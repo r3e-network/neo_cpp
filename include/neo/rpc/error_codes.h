@@ -1,5 +1,7 @@
 #pragma once
 
+#include <neo/io/json.h>
+
 #include <string>
 #include <unordered_map>
 
@@ -25,6 +27,8 @@ enum class ErrorCode : int32_t {
     UnknownService = -105,
     UnknownValidator = -106,
     UnknownCommittee = -107,
+    UnknownSession = -108,
+    UnknownIterator = -109,
     
     // Blockchain errors
     BlockchainNotAvailable = -200,
@@ -48,6 +52,21 @@ enum class ErrorCode : int32_t {
     TransactionVerificationFailed = -306,
     TransactionPolicyViolation = -307,
     TransactionConflict = -308,
+
+    // Inventory verification errors (aligned with Neo C# RpcError definitions)
+    RpcVerificationFailed = -500,
+    RpcAlreadyExists = -501,
+    RpcMempoolCapReached = -502,
+    RpcAlreadyInPool = -503,
+    RpcInsufficientNetworkFee = -504,
+    RpcPolicyFailed = -505,
+    RpcInvalidTransactionScript = -506,
+    RpcInvalidTransactionAttribute = -507,
+    RpcInvalidSignature = -508,
+    RpcInvalidInventorySize = -509,
+    RpcExpiredTransaction = -510,
+    RpcInsufficientFunds = -511,
+    RpcInvalidContractVerification = -512,
     
     // Contract errors
     ContractNotFound = -400,
@@ -60,12 +79,12 @@ enum class ErrorCode : int32_t {
     OutOfGas = -407,
     
     // Network errors
-    NetworkError = -500,
-    PeerDisconnected = -501,
-    InvalidNetworkMagic = -502,
-    InvalidProtocolVersion = -503,
-    InvalidMessage = -504,
-    ConsensusError = -505,
+    NetworkError = -1300,
+    PeerDisconnected = -1301,
+    InvalidNetworkMagic = -1302,
+    InvalidProtocolVersion = -1303,
+    InvalidMessage = -1304,
+    ConsensusError = -1305,
     
     // Wallet errors
     WalletNotFound = -600,
@@ -85,7 +104,7 @@ enum class ErrorCode : int32_t {
     StorageError = -800,
     DatabaseError = -801,
     InvalidKey = -802,
-    KeyNotFound = -803,
+    StorageKeyNotFound = -803,
     
     // Security errors
     AccessDenied = -900,

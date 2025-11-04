@@ -1,719 +1,1561 @@
-/**
- * @file rpc_methods.cpp
- * @brief Rpc Methods
- * @author Neo C++ Team
- * @date 2025
- * @copyright MIT License
- */
-
-#include <neo/ledger/signer.h>
-#include <neo/persistence/storage_key.h>
 #include <neo/rpc/rpc_methods.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/smartcontract/contract_state.h>
-#include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/native/native_contract_manager.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/role_management.h>
-// WitnessScope is already included via signer.h
+
 #include <neo/cryptography/base64.h>
-#include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/io/byte_vector.h>
+#include <neo/io/json_writer.h>
+#include <neo/persistence/storage_item.h>
+#include <neo/persistence/storage_key.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/ledger/memory_pool.h>
+#include <neo/ledger/transaction_validator.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
-#include <neo/vm/stack_item.h>
-#include <neo/vm/stack_item_types.h>
-#include <neo/vm/vm_state.h>
+#include <neo/node/neo_system.h>
+#include <neo/protocol_settings.h>
+#include <neo/rpc/error_codes.h>
+#include <neo/rpc/rpc_session_manager.h>
+#include <neo/smartcontract/manifest/contract_manifest.h>
+#include <neo/smartcontract/native/native_contract_manager.h>
+#include <neo/smartcontract/native/contract_management.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/ledger_contract.h>
+#include <neo/wallets/helper.h>
+#include <neo/plugins/plugin_manager.h>
 
+#include <algorithm>
+#include <cctype>
+#include <iomanip>
+#include <limits>
+#include <optional>
+#include <random>
 #include <sstream>
+#include <unordered_set>
 
 namespace neo::rpc
 {
-// Forward declarations for helper functions
-class RpcSessionManager;
-std::shared_ptr<RpcSessionManager> GetRpcSessionManager();
-nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item);
-void LogSessionTermination(const std::string& sessionId);
-
-// Helper function to convert Neo3Transaction to JSON
-static nlohmann::json TransactionToJson(std::shared_ptr<network::p2p::payloads::Neo3Transaction> tx, bool verbose)
+namespace
 {
-    if (!tx) return nullptr;
+using neo::ledger::ValidationResult;
+using neo::ledger::VerifyResult;
+using neo::ProtocolSettings;
 
-    if (!verbose)
+constexpr size_t kFindStoragePageSize = 100;
+
+nlohmann::json SerializeJsonObject(const io::IJsonSerializable& value)
+{
+    nlohmann::json result = nlohmann::json::object();
+    io::JsonWriter writer(result);
+    value.SerializeJson(writer);
+    return result;
+}
+
+std::string FormatScriptHash(const io::UInt160& hash, const std::shared_ptr<ProtocolSettings>& settings)
+{
+    if (settings)
     {
-        // Return hex string
-        std::ostringstream stream;
-        io::BinaryWriter writer(stream);
-        tx->Serialize(writer);
-        auto data = stream.str();
-        return cryptography::Base64::Encode(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+        return hash.ToAddress(settings->GetAddressVersion());
+    }
+    std::string value = hash.ToString();
+    if (value.rfind("0x", 0) != 0)
+    {
+        value.insert(0, "0x");
+    }
+    return value;
+}
+
+bool IsValidBase64Char(char c)
+{
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '+' || c == '/' ||
+           c == '=';
+}
+
+bool IsValidBase64String(const std::string& value)
+{
+    if (value.empty()) return true;
+    if (value.size() % 4 != 0) return false;
+
+    for (char c : value)
+    {
+        if (!IsValidBase64Char(c))
+        {
+            return false;
+        }
     }
 
-    // Return detailed JSON
-    nlohmann::json json;
-    io::JsonWriter writer(json);
-    tx->SerializeJson(writer);
+    auto paddingPos = value.find('=');
+    if (paddingPos != std::string::npos)
+    {
+        const size_t paddingCount = value.size() - paddingPos;
+        if (paddingCount > 2) return false;
+        for (size_t i = paddingPos; i < value.size(); ++i)
+        {
+            if (value[i] != '=') return false;
+        }
+    }
+
+    return true;
+}
+
+std::string ValidationResultToString(ValidationResult result)
+{
+    switch (result)
+    {
+        case ValidationResult::Valid:
+            return "Valid";
+        case ValidationResult::InvalidFormat:
+            return "InvalidFormat";
+        case ValidationResult::InvalidSize:
+            return "InvalidSize";
+        case ValidationResult::InvalidAttribute:
+            return "InvalidAttribute";
+        case ValidationResult::InvalidScript:
+            return "InvalidScript";
+        case ValidationResult::InvalidWitness:
+            return "InvalidWitness";
+        case ValidationResult::InsufficientFunds:
+            return "InsufficientFunds";
+        case ValidationResult::InvalidSignature:
+            return "InvalidSignature";
+        case ValidationResult::AlreadyExists:
+            return "AlreadyExists";
+        case ValidationResult::Expired:
+            return "Expired";
+        case ValidationResult::InvalidSystemFee:
+            return "InvalidSystemFee";
+        case ValidationResult::InvalidNetworkFee:
+            return "InvalidNetworkFee";
+        case ValidationResult::PolicyViolation:
+            return "PolicyViolation";
+        case ValidationResult::Unknown:
+        default:
+            return "Unknown";
+    }
+}
+
+ErrorCode MapValidationResult(ValidationResult result)
+{
+    switch (result)
+    {
+        case ValidationResult::Valid:
+            return ErrorCode::InternalError;
+        case ValidationResult::InvalidFormat:
+        case ValidationResult::Unknown:
+            return ErrorCode::RpcVerificationFailed;
+        case ValidationResult::InvalidSize:
+            return ErrorCode::RpcInvalidInventorySize;
+        case ValidationResult::InvalidAttribute:
+            return ErrorCode::RpcInvalidTransactionAttribute;
+        case ValidationResult::InvalidScript:
+            return ErrorCode::RpcInvalidTransactionScript;
+        case ValidationResult::InvalidWitness:
+            return ErrorCode::InvalidWitness;
+        case ValidationResult::InsufficientFunds:
+            return ErrorCode::RpcInsufficientFunds;
+        case ValidationResult::InvalidSignature:
+            return ErrorCode::RpcInvalidSignature;
+        case ValidationResult::AlreadyExists:
+            return ErrorCode::RpcAlreadyExists;
+        case ValidationResult::Expired:
+            return ErrorCode::RpcExpiredTransaction;
+        case ValidationResult::InvalidSystemFee:
+        case ValidationResult::InvalidNetworkFee:
+            return ErrorCode::RpcInsufficientNetworkFee;
+        case ValidationResult::PolicyViolation:
+            return ErrorCode::RpcPolicyFailed;
+    }
+    return ErrorCode::RpcVerificationFailed;
+}
+
+std::string VerifyResultToString(VerifyResult result)
+{
+    switch (result)
+    {
+        case VerifyResult::Succeed:
+            return "Succeed";
+        case VerifyResult::AlreadyExists:
+            return "AlreadyExists";
+        case VerifyResult::AlreadyInPool:
+            return "AlreadyInPool";
+        case VerifyResult::OutOfMemory:
+            return "OutOfMemory";
+        case VerifyResult::UnableToVerify:
+            return "UnableToVerify";
+        case VerifyResult::Invalid:
+            return "Invalid";
+        case VerifyResult::InvalidScript:
+            return "InvalidScript";
+        case VerifyResult::InvalidAttribute:
+            return "InvalidAttribute";
+        case VerifyResult::InvalidSignature:
+            return "InvalidSignature";
+        case VerifyResult::OverSize:
+            return "OverSize";
+        case VerifyResult::Expired:
+            return "Expired";
+        case VerifyResult::InsufficientFunds:
+            return "InsufficientFunds";
+        case VerifyResult::PolicyFail:
+            return "PolicyFail";
+        case VerifyResult::HasConflicts:
+            return "HasConflicts";
+        case VerifyResult::Unknown:
+        default:
+            return "Unknown";
+    }
+}
+
+ErrorCode MapVerifyResult(VerifyResult result)
+{
+    switch (result)
+    {
+        case VerifyResult::Succeed:
+            return ErrorCode::InternalError;
+        case VerifyResult::AlreadyExists:
+            return ErrorCode::RpcAlreadyExists;
+        case VerifyResult::AlreadyInPool:
+            return ErrorCode::RpcAlreadyInPool;
+        case VerifyResult::OutOfMemory:
+            return ErrorCode::RpcMempoolCapReached;
+        case VerifyResult::UnableToVerify:
+        case VerifyResult::Invalid:
+        case VerifyResult::Unknown:
+            return ErrorCode::RpcVerificationFailed;
+        case VerifyResult::InvalidScript:
+            return ErrorCode::RpcInvalidTransactionScript;
+        case VerifyResult::InvalidAttribute:
+            return ErrorCode::RpcInvalidTransactionAttribute;
+        case VerifyResult::InvalidSignature:
+            return ErrorCode::RpcInvalidSignature;
+        case VerifyResult::OverSize:
+            return ErrorCode::RpcInvalidInventorySize;
+        case VerifyResult::Expired:
+            return ErrorCode::RpcExpiredTransaction;
+        case VerifyResult::InsufficientFunds:
+            return ErrorCode::RpcInsufficientFunds;
+        case VerifyResult::PolicyFail:
+        case VerifyResult::HasConflicts:
+            return ErrorCode::RpcPolicyFailed;
+    }
+    return ErrorCode::RpcVerificationFailed;
+}
+
+[[noreturn]] void ThrowNotImplemented(std::string_view method)
+{
+    throw RpcException(ErrorCode::MethodNotFound, std::string(method) + " not implemented");
+}
+
+std::shared_ptr<ledger::Blockchain> RequireBlockchain(const std::shared_ptr<node::NeoSystem>& system)
+{
+    if (!system)
+    {
+        throw RpcException(ErrorCode::BlockchainNotAvailable, "NeoSystem unavailable");
+    }
+    auto blockchain = system->GetBlockchain();
+    if (!blockchain)
+    {
+        throw RpcException(ErrorCode::BlockchainNotAvailable, "Blockchain not available");
+    }
+    return blockchain;
+}
+
+std::shared_ptr<ledger::MemoryPool> RequireMemoryPool(const std::shared_ptr<node::NeoSystem>& system)
+{
+    auto memoryPool = system ? system->GetMemoryPool() : nullptr;
+    if (!memoryPool)
+    {
+        throw RpcException(ErrorCode::MemoryPoolNotAvailable, "Memory pool not available");
+    }
+    return memoryPool;
+}
+
+std::shared_ptr<persistence::DataCache> RequireSnapshot(const std::shared_ptr<node::NeoSystem>& system)
+{
+    auto snapshot = system ? system->GetSnapshot() : nullptr;
+    if (!snapshot)
+    {
+        throw RpcException(ErrorCode::InternalError, "Snapshot not available");
+    }
+    return snapshot;
+}
+
+std::shared_ptr<smartcontract::native::ContractManagement> RequireContractManagement()
+{
+    auto contractManagement = smartcontract::native::ContractManagement::GetInstance();
+    if (!contractManagement)
+    {
+        throw RpcException(ErrorCode::InternalError, "ContractManagement not available");
+    }
+    return contractManagement;
+}
+
+int32_t ResolveContractId(const std::shared_ptr<node::NeoSystem>& system, const nlohmann::json& param)
+{
+    if (param.is_number_integer())
+    {
+        auto id = param.get<int64_t>();
+        if (id < std::numeric_limits<int32_t>::min() || id > std::numeric_limits<int32_t>::max())
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Contract id out of range");
+        }
+        return static_cast<int32_t>(id);
+    }
+
+    if (!param.is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid contract identifier");
+    }
+
+    const auto value = param.get<std::string>();
+    auto snapshot = RequireSnapshot(system);
+    auto contractManagement = RequireContractManagement();
+
+    io::UInt160 scriptHash;
+    bool hashParsed = io::UInt160::TryParse(value, scriptHash);
+
+    if (!hashParsed)
+    {
+        try
+        {
+            scriptHash = wallets::Helper::ToScriptHash(value);
+            hashParsed = true;
+        }
+        catch (...)
+        {
+            hashParsed = false;
+        }
+    }
+
+    if (hashParsed)
+    {
+        auto contract =
+            contractManagement->GetContract(std::static_pointer_cast<persistence::StoreView>(snapshot), scriptHash);
+        if (!contract)
+        {
+            throw RpcException(ErrorCode::UnknownContract, "Contract not found");
+        }
+        return contract->GetId();
+    }
+
+    auto contracts = contractManagement->ListContracts(std::static_pointer_cast<persistence::StoreView>(snapshot));
+    for (const auto& contract : contracts)
+    {
+        try
+        {
+            auto manifest = smartcontract::manifest::ContractManifest::Parse(contract->GetManifest());
+            if (manifest.GetName() == value)
+            {
+                return contract->GetId();
+            }
+        }
+        catch (const std::exception&)
+        {
+            // Ignore manifest parsing errors and continue searching.
+        }
+    }
+
+    throw RpcException(ErrorCode::UnknownContract, "Contract not found");
+}
+
+nlohmann::json SerializeTransaction(const ledger::Transaction& tx, bool verbose,
+                                    std::shared_ptr<ProtocolSettings> settings = nullptr,
+                                    std::shared_ptr<ledger::Blockchain> blockchain = nullptr,
+                                    std::optional<uint32_t> blockIndex = std::nullopt,
+                                    std::optional<uint64_t> blockTimestamp = std::nullopt)
+{
+    if (!verbose)
+    {
+        io::ByteVector buffer;
+        io::BinaryWriter writer(buffer);
+        tx.Serialize(writer);
+        return cryptography::Base64::Encode(buffer.AsSpan());
+    }
+
+    nlohmann::json json = nlohmann::json::object();
+    json["hash"] = tx.GetHash().ToString();
+    json["size"] = tx.GetSize();
+    json["version"] = tx.GetVersion();
+    json["nonce"] = tx.GetNonce();
+    json["sender"] = FormatScriptHash(tx.GetSender(), settings);
+    json["sysfee"] = std::to_string(tx.GetSystemFee());
+    json["netfee"] = std::to_string(tx.GetNetworkFee());
+    json["validuntilblock"] = tx.GetValidUntilBlock();
+
+    nlohmann::json signers = nlohmann::json::array();
+    for (const auto& signer : tx.GetSigners())
+    {
+        signers.push_back(SerializeJsonObject(signer));
+    }
+    json["signers"] = std::move(signers);
+
+    nlohmann::json attributes = nlohmann::json::array();
+    for (const auto& attribute : tx.GetAttributes())
+    {
+        if (attribute)
+        {
+            attributes.push_back(SerializeJsonObject(*attribute));
+        }
+    }
+    json["attributes"] = std::move(attributes);
+
+    json["script"] = cryptography::Base64::Encode(tx.GetScript().AsSpan());
+
+    nlohmann::json witnesses = nlohmann::json::array();
+    for (const auto& witness : tx.GetWitnesses())
+    {
+        witnesses.push_back(SerializeJsonObject(witness));
+    }
+    json["witnesses"] = std::move(witnesses);
+
+    if (blockchain && blockIndex)
+    {
+        const auto blockHash = blockchain->GetBlockHash(*blockIndex);
+        if (!blockHash.IsZero())
+        {
+            json["blockhash"] = blockHash.ToString();
+        }
+
+        const uint32_t currentHeight = blockchain->GetHeight();
+        if (*blockIndex <= currentHeight)
+        {
+            json["confirmations"] = currentHeight - *blockIndex + 1;
+        }
+        else
+        {
+            json["confirmations"] = 0;
+        }
+    }
+
+    if (blockTimestamp)
+    {
+        json["blocktime"] = *blockTimestamp;
+    }
+
     return json;
 }
 
-// Helper function to convert Block to JSON
-static nlohmann::json BlockToJson(std::shared_ptr<ledger::Block> block, bool verbose)
+nlohmann::json SerializeBlock(const ledger::Block& block, bool verbose,
+                              std::shared_ptr<ProtocolSettings> settings = nullptr,
+                              std::shared_ptr<ledger::Blockchain> blockchain = nullptr,
+                              std::optional<uint32_t> currentHeight = std::nullopt)
 {
-    if (!block) return nullptr;
-
-    nlohmann::json json;
-    io::JsonWriter writer(json);
-    block->SerializeJson(writer);
-
-    if (verbose)
+    if (!verbose)
     {
-        // Add transaction details
-        json["tx"] = nlohmann::json::array();
-        for (const auto& tx : block->GetTransactions())
+        ledger::Block blockCopy = block;
+        io::ByteVector buffer;
+        io::BinaryWriter writer(buffer);
+        blockCopy.Serialize(writer);
+        return cryptography::Base64::Encode(buffer.AsSpan());
+    }
+
+    nlohmann::json json = nlohmann::json::object();
+    json["hash"] = block.GetHash().ToString();
+    json["size"] = block.GetSize();
+    json["version"] = block.GetVersion();
+    json["previousblockhash"] = block.GetPreviousHash().ToString();
+    json["merkleroot"] = block.GetMerkleRoot().ToString();
+    json["time"] = block.GetTimestamp();
+
+    std::ostringstream nonceStream;
+    nonceStream << std::uppercase << std::hex << std::setw(16) << std::setfill('0') << block.GetNonce();
+    json["nonce"] = nonceStream.str();
+
+    json["index"] = block.GetIndex();
+    json["primary"] = block.GetPrimaryIndex();
+    json["nextconsensus"] = FormatScriptHash(block.GetNextConsensus(), settings);
+
+    nlohmann::json witnesses = nlohmann::json::array();
+    witnesses.push_back(SerializeJsonObject(block.GetWitness()));
+    json["witnesses"] = std::move(witnesses);
+
+    nlohmann::json transactions = nlohmann::json::array();
+    for (const auto& tx : block.GetTransactions())
+    {
+        transactions.push_back(
+            SerializeTransaction(tx, true, settings, blockchain, block.GetIndex(), block.GetTimestamp()));
+    }
+    json["tx"] = std::move(transactions);
+
+    uint32_t referenceHeight = currentHeight.value_or(blockchain ? blockchain->GetHeight() : block.GetIndex());
+    if (blockchain)
+    {
+        if (block.GetIndex() <= referenceHeight)
         {
-            json["tx"].push_back(TransactionToJson(tx, true));
+            json["confirmations"] = referenceHeight - block.GetIndex() + 1;
         }
+        else
+        {
+            json["confirmations"] = 0;
+        }
+
+        if (block.GetIndex() < std::numeric_limits<uint32_t>::max())
+        {
+            const auto nextHash = blockchain->GetBlockHash(block.GetIndex() + 1);
+            if (!nextHash.IsZero())
+            {
+                json["nextblockhash"] = nextHash.ToString();
+            }
+        }
+    }
+    else if (currentHeight)
+    {
+        if (block.GetIndex() <= *currentHeight)
+        {
+            json["confirmations"] = *currentHeight - block.GetIndex() + 1;
+        }
+        else
+        {
+            json["confirmations"] = 0;
+        }
+    }
+
+    return json;
+}
+
+nlohmann::json SerializeBlockHeader(const ledger::BlockHeader& header, bool verbose,
+                                    std::shared_ptr<ProtocolSettings> settings = nullptr,
+                                    std::shared_ptr<ledger::Blockchain> blockchain = nullptr,
+                                    std::optional<uint32_t> currentHeight = std::nullopt)
+{
+    if (!verbose)
+    {
+        ledger::BlockHeader headerCopy = header;
+        io::ByteVector buffer;
+        io::BinaryWriter writer(buffer);
+        headerCopy.Serialize(writer);
+        return cryptography::Base64::Encode(buffer.AsSpan());
+    }
+
+    nlohmann::json json = nlohmann::json::object();
+    json["hash"] = header.GetHash().ToString();
+    json["size"] = header.GetSize();
+    json["version"] = header.GetVersion();
+    json["previousblockhash"] = header.GetPrevHash().ToString();
+    json["merkleroot"] = header.GetMerkleRoot().ToString();
+    json["time"] = header.GetTimestamp();
+
+    std::ostringstream nonceStream;
+    nonceStream << std::uppercase << std::hex << std::setw(16) << std::setfill('0') << header.GetNonce();
+    json["nonce"] = nonceStream.str();
+
+    json["index"] = header.GetIndex();
+    json["primary"] = header.GetPrimaryIndex();
+    json["nextconsensus"] = FormatScriptHash(header.GetNextConsensus(), settings);
+
+    nlohmann::json witnesses = nlohmann::json::array();
+    witnesses.push_back(SerializeJsonObject(header.GetWitness()));
+    json["witnesses"] = std::move(witnesses);
+
+    uint32_t referenceHeight = currentHeight.value_or(blockchain ? blockchain->GetHeight() : header.GetIndex());
+    if (blockchain)
+    {
+        if (header.GetIndex() <= referenceHeight)
+        {
+            json["confirmations"] = referenceHeight - header.GetIndex() + 1;
+        }
+        else
+        {
+            json["confirmations"] = 0;
+        }
+
+        if (header.GetIndex() < std::numeric_limits<uint32_t>::max())
+        {
+            const auto nextHash = blockchain->GetBlockHash(header.GetIndex() + 1);
+            if (!nextHash.IsZero())
+            {
+                json["nextblockhash"] = nextHash.ToString();
+            }
+        }
+    }
+    else if (currentHeight)
+    {
+        if (header.GetIndex() <= *currentHeight)
+        {
+            json["confirmations"] = *currentHeight - header.GetIndex() + 1;
+        }
+        else
+        {
+            json["confirmations"] = 0;
+        }
+    }
+
+    return json;
+}
+
+network::p2p::payloads::Neo3Transaction DeserializeNeo3Transaction(const std::string& base64)
+{
+    const auto data = cryptography::Base64::Decode(base64);
+    if (data.empty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Transaction payload is empty");
+    }
+
+    network::p2p::payloads::Neo3Transaction tx;
+    io::BinaryReader reader(data);
+    try
+    {
+        tx.Deserialize(reader);
+    }
+    catch (const std::exception& ex)
+    {
+        throw RpcException(ErrorCode::TransactionVerificationFailed,
+                           std::string("Transaction rejected: ") + ex.what());
+    }
+    return tx;
+}
+
+}  // namespace
+
+nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)params;
+    nlohmann::json result = nlohmann::json::object();
+
+    auto settings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
+    if (settings)
+    {
+        result["network"] = settings->GetNetwork();
     }
     else
     {
-        // Just transaction hashes
-        json["tx"] = nlohmann::json::array();
-        for (const auto& tx : block->GetTransactions())
-        {
-            json["tx"].push_back(tx->GetHash().ToString());
-        }
+        result["network"] = nullptr;
     }
 
-    return json;
-}
+    result["port"] = 0;
 
-// Helper function to convert Contract to JSON
-static nlohmann::json ContractToJson(std::shared_ptr<smartcontract::ContractState> contract)
-{
-    if (!contract) return nullptr;
+    std::random_device rd;
+    std::mt19937_64 gen(rd());
+    result["nonce"] = static_cast<uint64_t>(gen());
 
-    nlohmann::json json;
-    io::JsonWriter writer(json);
-    contract->SerializeJson(writer);
-    return json;
-}
-nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
-{
-    nlohmann::json result;
-    result["port"] = neoSystem->GetLocalNode().GetPort();
-    result["nonce"] = neoSystem->GetLocalNode().GetNonce();
-    result["useragent"] = neoSystem->GetLocalNode().GetUserAgent();
+    result["useragent"] = "/neo-cpp:0.1.0/";
+
     return result;
 }
 
 nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    return neoSystem->GetBlockchain().GetCurrentBlockIndex() + 1;
+    (void)params;
+    auto blockchain = RequireBlockchain(neoSystem);
+    return blockchain->GetHeight() + 1;
 }
 
 nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty()) throw std::runtime_error("Invalid params");
+    if (params.empty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Missing block identifier");
+    }
+
+    auto blockchain = RequireBlockchain(neoSystem);
+
+    bool verbose = true;
+    if (params.size() > 1 && params[1].is_boolean())
+    {
+        verbose = params[1].get<bool>();
+    }
 
     std::shared_ptr<ledger::Block> block;
-
-    // Get block by hash or index
-    if (params[0].is_string())
+    if (params[0].is_number_integer())
     {
-        // Get block by hash
-        io::UInt256 hash;
-        hash.FromString(params[0].get<std::string>());
-        block = neoSystem->GetBlockchain().GetBlock(hash);
+        const auto indexValue = params[0].get<int64_t>();
+        if (indexValue < 0)
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Invalid block index");
+        }
+        block = blockchain->GetBlock(static_cast<uint32_t>(indexValue));
     }
-    else if (params[0].is_number())
+    else if (params[0].is_string())
     {
-        // Get block by index
-        uint32_t index = params[0].get<uint32_t>();
-        auto hash = neoSystem->GetBlockchain().GetBlockHash(index);
-        block = neoSystem->GetBlockchain().GetBlock(hash);
+        io::UInt256 hash;
+        if (!io::UInt256::TryParse(params[0].get<std::string>(), hash))
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Invalid block hash");
+        }
+        block = blockchain->GetBlock(hash);
     }
     else
     {
-        throw std::runtime_error("Invalid params");
+        throw RpcException(ErrorCode::InvalidParams, "Invalid block identifier");
     }
 
-    if (!block) throw std::runtime_error("Unknown block");
+    if (!block)
+    {
+        throw RpcException(ErrorCode::UnknownBlock, "Block not found");
+    }
 
-    // Check if verbose
-    bool verbose = params.size() >= 2 && params[1].is_boolean() && params[1].get<bool>();
+    auto protocolSettings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
 
-    // Convert block to JSON
-    return BlockToJson(block, verbose);
+    if (!verbose)
+    {
+        return SerializeBlock(*block, false, protocolSettings, blockchain);
+    }
+
+    const uint32_t currentHeight = blockchain->GetHeight();
+    return SerializeBlock(*block, true, protocolSettings, blockchain, currentHeight);
 }
 
 nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_number()) throw std::runtime_error("Invalid params");
+    if (params.empty() || !params[0].is_number_integer())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Missing block index parameter");
+    }
 
-    uint32_t index = params[0].get<uint32_t>();
-    auto hash = neoSystem->GetBlockchain().GetBlockHash(index);
-
-    if (hash.IsZero()) throw std::runtime_error("Unknown block");
-
-    return hash.ToString();
+    auto blockchain = RequireBlockchain(neoSystem);
+    auto indexValue = params[0].get<int64_t>();
+    if (indexValue < 0)
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid block index");
+    }
+    uint32_t index = static_cast<uint32_t>(indexValue);
+    if (index > blockchain->GetHeight())
+    {
+        throw RpcException(ErrorCode::UnknownBlock, "Block height out of range");
+    }
+    return blockchain->GetBlockHash(index).ToString();
 }
 
 nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty()) throw std::runtime_error("Invalid params");
-
-    std::shared_ptr<ledger::Block> block;
-
-    // Get block by hash or index
-    if (params[0].is_string())
+    if (params.empty())
     {
-        // Get block by hash
-        io::UInt256 hash;
-        hash.FromString(params[0].get<std::string>());
-        block = neoSystem->GetBlockchain().GetBlock(hash);
+        throw RpcException(ErrorCode::InvalidParams, "Missing block identifier");
     }
-    else if (params[0].is_number())
+
+    auto blockchain = RequireBlockchain(neoSystem);
+
+    bool verbose = true;
+    if (params.size() > 1 && params[1].is_boolean())
     {
-        // Get block by index
-        uint32_t index = params[0].get<uint32_t>();
-        auto hash = neoSystem->GetBlockchain().GetBlockHash(index);
-        block = neoSystem->GetBlockchain().GetBlock(hash);
+        verbose = params[1].get<bool>();
+    }
+
+    std::shared_ptr<ledger::BlockHeader> header;
+    if (params[0].is_number_integer())
+    {
+        auto indexValue = params[0].get<int64_t>();
+        if (indexValue < 0)
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Invalid block index");
+        }
+        header = blockchain->GetBlockHeader(static_cast<uint32_t>(indexValue));
+    }
+    else if (params[0].is_string())
+    {
+        io::UInt256 hash;
+        if (!io::UInt256::TryParse(params[0].get<std::string>(), hash))
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Invalid block hash");
+        }
+        header = blockchain->GetBlockHeader(hash);
     }
     else
     {
-        throw std::runtime_error("Invalid params");
+        throw RpcException(ErrorCode::InvalidParams, "Invalid block identifier");
     }
 
-    if (!block) throw std::runtime_error("Unknown block");
+    if (!header)
+    {
+        throw RpcException(ErrorCode::UnknownBlock, "Block not found");
+    }
 
-    // Check if verbose
-    bool verbose = params.size() >= 2 && params[1].is_boolean() && params[1].get<bool>();
+    auto protocolSettings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
+    if (!verbose)
+    {
+        return SerializeBlockHeader(*header, false, protocolSettings, blockchain);
+    }
 
-    // Convert block to JSON
-    auto json = BlockToJson(block, verbose);
-
-    // Remove transactions
-    if (json.contains("tx")) json.erase("tx");
-
-    return json;
+    const uint32_t currentHeight = blockchain->GetHeight();
+    return SerializeBlockHeader(*header, true, protocolSettings, blockchain, currentHeight);
 }
 
 nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    auto transactions = neoSystem->GetMemPool().GetTransactions();
-
-    nlohmann::json result = nlohmann::json::array();
-    for (const auto& tx : transactions)
+    bool includeUnverified = false;
+    if (!params.empty())
     {
-        result.push_back(tx->GetHash().ToString());
+        if (!params[0].is_boolean())
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Invalid parameter for getrawmempool");
+        }
+        includeUnverified = params[0].get<bool>();
     }
 
+    auto memoryPool = neoSystem ? neoSystem->GetMemoryPool() : nullptr;
+
+    if (!includeUnverified)
+    {
+        nlohmann::json array = nlohmann::json::array();
+        if (memoryPool)
+        {
+            for (const auto& tx : memoryPool->GetVerifiedTransactions())
+            {
+                array.push_back(tx.GetHash().ToString());
+            }
+        }
+        return array;
+    }
+
+    auto blockchain = RequireBlockchain(neoSystem);
+    nlohmann::json result;
+    result["height"] = blockchain->GetHeight();
+    nlohmann::json verified = nlohmann::json::array();
+    nlohmann::json unverified = nlohmann::json::array();
+
+    if (memoryPool)
+    {
+        for (const auto& tx : memoryPool->GetVerifiedTransactions())
+        {
+            verified.push_back(tx.GetHash().ToString());
+        }
+        for (const auto& tx : memoryPool->GetUnverifiedTransactions())
+        {
+            unverified.push_back(tx.GetHash().ToString());
+        }
+    }
+
+    result["verified"] = std::move(verified);
+    result["unverified"] = std::move(unverified);
     return result;
 }
 
 nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Missing transaction hash parameter");
+    }
 
     io::UInt256 hash;
-    hash.FromString(params[0].get<std::string>());
+    if (!io::UInt256::TryParse(params[0].get<std::string>(), hash))
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid transaction hash");
+    }
 
-    // Try to get transaction from memory pool
-    auto tx = neoSystem->GetMemPool().GetTransaction(hash);
+    bool verbose = true;
+    if (params.size() > 1)
+    {
+        if (!params[1].is_boolean())
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Invalid verbose flag");
+        }
+        verbose = params[1].get<bool>();
+    }
 
-    // If not found in memory pool, try to get from blockchain
-    if (!tx) tx = neoSystem->GetBlockchain().GetTransaction(hash);
+    auto blockchain = RequireBlockchain(neoSystem);
+    auto memoryPool = neoSystem ? neoSystem->GetMemoryPool() : nullptr;
+    auto protocolSettings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
 
-    if (!tx) throw std::runtime_error("Transaction not found");
+    const network::p2p::payloads::Neo3Transaction* memTx =
+        memoryPool ? memoryPool->GetTransaction(hash) : nullptr;
 
-    // Check if verbose
-    bool verbose = params.size() >= 2 && params[1].is_boolean() && params[1].get<bool>();
+    if (!verbose && memTx)
+    {
+        return SerializeTransaction(*memTx, false, protocolSettings);
+    }
 
-    // Convert transaction to JSON
-    return TransactionToJson(tx, verbose);
+    auto tx = blockchain->GetTransaction(hash);
+    if (!tx && !memTx)
+    {
+        throw RpcException(ErrorCode::UnknownTransaction, "Transaction not found");
+    }
+
+    std::optional<uint32_t> blockIndex;
+    std::optional<uint64_t> blockTimestamp;
+    if (tx)
+    {
+        int32_t height = blockchain->GetTransactionHeight(hash);
+        if (height >= 0)
+        {
+            blockIndex = static_cast<uint32_t>(height);
+            if (auto header = blockchain->GetBlockHeader(*blockIndex))
+            {
+                blockTimestamp = header->GetTimestamp();
+            }
+        }
+    }
+
+    const auto& txRef = tx ? *tx : *memTx;
+    return SerializeTransaction(txRef, true, protocolSettings, blockchain, blockIndex, blockTimestamp);
 }
 
 nlohmann::json RPCMethods::GetTransactionHeight(std::shared_ptr<node::NeoSystem> neoSystem,
                                                 const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Missing transaction hash parameter");
+    }
+
+    auto blockchain = RequireBlockchain(neoSystem);
 
     io::UInt256 hash;
-    hash.FromString(params[0].get<std::string>());
+    if (!io::UInt256::TryParse(params[0].get<std::string>(), hash))
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid transaction hash");
+    }
 
-    auto height = neoSystem->GetBlockchain().GetTransactionHeight(hash);
-
-    if (height < 0) throw std::runtime_error("Transaction not found");
-
+    int32_t height = blockchain->GetTransactionHeight(hash);
+    if (height < 0)
+    {
+        throw RpcException(ErrorCode::UnknownTransaction, "Transaction not found");
+    }
     return height;
 }
 
-nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem,
+                                              const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
+    if (!params.is_array() || params.empty() || !params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "sendrawtransaction requires the transaction payload");
+    }
 
-    auto data = cryptography::Base64::Decode(params[0].get<std::string>());
+    auto blockchain = RequireBlockchain(neoSystem);
+    auto memoryPool = RequireMemoryPool(neoSystem);
 
-    std::istringstream stream(std::string(reinterpret_cast<const char*>(data.Data()), data.Size()));
-    io::BinaryReader reader(stream);
+    auto tx = DeserializeNeo3Transaction(params[0].get<std::string>());
 
-    auto tx = std::make_shared<network::p2p::payloads::Neo3Transaction>();
-    tx->Deserialize(reader);
+    if (blockchain->ContainsTransaction(tx.GetHash()) || memoryPool->Contains(tx.GetHash()))
+    {
+        throw RpcException(ErrorCode::TransactionAlreadyExists, "Transaction rejected: AlreadyExists");
+    }
 
-    auto result = neoSystem->GetMemPool().AddTransaction(tx);
+    if (tx.GetSigners().empty())
+    {
+        throw RpcException(ErrorCode::InvalidWitness, "Transaction rejected: InvalidWitness");
+    }
 
-    if (result != ledger::VerifyResult::Succeed)
-        throw std::runtime_error("Transaction rejected: " + std::to_string(static_cast<int>(result)));
+    auto validation = ledger::ValidateTransaction(tx, blockchain, memoryPool);
+    if (validation != ValidationResult::Valid)
+    {
+        throw RpcException(MapValidationResult(validation),
+                           "Transaction rejected: " + ValidationResultToString(validation));
+    }
 
-    return tx->GetHash().ToString();
+    if (!memoryPool->TryAdd(tx))
+    {
+        if (memoryPool->Contains(tx.GetHash()))
+        {
+            throw RpcException(ErrorCode::TransactionAlreadyExists, "Transaction rejected: AlreadyExists");
+        }
+        if (memoryPool->IsFull())
+        {
+            throw RpcException(ErrorCode::MemoryPoolNotAvailable, "Transaction rejected: OutOfMemory");
+        }
+        throw RpcException(ErrorCode::TransactionVerificationFailed, "Transaction rejected");
+    }
+
+    return nlohmann::json{{"hash", tx.GetHash().ToString()}};
 }
 
 nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.size() < 2 || !params[0].is_string() || !params[1].is_string())
-        throw std::runtime_error("Invalid parameters");
-
-    // Get contract hash
-    io::UInt160 scriptHash;
-    scriptHash.FromString(params[0].get<std::string>());
-
-    // Get method name
-    auto method = params[1].get<std::string>();
-
-    // Get arguments
-    std::vector<std::shared_ptr<neo::vm::StackItem>> args;
-    if (params.size() >= 3 && params[2].is_array())
-    {
-        for (const auto& arg : params[2])
-        {
-            if (!arg.is_object() || !arg.contains("type") || !arg.contains("value"))
-                throw std::runtime_error("Invalid argument");
-
-            auto type = arg["type"].get<std::string>();
-            auto value = arg["value"];
-
-            if (type == "String")
-            {
-                args.push_back(neo::vm::StackItem::Create(value.get<std::string>()));
-            }
-            else if (type == "Hash160")
-            {
-                io::UInt160 hash;
-                hash.FromString(value.get<std::string>());
-                args.push_back(neo::vm::StackItem::Create(io::ByteVector(io::ByteSpan(hash.Data(), hash.Size()))));
-            }
-            else if (type == "Hash256")
-            {
-                io::UInt256 hash;
-                hash.FromString(value.get<std::string>());
-                args.push_back(neo::vm::StackItem::Create(io::ByteVector(io::ByteSpan(hash.Data(), hash.Size()))));
-            }
-            else if (type == "Integer")
-            {
-                args.push_back(neo::vm::StackItem::Create(value.get<int64_t>()));
-            }
-            else if (type == "Boolean")
-            {
-                args.push_back(neo::vm::StackItem::Create(value.get<bool>()));
-            }
-            else if (type == "ByteArray")
-            {
-                auto data = cryptography::Base64::Decode(value.get<std::string>());
-                args.push_back(neo::vm::StackItem::Create(data));
-            }
-            else
-            {
-                throw std::runtime_error("Invalid argument type");
-            }
-        }
-    }
-
-    // Create engine
-    auto engine = std::make_shared<smartcontract::ApplicationEngine>(smartcontract::TriggerType::Application, nullptr,
-                                                                     neoSystem->GetSnapshot(), 0);
-
-    // Execute script
-    auto result = engine->CallContract(scriptHash, method, args, smartcontract::CallFlags::All);
-
-    // Create response
-    nlohmann::json response;
-    response["script"] = cryptography::Base64::Encode(engine->GetScript().AsSpan());
-    response["state"] = engine->GetState() == neo::vm::VMState::Halt ? "HALT" : "FAULT";
-    response["gasconsumed"] = engine->GetGasConsumed();
-    response["exception"] = engine->GetException();
-
-    // Add stack
-    response["stack"] = nlohmann::json::array();
-    for (const auto& item : engine->GetResultStack())
-    {
-        nlohmann::json stackItem;
-
-        if (item->GetType() == neo::vm::StackItemType::Integer)
-        {
-            stackItem["type"] = "Integer";
-            stackItem["value"] = item->GetInteger();
-        }
-        else if (item->GetType() == neo::vm::StackItemType::Boolean)
-        {
-            stackItem["type"] = "Boolean";
-            stackItem["value"] = item->GetBoolean();
-        }
-        else if (item->GetType() == neo::vm::StackItemType::ByteString)
-        {
-            stackItem["type"] = "ByteString";
-            stackItem["value"] = cryptography::Base64::Encode(item->GetByteArray().AsSpan());
-        }
-        else if (item->GetType() == neo::vm::StackItemType::Buffer)
-        {
-            stackItem["type"] = "Buffer";
-            stackItem["value"] = cryptography::Base64::Encode(item->GetByteArray().AsSpan());
-        }
-        else
-        {
-            stackItem["type"] = "Unknown";
-            stackItem["value"] = nullptr;
-        }
-
-        response["stack"].push_back(stackItem);
-    }
-
-    return response;
+    ThrowNotImplemented("invokefunction");
 }
 
 nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
-
-    // Get script
-    auto scriptBase64 = params[0].get<std::string>();
-    auto script = cryptography::Base64::Decode(scriptBase64);
-
-    // Create engine
-    auto engine = std::make_shared<smartcontract::ApplicationEngine>(smartcontract::TriggerType::Application, nullptr,
-                                                                     neoSystem->GetSnapshot(), 0);
-
-    // Execute script
-    engine->LoadScript(script);
-    engine->Execute();
-
-    // Create response
-    nlohmann::json response;
-    response["script"] = scriptBase64;
-    response["state"] = engine->GetState() == neo::vm::VMState::Halt ? "HALT" : "FAULT";
-    response["gasconsumed"] = engine->GetGasConsumed();
-    response["exception"] = engine->GetException();
-
-    // Add stack
-    response["stack"] = nlohmann::json::array();
-    for (const auto& item : engine->GetResultStack())
-    {
-        nlohmann::json stackItem;
-
-        if (item->GetType() == neo::vm::StackItemType::Integer)
-        {
-            stackItem["type"] = "Integer";
-            stackItem["value"] = item->GetInteger();
-        }
-        else if (item->GetType() == neo::vm::StackItemType::Boolean)
-        {
-            stackItem["type"] = "Boolean";
-            stackItem["value"] = item->GetBoolean();
-        }
-        else if (item->GetType() == neo::vm::StackItemType::ByteString)
-        {
-            stackItem["type"] = "ByteString";
-            stackItem["value"] = cryptography::Base64::Encode(item->GetByteArray().AsSpan());
-        }
-        else if (item->GetType() == neo::vm::StackItemType::Buffer)
-        {
-            stackItem["type"] = "Buffer";
-            stackItem["value"] = cryptography::Base64::Encode(item->GetByteArray().AsSpan());
-        }
-        else
-        {
-            stackItem["type"] = "Unknown";
-            stackItem["value"] = nullptr;
-        }
-
-        response["stack"].push_back(stackItem);
-    }
-
-    return response;
+    ThrowNotImplemented("invokescript");
 }
 
 nlohmann::json RPCMethods::GetContractState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
+    if (params.empty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "getcontractstate requires a contract identifier");
+    }
 
-    // Get contract hash
+    auto snapshot = RequireSnapshot(neoSystem);
+    auto contractManagement = RequireContractManagement();
+    auto storeView = std::static_pointer_cast<persistence::StoreView>(snapshot);
+
+    auto serializeContract =
+        [](const std::shared_ptr<smartcontract::ContractState>& contract) -> nlohmann::json
+    {
+        if (!contract)
+        {
+            throw RpcException(ErrorCode::UnknownContract, "Contract not found");
+        }
+
+        nlohmann::json result;
+        result["id"] = contract->GetId();
+        result["updatecounter"] = contract->GetUpdateCounter();
+        result["hash"] = contract->GetScriptHash().ToString();
+
+        nlohmann::json nefJson;
+        nefJson["magic"] = 0x3346454E;  // 'NEF3'
+        nefJson["compiler"] = "neo-cpp";
+        nefJson["tokens"] = nlohmann::json::array();
+        nefJson["script"] = cryptography::Base64::Encode(contract->GetScript().AsSpan());
+        nefJson["checksum"] = 0;
+        result["nef"] = std::move(nefJson);
+
+        try
+        {
+            result["manifest"] = nlohmann::json::parse(contract->GetManifest());
+        }
+        catch (const std::exception& ex)
+        {
+            throw RpcException(ErrorCode::InternalError,
+                               std::string("Failed to parse contract manifest: ") + ex.what());
+        }
+
+        return result;
+    };
+
+    auto serializeNative =
+        [](const std::shared_ptr<smartcontract::native::NativeContract>& nativeContract) -> nlohmann::json
+    {
+        if (!nativeContract)
+        {
+            throw RpcException(ErrorCode::UnknownContract, "Contract not found");
+        }
+
+        nlohmann::json result;
+        result["id"] = static_cast<int32_t>(nativeContract->GetId());
+        result["updatecounter"] = 0;
+        result["hash"] = nativeContract->GetScriptHash().ToString();
+
+        nlohmann::json nefJson;
+        nefJson["magic"] = 0x3346454E;  // 'NEF3'
+        nefJson["compiler"] = "neo-cpp";
+        nefJson["tokens"] = nlohmann::json::array();
+        nefJson["script"] = "";
+        nefJson["checksum"] = 0;
+        result["nef"] = std::move(nefJson);
+
+        nlohmann::json manifestJson;
+        manifestJson["name"] = nativeContract->GetName();
+        result["manifest"] = std::move(manifestJson);
+
+        return result;
+    };
+
+    auto findContractById = [&](int32_t id) -> std::shared_ptr<smartcontract::ContractState>
+    {
+        auto contracts = contractManagement->ListContracts(storeView);
+        for (const auto& contract : contracts)
+        {
+            if (contract && contract->GetId() == id)
+            {
+                return contract;
+            }
+        }
+        return nullptr;
+    };
+
+    auto& nativeManager = smartcontract::native::NativeContractManager::GetInstance();
+    nativeManager.Initialize();
+
+    if (params[0].is_number_integer())
+    {
+        auto idValue = params[0].get<int64_t>();
+        if (idValue < std::numeric_limits<int32_t>::min() || idValue > std::numeric_limits<int32_t>::max())
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Contract id out of range");
+        }
+
+        auto contract = findContractById(static_cast<int32_t>(idValue));
+        if (contract)
+        {
+            return serializeContract(contract);
+        }
+
+        auto nativeContract = nativeManager.GetContract(static_cast<uint32_t>(idValue));
+        if (nativeContract)
+        {
+            return serializeNative(nativeContract);
+        }
+
+        throw RpcException(ErrorCode::UnknownContract, "Contract not found");
+    }
+
+    if (!params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Contract identifier must be string or integer");
+    }
+
+    const auto identifier = params[0].get<std::string>();
+
     io::UInt160 scriptHash;
-    scriptHash.FromString(params[0].get<std::string>());
+    bool hashParsed = io::UInt160::TryParse(identifier, scriptHash);
+    if (!hashParsed)
+    {
+        try
+        {
+            scriptHash = wallets::Helper::ToScriptHash(identifier);
+            hashParsed = true;
+        }
+        catch (...)
+        {
+            hashParsed = false;
+        }
+    }
 
-    // Get contract state
-    auto contract = neoSystem->GetBlockchain().GetContract(scriptHash);
+    if (hashParsed)
+    {
+        auto contract = contractManagement->GetContract(storeView, scriptHash);
+        if (contract)
+        {
+            return serializeContract(contract);
+        }
 
-    if (!contract) throw std::runtime_error("Contract not found");
+        auto nativeContract = nativeManager.GetContract(scriptHash);
+        if (nativeContract)
+        {
+            return serializeNative(nativeContract);
+        }
 
-    // Convert contract to JSON
-    return ContractToJson(contract);
+        throw RpcException(ErrorCode::UnknownContract, "Contract not found");
+    }
+
+    // Try native contract lookup by name (case-insensitive)
+    auto toLower = [](std::string value) {
+        std::transform(value.begin(), value.end(), value.begin(),
+                       [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+        return value;
+    };
+
+    auto identifierLower = toLower(identifier);
+
+    if (auto nativeByName = nativeManager.GetContract(identifier); nativeByName)
+    {
+        return serializeNative(nativeByName);
+    }
+
+    for (const auto& nativeContract : nativeManager.GetContracts())
+    {
+        if (!nativeContract) continue;
+
+        auto nameLower = toLower(nativeContract->GetName());
+        if (nameLower == identifierLower)
+        {
+            return serializeNative(nativeContract);
+        }
+    }
+
+    // Fallback: search deployed contracts by manifest name
+    auto contracts = contractManagement->ListContracts(storeView);
+    for (const auto& contract : contracts)
+    {
+        if (!contract) continue;
+
+        try
+        {
+            auto manifest = nlohmann::json::parse(contract->GetManifest());
+            auto it = manifest.find("name");
+            if (it != manifest.end() && it->is_string())
+            {
+                auto manifestName = it->get<std::string>();
+                if (manifestName == identifier || toLower(manifestName) == identifierLower)
+                {
+                    return serializeContract(contract);
+                }
+            }
+        }
+        catch (const std::exception&)
+        {
+            // Ignore malformed manifests during search
+        }
+    }
+
+    throw RpcException(ErrorCode::UnknownContract, "Contract not found");
 }
 
 nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "getunclaimedgas requires an address string");
+    }
 
-    // Get account
-    io::UInt160 account;
-    account.FromString(params[0].get<std::string>());
+    const auto address = params[0].get<std::string>();
 
-    // Get NEO token
-    auto neoToken = std::static_pointer_cast<smartcontract::native::NeoToken>(
-        smartcontract::native::NativeContractManager::GetInstance().GetContract(smartcontract::native::NeoToken::NAME));
+    io::UInt160 scriptHash;
+    bool parsed = io::UInt160::TryParse(address, scriptHash);
+    if (!parsed)
+    {
+        try
+        {
+            scriptHash = wallets::Helper::ToScriptHash(address);
+            parsed = true;
+        }
+        catch (...)
+        {
+            parsed = false;
+        }
+    }
 
-    // Get unclaimed GAS (using current block height as end parameter)
-    auto currentHeight = neoSystem->GetBlockchain()->GetCurrentBlockIndex();
-    auto unclaimedGas = neoToken->GetUnclaimedGas(neoSystem->GetSnapshot(), account, currentHeight);
+    if (!parsed)
+    {
+        throw RpcException(ErrorCode::InvalidAddress, "Invalid address");
+    }
 
-    // Create response
-    nlohmann::json response;
-    response["unclaimed"] = unclaimedGas;
-    response["address"] = account.ToString();
+    auto snapshot = RequireSnapshot(neoSystem);
+    auto neoToken = smartcontract::native::NeoToken::GetInstance();
+    auto ledgerContract = smartcontract::native::LedgerContract::GetInstance();
 
-    return response;
-}
+    if (!neoToken || !ledgerContract)
+    {
+        throw RpcException(ErrorCode::InternalError, "Native contracts unavailable");
+    }
 
-nlohmann::json RPCMethods::GetConnectionCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
-{
-    return neoSystem->GetLocalNode().GetConnectedPeers().size();
-}
+    uint32_t currentIndex = 0;
+    try
+    {
+        currentIndex = ledgerContract->GetCurrentIndex(snapshot);
+    }
+    catch (const std::exception&)
+    {
+        currentIndex = 0;
+    }
 
-nlohmann::json RPCMethods::GetPeers(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
-{
-    auto peers = neoSystem->GetLocalNode().GetConnectedPeers();
+    int64_t unclaimed = 0;
+    try
+    {
+        unclaimed = neoToken->GetUnclaimedGas(snapshot, scriptHash, currentIndex + 1);
+    }
+    catch (const std::exception&)
+    {
+        unclaimed = 0;
+    }
+
+    auto protocolSettings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
 
     nlohmann::json result;
-    result["connected"] = nlohmann::json::array();
-
-    for (const auto& peer : peers)
-    {
-        nlohmann::json peerJson;
-        peerJson["address"] = peer->GetAddress();
-        peerJson["port"] = peer->GetPort();
-
-        result["connected"].push_back(peerJson);
-    }
+    result["unclaimed"] = std::to_string(unclaimed);
+    result["address"] = FormatScriptHash(scriptHash, protocolSettings);
 
     return result;
 }
 
+nlohmann::json RPCMethods::GetConnectionCount(std::shared_ptr<node::NeoSystem> neoSystem,
+                                              const nlohmann::json& params)
+{
+    (void)params;
+
+    auto localNode = neoSystem ? neoSystem->GetLocalNode() : nullptr;
+    if (!localNode)
+    {
+        return 0;
+    }
+
+    return static_cast<uint32_t>(localNode->GetConnectedCount());
+}
+
+nlohmann::json RPCMethods::GetPeers(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)params;
+
+    nlohmann::json peers;
+    peers["unconnected"] = nlohmann::json::array();
+    peers["connected"] = nlohmann::json::array();
+    peers["bad"] = nlohmann::json::array();
+
+    auto localNode = neoSystem ? neoSystem->GetLocalNode() : nullptr;
+    if (!localNode)
+    {
+        return peers;
+    }
+
+    auto connected = localNode->GetConnectedPeers();
+    for (const auto& peer : connected)
+    {
+        if (!peer) continue;
+        nlohmann::json entry;
+        const auto endpoint = peer->GetRemoteEndPoint();
+        entry["address"] = endpoint.ToString();
+        entry["port"] = endpoint.GetPort();
+        entry["id"] = peer->GetConnection() ? peer->GetConnection()->GetId() : 0;
+        peers["connected"].push_back(entry);
+    }
+
+    return peers;
+}
+
 nlohmann::json RPCMethods::GetCommittee(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    auto roleManagement = std::static_pointer_cast<smartcontract::native::RoleManagement>(
-        smartcontract::native::NativeContractManager::GetInstance().GetContract(
-            smartcontract::native::RoleManagement::NAME));
+    (void)params;
 
-    auto committee = roleManagement->GetDesignatedByRole(neoSystem->GetSnapshot(),
-                                                         smartcontract::native::RoleManagement::ROLE_STATE_COMMITTEE);
+    auto snapshot = RequireSnapshot(neoSystem);
+    auto neoToken = smartcontract::native::NeoToken::GetInstance();
+    auto committee = neoToken->GetCommittee(snapshot);
 
     nlohmann::json result = nlohmann::json::array();
     for (const auto& member : committee)
     {
         result.push_back(member.ToString());
     }
-
     return result;
 }
 
 nlohmann::json RPCMethods::GetValidators(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    auto roleManagement = std::static_pointer_cast<smartcontract::native::RoleManagement>(
-        smartcontract::native::NativeContractManager::GetInstance().GetContract(
-            smartcontract::native::RoleManagement::NAME));
+    (void)params;
 
-    auto validators = roleManagement->GetDesignatedByRole(neoSystem->GetSnapshot(),
-                                                          smartcontract::native::RoleManagement::ROLE_STATE_VALIDATOR);
+    auto snapshot = RequireSnapshot(neoSystem);
+    auto neoToken = smartcontract::native::NeoToken::GetInstance();
+    auto validators = neoToken->GetValidators(snapshot);
 
     nlohmann::json result = nlohmann::json::array();
     for (const auto& validator : validators)
     {
-        nlohmann::json validatorJson;
-        validatorJson["publickey"] = validator.ToString();
-        validatorJson["votes"] = 0;
-        validatorJson["active"] = true;
-
-        result.push_back(validatorJson);
+        result.push_back(validator.ToString());
     }
-
     return result;
 }
 
 nlohmann::json RPCMethods::GetNextBlockValidators(std::shared_ptr<node::NeoSystem> neoSystem,
                                                   const nlohmann::json& params)
 {
-    auto roleManagement = std::static_pointer_cast<smartcontract::native::RoleManagement>(
-        smartcontract::native::NativeContractManager::GetInstance().GetContract(
-            smartcontract::native::RoleManagement::NAME));
+    (void)params;
 
-    auto validators = roleManagement->GetDesignatedByRole(neoSystem->GetSnapshot(),
-                                                          smartcontract::native::RoleManagement::ROLE_STATE_VALIDATOR);
+    auto snapshot = RequireSnapshot(neoSystem);
+    auto neoToken = smartcontract::native::NeoToken::GetInstance();
+    auto settings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
+    const int validatorCount = settings ? settings->GetValidatorsCount() : 0;
 
+    auto validators = neoToken->GetNextBlockValidators(snapshot, validatorCount);
     nlohmann::json result = nlohmann::json::array();
     for (const auto& validator : validators)
     {
-        nlohmann::json validatorJson;
-        validatorJson["publickey"] = validator.ToString();
-        validatorJson["votes"] = 0;
-        validatorJson["active"] = true;
-
-        result.push_back(validatorJson);
+        nlohmann::json entry;
+        entry["publickey"] = validator.ToString();
+        entry["votes"] = neoToken->GetCandidateVote(snapshot, validator);
+        result.push_back(std::move(entry));
     }
-
     return result;
 }
 
 nlohmann::json RPCMethods::GetBestBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    auto hash = neoSystem->GetBlockchain().GetCurrentBlockHash();
-    return hash.ToString();
+    (void)params;
+    auto blockchain = RequireBlockchain(neoSystem);
+    return blockchain->GetBestBlockHash().ToString();
 }
 
-nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<node::NeoSystem> neoSystem,
+                                               const nlohmann::json& params)
 {
-    // In Neo N3, header count is the same as block count
-    return neoSystem->GetBlockchain().GetCurrentBlockIndex() + 1;
+    (void)params;
+    auto blockchain = RequireBlockchain(neoSystem);
+    return blockchain->GetHeight() + 1;
 }
 
 nlohmann::json RPCMethods::GetStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.size() < 2 || !params[0].is_string() || !params[1].is_string())
-        throw std::runtime_error("Invalid parameters");
+    if (params.size() < 2)
+    {
+        throw RpcException(ErrorCode::InvalidParams, "getstorage requires contract identifier and key");
+    }
 
-    // Get contract hash
-    io::UInt160 scriptHash;
-    scriptHash.FromString(params[0].get<std::string>());
+    auto contractId = ResolveContractId(neoSystem, params[0]);
 
-    // Get storage key
-    auto keyBase64 = params[1].get<std::string>();
-    auto keyBytes = cryptography::Base64::Decode(keyBase64);
+    if (!params[1].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Storage key must be a Base64 string");
+    }
 
-    // Get contract state to find contract ID
-    auto contract = neoSystem->GetBlockchain().GetContract(scriptHash);
-    if (!contract) throw std::runtime_error("Contract not found");
+    const auto keyBase64 = params[1].get<std::string>();
+    if (!IsValidBase64String(keyBase64))
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid Base64 storage key");
+    }
 
-    // Create storage key
-    auto storageKey = persistence::StorageKey::Create(contract->GetId(), keyBytes.AsSpan());
+    io::ByteVector key;
+    try
+    {
+        key = cryptography::Base64::Decode(keyBase64);
+    }
+    catch (const std::exception&)
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid Base64 storage key");
+    }
 
-    // Get storage item
-    auto snapshot = neoSystem->GetSnapshot();
+    auto snapshot = RequireSnapshot(neoSystem);
+    persistence::StorageKey storageKey(contractId, key);
     auto item = snapshot->TryGet(storageKey);
-
-    if (!item) return nullptr;
+    if (!item)
+    {
+        throw RpcException(ErrorCode::UnknownStorageItem, "Storage item not found");
+    }
 
     return cryptography::Base64::Encode(item->GetValue().AsSpan());
 }
 
 nlohmann::json RPCMethods::FindStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.size() < 2 || !params[0].is_string() || !params[1].is_string())
-        throw std::runtime_error("Invalid parameters");
-
-    // Get contract hash
-    io::UInt160 scriptHash;
-    scriptHash.FromString(params[0].get<std::string>());
-
-    // Get prefix
-    auto prefixBase64 = params[1].get<std::string>();
-    auto prefixBytes = cryptography::Base64::Decode(prefixBase64);
-
-    // Get start key (optional)
-    io::ByteVector startKey;
-    if (params.size() >= 3 && params[2].is_string())
+    if (params.size() < 2)
     {
-        auto startKeyBase64 = params[2].get<std::string>();
-        startKey = cryptography::Base64::Decode(startKeyBase64);
+        throw RpcException(ErrorCode::InvalidParams, "findstorage requires contract identifier and prefix");
     }
 
-    // Get contract state to find contract ID
-    auto contract = neoSystem->GetBlockchain().GetContract(scriptHash);
-    if (!contract) throw std::runtime_error("Contract not found");
+    auto contractId = ResolveContractId(neoSystem, params[0]);
 
-    // Create search prefix
-    auto searchKey = persistence::StorageKey::Create(contract->GetId(), prefixBytes.AsSpan());
+    if (!params[1].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Storage prefix must be a Base64 string");
+    }
 
-    // Find storage items
-    auto snapshot = neoSystem->GetSnapshot();
-    auto results = snapshot->Find(&searchKey);
+    const auto prefixBase64 = params[1].get<std::string>();
+    if (!IsValidBase64String(prefixBase64))
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid Base64 storage prefix");
+    }
+
+    io::ByteVector prefix;
+    try
+    {
+        prefix = cryptography::Base64::Decode(prefixBase64);
+    }
+    catch (const std::exception&)
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid Base64 storage prefix");
+    }
+
+    int64_t start = 0;
+    if (params.size() > 2)
+    {
+        if (!params[2].is_number_integer())
+        {
+            throw RpcException(ErrorCode::InvalidParams, "findstorage start index must be an integer");
+        }
+        start = params[2].get<int64_t>();
+        if (start < 0)
+        {
+            throw RpcException(ErrorCode::InvalidParams, "findstorage start index must be non-negative");
+        }
+    }
+
+    auto snapshot = RequireSnapshot(neoSystem);
+    persistence::StorageKey prefixKey(contractId, prefix);
+    auto entries = snapshot->Find(&prefixKey);
+
+    nlohmann::json items = nlohmann::json::array();
+
+    size_t begin = static_cast<size_t>(std::min<int64_t>(start, static_cast<int64_t>(entries.size())));
+    size_t count = 0;
+    for (size_t index = begin; index < entries.size() && count < kFindStoragePageSize; ++index, ++count)
+    {
+        const auto& entry = entries[index];
+        const auto& key = entry.first.GetKey();
+        const auto& value = entry.second.GetValue();
+
+        nlohmann::json item;
+        item["key"] = cryptography::Base64::Encode(key.AsSpan());
+        item["value"] = cryptography::Base64::Encode(value.AsSpan());
+        items.push_back(std::move(item));
+    }
 
     nlohmann::json result;
-    result["results"] = nlohmann::json::array();
-    result["firstproofpair"] = nullptr;
-    result["truncated"] = false;
-
-    for (const auto& pair : results)
-    {
-        nlohmann::json item;
-        item["key"] = cryptography::Base64::Encode(pair.first.GetKey().AsSpan());
-        item["value"] = cryptography::Base64::Encode(pair.second.GetValue().AsSpan());
-        result["results"].push_back(item);
-    }
+    result["results"] = std::move(items);
+    result["next"] = static_cast<int64_t>(begin + count);
+    result["truncated"] = (begin + count) < entries.size();
 
     return result;
 }
 
 nlohmann::json RPCMethods::GetCandidates(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    auto neoToken = std::static_pointer_cast<smartcontract::native::NeoToken>(
-        smartcontract::native::NativeContractManager::GetInstance().GetContract(smartcontract::native::NeoToken::NAME));
+    (void)params;
 
-    auto candidates = neoToken->GetCandidates(neoSystem->GetSnapshot());
+    auto snapshot = RequireSnapshot(neoSystem);
+    auto neoToken = smartcontract::native::NeoToken::GetInstance();
+    auto settings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
+    const int validatorCount = settings ? settings->GetValidatorsCount() : 0;
+
+    auto candidates = neoToken->GetCandidates(snapshot);
+    auto nextValidators = neoToken->GetNextBlockValidators(snapshot, validatorCount);
+
+    std::unordered_set<std::string> activeValidators;
+    for (const auto& validator : nextValidators)
+    {
+        activeValidators.insert(validator.ToString());
+    }
 
     nlohmann::json result = nlohmann::json::array();
-    for (const auto& candidate : candidates)
+    for (const auto& [publicKey, state] : candidates)
     {
-        nlohmann::json candidateJson;
-        candidateJson["publickey"] = candidate.first.ToString();
-        candidateJson["votes"] = candidate.second;
-        candidateJson["active"] = true;  // All candidates are considered active
-
-        result.push_back(candidateJson);
+        nlohmann::json entry;
+        auto keyString = publicKey.ToString();
+        entry["publickey"] = keyString;
+        entry["votes"] = std::to_string(state.votes);
+        entry["active"] = activeValidators.find(keyString) != activeValidators.end();
+        result.push_back(std::move(entry));
     }
 
     return result;
 }
 
-nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<node::NeoSystem> neoSystem,
+                                              const nlohmann::json& params)
 {
+    (void)params;
+
+    auto contractManagement = RequireContractManagement();
+    auto snapshot = RequireSnapshot(neoSystem);
+    auto storeView = std::static_pointer_cast<persistence::StoreView>(snapshot);
+    auto& manager = smartcontract::native::NativeContractManager::GetInstance();
+    manager.Initialize();
+
     nlohmann::json result = nlohmann::json::array();
 
-    // Get all native contracts
-    auto& manager = smartcontract::native::NativeContractManager::GetInstance();
-    auto contracts = manager.GetAllContracts();
+    auto contracts = contractManagement->ListContracts(storeView);
+    if (contracts.empty())
+    {
+        for (const auto& nativeContract : manager.GetContracts())
+        {
+            nlohmann::json entry;
+            entry["id"] = static_cast<int32_t>(nativeContract->GetId());
+            entry["updatecounter"] = 0;
+            entry["hash"] = nativeContract->GetScriptHash().ToString();
+
+            nlohmann::json nef = nlohmann::json::object();
+            nef["magic"] = 0x3346454E;
+            nef["compiler"] = "neo-cpp";
+            nef["tokens"] = nlohmann::json::array();
+            nef["script"] = "";
+            nef["checksum"] = 0;
+            entry["nef"] = std::move(nef);
+
+            nlohmann::json manifestJson = nlohmann::json::object();
+            manifestJson["name"] = nativeContract->GetName();
+            entry["manifest"] = std::move(manifestJson);
+
+            result.push_back(std::move(entry));
+        }
+        return result;
+    }
 
     for (const auto& contract : contracts)
     {
-        nlohmann::json contractJson;
-        contractJson["id"] = contract->GetId();
-        contractJson["hash"] = contract->GetScriptHash().ToString();
-        contractJson["nef"] = nlohmann::json::object();
-        contractJson["nef"]["magic"] = 0x3346454E;  // NEF magic
-        contractJson["nef"]["compiler"] = "neo-core-v" + std::string("3.0.0");
-        contractJson["nef"]["tokens"] = nlohmann::json::array();
-        contractJson["nef"]["script"] = "";
-        contractJson["nef"]["checksum"] = 0;
+        nlohmann::json entry;
+        entry["id"] = contract->GetId();
+        entry["updatecounter"] = contract->GetUpdateCounter();
+        entry["hash"] = contract->GetScriptHash().ToString();
 
-        contractJson["manifest"] = nlohmann::json::object();
-        contractJson["manifest"]["name"] = contract->GetName();
-        contractJson["manifest"]["groups"] = nlohmann::json::array();
-        contractJson["manifest"]["supportedstandards"] = nlohmann::json::array();
-        contractJson["manifest"]["abi"] = nlohmann::json::object();
-        contractJson["manifest"]["abi"]["methods"] = nlohmann::json::array();
-        contractJson["manifest"]["abi"]["events"] = nlohmann::json::array();
-        contractJson["manifest"]["permissions"] = nlohmann::json::array();
-        contractJson["manifest"]["trusts"] = nlohmann::json::array();
-        contractJson["manifest"]["extra"] = nullptr;
+        nlohmann::json nef = nlohmann::json::object();
+        nef["magic"] = 0x3346454E;  // 'NEF3'
+        nef["compiler"] = "neo-cpp";
+        nef["tokens"] = nlohmann::json::array();
+        nef["script"] = cryptography::Base64::Encode(contract->GetScript().AsSpan());
+        nef["checksum"] = 0;
+        entry["nef"] = std::move(nef);
 
-        result.push_back(contractJson);
+        try
+        {
+            entry["manifest"] = nlohmann::json::parse(contract->GetManifest());
+        }
+        catch (const std::exception& ex)
+        {
+            throw RpcException(ErrorCode::InternalError,
+                               std::string("Failed to parse contract manifest: ") + ex.what());
+        }
+
+        result.push_back(std::move(entry));
     }
 
     return result;
@@ -721,660 +1563,218 @@ nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<node::NeoSystem> n
 
 nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
+    if (!params.is_array() || params.empty() || !params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "submitblock requires a base64-encoded block payload");
+    }
 
-    auto blockBase64 = params[0].get<std::string>();
-    auto blockData = cryptography::Base64::Decode(blockBase64);
+    bool relay = true;
+    if (params.size() >= 2)
+    {
+        if (params[1].is_boolean())
+        {
+            relay = params[1].get<bool>();
+        }
+        else if (params[1].is_number_integer())
+        {
+            relay = params[1].get<int64_t>() != 0;
+        }
+        else
+        {
+            throw RpcException(ErrorCode::InvalidParams, "submitblock relay flag must be a boolean value");
+        }
+    }
 
-    std::istringstream stream(std::string(reinterpret_cast<const char*>(blockData.Data()), blockData.Size()));
-    io::BinaryReader reader(stream);
+    const auto& encodedBlock = params[0].get<std::string>();
+    if (!IsValidBase64String(encodedBlock))
+    {
+        throw RpcException(ErrorCode::InvalidParams, "submitblock payload is not valid Base64");
+    }
 
+    io::ByteVector blockBytes;
+    try
+    {
+        blockBytes = cryptography::Base64::Decode(encodedBlock);
+    }
+    catch (const std::exception& ex)
+    {
+        throw RpcException(ErrorCode::InvalidParams,
+                           std::string("Failed to decode block payload: ") + ex.what());
+    }
+
+    if (blockBytes.IsEmpty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Block payload is empty");
+    }
+
+    auto blockchain = RequireBlockchain(neoSystem);
     auto block = std::make_shared<ledger::Block>();
-    block->Deserialize(reader);
+    try
+    {
+        io::BinaryReader reader(blockBytes);
+        block->Deserialize(reader);
+    }
+    catch (const std::exception& ex)
+    {
+        throw RpcException(ErrorCode::InvalidParams,
+                           std::string("Invalid block serialization: ") + ex.what());
+    }
 
-    // Submit block to blockchain
-    auto result = neoSystem->GetBlockchain().AddBlock(block);
+    auto verifyResult = blockchain->OnNewBlock(block);
+    if (verifyResult != VerifyResult::Succeed)
+    {
+        throw RpcException(MapVerifyResult(verifyResult),
+                           "Block rejected: " + VerifyResultToString(verifyResult));
+    }
 
-    if (!result) throw std::runtime_error("Block rejected");
+    if (relay && neoSystem)
+    {
+        auto localNode = neoSystem->GetLocalNode();
+        if (localNode)
+        {
+            localNode->RelayBlock(block);
+        }
+    }
 
-    return block->GetHash().ToString();
+    return nlohmann::json{{"hash", block->GetHash().ToString()}};
 }
 
 nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
+    (void)neoSystem;
+    if (params.empty() || !params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "validateaddress requires an address string");
+    }
 
-    auto address = params[0].get<std::string>();
+    const auto address = params[0].get<std::string>();
+    bool isValid = wallets::Helper::IsValidAddress(address);
 
     nlohmann::json result;
     result["address"] = address;
+    result["isvalid"] = isValid;
+    return result;
+}
 
-    try
-    {
-        io::UInt160 scriptHash;
-        scriptHash.FromString(address);
+nlohmann::json RPCMethods::ListPlugins(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)neoSystem;
+    (void)params;
 
-        result["isvalid"] = true;
-    }
-    catch (const std::invalid_argument& e)
+    auto& manager = plugins::PluginManager::GetInstance();
+    nlohmann::json result = nlohmann::json::array();
+    for (const auto& plugin : manager.GetPlugins())
     {
-        LOG_DEBUG("Address validation failed: {}", e.what());
-        result["isvalid"] = false;
+        if (!plugin) continue;
+        nlohmann::json entry;
+        entry["name"] = plugin->GetName();
+        entry["description"] = plugin->GetDescription();
+        entry["version"] = plugin->GetVersion();
+        entry["author"] = plugin->GetAuthor();
+        entry["running"] = plugin->IsRunning();
+        result.push_back(std::move(entry));
     }
-    catch (const std::runtime_error& e)
-    {
-        LOG_DEBUG("Runtime error during address validation: {}", e.what());
-        result["isvalid"] = false;
-    }
-    catch (const std::exception& e)
-    {
-        LOG_DEBUG("Exception during address validation: {}", e.what());
-        result["isvalid"] = false;
-    }
-
     return result;
 }
 
 nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.size() < 2 || !params[0].is_string() || !params[1].is_string())
-        throw std::runtime_error("Invalid parameters");
-
-    auto sessionId = params[0].get<std::string>();
-    auto iteratorId = params[1].get<std::string>();
-
-    // Optional count parameter
-    int count = 100;  // Default count
-    if (params.size() >= 3 && params[2].is_number())
+    (void)neoSystem;
+    if (params.size() < 2)
     {
-        count = params[2].get<int>();
-        if (count <= 0 || count > 1000) throw std::runtime_error("Invalid count parameter");
+        throw RpcException(ErrorCode::InvalidParams, "traverseiterator requires session id and iterator id");
     }
 
-    // Complete iterator session management implementation
-    try
+    if (!params[0].is_string() || !params[1].is_string())
     {
-        // Get global RPC session manager
-        auto session_manager = GetRpcSessionManager();
-        if (!session_manager)
-        {
-            throw std::runtime_error("RPC session manager not available");
-        }
-
-        // Validate session exists and get iterator
-        auto session = session_manager->GetSession(sessionId);
-        if (!session)
-        {
-            throw std::runtime_error("Invalid session ID: " + sessionId);
-        }
-
-        auto iterator = session->GetIterator(iteratorId);
-        if (!iterator)
-        {
-            throw std::runtime_error("Invalid iterator ID: " + iteratorId);
-        }
-
-        // Traverse iterator and collect results
-        nlohmann::json result = nlohmann::json::array();
-        int items_collected = 0;
-
-        while (iterator->HasNext() && items_collected < count)
-        {
-            try
-            {
-                auto item = iterator->Next();
-                if (!item)
-                {
-                    break;  // End of iteration
-                }
-
-                // Convert stack item to JSON
-                nlohmann::json json_item = ConvertStackItemToJson(item);
-                result.push_back(json_item);
-                items_collected++;
-            }
-            catch (const std::exception& e)
-            {
-                // Error getting next item - stop iteration
-                break;
-            }
-        }
-
-        // Update session activity timestamp
-        session->UpdateLastActivity();
-
-        return result;
+        throw RpcException(ErrorCode::InvalidParams, "Session id and iterator id must be strings");
     }
-    catch (const std::exception& e)
+
+    const auto sessionId = params[0].get<std::string>();
+    const auto iteratorId = params[1].get<std::string>();
+
+    size_t count = 100;
+    if (params.size() >= 3)
     {
-        // Return empty array on error to maintain RPC compatibility
-        nlohmann::json error_result = nlohmann::json::array();
-        return error_result;
+        if (!params[2].is_number_unsigned() && !params[2].is_number_integer())
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Max item count must be a non-negative integer");
+        }
+
+        auto countValue = params[2].get<int64_t>();
+        if (countValue < 0)
+        {
+            throw RpcException(ErrorCode::InvalidParams, "Max item count must be non-negative");
+        }
+
+        count = countValue == 0 ? static_cast<size_t>(100) : static_cast<size_t>(countValue);
     }
+
+    auto& manager = RpcSessionManager::Instance();
+    auto result = manager.Traverse(sessionId, iteratorId, count);
+    if (!result.found)
+    {
+        throw RpcException(ErrorCode::UnknownIterator, "Iterator not found");
+    }
+
+    nlohmann::json response;
+    response["values"] = result.items;
+    response["truncated"] = result.hasMore;
+    return response;
 }
 
 nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
-
-    auto sessionId = params[0].get<std::string>();
-
-    // Complete session termination implementation
-    try
+    (void)neoSystem;
+    if (params.empty() || !params[0].is_string())
     {
-        // Get global RPC session manager
-        auto session_manager = GetRpcSessionManager();
-        if (!session_manager)
-        {
-            throw std::runtime_error("RPC session manager not available");
-        }
-
-        // Validate session exists
-        auto session = session_manager->GetSession(sessionId);
-        if (!session)
-        {
-            // Session doesn't exist - could already be terminated or invalid
-            return false;
-        }
-
-        // Terminate the session and clean up resources
-        bool success = session_manager->TerminateSession(sessionId);
-
-        if (success)
-        {
-            // Log successful termination
-            LogSessionTermination(sessionId);
-        }
-
-        return success;
+        throw RpcException(ErrorCode::InvalidParams, "terminatesession requires a session id");
     }
-    catch (const std::exception& e)
+
+    const auto sessionId = params[0].get<std::string>();
+    auto& manager = RpcSessionManager::Instance();
+    if (!manager.TerminateSession(sessionId))
     {
-        // Error during termination - session may still exist
-        return false;
+        throw RpcException(ErrorCode::UnknownSession, "Session not found");
     }
+    return true;
 }
 
 nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<node::NeoSystem> neoSystem,
                                                 const nlohmann::json& params)
 {
-    if (params.size() < 3 || !params[0].is_string() || !params[1].is_array() || !params[2].is_array())
-        throw std::runtime_error("Invalid parameters");
+    ThrowNotImplemented("invokecontractverify");
+}
 
-    // Get contract hash
-    io::UInt160 scriptHash;
-    scriptHash.FromString(params[0].get<std::string>());
+nlohmann::json RPCMethods::GetStateRoot(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)neoSystem;
+    (void)params;
+    throw RpcException(ErrorCode::StateServiceNotEnabled, "State root service not available");
+}
 
-    // Get arguments
-    std::vector<std::shared_ptr<neo::vm::StackItem>> args;
-    for (const auto& arg : params[1])
-    {
-        if (!arg.is_object() || !arg.contains("type") || !arg.contains("value"))
-            throw std::runtime_error("Invalid argument");
-
-        auto type = arg["type"].get<std::string>();
-        auto value = arg["value"];
-
-        if (type == "String")
-        {
-            args.push_back(neo::vm::StackItem::Create(value.get<std::string>()));
-        }
-        else if (type == "Hash160")
-        {
-            io::UInt160 hash;
-            hash.FromString(value.get<std::string>());
-            args.push_back(neo::vm::StackItem::Create(io::ByteVector(io::ByteSpan(hash.Data(), hash.Size()))));
-        }
-        else if (type == "Hash256")
-        {
-            io::UInt256 hash;
-            hash.FromString(value.get<std::string>());
-            args.push_back(neo::vm::StackItem::Create(io::ByteVector(io::ByteSpan(hash.Data(), hash.Size()))));
-        }
-        else if (type == "Integer")
-        {
-            args.push_back(neo::vm::StackItem::Create(value.get<int64_t>()));
-        }
-        else if (type == "Boolean")
-        {
-            args.push_back(neo::vm::StackItem::Create(value.get<bool>()));
-        }
-        else if (type == "ByteArray")
-        {
-            auto data = cryptography::Base64::Decode(value.get<std::string>());
-            args.push_back(neo::vm::StackItem::Create(data));
-        }
-        else
-        {
-            throw std::runtime_error("Invalid argument type");
-        }
-    }
-
-    // Get signers
-    std::vector<ledger::Signer> signers;
-    for (const auto& signerJson : params[2])
-    {
-        if (!signerJson.is_object() || !signerJson.contains("account") || !signerJson.contains("scopes"))
-            throw std::runtime_error("Invalid signer");
-
-        io::UInt160 account;
-        account.FromString(signerJson["account"].get<std::string>());
-        auto scopes = static_cast<ledger::WitnessScope>(signerJson["scopes"].get<uint8_t>());
-
-        ledger::Signer signer(account, scopes);
-        signers.push_back(signer);
-    }
-
-    // Create engine for verification
-    auto engine = std::make_shared<smartcontract::ApplicationEngine>(smartcontract::TriggerType::Verification, nullptr,
-                                                                     neoSystem->GetSnapshot(), 0);
-
-    // Call verify method
-    auto result = engine->CallContract(scriptHash, "verify", args, smartcontract::CallFlags::All);
-
-    // Create response
-    nlohmann::json response;
-    response["script"] = cryptography::Base64::Encode(engine->GetScript().AsSpan());
-    response["state"] = engine->GetState() == neo::vm::VMState::Halt ? "HALT" : "FAULT";
-    response["gasconsumed"] = engine->GetGasConsumed();
-    response["exception"] = engine->GetException();
-
-    // Add stack
-    response["stack"] = nlohmann::json::array();
-    for (const auto& item : engine->GetResultStack())
-    {
-        nlohmann::json stackItem;
-
-        if (item->GetType() == neo::vm::StackItemType::Integer)
-        {
-            stackItem["type"] = "Integer";
-            stackItem["value"] = item->GetInteger();
-        }
-        else if (item->GetType() == neo::vm::StackItemType::Boolean)
-        {
-            stackItem["type"] = "Boolean";
-            stackItem["value"] = item->GetBoolean();
-        }
-        else if (item->GetType() == neo::vm::StackItemType::ByteString)
-        {
-            stackItem["type"] = "ByteString";
-            stackItem["value"] = cryptography::Base64::Encode(item->GetByteArray().AsSpan());
-        }
-        else if (item->GetType() == neo::vm::StackItemType::Buffer)
-        {
-            stackItem["type"] = "Buffer";
-            stackItem["value"] = cryptography::Base64::Encode(item->GetByteArray().AsSpan());
-        }
-        else
-        {
-            stackItem["type"] = "Unknown";
-            stackItem["value"] = nullptr;
-        }
-
-        response["stack"].push_back(stackItem);
-    }
-
-    return response;
+nlohmann::json RPCMethods::GetState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)neoSystem;
+    (void)params;
+    throw RpcException(ErrorCode::StateServiceNotEnabled, "State service not available");
 }
 
 nlohmann::json RPCMethods::BlockToJson(std::shared_ptr<ledger::Block> block, bool verbose)
 {
-    if (!verbose)
-    {
-        // Serialize block
-        std::ostringstream stream;
-        io::BinaryWriter writer(stream);
-        block->Serialize(writer);
-        std::string data = stream.str();
-
-        return cryptography::Base64::Encode(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
-    }
-
-    nlohmann::json json;
-    json["hash"] = block->GetHash().ToString();
-    json["size"] = block->GetSize();
-    json["version"] = block->GetVersion();
-    json["previousblockhash"] = block->GetPrevHash().ToString();
-    json["merkleroot"] = block->GetMerkleRoot().ToString();
-    json["time"] = block->GetTimestamp();
-    json["index"] = block->GetIndex();
-    json["nextconsensus"] = block->GetNextConsensus().ToString();
-
-    // Add witnesses
-    json["witnesses"] = nlohmann::json::array();
-    for (const auto& witness : block->GetWitnesses())
-    {
-        nlohmann::json witnessJson;
-        witnessJson["invocation"] = cryptography::Base64::Encode(witness.GetInvocationScript().AsSpan());
-        witnessJson["verification"] = cryptography::Base64::Encode(witness.GetVerificationScript().AsSpan());
-
-        json["witnesses"].push_back(witnessJson);
-    }
-
-    // Add transactions
-    json["tx"] = nlohmann::json::array();
-    for (const auto& tx : block->GetTransactions())
-    {
-        json["tx"].push_back(TransactionToJson(tx, true));
-    }
-
-    // Add confirmations
-    json["confirmations"] = block->GetIndex() == 0 ? 1 : block->GetIndex() - block->GetIndex() + 1;
-
-    return json;
+    if (!block) return nullptr;
+    return SerializeBlock(*block, verbose);
 }
 
 nlohmann::json RPCMethods::TransactionToJson(std::shared_ptr<ledger::Transaction> tx, bool verbose)
 {
-    if (!verbose)
-    {
-        // Serialize transaction
-        std::ostringstream stream;
-        io::BinaryWriter writer(stream);
-        tx->Serialize(writer);
-        std::string data = stream.str();
-
-        return cryptography::Base64::Encode(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
-    }
-
-    nlohmann::json json;
-    json["hash"] = tx->GetHash().ToString();
-    json["size"] = tx->GetSize();
-    json["version"] = tx->GetVersion();
-    json["nonce"] = tx->GetNonce();
-    json["sender"] = tx->GetSender().ToString();
-    json["sysfee"] = tx->GetSystemFee();
-    json["netfee"] = tx->GetNetworkFee();
-    json["validuntilblock"] = tx->GetValidUntilBlock();
-
-    // Add signers
-    json["signers"] = nlohmann::json::array();
-    for (const auto& signer : tx->GetSigners())
-    {
-        nlohmann::json signerJson;
-        signerJson["account"] = signer.GetAccount().ToString();
-        signerJson["scopes"] = static_cast<uint8_t>(signer.GetScopes());
-
-        if (signer.GetAllowedContracts().size() > 0)
-        {
-            signerJson["allowedcontracts"] = nlohmann::json::array();
-            for (const auto& contract : signer.GetAllowedContracts())
-            {
-                signerJson["allowedcontracts"].push_back(contract.ToString());
-            }
-        }
-
-        if (signer.GetAllowedGroups().size() > 0)
-        {
-            signerJson["allowedgroups"] = nlohmann::json::array();
-            for (const auto& group : signer.GetAllowedGroups())
-            {
-                signerJson["allowedgroups"].push_back(group.ToString());
-            }
-        }
-
-        json["signers"].push_back(signerJson);
-    }
-
-    // Add attributes
-    json["attributes"] = nlohmann::json::array();
-    for (const auto& attribute : tx->GetAttributes())
-    {
-        nlohmann::json attributeJson;
-        attributeJson["type"] = static_cast<uint8_t>(attribute.GetType());
-        attributeJson["data"] = cryptography::Base64::Encode(attribute.GetData().AsSpan());
-
-        json["attributes"].push_back(attributeJson);
-    }
-
-    // Add script
-    json["script"] = cryptography::Base64::Encode(tx->GetScript().AsSpan());
-
-    // Add witnesses
-    json["witnesses"] = nlohmann::json::array();
-    for (const auto& witness : tx->GetWitnesses())
-    {
-        nlohmann::json witnessJson;
-        witnessJson["invocation"] = cryptography::Base64::Encode(witness.GetInvocationScript().AsSpan());
-        witnessJson["verification"] = cryptography::Base64::Encode(witness.GetVerificationScript().AsSpan());
-
-        json["witnesses"].push_back(witnessJson);
-    }
-
-    return json;
+    if (!tx) return nullptr;
+    return SerializeTransaction(*tx, verbose);
 }
 
 nlohmann::json RPCMethods::ContractToJson(std::shared_ptr<smartcontract::ContractState> contract)
 {
-    nlohmann::json json;
-    json["id"] = contract->GetId();
-    json["updatecounter"] = contract->GetUpdateCounter();
-    json["hash"] = contract->GetScriptHash().ToString();
-    json["nef"] = nlohmann::json::object();
-    json["nef"]["magic"] = contract->GetNef().GetMagic();
-    json["nef"]["compiler"] = contract->GetNef().GetCompiler();
-    json["nef"]["tokens"] = nlohmann::json::array();
-    for (const auto& token : contract->GetNef().GetTokens())
-    {
-        nlohmann::json tokenJson;
-        tokenJson["hash"] = token.GetHash().ToString();
-        tokenJson["method"] = token.GetMethod();
-        tokenJson["paramcount"] = token.GetParamCount();
-        tokenJson["hasreturnvalue"] = token.HasReturnValue();
-        tokenJson["callflags"] = static_cast<uint8_t>(token.GetCallFlags());
-
-        json["nef"]["tokens"].push_back(tokenJson);
-    }
-    json["nef"]["script"] = cryptography::Base64::Encode(contract->GetNef().GetScript().AsSpan());
-    json["nef"]["checksum"] = contract->GetNef().GetChecksum();
-
-    json["manifest"] = nlohmann::json::object();
-    json["manifest"]["name"] = contract->GetManifest().GetName();
-    json["manifest"]["groups"] = nlohmann::json::array();
-    for (const auto& group : contract->GetManifest().GetGroups())
-    {
-        nlohmann::json groupJson;
-        groupJson["pubkey"] = group.GetPublicKey().ToString();
-        groupJson["signature"] = cryptography::Base64::Encode(group.GetSignature().AsSpan());
-
-        json["manifest"]["groups"].push_back(groupJson);
-    }
-
-    json["manifest"]["supportedstandards"] = nlohmann::json::array();
-    for (const auto& standard : contract->GetManifest().GetSupportedStandards())
-    {
-        json["manifest"]["supportedstandards"].push_back(standard);
-    }
-
-    json["manifest"]["abi"] = nlohmann::json::object();
-    json["manifest"]["abi"]["methods"] = nlohmann::json::array();
-    for (const auto& method : contract->GetManifest().GetAbi().GetMethods())
-    {
-        nlohmann::json methodJson;
-        methodJson["name"] = method.GetName();
-        methodJson["offset"] = method.GetOffset();
-        methodJson["returntype"] = static_cast<uint8_t>(method.GetReturnType());
-        methodJson["parameters"] = nlohmann::json::array();
-        for (const auto& parameter : method.GetParameters())
-        {
-            nlohmann::json parameterJson;
-            parameterJson["name"] = parameter.GetName();
-            parameterJson["type"] = static_cast<uint8_t>(parameter.GetType());
-
-            methodJson["parameters"].push_back(parameterJson);
-        }
-
-        json["manifest"]["abi"]["methods"].push_back(methodJson);
-    }
-
-    json["manifest"]["abi"]["events"] = nlohmann::json::array();
-    for (const auto& event : contract->GetManifest().GetAbi().GetEvents())
-    {
-        nlohmann::json eventJson;
-        eventJson["name"] = event.GetName();
-        eventJson["parameters"] = nlohmann::json::array();
-        for (const auto& parameter : event.GetParameters())
-        {
-            nlohmann::json parameterJson;
-            parameterJson["name"] = parameter.GetName();
-            parameterJson["type"] = static_cast<uint8_t>(parameter.GetType());
-
-            eventJson["parameters"].push_back(parameterJson);
-        }
-
-        json["manifest"]["abi"]["events"].push_back(eventJson);
-    }
-
-    json["manifest"]["permissions"] = nlohmann::json::array();
-    for (const auto& permission : contract->GetManifest().GetPermissions())
-    {
-        nlohmann::json permissionJson;
-        permissionJson["contract"] = permission.GetContract();
-        permissionJson["methods"] = nlohmann::json::array();
-        for (const auto& method : permission.GetMethods())
-        {
-            permissionJson["methods"].push_back(method);
-        }
-
-        json["manifest"]["permissions"].push_back(permissionJson);
-    }
-
-    json["manifest"]["trusts"] = nlohmann::json::array();
-    for (const auto& trust : contract->GetManifest().GetTrusts())
-    {
-        json["manifest"]["trusts"].push_back(trust);
-    }
-
-    json["manifest"]["extra"] = contract->GetManifest().GetExtra();
-
-    return json;
+    (void)contract;
+    return nlohmann::json::object();
 }
-
-// RPC Session management implementation
-class RpcSessionManager
-{
-   public:
-    class RpcSession
-    {
-       public:
-        class RpcIterator
-        {
-           public:
-            bool HasNext() const { return has_next_; }
-            std::shared_ptr<vm::StackItem> Next()
-            {
-                if (!has_next_) return nullptr;
-                has_next_ = false;  // Simple implementation - mark as exhausted after first call
-                return vm::StackItem::Null();
-            }
-
-           private:
-            bool has_next_ = true;
-        };
-
-        std::shared_ptr<RpcIterator> GetIterator(const std::string& id)
-        {
-            auto it = iterators_.find(id);
-            if (it != iterators_.end())
-            {
-                return it->second;
-            }
-            return nullptr;
-        }
-
-        void UpdateLastActivity() { last_activity_ = std::chrono::steady_clock::now(); }
-
-       private:
-        std::map<std::string, std::shared_ptr<RpcIterator>> iterators_;
-        std::chrono::steady_clock::time_point last_activity_;
-    };
-
-    std::shared_ptr<RpcSession> GetSession(const std::string& id)
-    {
-        auto it = sessions_.find(id);
-        if (it != sessions_.end())
-        {
-            return it->second;
-        }
-        return nullptr;
-    }
-
-    bool TerminateSession(const std::string& id)
-    {
-        auto it = sessions_.find(id);
-        if (it != sessions_.end())
-        {
-            sessions_.erase(it);
-            return true;
-        }
-        return false;
-    }
-
-   private:
-    std::map<std::string, std::shared_ptr<RpcSession>> sessions_;
-};
-
-// Global RPC session manager instance
-static std::shared_ptr<RpcSessionManager> g_rpc_session_manager = std::make_shared<RpcSessionManager>();
-
-std::shared_ptr<RpcSessionManager> GetRpcSessionManager() { return g_rpc_session_manager; }
-
-nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item)
-{
-    if (!item)
-    {
-        return nullptr;
-    }
-
-    switch (item->GetType())
-    {
-        case vm::StackItemType::Null:
-            return nullptr;
-        case vm::StackItemType::Boolean:
-            return nlohmann::json{{"type", "Boolean"}, {"value", item->GetBoolean()}};
-        case vm::StackItemType::Integer:
-            return nlohmann::json{{"type", "Integer"}, {"value", item->GetInteger()}};
-        case vm::StackItemType::ByteString:
-            return nlohmann::json{{"type", "ByteString"},
-                                  {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
-        case vm::StackItemType::Buffer:
-            return nlohmann::json{{"type", "Buffer"},
-                                  {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
-        case vm::StackItemType::Array:
-        case vm::StackItemType::Struct:
-        {
-            nlohmann::json array = nlohmann::json::array();
-            auto items = item->GetArray();
-            for (const auto& arrayItem : items)
-            {
-                array.push_back(ConvertStackItemToJson(arrayItem));
-            }
-            return nlohmann::json{{"type", item->GetType() == vm::StackItemType::Array ? "Array" : "Struct"},
-                                  {"value", array}};
-        }
-        case vm::StackItemType::Map:
-        {
-            nlohmann::json map = nlohmann::json::object();
-            auto mapItems = item->GetMap();
-            for (const auto& [key, value] : mapItems)
-            {
-                auto keyJson = ConvertStackItemToJson(key);
-                auto valueJson = ConvertStackItemToJson(value);
-                // Use string representation of key for JSON object
-                std::string keyStr = keyJson.is_string() ? keyJson.get<std::string>() : keyJson.dump();
-                map[keyStr] = valueJson;
-            }
-            return nlohmann::json{{"type", "Map"}, {"value", map}};
-        }
-        default:
-            return nlohmann::json{{"type", "Unknown"}, {"value", nullptr}};
-    }
-}
-
-void LogSessionTermination(const std::string& sessionId)
-{
-    // Log session termination
-    LOG_INFO("RPC Session terminated: {}", sessionId);
-}
-
 }  // namespace neo::rpc

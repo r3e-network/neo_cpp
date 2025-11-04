@@ -20,6 +20,8 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_messages_ = {
     {ErrorCode::UnknownService, "Unknown service"},
     {ErrorCode::UnknownValidator, "Unknown validator"},
     {ErrorCode::UnknownCommittee, "Unknown committee"},
+    {ErrorCode::UnknownSession, "Unknown session"},
+    {ErrorCode::UnknownIterator, "Unknown iterator"},
     
     // Blockchain errors
     {ErrorCode::BlockchainNotAvailable, "Blockchain not available"},
@@ -43,6 +45,19 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_messages_ = {
     {ErrorCode::TransactionVerificationFailed, "Transaction verification failed"},
     {ErrorCode::TransactionPolicyViolation, "Transaction policy violation"},
     {ErrorCode::TransactionConflict, "Transaction conflict"},
+    {ErrorCode::RpcVerificationFailed, "Inventory verification failed"},
+    {ErrorCode::RpcAlreadyExists, "Inventory already exists"},
+    {ErrorCode::RpcMempoolCapReached, "Memory pool capacity reached"},
+    {ErrorCode::RpcAlreadyInPool, "Inventory already in pool"},
+    {ErrorCode::RpcInsufficientNetworkFee, "Insufficient network fee"},
+    {ErrorCode::RpcPolicyFailed, "Policy check failed"},
+    {ErrorCode::RpcInvalidTransactionScript, "Invalid transaction script"},
+    {ErrorCode::RpcInvalidTransactionAttribute, "Invalid transaction attribute"},
+    {ErrorCode::RpcInvalidSignature, "Invalid signature"},
+    {ErrorCode::RpcInvalidInventorySize, "Invalid inventory size"},
+    {ErrorCode::RpcExpiredTransaction, "Expired transaction"},
+    {ErrorCode::RpcInsufficientFunds, "Insufficient funds for fee"},
+    {ErrorCode::RpcInvalidContractVerification, "Invalid contract verification"},
     
     // Contract errors
     {ErrorCode::ContractNotFound, "Contract not found"},
@@ -80,7 +95,7 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_messages_ = {
     {ErrorCode::StorageError, "Storage error"},
     {ErrorCode::DatabaseError, "Database error"},
     {ErrorCode::InvalidKey, "Invalid key"},
-    {ErrorCode::KeyNotFound, "Key not found"},
+    {ErrorCode::StorageKeyNotFound, "Key not found"},
     
     // Security errors
     {ErrorCode::AccessDenied, "Access denied"},
@@ -121,6 +136,8 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_categories_ =
     {ErrorCode::UnknownService, "Unknown"},
     {ErrorCode::UnknownValidator, "Unknown"},
     {ErrorCode::UnknownCommittee, "Unknown"},
+    {ErrorCode::UnknownSession, "Unknown"},
+    {ErrorCode::UnknownIterator, "Unknown"},
     
     // Blockchain category
     {ErrorCode::BlockchainNotAvailable, "Blockchain"},
@@ -144,6 +161,19 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_categories_ =
     {ErrorCode::TransactionVerificationFailed, "Transaction"},
     {ErrorCode::TransactionPolicyViolation, "Transaction"},
     {ErrorCode::TransactionConflict, "Transaction"},
+    {ErrorCode::RpcVerificationFailed, "Transaction"},
+    {ErrorCode::RpcAlreadyExists, "Transaction"},
+    {ErrorCode::RpcMempoolCapReached, "Transaction"},
+    {ErrorCode::RpcAlreadyInPool, "Transaction"},
+    {ErrorCode::RpcInsufficientNetworkFee, "Transaction"},
+    {ErrorCode::RpcPolicyFailed, "Transaction"},
+    {ErrorCode::RpcInvalidTransactionScript, "Transaction"},
+    {ErrorCode::RpcInvalidTransactionAttribute, "Transaction"},
+    {ErrorCode::RpcInvalidSignature, "Transaction"},
+    {ErrorCode::RpcInvalidInventorySize, "Transaction"},
+    {ErrorCode::RpcExpiredTransaction, "Transaction"},
+    {ErrorCode::RpcInsufficientFunds, "Transaction"},
+    {ErrorCode::RpcInvalidContractVerification, "Transaction"},
     
     // Contract category
     {ErrorCode::ContractNotFound, "Contract"},
@@ -181,7 +211,7 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_categories_ =
     {ErrorCode::StorageError, "Storage"},
     {ErrorCode::DatabaseError, "Storage"},
     {ErrorCode::InvalidKey, "Storage"},
-    {ErrorCode::KeyNotFound, "Storage"},
+    {ErrorCode::StorageKeyNotFound, "Storage"},
     
     // Security category
     {ErrorCode::AccessDenied, "Security"},

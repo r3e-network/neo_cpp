@@ -3,7 +3,10 @@
 # Create RPC library
 add_library(neo_rpc OBJECT
     rpc_server.cpp                      # Main RPC server implementation
-    rpc_methods_complete.cpp            # Re-enabled full RPC methods
+    rpc_methods.cpp                     # Core RPC method implementations
+    error_codes.cpp
+    rpc_methods_consensus_state.cpp
+    rpc_session_manager.cpp
     # rpc_server_complete_production.cpp
     # metrics_endpoint.cpp
     # rpc_server_unified.cpp
