@@ -118,30 +118,15 @@ Deliverable: feature-complete consensus engine consistent with C# behaviour.
 
 | Command/API                        | Status                                   | Notes | Remaining Work |
 |-----------------------------------|-------------------------------------------|-------|----------------|
-| RPC `startconsensus`/`stop`/`restart` | ✅ Implemented                         | Uses `ConsensusService::StartManually()` / `Stop()` hooks shared with NeoNode, returns bool like C# RPC | ✅ Covered by integration tests |
-| Console `consensus start/stop/restart` | ✅ Implemented                        | Delegates to same service lifecycle; respects auto-start flag | ✅ Operator usage documented + CLI help |
-| Console `consensus status`            | ✅ Implemented                         | Reports running flag, block, view, phase, auto-start state | Enhance output once consensus exposes extra diagnostics |
-| Console `consensus autostart on/off` | ✅ Implemented                        | Persists to `ConfigurationManager::GetConsensusConfig().auto_start` and updates live service | ✅ Tests exercise service/config sync |
-| Auto-start flag propagation           | ✅ Implemented                        | `ConsensusService::SetAutoStartEnabled()` and `NeoNode` sync flag on start | Ensure DBFT plugin/other tooling keep configuration in sync |
+| Manual RPC control                 | ❌ Not exposed                           | Matches C# node – consensus lifecycle is driven by DBFT plugin configuration | None |
+| Console manual start/stop          | ❌ Not exposed                           | Aligns with C# CLI (`start consensus` only) – C++ console defers to plugin configuration | Consider adding shared plugin-driven command in future |
+| Auto-start flag propagation        | ✅ Implemented                           | `ConsensusService::SetAutoStartEnabled()` and `NeoNode` sync flag on start | Ensure DBFT plugin/other tooling keep configuration in sync |
 
 
 ## Manual Control (Current Implementation) *(2025-02-18 Update)*
 
-- `startconsensus`, `stopconsensus`, and `restartconsensus` RPC endpoints now call the shared `ConsensusService::StartManually()` / `Stop()` helpers, matching the behaviour of the C# node.
-- The console command `consensus start|stop|restart|status` wires into the same lifecycle. Status output includes running flag, current block, view number, consensus phase, and whether auto-start is enabled.
-- `consensus autostart on|off` toggles `ConfigurationManager::GetConsensusConfig().auto_start` and updates the live service immediately.
-- `ConsensusService` exposes `SetAutoStartEnabled()` / `IsAutoStartEnabled()` so tooling and tests can query or adjust the flag atomically.
-### Operator Quick Reference
-
-| Command | Description | Behaviour |
-|---------|-------------|-----------|
-| `consensus start` | Manually starts dBFT when auto-start is disabled. Requires networking (`LocalNode`) to be online. | Invokes `ConsensusService::StartManually()` and re-registers with the `LocalNode`. |
-| `consensus stop` | Stops the running consensus engine. | Calls `ConsensusService::Stop()` and detaches from the `LocalNode`. |
-| `consensus restart` | Convenience wrapper combining stop and manual start. | Ensures networking is running, then re-initialises the consensus threads. |
-| `consensus status` | Displays current consensus health snapshot. | Mirrors the C# `consensus status` output: running flag, block, view, phase, vote counts, and auto-start state. |
-| `consensus autostart on|off` | Persists the auto-start preference through `ConfigurationManager`. | Updates the live service immediately and the in-memory configuration used on restart. |
-
-RPC equivalents are exposed as `startconsensus`, `stopconsensus`, and `restartconsensus`. Each call returns a simple boolean (`true` on success, `false` otherwise), matching the Neo C# RPC contract. The `ManualConsensusControl` integration test covers the RPC lifecycle and verifies that `ConfigurationManager::GetConsensusConfig().auto_start` remains in sync with `ConsensusService::SetAutoStartEnabled`.
+- Manual consensus lifecycle remains managed by configuration/DBFT plugin auto-start, mirroring the C# node.
+- `ConsensusService` still exposes `SetAutoStartEnabled()` / `IsAutoStartEnabled()` for internal tooling parity, but no additional RPC/CLI surfaces are provided.
 ## Next Actions
 
 * Review and confirm the Phase 1 plan (this document).

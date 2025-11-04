@@ -152,7 +152,6 @@ class ServiceProxy
     std::string HandleWalletCommands(const std::string& command);
     std::string HandleContractCommands(const std::string& command);
     std::string HandleTransactionCommands(const std::string& command);
-    std::string HandleConsensusCommands(const std::string& command);
     std::string HandlePluginCommands(const std::string& command);
     std::string HandleConfigCommands(const std::string& command);
 

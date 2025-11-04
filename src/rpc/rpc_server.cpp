@@ -252,10 +252,7 @@ io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
                 {"getblockhash", &RPCMethods::GetBlockHash},
                 {"getblockheadercount", &RPCMethods::GetBlockHeaderCount},
                 {"getbestblockhash", &RPCMethods::GetBestBlockHash},
-                {"getconsensusstate", &RPCMethods::GetConsensusState},
-                {"startconsensus", &RPCMethods::StartConsensus},
-                {"stopconsensus", &RPCMethods::StopConsensus},
-                {"restartconsensus", &RPCMethods::RestartConsensus}
+                {"getconsensusstate", &RPCMethods::GetConsensusState}
             };
 
             auto it = simple_routes.find(method);

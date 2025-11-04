@@ -6,7 +6,6 @@
  * @copyright MIT License
  */
 
-#include <neo/consensus/consensus_service.h>
 #include <neo/console_service/service_proxy.h>
 #include <neo/ledger/transaction.h>
 #include <neo/plugins/plugin_manager.h>
@@ -350,62 +349,6 @@ std::string ServiceProxy::HandleTransactionCommandsProper(const std::string& com
     }
 
     return "Unknown transaction command: " + subcmd;
-}
-
-// Proper implementation for consensus commands
-std::string ServiceProxy::HandleConsensusCommandsProper(const std::string& command)
-{
-    std::istringstream iss(command);
-    std::string cmd, subcmd;
-    iss >> cmd >> subcmd;
-
-    if (subcmd == "start")
-    {
-        try
-        {
-            if (neo_system_->StartConsensus())
-            {
-                return "Consensus started successfully";
-            }
-            return "Error: Failed to start consensus";
-        }
-        catch (const std::exception& e)
-        {
-            return "Error starting consensus: " + std::string(e.what());
-        }
-    }
-    else if (subcmd == "stop")
-    {
-        try
-        {
-            neo_system_->StopConsensus();
-            return "Consensus stopped successfully";
-        }
-        catch (const std::exception& e)
-        {
-            return "Error stopping consensus: " + std::string(e.what());
-        }
-    }
-    else if (subcmd == "status")
-    {
-        try
-        {
-            auto status = neo_system_->GetConsensusStatus();
-            std::ostringstream result;
-            result << "Consensus Status:\n";
-            result << " Running: " << (status.running ? "Yes" : "No") << "\n";
-            result << " View: " << status.view << "\n";
-            result << " Primary: " << status.primary << "\n";
-            result << " Block Height: " << status.blockHeight << "\n";
-            return result.str();
-        }
-        catch (const std::exception& e)
-        {
-            return "Error getting consensus status: " + std::string(e.what());
-        }
-    }
-
-    return "Unknown consensus command: " + subcmd;
 }
 
 // Proper implementation for plugin commands

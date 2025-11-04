@@ -599,19 +599,6 @@ class LocalNode
     std::shared_ptr<class StateService> GetStateService() const { return stateService_; }
 
     void SetConsensusService(std::shared_ptr<consensus::ConsensusService> service) { consensusService_ = service; }
-    /**
-     * @brief Forces the running state for test scenarios without binding network sockets.
-     */
-    void ForceRunningStateForTesting(bool running)
-    {
-        if (running)
-        {
-            running_.store(true);
-            return;
-        }
-
-        Stop();
-    }
 
    private:
     LocalNode();

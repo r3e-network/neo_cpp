@@ -1,11 +1,9 @@
 # Integration Test Module CMakeLists.txt
 
-set(INTEGRATION_TEST_SOURCES
-    test_consensus_manual_control.cpp
-)
-
 # Main integration test executable
-add_executable(test_integration ${INTEGRATION_TEST_SOURCES})
+add_executable(test_integration
+    test_stub.cpp
+)
 
 target_link_libraries(test_integration
     PRIVATE
