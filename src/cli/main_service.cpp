@@ -11,7 +11,11 @@
 #include <neo/cryptography/ecc/ec_point.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+#include <neo/network/ip_address.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/channels_config.h>
 #include <neo/protocol_settings.h>
+#include <neo/settings.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/gas_token.h>
@@ -116,27 +120,46 @@ void MainService::Start(const CommandLineOptions& options)
 {
     if (neoSystem_) return;
 
-    // Create Neo system with settings from config file or defaults
-    // Configuration can be provided via command line or config file
-    std::string dbEngine = options.DbEngine.empty() ? "memory" : options.DbEngine;
-    std::string dbPath = options.DbPath.empty() ? "./data" : options.DbPath;
-
-    // Create protocol settings - can be loaded from config file if provided
-    ProtocolSettings protocolSettings;
+    // Load settings from configuration or defaults
+    Settings appSettings = Settings::GetDefault();
     if (!options.ConfigPath.empty())
     {
-        // Config file path provided - attempt to load settings
-        try
-        {
-            protocolSettings.LoadFromFile(options.ConfigPath);
-        }
-        catch (const std::exception& e)
-        {
-            LOG_WARNING("Failed to load config file: {} - using defaults", e.what());
-        }
+        appSettings = Settings::Load(options.ConfigPath);
     }
 
+    ProtocolSettings protocolSettings = appSettings.Protocol ? *appSettings.Protocol : ProtocolSettings{};
+
+    // Allow command-line overrides
+    std::string dbEngine = options.DbEngine.empty() ? appSettings.Storage.Engine : options.DbEngine;
+    std::string dbPath = options.DbPath.empty() ? appSettings.Storage.Path : options.DbPath;
+
     neoSystem_ = std::make_shared<node::NeoSystem>(protocolSettings, dbEngine, dbPath);
+
+    // Configure P2P networking from settings (falling back to protocol seed list)
+    network::p2p::ChannelsConfig channelsConfig;
+    channelsConfig.SetTcp(network::IPEndPoint(appSettings.P2P.BindAddress, static_cast<uint16_t>(appSettings.P2P.Port)));
+    channelsConfig.SetMinDesiredConnections(static_cast<uint32_t>(appSettings.P2P.MinDesiredConnections));
+    channelsConfig.SetMaxConnections(static_cast<uint32_t>(appSettings.P2P.MaxConnections));
+    channelsConfig.SetMaxConnectionsPerAddress(static_cast<uint32_t>(appSettings.P2P.MaxConnectionsPerAddress));
+
+    std::vector<std::string> seedStrings = appSettings.P2P.Seeds.empty() ? protocolSettings.GetSeedList()
+                                                                         : appSettings.P2P.Seeds;
+    std::vector<network::IPEndPoint> seedEndpoints;
+    seedEndpoints.reserve(seedStrings.size());
+    for (const auto& seed : seedStrings)
+    {
+        network::IPEndPoint endpoint;
+        if (network::IPEndPoint::TryParse(seed, endpoint))
+        {
+            seedEndpoints.push_back(endpoint);
+        }
+    }
+    if (!seedEndpoints.empty())
+    {
+        channelsConfig.SetSeedList(seedEndpoints);
+    }
+
+    neoSystem_->SetNetworkConfig(channelsConfig);
 
     // Native contracts are initialized internally by NeoSystem
 

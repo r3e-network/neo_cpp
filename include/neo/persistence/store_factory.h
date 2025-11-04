@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <neo/persistence/file_store.h>
 #include <neo/persistence/istore.h>
 #include <neo/persistence/memory_store.h>
 #ifdef NEO_HAS_ROCKSDB

@@ -20,6 +20,7 @@
 namespace neo::cryptography::ecc
 {
 class ECPoint;
+class ECCCurve;
 }
 
 namespace neo::cryptography
@@ -133,6 +134,9 @@ class Crypto
     static bool VerifySignature(const io::ByteSpan& message, const io::ByteSpan& signature,
                                 const ecc::ECPoint& publicKey);
 
+    static bool VerifySignature(const io::ByteSpan& message, const io::ByteSpan& signature,
+                                const ecc::ECPoint& publicKey, const ecc::ECCCurve& curve);
+
     /**
      * @brief Signs a message with a private key.
      * @param message The message to sign.
@@ -140,6 +144,8 @@ class Crypto
      * @return The signature.
      */
     static io::ByteVector Sign(const io::ByteSpan& message, const io::ByteSpan& privateKey);
+    static io::ByteVector Sign(const io::ByteSpan& message, const io::ByteSpan& privateKey,
+                               const ecc::ECCCurve& curve);
 
     /**
      * @brief Computes the public key from a private key.
@@ -147,6 +153,7 @@ class Crypto
      * @return The computed public key.
      */
     static ecc::ECPoint ComputePublicKey(const io::ByteSpan& privateKey);
+    static ecc::ECPoint ComputePublicKey(const io::ByteSpan& privateKey, const ecc::ECCCurve& curve);
 };
 
 }  // namespace neo::cryptography

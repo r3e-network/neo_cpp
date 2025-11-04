@@ -1,9 +1,15 @@
 #include <gtest/gtest.h>
 #include <neo/consensus/consensus_message.h>
+#include <neo/consensus/consensus_state.h>
+#include <neo/consensus/change_view_message.h>
+#include <neo/consensus/recovery_message.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/io/byte_vector.h>
 #include <neo/io/memory_stream.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
+#include <array>
 #include <sstream>
 #include <chrono>
 
@@ -57,6 +63,7 @@ TEST_F(ConsensusMessageTest, ViewChangeMessage)
     message.SetBlockIndex(100);
     auto timestamp = std::chrono::system_clock::now();
     message.SetTimestamp(timestamp);
+    message.SetReason(ChangeViewReason::TxInvalid);
 
     // Serialize message
     std::ostringstream stream;
@@ -75,6 +82,7 @@ TEST_F(ConsensusMessageTest, ViewChangeMessage)
     EXPECT_EQ(message2.GetViewNumber(), 1u);
     EXPECT_EQ(message2.GetValidatorIndex(), 3u);
     EXPECT_EQ(message2.GetNewViewNumber(), 2u);
+    EXPECT_EQ(message2.GetReason(), ChangeViewReason::TxInvalid);
     // Note: Timestamp comparison would need tolerance due to serialization precision
 }
 
@@ -194,86 +202,188 @@ TEST_F(ConsensusMessageTest, RecoveryRequestMessage)
     EXPECT_EQ(message2.GetValidatorIndex(), 3u);
 }
 
-TEST_F(ConsensusMessageTest, RecoveryMessage)
+TEST_F(ConsensusMessageTest, RecoveryMessageRoundTrip)
 {
-    // RecoveryMessage tests disabled due to API incompatibilities
-    SUCCEED() << "RecoveryMessage test disabled - API incompatible";
-    return;
-    
-    // Create message
-    // RecoveryMessage message;
-    // message.SetViewNumber(1);
-    // message.SetValidatorIndex(3);
-    // message.SetBlockIndex(100);
+    RecoveryMessage message(1);
+    message.SetViewNumber(1);
+    message.SetValidatorIndex(7);
+    message.SetBlockIndex(512);
 
-    // Add change view message
-    // auto changeViewMessage = std::make_unique<ViewChangeMessage>();
-    // changeViewMessage->SetViewNumber(1);
-    // changeViewMessage->SetNewViewNumber(2);
-    // changeViewMessage->SetValidatorIndex(4);
-    // changeViewMessage->SetTimestamp(std::chrono::system_clock::now());
-    // message.SetViewChange(std::move(changeViewMessage));
+    RecoveryMessage::ChangeViewPayloadCompact changeView;
+    changeView.validator_index = 2;
+    changeView.original_view_number = 1;
+    changeView.timestamp = 123u;
+    changeView.invocation_script = ByteVector({0x10, 0x20});
+    message.AddChangeViewPayload(changeView);
 
-    // Add prepare request
-    // auto prepareRequest = std::make_unique<PrepareRequestMessage>();
-    // prepareRequest->SetViewNumber(1);
-    // prepareRequest->SetValidatorIndex(5);
-    // prepareRequest->SetNonce(987654321);
-    // prepareRequest->SetTimestamp(std::chrono::system_clock::now());
-    // prepareRequest->SetTransactionHashes({UInt256::Zero(), UInt256::Zero()});
-    // message.SetPrepareRequest(std::move(prepareRequest));
+    auto prepareRequest = std::make_shared<PrepareRequest>();
+    prepareRequest->SetViewNumber(1);
+    prepareRequest->SetValidatorIndex(3);
+    prepareRequest->SetBlockIndex(512);
+    prepareRequest->SetNonce(42);
+    UInt256 txHash{};
+    txHash.Data()[0] = 0x01;
+    std::vector<UInt256> hashes{txHash};
+    prepareRequest->SetTransactionHashes(hashes);
+    message.SetPrepareRequest(prepareRequest);
 
-    // Add prepare response
-    // UInt256 preparationHash = UInt256::Parse("0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef");
-    // auto prepareResponse = std::make_unique<PrepareResponseMessage>();
-    // prepareResponse->SetViewNumber(1);
-    // prepareResponse->SetValidatorIndex(6);
-    // prepareResponse->SetPrepareRequestHash(preparationHash);
-    // message.AddPrepareResponse(std::move(prepareResponse));
+    RecoveryMessage::PreparationPayloadCompact prepareResponse;
+    prepareResponse.validator_index = 4;
+    prepareResponse.invocation_script = ByteVector({0x30, 0x31});
+    message.AddPreparationPayload(prepareResponse);
 
-    // Add commit message
-    // std::vector<uint8_t> commitSignature{1, 2, 3, 4, 5};
-    // auto commitMessage = std::make_unique<CommitMessage>();
-    // commitMessage->SetViewNumber(1);
-    // commitMessage->SetValidatorIndex(7);
-    // commitMessage->SetSignature(commitSignature);
-    // message.AddCommit(std::move(commitMessage));
+    RecoveryMessage::CommitPayloadCompact commit;
+    commit.view_number = 1;
+    commit.validator_index = 5;
+    commit.signature = ByteVector({0xAA, 0xBB});
+    commit.invocation_script = ByteVector({0x40, 0x41});
+    message.AddCommitPayload(commit);
 
-    // Serialize message
-    // std::ostringstream stream;
-    // BinaryWriter writer(stream);
-    // message.Serialize(writer);
-    // std::string data = stream.str();
+    neo::network::p2p::payloads::Neo3Transaction transaction;
+    transaction.SetVersion(1);
+    transaction.SetNonce(123456);
+    transaction.SetSystemFee(100);
+    transaction.SetNetworkFee(50);
+    transaction.SetValidUntilBlock(200);
+    neo::io::ByteVector script({0x01, 0x02});
+    transaction.SetScript(script);
+    message.AddTransaction(transaction);
 
-    // Deserialize message
-    // std::istringstream stream2(data);
-    // BinaryReader reader(stream2);
-    // RecoveryMessage message2;
-    // message2.Deserialize(reader);
+    std::ostringstream stream;
+    BinaryWriter writer(stream);
+    message.Serialize(writer);
 
-    // Check message
-    // EXPECT_EQ(message2.GetType(), ConsensusMessageType::RecoveryMessage);
-    // EXPECT_EQ(message2.GetViewNumber(), 1u);
-    // EXPECT_EQ(message2.GetValidatorIndex(), 3u);
+    std::istringstream serialized(stream.str());
+    BinaryReader reader(serialized);
+    RecoveryMessage decoded(0);
+    decoded.Deserialize(reader);
 
-    // Check change view message
-    // ASSERT_NE(message2.GetViewChange(), nullptr);
-    // EXPECT_EQ(message2.GetViewChange()->GetValidatorIndex(), 4u);
-    // EXPECT_EQ(message2.GetViewChange()->GetNewViewNumber(), 2u);
+    EXPECT_EQ(decoded.GetType(), ConsensusMessageType::RecoveryMessage);
+    EXPECT_EQ(decoded.GetViewNumber(), 1u);
+    EXPECT_EQ(decoded.GetValidatorIndex(), 7u);
+    ASSERT_EQ(decoded.GetChangeViewPayloads().size(), 1u);
+    EXPECT_EQ(decoded.GetChangeViewPayloads()[0].validator_index, 2u);
+    EXPECT_EQ(decoded.GetChangeViewPayloads()[0].original_view_number, 1u);
+    EXPECT_EQ(decoded.GetChangeViewPayloads()[0].invocation_script.Size(), 2u);
+    ASSERT_NE(decoded.GetPrepareRequest(), nullptr);
+    EXPECT_EQ(decoded.GetPrepareRequest()->GetNonce(), 42u);
+    ASSERT_EQ(decoded.GetPreparationPayloads().size(), 1u);
+    EXPECT_EQ(decoded.GetPreparationPayloads()[0].validator_index, 4u);
+    EXPECT_EQ(decoded.GetPreparationPayloads()[0].invocation_script.Size(), 2u);
+    ASSERT_EQ(decoded.GetCommitPayloads().size(), 1u);
+    const auto& commitPayload = decoded.GetCommitPayloads()[0];
+    EXPECT_EQ(commitPayload.signature.Size(), 2u);
+    EXPECT_EQ(commitPayload.signature.Data()[0], 0xAA);
+    EXPECT_EQ(commitPayload.signature.Data()[1], 0xBB);
+    EXPECT_EQ(commitPayload.invocation_script.Size(), 2u);
+    ASSERT_EQ(decoded.GetTransactions().size(), 1u);
+    EXPECT_EQ(decoded.GetTransactions()[0].GetNonce(), 123456u);
+    EXPECT_EQ(decoded.GetTransactions()[0].GetSystemFee(), 100);
+    EXPECT_EQ(decoded.GetTransactions()[0].GetNetworkFee(), 50);
+}
 
-    // Check prepare request
-    // ASSERT_NE(message2.GetPrepareRequest(), nullptr);
-    // EXPECT_EQ(message2.GetPrepareRequest()->GetValidatorIndex(), 5u);
-    // EXPECT_EQ(message2.GetPrepareRequest()->GetNonce(), 987654321u);
-    // EXPECT_EQ(message2.GetPrepareRequest()->GetTransactionHashes().size(), 2u);
+TEST_F(ConsensusMessageTest, RecoveryMessagePreservesTransactionOrder)
+{
+    RecoveryMessage message(3);
 
-    // Check prepare responses
-    // EXPECT_EQ(message2.GetPrepareResponses().size(), 1u);
-    // EXPECT_EQ(message2.GetPrepareResponses()[0]->GetValidatorIndex(), 6u);
-    // EXPECT_EQ(message2.GetPrepareResponses()[0]->GetPrepareRequestHash(), preparationHash);
+    neo::network::p2p::payloads::Neo3Transaction first;
+    first.SetNonce(111);
+    first.SetSystemFee(10);
+    first.SetNetworkFee(5);
+    first.SetValidUntilBlock(500);
+    first.SetScript(ByteVector({0x01, 0x02}));
 
-    // Check commit messages
-    // EXPECT_EQ(message2.GetCommits().size(), 1u);
-    // EXPECT_EQ(message2.GetCommits()[0]->GetValidatorIndex(), 7u);
-    // EXPECT_EQ(message2.GetCommits()[0]->GetSignature(), commitSignature);
+    neo::network::p2p::payloads::Neo3Transaction second;
+    second.SetNonce(222);
+    second.SetSystemFee(20);
+    second.SetNetworkFee(6);
+    second.SetValidUntilBlock(600);
+    second.SetScript(ByteVector({0x03, 0x04}));
+
+    message.SetTransactions({first, second});
+
+    const auto& direct = message.GetTransactions();
+    ASSERT_EQ(direct.size(), 2u);
+    EXPECT_EQ(direct[0].GetNonce(), first.GetNonce());
+    EXPECT_EQ(direct[1].GetNonce(), second.GetNonce());
+
+    std::ostringstream stream;
+    BinaryWriter writer(stream);
+    message.Serialize(writer);
+
+    std::istringstream serialized(stream.str());
+    BinaryReader reader(serialized);
+    RecoveryMessage decoded(0);
+    decoded.Deserialize(reader);
+
+    const auto& roundTrip = decoded.GetTransactions();
+    ASSERT_EQ(roundTrip.size(), 2u);
+    EXPECT_EQ(roundTrip[0].GetNonce(), first.GetNonce());
+    EXPECT_EQ(roundTrip[1].GetNonce(), second.GetNonce());
+}
+
+TEST_F(ConsensusMessageTest, RecoveryMessagePreparationHashFallback)
+{
+    RecoveryMessage message(4);
+
+    auto hash = UInt256::Parse("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
+    message.SetPreparationHash(hash);
+
+    RecoveryMessage::PreparationPayloadCompact prep;
+    prep.validator_index = 1;
+    prep.invocation_script = ByteVector({0xAA});
+    message.AddPreparationPayload(prep);
+
+    RecoveryMessage::CommitPayloadCompact commit;
+    commit.view_number = 4;
+    commit.validator_index = 2;
+    commit.signature = ByteVector({0x10, 0x11, 0x12});
+    commit.invocation_script = ByteVector({0xBB, 0xCC});
+    message.AddCommitPayload(commit);
+
+    std::ostringstream stream;
+    BinaryWriter writer(stream);
+    message.Serialize(writer);
+
+    std::istringstream serialized(stream.str());
+    BinaryReader reader(serialized);
+    RecoveryMessage decoded(0);
+    decoded.Deserialize(reader);
+
+    EXPECT_EQ(decoded.GetPrepareRequest(), nullptr);
+    ASSERT_TRUE(decoded.GetPreparationHash().has_value());
+    EXPECT_EQ(decoded.GetPreparationHash().value(), hash);
+    ASSERT_EQ(decoded.GetPreparationPayloads().size(), 1u);
+    EXPECT_EQ(decoded.GetPreparationPayloads()[0].validator_index, 1u);
+    EXPECT_EQ(decoded.GetPreparationPayloads()[0].invocation_script.Size(), 1u);
+    ASSERT_EQ(decoded.GetCommitPayloads().size(), 1u);
+    EXPECT_EQ(decoded.GetCommitPayloads()[0].validator_index, 2u);
+    EXPECT_EQ(decoded.GetCommitPayloads()[0].signature.Size(), 3u);
+    EXPECT_EQ(decoded.GetCommitPayloads()[0].invocation_script.Size(), 2u);
+}
+
+TEST_F(ConsensusMessageTest, ConsensusStateCachesTransactions)
+{
+    ConsensusState state;
+
+    neo::network::p2p::payloads::Neo3Transaction tx;
+    tx.SetVersion(0);
+    tx.SetNonce(4242);
+    tx.SetSystemFee(10);
+    tx.SetNetworkFee(5);
+    tx.SetValidUntilBlock(1000);
+    tx.SetScript(ByteVector({0x01, 0x02, 0x03}));
+
+    EXPECT_TRUE(state.AddTransaction(tx));
+
+    auto hash = tx.GetHash();
+    auto cached = state.GetCachedTransaction(hash);
+    ASSERT_TRUE(cached.has_value());
+    EXPECT_EQ(cached->GetNonce(), tx.GetNonce());
+
+    // Duplicate additions should be ignored
+    EXPECT_FALSE(state.AddTransaction(tx));
+
+    state.RemoveTransaction(hash);
+    EXPECT_FALSE(state.GetCachedTransaction(hash).has_value());
 }

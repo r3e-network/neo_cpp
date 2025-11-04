@@ -20,7 +20,9 @@ add_library(neo_ledger OBJECT
     witness_rule.cpp
     transaction_pool_manager.cpp  # Transaction pool management
     state_synchronization_manager.cpp  # State synchronization
-    # transaction_validator.cpp  # Disabled - needs Transaction class refactoring
+    transaction_validator.cpp
+    transaction_verification_context.cpp
+    neo_system.cpp
 )
 
 # Set include directories

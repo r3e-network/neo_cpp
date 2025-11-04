@@ -9,7 +9,7 @@
 #pragma once
 
 #include <neo/consensus/consensus_message.h>
-#include <neo/cryptography/witness.h>
+#include <neo/ledger/witness.h>
 #include <neo/io/uint160.h>
 #include <neo/network/p2p/payloads/extensible_payload.h>
 
@@ -63,6 +63,6 @@ class ConsensusPayloadHelper
      * @param payload The payload to sign.
      * @param witness The witness containing the signature.
      */
-    static void SignPayload(network::p2p::payloads::ExtensiblePayload& payload, const cryptography::Witness& witness);
+    static void SignPayload(network::p2p::payloads::ExtensiblePayload& payload, const ledger::Witness& witness);
 };
 }  // namespace neo::consensus

@@ -2,6 +2,7 @@
 set(PERSISTENCE_SOURCES
     memory_store.cpp
     memory_store_view.cpp
+    file_store.cpp
     storage_key.cpp
     storage_item.cpp
     data_cache.cpp

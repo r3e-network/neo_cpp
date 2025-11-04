@@ -58,6 +58,7 @@ struct P2PSettings
     int MaxConnectionsPerAddress = 3;     // Max connections per IP address
     int DialTimeoutMs = 5000;             // Connection timeout in milliseconds
     bool EnableUpnp = true;               // Enable UPnP port mapping
+    std::vector<std::string> Seeds;       // Seed node endpoints (host:port)
 };
 
 /**

@@ -8,6 +8,7 @@
 
 #include <neo/cli/console_helper.h>
 #include <neo/cli/main_service.h>
+#include <neo/network/p2p/remote_node.h>
 
 namespace neo::cli
 {
@@ -56,7 +57,8 @@ void MainService::OnShowState()
         auto hash = neoSystem_->GetBlockchain().GetCurrentBlockHash();
         auto headerHeight = neoSystem_->GetBlockchain().GetCurrentHeaderIndex();
         auto headerHash = neoSystem_->GetBlockchain().GetCurrentHeaderHash();
-        auto peerCount = neoSystem_->GetLocalNode().GetConnectedCount();
+        auto localNode = neoSystem_->GetLocalNode();
+        auto peerCount = localNode ? localNode->GetConnectedCount() : 0U;
         auto memoryPoolSize = neoSystem_->GetMemPool().GetCount();
 
         ConsoleHelper::Info("State:");
@@ -107,7 +109,8 @@ void MainService::OnShowPeers()
 
     try
     {
-        auto peers = neoSystem_->GetLocalNode().GetConnectedNodes();
+        auto localNode = neoSystem_->GetLocalNode();
+        auto peers = localNode ? localNode->GetConnectedNodes() : std::vector<network::p2p::RemoteNode*>{};
 
         ConsoleHelper::Info("Connected Peers: " + std::to_string(peers.size()));
         for (const auto& peer : peers)

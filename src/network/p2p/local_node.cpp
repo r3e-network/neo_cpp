@@ -89,6 +89,11 @@ void LocalNode::SetLastBlockIndex(uint32_t lastBlockIndex) { lastBlockIndex_ = l
 
 uint32_t LocalNode::GetNonce() const { return nonce_; }
 
+uint16_t LocalNode::GetPort() const
+{
+    return listeningPort_;
+}
+
 std::vector<RemoteNode*> LocalNode::GetConnectedNodes() const
 {
     std::lock_guard<std::mutex> lock(connectedNodesMutex_);
@@ -108,6 +113,21 @@ size_t LocalNode::GetConnectedCount() const
 {
     std::lock_guard<std::mutex> lock(connectedNodesMutex_);
     return connectedNodes_.size();
+}
+
+std::vector<std::shared_ptr<RemoteNode>> LocalNode::GetConnectedPeers() const
+{
+    std::lock_guard<std::mutex> lock(connectedNodesMutex_);
+
+    std::vector<std::shared_ptr<RemoteNode>> peers;
+    peers.reserve(connectedNodes_.size());
+
+    for (const auto& entry : connectedNodes_)
+    {
+        peers.emplace_back(entry.second.get(), [](RemoteNode*) {});
+    }
+
+    return peers;
 }
 
 std::shared_ptr<payloads::VersionPayload> LocalNode::CreateVersionPayload() const
@@ -251,6 +271,8 @@ bool LocalNode::Start(uint16_t port, size_t maxConnections)
         acceptor_->bind(endpoint);
         acceptor_->listen();
 
+        listeningPort_ = port;
+
         // Start accepting connections
         StartAccept();
 
@@ -362,6 +384,7 @@ void LocalNode::Stop()
     SavePeerList();
 
     running_ = false;
+    listeningPort_ = 0;
     LOG_INFO("LocalNode stopped");
 }
 

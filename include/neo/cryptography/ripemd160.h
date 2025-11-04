@@ -22,7 +22,7 @@ public:
      */
     static io::UInt160 Hash(const io::ByteSpan& data) {
         std::array<uint8_t, HASH_SIZE> hash;
-        RIPEMD160(data.data(), data.size(), hash.data());
+        RIPEMD160(data.Data(), data.Size(), hash.data());
         return io::UInt160(hash.data());
     }
     

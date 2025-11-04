@@ -57,15 +57,25 @@ class MemoryStreamBuf : public std::streambuf
 
     std::streamsize xsputn(const char* s, std::streamsize n) override
     {
-        size_t old_size = buffer_.size();
-        buffer_.resize(old_size + n);
-        std::memcpy(buffer_.data() + old_size, s, n);
+        const size_t old_size = buffer_.size();
+        buffer_.resize(old_size + static_cast<size_t>(n));
+        std::memcpy(buffer_.data() + old_size, s, static_cast<size_t>(n));
         Reset();
         return n;
     }
 
    private:
     std::vector<uint8_t>& buffer_;
+};
+
+/**
+ * @brief Indicates the reference point used to obtain a new position within a stream.
+ */
+enum class SeekOrigin
+{
+    Begin,
+    Current,
+    End
 };
 
 /**
@@ -77,15 +87,15 @@ class MemoryStream : public std::iostream
     /**
      * @brief Constructs an empty memory stream.
      */
-    MemoryStream() : std::iostream(&streamBuf_), streamBuf_(data_), position_(0) {}
+    MemoryStream() : std::iostream(&streamBuf_), data_(), streamBuf_(data_), position_(0) {}
 
     /**
      * @brief Constructs a memory stream from a byte vector.
      * @param data The initial data.
      */
-    explicit MemoryStream(const ByteVector& data) : std::iostream(&streamBuf_), streamBuf_(data_), position_(0)
+    explicit MemoryStream(const ByteVector& data)
+        : std::iostream(&streamBuf_), data_(data.Data(), data.Data() + data.Size()), streamBuf_(data_), position_(0)
     {
-        data_.assign(data.Data(), data.Data() + data.Size());
         streamBuf_.Reset();
     }
 
@@ -94,9 +104,9 @@ class MemoryStream : public std::iostream
      * @param data The initial data.
      * @param size The size of the data.
      */
-    MemoryStream(const uint8_t* data, size_t size) : std::iostream(&streamBuf_), streamBuf_(data_), position_(0)
+    MemoryStream(const uint8_t* data, size_t size)
+        : std::iostream(&streamBuf_), data_(data, data + size), streamBuf_(data_), position_(0)
     {
-        data_.assign(data, data + size);
         streamBuf_.Reset();
     }
 
@@ -119,9 +129,16 @@ class MemoryStream : public std::iostream
 
     /**
      * @brief Seeks to a specific position in the stream.
-     * @param position The position to seek to.
+     * @param position The absolute position to seek to.
      */
     void Seek(size_t position) { SetPosition(position); }
+
+    /**
+     * @brief Seeks to a specific position using the provided origin.
+     * @param offset The offset relative to the origin.
+     * @param origin The reference point used to calculate the new position.
+     */
+    void Seek(int64_t offset, SeekOrigin origin);
 
     /**
      * @brief Gets the length of the stream.
@@ -158,8 +175,8 @@ class MemoryStream : public std::iostream
 
    private:
     std::vector<uint8_t> data_;
-    size_t position_;
     MemoryStreamBuf streamBuf_;
+    size_t position_;
 };
 
 }  // namespace neo::io

@@ -6,9 +6,8 @@
 #include <iostream>
 #include <neo/io/json.h>
 #include <neo/network/p2p/network_synchronizer.h>
+#include <neo/network/p2p/remote_node.h>
 #include <neo/node/neo_system.h>
-#include <neo/persistence/rocksdb_store.h>
-// #include <neo/persistence/store_provider.h> // File not found
 #include <neo/rpc/rpc_server.h>
 #include <neo/settings.h>
 #include <neo/smartcontract/native/gas_token.h>
@@ -775,7 +774,8 @@ void MainService::OnShowState()
         ConsoleHelper::Info("  Block Hash: " + blockchain->GetCurrentBlockHash().ToString());
         // ConsoleHelper::Info("  Header Height: " + std::to_string(blockchain->GetHeaderHeight())); // Method unavailable
         // ConsoleHelper::Info("  Header Hash: " + blockchain->GetCurrentHeaderHash().ToString()); // Method unavailable
-        ConsoleHelper::Info("  Connected Peers: " + std::to_string(localNode->GetConnectedPeersCount()));
+        const auto peerCount = localNode ? localNode->GetConnectedCount() : 0U;
+        ConsoleHelper::Info("  Connected Peers: " + std::to_string(peerCount));
         ConsoleHelper::Info("  Memory Pool Size: " + std::to_string(memPool->GetSize()));
 
         if (synchronizer)
@@ -845,13 +845,20 @@ void MainService::OnShowPeers()
     try
     {
         auto localNode = neoSystem_->GetLocalNode();
-        auto peers = localNode->GetConnectedPeers();
+        std::vector<std::shared_ptr<network::p2p::RemoteNode>> peers;
+        if (localNode)
+        {
+            peers = localNode->GetConnectedPeers();
+        }
 
         ConsoleHelper::Info("Connected Peers: " + std::to_string(peers.size()));
         for (const auto& peer : peers)
         {
             // GetRemoteEndPoint not available in P2PPeer
-            ConsoleHelper::Info("  " + peer->GetUserAgent() + " (Height: " + std::to_string(peer->GetStartHeight()) + ")");
+            if (peer)
+            {
+                ConsoleHelper::Info("  " + peer->GetUserAgent() + " (Height: " + std::to_string(peer->GetStartHeight()) + ")");
+            }
         }
     }
     catch (const std::exception& ex)

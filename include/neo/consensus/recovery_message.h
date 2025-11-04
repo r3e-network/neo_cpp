@@ -13,9 +13,12 @@
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/prepare_request.h>
 #include <neo/consensus/prepare_response.h>
+#include <neo/io/byte_vector.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <vector>
 
 namespace neo::consensus
@@ -26,23 +29,37 @@ namespace neo::consensus
 class RecoveryMessage : public ConsensusMessage
 {
    public:
+    struct ChangeViewPayloadCompact
+    {
+        uint32_t validator_index{0};
+        uint32_t original_view_number{0};
+        uint64_t timestamp{0};
+        io::ByteVector invocation_script;
+    };
+
+    struct PreparationPayloadCompact
+    {
+        uint32_t validator_index{0};
+        io::ByteVector invocation_script;
+    };
+
+    struct CommitPayloadCompact
+    {
+        uint32_t view_number{0};
+        uint32_t validator_index{0};
+        io::ByteVector signature;
+        io::ByteVector invocation_script;
+    };
+
+   public:
     /**
      * @brief Constructs a RecoveryMessage.
      * @param viewNumber The view number.
      */
     explicit RecoveryMessage(uint8_t viewNumber);
 
-    /**
-     * @brief Gets the change view messages.
-     * @return The change view messages.
-     */
-    const std::vector<std::shared_ptr<ChangeViewMessage>>& GetChangeViewMessages() const;
-
-    /**
-     * @brief Adds a change view message.
-     * @param message The change view message.
-     */
-    void AddChangeViewMessage(std::shared_ptr<ChangeViewMessage> message);
+    const std::vector<ChangeViewPayloadCompact>& GetChangeViewPayloads() const { return change_view_payloads_; }
+    void AddChangeViewPayload(const ChangeViewPayloadCompact& payload);
 
     /**
      * @brief Gets the prepare request.
@@ -56,29 +73,38 @@ class RecoveryMessage : public ConsensusMessage
      */
     void SetPrepareRequest(std::shared_ptr<PrepareRequest> prepareRequest);
 
-    /**
-     * @brief Gets the prepare responses.
-     * @return The prepare responses.
-     */
-    const std::vector<std::shared_ptr<PrepareResponse>>& GetPrepareResponses() const;
+    void SetPreparationHash(const io::UInt256& hash);
+    std::optional<io::UInt256> GetPreparationHash() const { return preparation_hash_; }
 
     /**
-     * @brief Adds a prepare response.
-     * @param message The prepare response.
+     * @brief Convenience setter accepting an array of prepare requests.
+     *        First non-null entry will be stored as the active request.
      */
-    void AddPrepareResponse(std::shared_ptr<PrepareResponse> message);
+    void SetPrepareRequests(const std::vector<std::shared_ptr<PrepareRequest>>& requests);
+
+    const std::vector<PreparationPayloadCompact>& GetPreparationPayloads() const { return preparation_payloads_; }
+    void AddPreparationPayload(const PreparationPayloadCompact& payload);
+
+    void SetPreparationPayloads(const std::vector<PreparationPayloadCompact>& payloads);
+
+    const std::vector<CommitPayloadCompact>& GetCommitPayloads() const { return commit_payloads_; }
+    void AddCommitPayload(const CommitPayloadCompact& payload);
+    void SetCommitPayloads(const std::vector<CommitPayloadCompact>& payloads);
 
     /**
-     * @brief Gets the commit messages.
-     * @return The commit messages.
+     * @brief Access transactions bundled with the recovery payload.
      */
-    const std::vector<std::shared_ptr<CommitMessage>>& GetCommitMessages() const;
+    const std::vector<network::p2p::payloads::Neo3Transaction>& GetTransactions() const { return transactions_; }
 
     /**
-     * @brief Adds a commit message.
-     * @param message The commit message.
+     * @brief Add a single transaction to the recovery payload.
      */
-    void AddCommitMessage(std::shared_ptr<CommitMessage> message);
+    void AddTransaction(const network::p2p::payloads::Neo3Transaction& transaction);
+
+    /**
+     * @brief Replace recovery transactions.
+     */
+    void SetTransactions(const std::vector<network::p2p::payloads::Neo3Transaction>& transactions);
 
     /**
      * @brief Serializes the object.
@@ -99,9 +125,11 @@ class RecoveryMessage : public ConsensusMessage
     io::ByteVector GetData() const;
 
    private:
-    std::vector<std::shared_ptr<ChangeViewMessage>> changeViewMessages_;
+    std::vector<ChangeViewPayloadCompact> change_view_payloads_;
     std::shared_ptr<PrepareRequest> prepareRequest_;
-    std::vector<std::shared_ptr<PrepareResponse>> prepareResponses_;
-    std::vector<std::shared_ptr<CommitMessage>> commitMessages_;
+    std::optional<io::UInt256> preparation_hash_;
+    std::vector<PreparationPayloadCompact> preparation_payloads_;
+    std::vector<CommitPayloadCompact> commit_payloads_;
+    std::vector<network::p2p::payloads::Neo3Transaction> transactions_;
 };
 }  // namespace neo::consensus

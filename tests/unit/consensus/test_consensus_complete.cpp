@@ -220,9 +220,9 @@ TEST_F(ConsensusCompleteTest, ChangeView_Serialization) {
 TEST_F(ConsensusCompleteTest, ChangeView_Reasons) {
     EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::Timeout), 0x00);
     EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::ChangeAgreement), 0x01);
-    EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::TxInvalid), 0x02);
+    EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::TxNotFound), 0x02);
     EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::TxRejectedByPolicy), 0x03);
-    EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::TxDoubleSpend), 0x04);
+    EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::TxInvalid), 0x04);
     EXPECT_EQ(static_cast<uint8_t>(ChangeViewReason::BlockRejectedByPolicy), 0x05);
 }
 

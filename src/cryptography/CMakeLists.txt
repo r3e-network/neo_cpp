@@ -9,7 +9,7 @@ add_library(neo_cryptography OBJECT
     ecc/ecdsa.cpp
     ecc/ecfieldelement.cpp
     ecc/keypair.cpp
-    ecc/secp256r1_simple.cpp
+    ecc/secp256r1.cpp
     ecrecover.cpp
     merkletree.cpp
     base64.cpp
@@ -20,6 +20,7 @@ add_library(neo_cryptography OBJECT
     keccak256.cpp
     keccak256_simple.cpp
     murmur3.cpp
+    scrypt.cpp
 )
 
 # BLS12_381 support (always enabled for Neo compatibility)

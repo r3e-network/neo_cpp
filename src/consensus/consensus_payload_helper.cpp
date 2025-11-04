@@ -23,8 +23,8 @@ std::shared_ptr<network::p2p::payloads::ExtensiblePayload> ConsensusPayloadHelpe
 
     // Create ExtensiblePayload with consensus message data
     auto payload = std::make_shared<network::p2p::payloads::ExtensiblePayload>(
-        CONSENSUS_CATEGORY, validBlockStart, validBlockEnd, sender, stream.ToArray(),
-        cryptography::Witness()  // Witness will be set later
+        CONSENSUS_CATEGORY, validBlockStart, validBlockEnd, sender, stream.ToByteVector(),
+        ledger::Witness()  // Witness will be set later
     );
 
     return payload;
@@ -35,7 +35,17 @@ std::shared_ptr<ConsensusMessage> ConsensusPayloadHelper::GetMessage(
 {
     if (!IsConsensusPayload(payload)) return nullptr;
 
-    return ConsensusMessage::DeserializeFrom(payload.GetData());
+    const auto& data = payload.GetData();
+    if (data.Size() < 1) return nullptr;
+
+    auto type = static_cast<ConsensusMessageType>(data.Data()[0]);
+    auto message = ConsensusMessage::CreateFromType(type);
+    if (!message) return nullptr;
+
+    io::BinaryReader reader(data);
+    message->Deserialize(reader);
+    message->SetInvocationScript(payload.GetWitness().GetInvocationScript());
+    return message;
 }
 
 bool ConsensusPayloadHelper::IsConsensusPayload(const network::p2p::payloads::ExtensiblePayload& payload)
@@ -44,7 +54,7 @@ bool ConsensusPayloadHelper::IsConsensusPayload(const network::p2p::payloads::Ex
 }
 
 void ConsensusPayloadHelper::SignPayload(network::p2p::payloads::ExtensiblePayload& payload,
-                                         const cryptography::Witness& witness)
+                                         const ledger::Witness& witness)
 {
     payload.SetWitness(witness);
 }

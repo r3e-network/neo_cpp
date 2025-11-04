@@ -28,8 +28,8 @@ NEP6Account::NEP6Account(const cryptography::ecc::KeyPair& keyPair, const std::s
     : WalletAccount(keyPair), deployed_(false)
 {
     // Generate NEP2 key
-    nep2Key_ = cryptography::ecc::Secp256r1::ToNEP2(keyPair.PrivateKey(), password, scrypt.GetN(), scrypt.GetR(),
-                                                    scrypt.GetP());
+    nep2Key_ = cryptography::ecc::Secp256r1::ToNEP2(keyPair.PrivateKey(), password, static_cast<int>(scrypt.GetN()),
+                                                    static_cast<int>(scrypt.GetR()), static_cast<int>(scrypt.GetP()));
 }
 
 NEP6Account::NEP6Account(const io::UInt160& scriptHash, const std::string& nep2Key)
@@ -63,7 +63,8 @@ bool NEP6Account::DecryptPrivateKey(const std::string& password, const ScryptPar
     try
     {
         auto privateKey =
-            cryptography::ecc::Secp256r1::FromNEP2(nep2Key_, password, scrypt.GetN(), scrypt.GetR(), scrypt.GetP());
+            cryptography::ecc::Secp256r1::FromNEP2(nep2Key_, password, static_cast<int>(scrypt.GetN()),
+                                                   static_cast<int>(scrypt.GetR()), static_cast<int>(scrypt.GetP()));
         SetPrivateKey(privateKey);
 
         // Calculate public key
@@ -85,7 +86,8 @@ bool NEP6Account::VerifyPassword(const std::string& password, const ScryptParame
 
     try
     {
-        cryptography::ecc::Secp256r1::FromNEP2(nep2Key_, password, scrypt.GetN(), scrypt.GetR(), scrypt.GetP());
+        cryptography::ecc::Secp256r1::FromNEP2(nep2Key_, password, static_cast<int>(scrypt.GetN()),
+                                               static_cast<int>(scrypt.GetR()), static_cast<int>(scrypt.GetP()));
         return true;
     }
     catch (const std::exception&)
@@ -214,8 +216,9 @@ bool NEP6Wallet::ChangePassword(const std::string& oldPassword, const std::strin
 
             // Re-encrypt with new password
             auto privateKey = nep6Account->GetPrivateKey();
-            auto nep2Key = cryptography::ecc::Secp256r1::ToNEP2(privateKey, newPassword, scrypt_.GetN(), scrypt_.GetR(),
-                                                                scrypt_.GetP());
+            auto nep2Key = cryptography::ecc::Secp256r1::ToNEP2(privateKey, newPassword, static_cast<int>(scrypt_.GetN()),
+                                                                static_cast<int>(scrypt_.GetR()),
+                                                                static_cast<int>(scrypt_.GetP()));
             nep6Account->SetNEP2Key(nep2Key);
         }
     }
@@ -286,7 +289,8 @@ std::shared_ptr<WalletAccount> NEP6Wallet::ImportFromNEP2(const std::string& nep
 {
     // Decrypt private key
     auto privateKey =
-        cryptography::ecc::Secp256r1::FromNEP2(nep2Key, password, scrypt_.GetN(), scrypt_.GetR(), scrypt_.GetP());
+        cryptography::ecc::Secp256r1::FromNEP2(nep2Key, password, static_cast<int>(scrypt_.GetN()),
+                                               static_cast<int>(scrypt_.GetR()), static_cast<int>(scrypt_.GetP()));
 
     // Create key pair
     auto keyPair = cryptography::ecc::Secp256r1::FromPrivateKey(privateKey);

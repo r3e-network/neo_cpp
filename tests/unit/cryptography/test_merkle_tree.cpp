@@ -12,7 +12,6 @@
 #ifndef TESTS_UNIT_CRYPTOGRAPHY_TEST_MERKLE_TREE_CPP_H
 #define TESTS_UNIT_CRYPTOGRAPHY_TEST_MERKLE_TREE_CPP_H
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 // Include the class under test
@@ -22,6 +21,7 @@ namespace neo
 {
 namespace test
 {
+using cryptography::MerkleTree;
 
 class MerkleTreeTest : public ::testing::Test
 {

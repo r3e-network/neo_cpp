@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <neo/io/byte_vector.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
@@ -18,6 +19,19 @@
 
 namespace neo::consensus
 {
+/**
+ * @brief Reason for requesting a change of view within dBFT.
+ */
+enum class ChangeViewReason : uint8_t
+{
+    Timeout = 0x00,
+    ChangeAgreement = 0x01,
+    TxNotFound = 0x02,
+    TxRejectedByPolicy = 0x03,
+    TxInvalid = 0x04,
+    BlockRejectedByPolicy = 0x05
+};
+
 /**
  * @brief Type of consensus message
  */
@@ -41,6 +55,7 @@ class ConsensusMessage : public io::ISerializable
     uint32_t view_number_;
     uint32_t validator_index_;
     uint32_t block_index_;
+    io::ByteVector invocation_script_;
 
    public:
     ConsensusMessage(ConsensusMessageType type);
@@ -53,6 +68,8 @@ class ConsensusMessage : public io::ISerializable
     void SetViewNumber(uint32_t view) { view_number_ = view; }
     void SetValidatorIndex(uint32_t index) { validator_index_ = index; }
     void SetBlockIndex(uint32_t index) { block_index_ = index; }
+    const io::ByteVector& GetInvocationScript() const { return invocation_script_; }
+    void SetInvocationScript(const io::ByteVector& script) { invocation_script_ = script; }
 
     // ISerializable
     void Serialize(io::BinaryWriter& writer) const override;
@@ -72,6 +89,7 @@ class ViewChangeMessage : public ConsensusMessage
    private:
     uint32_t new_view_number_;
     std::chrono::system_clock::time_point timestamp_;
+    ChangeViewReason reason_{ChangeViewReason::Timeout};
 
    public:
     ViewChangeMessage();
@@ -81,6 +99,9 @@ class ViewChangeMessage : public ConsensusMessage
 
     std::chrono::system_clock::time_point GetTimestamp() const { return timestamp_; }
     void SetTimestamp(std::chrono::system_clock::time_point time) { timestamp_ = time; }
+
+    ChangeViewReason GetReason() const { return reason_; }
+    void SetReason(ChangeViewReason reason) { reason_ = reason; }
 
     void Serialize(io::BinaryWriter& writer) const override;
     void Deserialize(io::BinaryReader& reader) override;
@@ -158,8 +179,14 @@ class CommitMessage : public ConsensusMessage
  */
 class RecoveryRequestMessage : public ConsensusMessage
 {
+   private:
+    uint64_t timestamp_{0};
+
    public:
     RecoveryRequestMessage();
+
+    uint64_t GetTimestamp() const { return timestamp_; }
+    void SetTimestamp(uint64_t timestamp) { timestamp_ = timestamp; }
 
     void Serialize(io::BinaryWriter& writer) const override;
     void Deserialize(io::BinaryReader& reader) override;

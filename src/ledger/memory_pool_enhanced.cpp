@@ -165,6 +165,48 @@ std::vector<network::p2p::payloads::Neo3Transaction> MemoryPool::GetUnverifiedTr
     return result;
 }
 
+std::vector<network::p2p::payloads::Neo3Transaction> MemoryPool::GetVerifiedTransactions() const
+{
+    std::shared_lock<std::shared_mutex> lock(mutex_);
+
+    std::vector<network::p2p::payloads::Neo3Transaction> result;
+    result.reserve(unsorted_transactions_.size());
+
+    for (const auto& pair : unsorted_transactions_)
+    {
+        auto neo3_tx =
+            std::reinterpret_pointer_cast<network::p2p::payloads::Neo3Transaction>(pair.second.GetTransaction());
+        result.push_back(*neo3_tx);
+    }
+
+    return result;
+}
+
+void MemoryPool::GetVerifiedAndUnverifiedTransactions(
+    std::vector<network::p2p::payloads::Neo3Transaction>& verified,
+    std::vector<network::p2p::payloads::Neo3Transaction>& unverified) const
+{
+    std::shared_lock<std::shared_mutex> lock(mutex_);
+
+    verified.clear();
+    verified.reserve(unsorted_transactions_.size());
+    for (const auto& pair : unsorted_transactions_)
+    {
+        auto neo3_tx =
+            std::reinterpret_pointer_cast<network::p2p::payloads::Neo3Transaction>(pair.second.GetTransaction());
+        verified.push_back(*neo3_tx);
+    }
+
+    unverified.clear();
+    unverified.reserve(unverified_transactions_.size());
+    for (const auto& pair : unverified_transactions_)
+    {
+        auto neo3_tx =
+            std::reinterpret_pointer_cast<network::p2p::payloads::Neo3Transaction>(pair.second.GetTransaction());
+        unverified.push_back(*neo3_tx);
+    }
+}
+
 std::vector<network::p2p::payloads::Neo3Transaction> MemoryPool::GetTransactionsForBlock(size_t max_count) const
 {
     auto sorted = GetSortedTransactions();

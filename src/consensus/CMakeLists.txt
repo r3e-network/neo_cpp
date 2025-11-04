@@ -3,6 +3,8 @@
 # Create consensus library
 add_library(neo_consensus OBJECT
     dbft_consensus.cpp
+    consensus_payload_helper.cpp
+    consensus_service.cpp
     consensus_state.cpp
     consensus_message.cpp
     recovery_message.cpp  # Full implementation for RecoveryMessage

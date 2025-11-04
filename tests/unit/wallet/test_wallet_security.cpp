@@ -6,8 +6,8 @@
 #include <gtest/gtest.h>
 #include <neo/wallets/wallet.h>
 #include <neo/wallets/key_pair.h>
-#include <neo/cryptography/aes.h>
 #include <neo/cryptography/scrypt.h>
+#include <neo/cryptography/ecc/secp256r1.h>
 #include <thread>
 #include <atomic>
 #include <random>
@@ -81,15 +81,23 @@ TEST_F(WalletSecurityTest, StrongPasswordGeneration) {
 TEST_F(WalletSecurityTest, NEP2Encryption) {
     auto account = wallet->CreateAccount();
     std::string password = GenerateRandomPassword();
-    
+
     // Export as NEP2 (encrypted)
     wallet->ChangePassword("", password);
     auto nep2 = wallet->ExportNEP2(account->ScriptHash);
-    
+
     // Verify NEP2 format
     EXPECT_TRUE(nep2.starts_with("6P"));
     EXPECT_EQ(nep2.length(), 58);
-    
+
+    // Firmware test vector round-trip (value from C# test suite)
+    const std::string knownNep2 = "6PYLHmDf6AjF4AsVtosmxHuPYeuyJL3SLuw7J1U8i7HxKAnYNsp61HYRfF";
+    const std::string knownPassword = "test123";
+    auto privateKey = neo::cryptography::ecc::Secp256r1::FromNEP2(knownNep2, knownPassword);
+    ASSERT_EQ(privateKey.Size(), 32u);
+    auto regenerated = neo::cryptography::ecc::Secp256r1::ToNEP2(privateKey, knownPassword);
+    EXPECT_EQ(regenerated, knownNep2);
+
     // Import with wrong password should fail
     auto newWallet = std::make_unique<NEP6Wallet>("TestImport");
     EXPECT_THROW(newWallet->Import(nep2, "wrongPassword"), std::runtime_error);

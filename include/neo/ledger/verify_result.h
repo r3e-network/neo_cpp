@@ -19,10 +19,18 @@ enum class VerifyResult : uint8_t
     Succeed = 0,
     AlreadyExists = 1,
     AlreadyInPool = 2,
-    Invalid = 3,
-    HasConflicts = 4,
-    UnableToVerify = 5,
-    OutOfMemory = 6
+    OutOfMemory = 3,
+    UnableToVerify = 4,
+    Invalid = 5,
+    InvalidScript = 6,
+    InvalidAttribute = 7,
+    InvalidSignature = 8,
+    OverSize = 9,
+    Expired = 10,
+    InsufficientFunds = 11,
+    PolicyFail = 12,
+    HasConflicts = 13,
+    Unknown = 14
 };
 
 }  // namespace neo::ledger

@@ -8,7 +8,21 @@
 
 #include <neo/node/neo_node.h>
 
+#include <neo/core/configuration_manager.h>
+#include <neo/cryptography/ecc/keypair.h>
+#include <neo/io/byte_vector.h>
+
+#include <neo/consensus/consensus_service.h>
+
 #include <exception>
+
+namespace
+{
+bool LooksLikeWIF(const std::string& key)
+{
+    return key.size() == 51 || key.size() == 52;
+}
+}
 
 namespace neo::node
 {
@@ -28,6 +42,12 @@ bool NeoNode::LoadProtocolSettings()
         {
             logger_->Warning("Failed to load config from {}, using defaults", configPath_);
             protocolSettings_ = std::make_unique<ProtocolSettings>(ProtocolSettings::GetDefault());
+        }
+
+        auto& configManager = core::ConfigurationManager::GetInstance();
+        if (!configManager.LoadFromFile(configPath_))
+        {
+            logger_->Warning("Failed to load extended configuration from {}", configPath_);
         }
 
         logger_->Info("Protocol settings loaded successfully");
@@ -156,6 +176,38 @@ bool NeoNode::InitializeConsensus()
         {
             consensusService_ =
                 std::make_shared<consensus::ConsensusService>(protocolSettings_, blockchain_, memoryPool_, p2pServer_);
+
+            const auto& consensusConfig = core::ConfigurationManager::GetInstance().GetConsensusConfig();
+            std::unique_ptr<cryptography::ecc::KeyPair> consensusKey;
+
+            if (!consensusConfig.private_key.empty())
+            {
+                try
+                {
+                    if (LooksLikeWIF(consensusConfig.private_key))
+                    {
+                        consensusKey = cryptography::ecc::KeyPair::FromWIF(consensusConfig.private_key);
+                    }
+                    else
+                    {
+                        auto rawKey = io::ByteVector::FromHexString(consensusConfig.private_key);
+                        consensusKey = std::make_unique<cryptography::ecc::KeyPair>(rawKey);
+                    }
+                }
+                catch (const std::exception& ex)
+                {
+                    logger_->Warning("Failed to parse consensus private key: {}", ex.what());
+                }
+            }
+
+            if (consensusKey)
+            {
+                consensusService_->SetKeyPair(std::move(consensusKey));
+            }
+            else if (!consensusConfig.private_key.empty())
+            {
+                logger_->Warning("Consensus private key configuration present but unusable; node will not sign consensus payloads");
+            }
 
             logger_->Info("Consensus service initialized");
         }

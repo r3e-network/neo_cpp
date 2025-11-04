@@ -153,6 +153,20 @@ class MemoryPool
     std::vector<network::p2p::payloads::Neo3Transaction> GetUnverifiedTransactions() const;
 
     /**
+     * @brief Gets all verified transactions (both sorted and unsorted buckets).
+     * @return Vector of verified transactions.
+     */
+    std::vector<network::p2p::payloads::Neo3Transaction> GetVerifiedTransactions() const;
+
+    /**
+     * @brief Gets both verified and unverified transactions in a single call.
+     * @param[out] verified Vector receiving verified transactions.
+     * @param[out] unverified Vector receiving unverified transactions.
+     */
+    void GetVerifiedAndUnverifiedTransactions(std::vector<network::p2p::payloads::Neo3Transaction>& verified,
+                                              std::vector<network::p2p::payloads::Neo3Transaction>& unverified) const;
+
+    /**
      * @brief Selects highest priority transactions for block creation
      * @param max_count Maximum transactions to include
      * @return Vector of transactions optimized for maximum fees

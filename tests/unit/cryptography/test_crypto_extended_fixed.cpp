@@ -23,7 +23,7 @@ protected:
 
 TEST_F(CryptoExtendedTest, TestVerifySignature)
 {
-    ByteVector message((uint8_t*)"test message", 12);
+    ByteVector message = ByteVector::FromString("test message");
     
     // Sign message
     auto signature = Crypto::Sign(message.AsSpan(), key->GetPrivateKey().AsSpan());
@@ -35,22 +35,22 @@ TEST_F(CryptoExtendedTest, TestVerifySignature)
     EXPECT_TRUE(valid);
     
     // Verify with wrong message should fail
-    ByteVector wrongMessage((uint8_t*)"wrong message", 13);
+    ByteVector wrongMessage = ByteVector::FromString("wrong message");
     bool invalid = Crypto::VerifySignature(wrongMessage.AsSpan(), signature.AsSpan(), key->GetPublicKey());
     EXPECT_FALSE(invalid);
 }
 
 TEST_F(CryptoExtendedTest, TestHashFunctions)
 {
-    ByteVector data((uint8_t*)"test data", 9);
+    ByteVector data = ByteVector::FromString("test data");
     
     // Test Hash256 (double SHA256)
     auto hash256 = Crypto::Hash256(data.AsSpan());
-    EXPECT_EQ(hash256.size, 32);
+    EXPECT_EQ(hash256.AsSpan().Size(), UInt256::Size);
     
     // Test Hash160 (SHA256 + RIPEMD160)
     auto hash160 = Crypto::Hash160(data.AsSpan());
-    EXPECT_EQ(hash160.size, 20);
+    EXPECT_EQ(hash160.AsSpan().Size(), UInt160::Size);
 }
 
 TEST_F(CryptoExtendedTest, TestRandomBytes)

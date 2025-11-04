@@ -70,7 +70,7 @@ size_t ServiceProxy::GetPeerCount() const
         // Approach 1: Via local node if available
         if (auto localNode = neoSystem_->GetLocalNode())
         {
-            return localNode->GetConnectedPeersCount();
+            return localNode->GetConnectedCount();
         }
 
         // Approach 2: Via P2P server if available

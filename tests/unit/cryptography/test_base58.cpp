@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <neo/cryptography/base58.h>
+#include <neo/cryptography/hash.h>
 #include <neo/io/byte_vector.h>
 #include <stdexcept>
 #include <string>
@@ -32,10 +33,10 @@ TEST(Base58Test, Encode)
     std::string addressEncoded = Base58::Encode(address.AsSpan());
     EXPECT_EQ(addressEncoded, "16UwLL9Risc3QfPqBUvKofHmBQ7wMtjvM");
 
-    // Test case 5: Maximum value
+    // Test case 5: Maximum 32-bit value
     ByteVector maxValue = {0xFF, 0xFF, 0xFF, 0xFF};
     std::string maxValueEncoded = Base58::Encode(maxValue.AsSpan());
-    EXPECT_EQ(maxValueEncoded, "LUv1");
+    EXPECT_EQ(maxValueEncoded, "7YXq9G");
 }
 
 TEST(Base58Test, Decode)
@@ -65,31 +66,26 @@ TEST(Base58Test, Decode)
     ByteVector addressDecoded = Base58::Decode(address);
     EXPECT_EQ(addressDecoded.ToHexString(), "00010966776006953d5567439e5e39f86a0d273beed61967f6");
 
-    // Test case 5: Maximum value
-    std::string maxValue = "LUv1";
+    // Test case 5: Maximum 32-bit value
+    std::string maxValue = "7YXq9G";
     ByteVector maxValueDecoded = Base58::Decode(maxValue);
-    EXPECT_EQ(maxValueDecoded.Size(), 4);
-    for (size_t i = 0; i < maxValueDecoded.Size(); i++)
-    {
-        EXPECT_EQ(maxValueDecoded[i], 0xFF);
-    }
+    ByteVector expectedMax = {0xFF, 0xFF, 0xFF, 0xFF};
+    EXPECT_EQ(maxValueDecoded, expectedMax);
 }
 
 TEST(Base58Test, EncodeWithChecksum)
 {
     // Test case 1: Empty array
-    ByteVector empty;
-    std::string emptyEncoded = Base58::EncodeWithChecksum(empty.AsSpan());
-    ByteVector emptyWithChecksum = empty;
-    uint32_t emptyChecksum = Hash::Checksum(empty.AsSpan());
-    emptyWithChecksum.PushBack((emptyChecksum >> 0) & 0xFF);
-    emptyWithChecksum.PushBack((emptyChecksum >> 8) & 0xFF);
-    emptyWithChecksum.PushBack((emptyChecksum >> 16) & 0xFF);
-    emptyWithChecksum.PushBack((emptyChecksum >> 24) & 0xFF);
-    EXPECT_EQ(emptyEncoded, Base58::Encode(emptyWithChecksum.AsSpan()));
+    ByteVector payload = ByteVector::Parse("00010966776006953D5567439E5E39F86A0D273BEE");
+    std::string encoded = Base58::EncodeWithChecksum(payload.AsSpan());
+    EXPECT_EQ(encoded, "16UwLL9Risc3QfPqBUvKofHmBQ7wMtjvM");
 
-    // Test case 2: Bitcoin address
-    ByteVector address = ByteVector::Parse("00010966776006953D5567439E5E39F86A0D273BEED61967F6");
+    // Encoding raw data that already contains checksum should match raw encode
+    ByteVector withChecksum = ByteVector::Parse("00010966776006953D5567439E5E39F86A0D273BEED61967F6");
+    EXPECT_EQ(Base58::Encode(withChecksum.AsSpan()), "16UwLL9Risc3QfPqBUvKofHmBQ7wMtjvM");
+
+    // Test case 2: Round-trip with payload
+    ByteVector address = payload;
     std::string addressEncoded = Base58::EncodeWithChecksum(address.AsSpan());
     EXPECT_EQ(addressEncoded, "16UwLL9Risc3QfPqBUvKofHmBQ7wMtjvM");
 }
@@ -107,7 +103,7 @@ TEST(Base58Test, DecodeWithChecksum)
     // Test case 3: Valid checksum
     std::string validChecksum = "16UwLL9Risc3QfPqBUvKofHmBQ7wMtjvM";
     ByteVector validChecksumDecoded = Base58::DecodeWithChecksum(validChecksum);
-    EXPECT_EQ(validChecksumDecoded.ToHexString(), "00010966776006953d5567439e5e39f86a0d273beed61967f6");
+    EXPECT_EQ(validChecksumDecoded.ToHexString(), "00010966776006953d5567439e5e39f86a0d273bee");
 }
 
 TEST(Base58Test, InvalidCharacters)

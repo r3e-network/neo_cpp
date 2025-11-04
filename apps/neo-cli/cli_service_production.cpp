@@ -107,19 +107,6 @@ void CLIService::SetupShutdownHandlers()
         },
         70, std::chrono::seconds(5));
 
-    // Priority 80: Flush and close storage
-    shutdownManager.RegisterHandler(
-        "close_storage",
-        [this]()
-        {
-            if (store_)
-            {
-                store_->Flush();
-                store_->Close();
-            }
-        },
-        80, std::chrono::seconds(30));
-
     // Priority 90: Final cleanup
     shutdownManager.RegisterHandler(
         "final_cleanup",

@@ -130,18 +130,14 @@ Settings Settings::LoadFromJson(const std::string& jsonContent)
             if (p.contains("MaxConnections")) settings.P2P.MaxConnections = p["MaxConnections"].get<int>();
             if (p.contains("DialTimeoutMs")) settings.P2P.DialTimeoutMs = p["DialTimeoutMs"].get<int>();
             // Parse seed nodes from configuration
-            if (p.contains("Seeds") && p["Seeds"].is_array())
+        if (p.contains("Seeds") && p["Seeds"].is_array())
+        {
+            settings.P2P.Seeds.clear();
+            for (const auto& s : p["Seeds"])
             {
-                std::string csv;
-                bool first = true;
-                for (const auto& s : p["Seeds"])
-                {
-                    if (!first) csv += ",";
-                    csv += s.get<std::string>();
-                    first = false;
-                }
-                settings.Plugins.PluginConfigs["P2P"]["Seeds"] = csv;
+                settings.P2P.Seeds.push_back(s.get<std::string>());
             }
+        }
         }
 
         // Application
@@ -225,7 +221,17 @@ std::string Settings::ToJson() const
     json << "    \"Port\": " << P2P.Port << ",\n";
     json << "    \"BindAddress\": \"" << P2P.BindAddress << "\",\n";
     json << "    \"MinDesiredConnections\": " << P2P.MinDesiredConnections << ",\n";
-    json << "    \"MaxConnections\": " << P2P.MaxConnections << "\n";
+    json << "    \"MaxConnections\": " << P2P.MaxConnections << ",\n";
+    json << "    \"MaxConnectionsPerAddress\": " << P2P.MaxConnectionsPerAddress << ",\n";
+    json << "    \"DialTimeoutMs\": " << P2P.DialTimeoutMs << ",\n";
+    json << "    \"EnableUpnp\": " << (P2P.EnableUpnp ? "true" : "false") << ",\n";
+    json << "    \"Seeds\": [";
+    for (size_t i = 0; i < P2P.Seeds.size(); ++i)
+    {
+        json << "\"" << P2P.Seeds[i] << "\"";
+        if (i + 1 < P2P.Seeds.size()) json << ", ";
+    }
+    json << "]\n";
     json << "  }\n";
     json << "}";
     return json.str();
@@ -401,15 +407,11 @@ void Settings::LoadP2PSettings(const std::string& json)
         if (p.contains("DialTimeoutMs")) P2P.DialTimeoutMs = p["DialTimeoutMs"].get<int>();
         if (p.contains("Seeds") && p["Seeds"].is_array())
         {
-            std::string csv;
-            bool first = true;
+            P2P.Seeds.clear();
             for (const auto& s : p["Seeds"])
             {
-                if (!first) csv += ",";
-                csv += s.get<std::string>();
-                first = false;
+                P2P.Seeds.push_back(s.get<std::string>());
             }
-            Plugins.PluginConfigs["P2P"]["Seeds"] = csv;
         }
     }
     catch (const nlohmann::json::exception& e)
@@ -505,6 +507,11 @@ bool Settings::ValidateP2PSettings() const
     }
 
     if (P2P.MaxConnections < 1 || P2P.MaxConnections > 1000)
+    {
+        return false;
+    }
+
+    if (P2P.MaxConnectionsPerAddress < 1 || P2P.MaxConnectionsPerAddress > P2P.MaxConnections)
     {
         return false;
     }

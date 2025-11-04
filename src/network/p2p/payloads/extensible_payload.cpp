@@ -21,6 +21,19 @@
 namespace neo::network::p2p::payloads
 {
 
+ExtensiblePayload::ExtensiblePayload(const std::string& category, uint32_t valid_block_start,
+                                     uint32_t valid_block_end, const io::UInt160& sender, const io::ByteVector& data,
+                                     const ledger::Witness& witness)
+    : category_(category),
+      valid_block_start_(valid_block_start),
+      valid_block_end_(valid_block_end),
+      sender_(sender),
+      data_(data),
+      witness_(witness),
+      hash_calculated_(false)
+{
+}
+
 io::UInt256 ExtensiblePayload::GetHash() const
 {
     if (!hash_calculated_)
@@ -119,6 +132,29 @@ void ExtensiblePayload::DeserializeJson(const io::JsonReader& reader)
 
     // Reset hash
     hash_calculated_ = false;
+}
+
+io::ByteVector ExtensiblePayload::GetUnsignedData() const
+{
+    io::ByteVector buffer;
+    io::BinaryWriter writer(buffer);
+    writer.WriteVarString(category_);
+    writer.Write(valid_block_start_);
+    writer.Write(valid_block_end_);
+    writer.Write(sender_);
+    writer.WriteVarBytes(data_.AsSpan());
+    return buffer;
+}
+
+std::shared_ptr<ExtensiblePayload> ExtensiblePayload::Create(const std::string& category, uint32_t valid_block_start,
+                                                             uint32_t valid_block_end, const io::UInt160& sender,
+                                                             const io::ByteVector& data)
+{
+    auto payload = std::make_shared<ExtensiblePayload>(category, valid_block_start, valid_block_end, sender, data,
+                                                       ledger::Witness{});
+    payload->hash_calculated_ = false;
+    payload->hash_cache_.reset();
+    return payload;
 }
 
 // io::UInt256 ExtensiblePayload::CalculateHash() const

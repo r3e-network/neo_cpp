@@ -7,19 +7,192 @@
  */
 
 #include <neo/cryptography/base64.h>
+#include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
-#include <neo/rpc/rpc_methods.h>
-#include <neo/ledger/blockchain.h>
 #include <neo/ledger/block.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/ledger/memory_pool.h>
+#include <neo/ledger/transaction.h>
+#include <neo/ledger/transaction_validator.h>
+#include <neo/rpc/error_codes.h>
+#include <neo/rpc/rpc_methods.h>
 #include <neo/smartcontract/contract.h>
 #include <neo/smartcontract/native/native_contract_manager.h>
 #include <neo/wallets/helper.h>
+
+#include <sstream>
 
 namespace neo::rpc
 {
 using json = nlohmann::json;
 
-nlohmann::json RPCMethods::GetVersion(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+namespace
+{
+using neo::ledger::ValidationResult;
+using neo::ledger::VerifyResult;
+using neo::rpc::ErrorCode;
+using neo::rpc::RpcException;
+
+std::string ValidationResultToString(ValidationResult result)
+{
+    switch (result)
+    {
+        case ValidationResult::Valid:
+            return "Valid";
+        case ValidationResult::InvalidFormat:
+            return "InvalidFormat";
+        case ValidationResult::InvalidSize:
+            return "InvalidSize";
+        case ValidationResult::InvalidAttribute:
+            return "InvalidAttribute";
+        case ValidationResult::InvalidScript:
+            return "InvalidScript";
+        case ValidationResult::InvalidWitness:
+            return "InvalidWitness";
+        case ValidationResult::InsufficientFunds:
+            return "InsufficientFunds";
+        case ValidationResult::InvalidSignature:
+            return "InvalidSignature";
+        case ValidationResult::AlreadyExists:
+            return "AlreadyExists";
+        case ValidationResult::Expired:
+            return "Expired";
+        case ValidationResult::InvalidSystemFee:
+            return "InvalidSystemFee";
+        case ValidationResult::InvalidNetworkFee:
+            return "InvalidNetworkFee";
+        case ValidationResult::PolicyViolation:
+            return "PolicyViolation";
+        case ValidationResult::Unknown:
+        default:
+            return "Unknown";
+    }
+}
+
+ErrorCode MapValidationResult(ValidationResult result)
+{
+    switch (result)
+    {
+        case ValidationResult::Valid:
+            return ErrorCode::InternalError;
+        case ValidationResult::InvalidFormat:
+        case ValidationResult::Unknown:
+            return ErrorCode::RpcVerificationFailed;
+        case ValidationResult::InvalidSize:
+            return ErrorCode::RpcInvalidInventorySize;
+        case ValidationResult::InvalidAttribute:
+            return ErrorCode::RpcInvalidTransactionAttribute;
+        case ValidationResult::InvalidScript:
+            return ErrorCode::RpcInvalidTransactionScript;
+        case ValidationResult::InvalidWitness:
+            return ErrorCode::InvalidWitness;
+        case ValidationResult::InsufficientFunds:
+            return ErrorCode::RpcInsufficientFunds;
+        case ValidationResult::InvalidSignature:
+            return ErrorCode::RpcInvalidSignature;
+        case ValidationResult::AlreadyExists:
+            return ErrorCode::RpcAlreadyExists;
+        case ValidationResult::Expired:
+            return ErrorCode::RpcExpiredTransaction;
+        case ValidationResult::InvalidSystemFee:
+        case ValidationResult::InvalidNetworkFee:
+            return ErrorCode::RpcInsufficientNetworkFee;
+        case ValidationResult::PolicyViolation:
+            return ErrorCode::RpcPolicyFailed;
+    }
+    return ErrorCode::RpcVerificationFailed;
+}
+
+std::string VerifyResultToString(VerifyResult result)
+{
+    switch (result)
+    {
+        case VerifyResult::Succeed:
+            return "Succeed";
+        case VerifyResult::AlreadyExists:
+            return "AlreadyExists";
+        case VerifyResult::AlreadyInPool:
+            return "AlreadyInPool";
+        case VerifyResult::Invalid:
+            return "Invalid";
+        case VerifyResult::HasConflicts:
+            return "HasConflicts";
+        case VerifyResult::UnableToVerify:
+            return "UnableToVerify";
+        case VerifyResult::OutOfMemory:
+            return "OutOfMemory";
+        default:
+            return "Unknown";
+    }
+}
+
+ErrorCode MapVerifyResult(VerifyResult result)
+{
+    switch (result)
+    {
+        case VerifyResult::Succeed:
+            return ErrorCode::InternalError;
+        case VerifyResult::AlreadyExists:
+            return ErrorCode::RpcAlreadyExists;
+        case VerifyResult::AlreadyInPool:
+            return ErrorCode::RpcAlreadyInPool;
+        case VerifyResult::Invalid:
+        case VerifyResult::UnableToVerify:
+        case VerifyResult::Unknown:
+            return ErrorCode::RpcVerificationFailed;
+        case VerifyResult::HasConflicts:
+        case VerifyResult::PolicyFail:
+            return ErrorCode::RpcPolicyFailed;
+        case VerifyResult::OutOfMemory:
+            return ErrorCode::RpcMempoolCapReached;
+    }
+    return ErrorCode::RpcVerificationFailed;
+}
+
+std::shared_ptr<ledger::Blockchain> RequireBlockchain(const std::shared_ptr<node::NeoSystem>& system)
+{
+    if (!system)
+    {
+        throw RpcException(ErrorCode::BlockchainNotAvailable, "NeoSystem unavailable");
+    }
+    auto blockchain = system->GetBlockchain();
+    if (!blockchain)
+    {
+        throw RpcException(ErrorCode::BlockchainNotAvailable, "Blockchain not available");
+    }
+    return blockchain;
+}
+
+std::shared_ptr<ledger::MemoryPool> RequireMemoryPool(const std::shared_ptr<node::NeoSystem>& system)
+{
+    if (!system)
+    {
+        throw RpcException(ErrorCode::MemoryPoolNotAvailable, "NeoSystem unavailable");
+    }
+    auto pool = system->GetMemPool();
+    if (!pool)
+    {
+        throw RpcException(ErrorCode::MemoryPoolNotAvailable, "Memory pool not available");
+    }
+    return pool;
+}
+
+std::shared_ptr<persistence::DataCache> RequireSnapshot(const std::shared_ptr<node::NeoSystem>& system)
+{
+    if (!system)
+    {
+        throw RpcException(ErrorCode::BlockchainNotAvailable, "NeoSystem unavailable");
+    }
+    auto snapshot = system->GetSnapshot();
+    if (!snapshot)
+    {
+        throw RpcException(ErrorCode::BlockchainNotAvailable, "Snapshot not available");
+    }
+    return snapshot;
+}
+}
+
+nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result;
     result["tcpport"] = 10333;
@@ -42,7 +215,7 @@ nlohmann::json RPCMethods::GetVersion(std::shared_ptr<neo::NeoSystem> neoSystem,
     return result;
 }
 
-nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     auto blockchain = neoSystem->GetBlockchain();
     if (!blockchain)
@@ -52,7 +225,7 @@ nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<neo::NeoSystem> neoSyst
     return blockchain->GetCurrentBlockIndex() + 1;
 }
 
-nlohmann::json RPCMethods::GetBlock(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -91,7 +264,7 @@ nlohmann::json RPCMethods::GetBlock(std::shared_ptr<neo::NeoSystem> neoSystem, c
     }
 }
 
-nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -109,7 +282,7 @@ nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<neo::NeoSystem> neoSyste
     return hash.ToString();
 }
 
-nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -162,20 +335,53 @@ nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<neo::NeoSystem> neoSys
     return result;
 }
 
-nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    auto memPool = neoSystem->GetMemPool();
-    if (!memPool)
+    auto mempool = RequireMemoryPool(neoSystem);
+
+    const bool include_unverified = !params.empty() && params[0].is_boolean() && params[0].get<bool>();
+
+    if (!include_unverified)
     {
-        throw std::runtime_error("Memory pool not available");
+        auto verified = mempool->GetVerifiedTransactions();
+        json hashes = json::array();
+        hashes.reserve(verified.size());
+        for (const auto& tx : verified)
+        {
+            hashes.push_back(tx.GetHash().ToString());
+        }
+        return hashes;
     }
 
-    json result = json::array();
-    // MemoryPool would need to expose transaction hashes
+    std::vector<network::p2p::payloads::Neo3Transaction> verified;
+    std::vector<network::p2p::payloads::Neo3Transaction> unverified;
+    mempool->GetVerifiedAndUnverifiedTransactions(verified, unverified);
+
+    auto blockchain = RequireBlockchain(neoSystem);
+
+    json result;
+    result["height"] = blockchain->GetCurrentBlockIndex();
+
+    json verified_array = json::array();
+    verified_array.reserve(verified.size());
+    for (const auto& tx : verified)
+    {
+        verified_array.push_back(tx.GetHash().ToString());
+    }
+    result["verified"] = std::move(verified_array);
+
+    json unverified_array = json::array();
+    unverified_array.reserve(unverified.size());
+    for (const auto& tx : unverified)
+    {
+        unverified_array.push_back(tx.GetHash().ToString());
+    }
+    result["unverified"] = std::move(unverified_array);
+
     return result;
 }
 
-nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -212,7 +418,7 @@ nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<neo::NeoSystem> neo
     }
 }
 
-nlohmann::json RPCMethods::GetTransactionHeight(std::shared_ptr<neo::NeoSystem> neoSystem,
+nlohmann::json RPCMethods::GetTransactionHeight(std::shared_ptr<node::NeoSystem> neoSystem,
                                                 const nlohmann::json& params)
 {
     if (params.empty())
@@ -229,16 +435,51 @@ nlohmann::json RPCMethods::GetTransactionHeight(std::shared_ptr<neo::NeoSystem> 
     return blockchain->GetTransactionHeight(hash);
 }
 
-nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty())
+    if (params.empty() || !params[0].is_string())
     {
-        throw std::runtime_error("Missing transaction data parameter");
+        throw RpcException(ErrorCode::InvalidParams, "Invalid parameter");
     }
-    return false;
+
+    const auto& base64 = params[0].get<std::string>();
+    auto data = cryptography::Base64::Decode(base64);
+
+    std::istringstream stream(std::string(reinterpret_cast<const char*>(data.Data()), data.Size()));
+    io::BinaryReader reader(stream);
+
+    auto tx = std::make_shared<ledger::Transaction>();
+    tx->Deserialize(reader);
+
+    auto blockchain = RequireBlockchain(neoSystem);
+    auto mempool = RequireMemoryPool(neoSystem);
+
+    auto validation = ledger::ValidateTransaction(*tx, blockchain, mempool);
+    if (validation != ValidationResult::Valid)
+    {
+        throw RpcException(MapValidationResult(validation),
+                           "Transaction rejected: " + ValidationResultToString(validation));
+    }
+
+    if (!mempool->TryAdd(*tx))
+    {
+        if (mempool->Contains(tx->GetHash()))
+        {
+            throw RpcException(ErrorCode::TransactionAlreadyExists, "Transaction rejected: AlreadyExists");
+        }
+        if (mempool->IsFull())
+        {
+            throw RpcException(ErrorCode::MemoryPoolNotAvailable, "Transaction rejected: OutOfMemory");
+        }
+        throw RpcException(ErrorCode::TransactionVerificationFailed, "Transaction rejected");
+    }
+
+    json result;
+    result["hash"] = tx->GetHash().ToString();
+    return result;
 }
 
-nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -254,7 +495,7 @@ nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<neo::NeoSystem> neoSys
     return result;
 }
 
-nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -270,7 +511,7 @@ nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<neo::NeoSystem> neoSyste
     return result;
 }
 
-nlohmann::json RPCMethods::GetContractState(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetContractState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -279,7 +520,7 @@ nlohmann::json RPCMethods::GetContractState(std::shared_ptr<neo::NeoSystem> neoS
     return nullptr;
 }
 
-nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -288,14 +529,14 @@ nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<neo::NeoSystem> neoSy
     return "0";
 }
 
-nlohmann::json RPCMethods::GetConnectionCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetConnectionCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     (void)neoSystem;
     (void)params;
     return 0;
 }
 
-nlohmann::json RPCMethods::GetPeers(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetPeers(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result;
     result["unconnected"] = json::array();
@@ -307,21 +548,21 @@ nlohmann::json RPCMethods::GetPeers(std::shared_ptr<neo::NeoSystem> neoSystem, c
     return result;
 }
 
-nlohmann::json RPCMethods::GetCommittee(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetCommittee(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result = json::array();
     // Would need to query NeoToken native contract
     return result;
 }
 
-nlohmann::json RPCMethods::GetValidators(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetValidators(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result = json::array();
     // Would need to query NeoToken native contract
     return result;
 }
 
-nlohmann::json RPCMethods::GetNextBlockValidators(std::shared_ptr<neo::NeoSystem> neoSystem,
+nlohmann::json RPCMethods::GetNextBlockValidators(std::shared_ptr<node::NeoSystem> neoSystem,
                                                   const nlohmann::json& params)
 {
     json result = json::array();
@@ -329,7 +570,7 @@ nlohmann::json RPCMethods::GetNextBlockValidators(std::shared_ptr<neo::NeoSystem
     return result;
 }
 
-nlohmann::json RPCMethods::GetBestBlockHash(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBestBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     auto blockchain = neoSystem->GetBlockchain();
     if (!blockchain)
@@ -342,7 +583,7 @@ nlohmann::json RPCMethods::GetBestBlockHash(std::shared_ptr<neo::NeoSystem> neoS
     return hash.ToString();
 }
 
-nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     auto blockchain = neoSystem->GetBlockchain();
     if (!blockchain)
@@ -352,7 +593,7 @@ nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<neo::NeoSystem> n
     return blockchain->GetCurrentBlockIndex() + 1;
 }
 
-nlohmann::json RPCMethods::GetStorage(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -361,7 +602,7 @@ nlohmann::json RPCMethods::GetStorage(std::shared_ptr<neo::NeoSystem> neoSystem,
     return nullptr;
 }
 
-nlohmann::json RPCMethods::FindStorage(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::FindStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -375,14 +616,14 @@ nlohmann::json RPCMethods::FindStorage(std::shared_ptr<neo::NeoSystem> neoSystem
     return result;
 }
 
-nlohmann::json RPCMethods::GetCandidates(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetCandidates(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result = json::array();
     // Would need to query NeoToken native contract
     return result;
 }
 
-nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     (void)neoSystem;
     json result = json::array();
@@ -410,7 +651,7 @@ nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<neo::NeoSystem> ne
     return result;
 }
 
-nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -419,7 +660,7 @@ nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<neo::NeoSystem> neoSystem
     return false;
 }
 
-nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -442,7 +683,7 @@ nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<neo::NeoSystem> neoSy
     return result;
 }
 
-nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -456,7 +697,7 @@ nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<neo::NeoSystem> neoS
     return result;
 }
 
-nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -465,7 +706,7 @@ nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<neo::NeoSystem> neoS
     return true;
 }
 
-nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<neo::NeoSystem> neoSystem,
+nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<node::NeoSystem> neoSystem,
                                                 const nlohmann::json& params)
 {
     if (params.empty())
@@ -482,7 +723,7 @@ nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<neo::NeoSystem> 
     return result;
 }
 
-nlohmann::json RPCMethods::GetStateRoot(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetStateRoot(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     // Placeholder: return null state root when not wired
     nlohmann::json result;
@@ -491,7 +732,7 @@ nlohmann::json RPCMethods::GetStateRoot(std::shared_ptr<neo::NeoSystem> neoSyste
     return result;
 }
 
-nlohmann::json RPCMethods::GetState(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     // Expected params: [contractHash, key]
     if (params.size() < 2) throw std::runtime_error("Missing required parameters");

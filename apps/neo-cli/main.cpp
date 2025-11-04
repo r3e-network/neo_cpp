@@ -19,7 +19,6 @@
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/network/p2p_server.h>
-#include <neo/persistence/rocksdb_store.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/wallets/nep6/nep6_wallet.h>

@@ -469,7 +469,7 @@ private:
     io::JsonValue GetConnectionCount(const io::JsonValue& params)
     {
         ValidateParamCount(params, 0, 0);
-        return io::JsonValue::CreateNumber(local_node_ ? local_node_->GetConnectedPeersCount() : 0);
+        return io::JsonValue::CreateNumber(local_node_ ? local_node_->GetConnectedCount() : 0);
     }
     
     io::JsonValue GetPeers(const io::JsonValue& params)
@@ -477,12 +477,32 @@ private:
         ValidateParamCount(params, 0, 0);
         
         auto peers = io::JsonValue::CreateObject();
+
+        auto connected = io::JsonValue::CreateArray();
+        if (local_node_)
+        {
+            for (const auto& remote : local_node_->GetConnectedPeers())
+            {
+                if (!remote)
+                {
+                    continue;
+                }
+
+                auto peerJson = io::JsonValue::CreateObject();
+                auto endpoint = remote->GetRemoteEndPoint();
+                peerJson.AddMember("address", endpoint.GetAddress().ToString());
+                peerJson.AddMember("port", static_cast<uint64_t>(endpoint.GetPort()));
+                peerJson.AddMember("useragent", remote->GetUserAgent());
+                peerJson.AddMember("startheight", static_cast<uint64_t>(remote->GetLastBlockIndex()));
+                peerJson.AddMember("connected", remote->IsConnected());
+                connected.PushBack(peerJson);
+            }
+        }
+
         peers.AddMember("unconnected", io::JsonValue::CreateArray());
         peers.AddMember("bad", io::JsonValue::CreateArray());
-        peers.AddMember("connected", io::JsonValue::CreateArray());
-        
-        // Get peer information from LocalNode P2P connection manager
-        
+        peers.AddMember("connected", connected);
+
         return peers;
     }
     

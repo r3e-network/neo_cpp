@@ -8,7 +8,6 @@
 #include <neo/consensus/dbft_consensus.h>
 #include <neo/node/neo_node.h>
 #include <neo/rpc/rpc_server.h>
-#include <neo/persistence/rocksdb_store.h>
 #include <neo/protocol_settings.h>
 // #include <neo/persistence/store_provider.h> // File not found
 #include <neo/plugins/plugin.h>
@@ -136,20 +135,6 @@ int main(int argc, char* argv[])
 
     if (settings.find("WalletPath") == settings.end())
         settings["WalletPath"] = "wallet.json";
-
-    // Create store provider
-    std::shared_ptr<persistence::RocksDbStore> store;
-    try
-    {
-        persistence::RocksDbConfig dbConfig;
-        dbConfig.db_path = settings["DataPath"];
-        store = std::make_shared<RocksDbStore>(dbConfig);
-    }
-    catch (const std::exception& ex)
-    {
-        std::cerr << "Failed to create store provider: " << ex.what() << std::endl;
-        return 1;
-    }
 
     // Create node
     try

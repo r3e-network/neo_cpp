@@ -6,17 +6,14 @@
  * @copyright MIT License
  */
 
-#include <neo/logging/logger.h>
 #include <neo/node/neo_system.h>
-#include <neo/persistence/rocksdb_store.h>
-#include <neo/smartcontract/native/contract_management.h>
-#include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/policy_contract.h>
-#include <neo/smartcontract/native/role_management.h>
-#include <neo/persistence/memory_store.h>
+#include <neo/smartcontract/native/native_contract_manager.h>
+#include <neo/network/ip_address.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/channels_config.h>
 
-#include <chrono>
+#include <algorithm>
+#include <cctype>
 #include <stdexcept>
 
 namespace neo::node
@@ -39,57 +36,87 @@ NeoSystem::~NeoSystem() { Stop(); }
 
 bool NeoSystem::Start()
 {
-    if (running_)
-    {
-        return true;
-    }
+    if (running_) return true;
 
     try
     {
-        // Initialize storage
-        if (!InitializeStorage())
+        std::string provider = storageEngine_;
+        if (provider.empty()) provider = "memory";
+        std::string normalized = provider;
+        std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                       [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+        if (normalized == "rocksdbstore")
         {
-            return false;
+            provider = "rocksdb";
+        }
+        else if (normalized == "leveldbstore")
+        {
+            provider = "leveldb";
+        }
+        else if (normalized == "memorystore")
+        {
+            provider = "memory";
+        }
+        else if (normalized == "file" || normalized == "filestore" || normalized == "filestoreprovider")
+        {
+            provider = "file";
         }
 
-        // Initialize blockchain
-        if (!InitializeBlockchain())
+        ledgerSystem_ = std::make_shared<ledger::NeoSystem>(protocolSettings_, provider, storePath_);
+
+        if (!networkConfig_)
         {
-            CleanupStorage();
-            return false;
+            network::p2p::ChannelsConfig defaultConfig;
+            defaultConfig.SetMinDesiredConnections(10);
+            defaultConfig.SetMaxConnections(40);
+            defaultConfig.SetMaxConnectionsPerAddress(3);
+            const auto& seeds = protocolSettings_->GetSeedList();
+            if (!seeds.empty())
+            {
+                std::vector<network::IPEndPoint> endpoints;
+                endpoints.reserve(seeds.size());
+                for (const auto& seed : seeds)
+                {
+                    network::IPEndPoint endpoint;
+                    if (network::IPEndPoint::TryParse(seed, endpoint))
+                    {
+                        endpoints.push_back(endpoint);
+                    }
+                    else
+                    {
+                        // Fall back to default port if only host provided
+                        endpoints.emplace_back(seed, static_cast<uint16_t>(10333));
+                    }
+                }
+
+                if (!endpoints.empty())
+                {
+                    defaultConfig.SetSeedList(endpoints);
+                    defaultConfig.SetTcp(network::IPEndPoint(network::IPAddress::Any(), endpoints.front().GetPort()));
+                }
+            }
+            networkConfig_ = defaultConfig;
         }
 
-        // Initialize memory pool
-        if (!InitializeMemoryPool())
+        if (networkConfig_)
         {
-            CleanupStorage();
-            return false;
+            ledgerSystem_->SetNetworkConfig(*networkConfig_);
         }
+        ledgerSystem_->Start();
 
-        // Initialize native contracts
-        if (!InitializeNativeContracts())
-        {
-            CleanupStorage();
-            return false;
-        }
-
-        // Initialize networking
-        if (!InitializeNetworking())
-        {
-            CleanupNativeContracts();
-            CleanupStorage();
-            return false;
-        }
+        blockchain_ = ledgerSystem_->GetBlockchain();
+        memoryPool_ = ledgerSystem_->GetMemoryPool();
+        localNode_ = ledgerSystem_->GetLocalNode();
+        p2pServer_.reset();
 
         running_ = true;
         return true;
     }
-    catch (const std::exception& e)
+    catch (const std::exception&)
     {
-        // Cleanup on failure
-        CleanupNetworking();
-        CleanupNativeContracts();
-        CleanupStorage();
+        ledgerSystem_.reset();
+        blockchain_.reset();
+        memoryPool_.reset();
         return false;
     }
 }
@@ -103,12 +130,17 @@ void NeoSystem::Stop()
 
     running_ = false;
 
-    // Cleanup in reverse order of initialization
-    CleanupNetworking();
-    CleanupNativeContracts();
-    CleanupStorage();
+    if (ledgerSystem_)
+    {
+        ledgerSystem_->Stop();
+    }
 
-    // Clear callbacks
+    ledgerSystem_.reset();
+    blockchain_.reset();
+    memoryPool_.reset();
+    localNode_.reset();
+    p2pServer_.reset();
+
     std::lock_guard<std::mutex> lock(callbackMutex_);
     blockPersistCallbacks_.clear();
 }
@@ -123,35 +155,57 @@ std::shared_ptr<ledger::MemoryPool> NeoSystem::GetMemoryPool() const { return me
 
 std::shared_ptr<network::P2PServer> NeoSystem::GetP2PServer() const { return p2pServer_; }
 
-std::shared_ptr<persistence::DataCache> NeoSystem::GetDataCache() const { return dataCache_; }
+std::shared_ptr<network::p2p::LocalNode> NeoSystem::GetLocalNode() const { return localNode_; }
+
+std::shared_ptr<persistence::DataCache> NeoSystem::GetDataCache() const
+{
+    return ledgerSystem_ ? ledgerSystem_->GetStoreView() : nullptr;
+}
+
+void NeoSystem::SetNetworkConfig(const network::p2p::ChannelsConfig& config)
+{
+    networkConfig_ = config;
+    if (ledgerSystem_)
+    {
+        ledgerSystem_->SetNetworkConfig(config);
+        localNode_ = ledgerSystem_->GetLocalNode();
+    }
+}
 
 std::unique_ptr<smartcontract::ApplicationEngine> NeoSystem::CreateApplicationEngine(
     smartcontract::TriggerType trigger, const io::ISerializable* container, const ledger::Block* persistingBlock,
     int64_t gas)
 {
-    return std::make_unique<smartcontract::ApplicationEngine>(trigger, container, dataCache_, persistingBlock, gas);
+    auto snapshot = ledgerSystem_ ? ledgerSystem_->GetStoreView() : nullptr;
+    return std::make_unique<smartcontract::ApplicationEngine>(trigger, container, snapshot, persistingBlock, gas);
 }
 
 void NeoSystem::RegisterNativeContract(std::shared_ptr<smartcontract::native::NativeContract> contract)
 {
-    if (!contract)
-    {
-        return;
-    }
+    if (!contract) return;
 
-    nativeContracts_.push_back(contract);
-    // nativeContractMap_[contract->GetHash()] = contract.get();
+    smartcontract::native::NativeContractManager::GetInstance().RegisterContract(contract);
 }
 
 smartcontract::native::NativeContract* NeoSystem::GetNativeContract(const io::UInt160& hash) const
 {
-    auto it = nativeContractMap_.find(hash);
-    return (it != nativeContractMap_.end()) ? it->second : nullptr;
+    if (ledgerSystem_)
+    {
+        return ledgerSystem_->GetNativeContract(hash);
+    }
+    auto& manager = smartcontract::native::NativeContractManager::GetInstance();
+    auto contract = manager.GetContract(hash);
+    return contract.get();
 }
 
 std::vector<std::shared_ptr<smartcontract::native::NativeContract>> NeoSystem::GetNativeContracts() const
 {
-    return nativeContracts_;
+    if (ledgerSystem_)
+    {
+        return ledgerSystem_->GetNativeContracts();
+    }
+    auto& manager = smartcontract::native::NativeContractManager::GetInstance();
+    return manager.GetContracts();
 }
 
 uint32_t NeoSystem::GetCurrentBlockHeight() const { return blockchain_ ? blockchain_->GetHeight() : 0; }
@@ -163,40 +217,23 @@ io::UInt256 NeoSystem::GetCurrentBlockHash() const
 
 bool NeoSystem::RelayTransaction(std::shared_ptr<ledger::Transaction> transaction)
 {
-    if (!transaction || !memoryPool_ || !p2pServer_)
+    if (!transaction || !memoryPool_)
     {
         return false;
     }
 
-    // Add to memory pool
-    // auto result = memoryPool_->TryAdd(transaction);
-    // if (result != ledger::VerifyResult::Succeed)
-    // {
-    //     return false;
-    // }
-
-    // Broadcast to network
-    // p2pServer_->BroadcastTransaction(transaction);
-    return true;
+    return memoryPool_->TryAdd(*transaction);
 }
 
 bool NeoSystem::RelayBlock(std::shared_ptr<ledger::Block> block)
 {
-    if (!block || !blockchain_ || !p2pServer_)
+    if (!block || !blockchain_)
     {
         return false;
     }
 
-    // Add to blockchain
-    // auto result = blockchain_->OnNewBlock(*block);
-    // if (result != ledger::VerifyResult::Succeed)
-    // {
-    //     return false;
-    // }
-
-    // Broadcast to network
-    // p2pServer_->BroadcastBlock(block);
-    return true;
+    auto result = blockchain_->OnNewBlock(block);
+    return result == ledger::VerifyResult::Succeed;
 }
 
 int32_t NeoSystem::RegisterBlockPersistCallback(std::function<void(std::shared_ptr<ledger::Block>)> callback)
@@ -216,6 +253,7 @@ void NeoSystem::UnregisterBlockPersistCallback(int32_t callbackId)
 std::string NeoSystem::GetSystemStats() const
 {
     // Return JSON-formatted system statistics
+    auto poolCount = memoryPool_ ? memoryPool_->GetSize() : 0;
     return R"({
             "blockchain": {
                 "height": )" +
@@ -225,11 +263,13 @@ std::string NeoSystem::GetSystemStats() const
             },
             "memoryPool": {
                 "count": )" +
-           std::to_string(0) + R"(
+           std::to_string(poolCount) + R"(
             },
             "network": {
                 "connectedPeers": )" +
-           std::to_string(0) + R"(
+           std::to_string(localNode_ ? localNode_->GetConnectedCount() : 0U) + R"(,
+                "listeningPort": )" +
+           std::to_string(localNode_ ? localNode_->GetPort() : 0) + R"(
             },
             "system": {
                 "running": )" +
@@ -240,137 +280,4 @@ std::string NeoSystem::GetSystemStats() const
         })";
 }
 
-bool NeoSystem::InitializeStorage()
-{
-    try
-    {
-        // Prefer RocksDB (aliased as LevelDBStore when RocksDB is available)
-        if (storageEngine_ == "RocksDB" || storageEngine_ == "LevelDB")
-        {
-#ifdef NEO_HAS_ROCKSDB
-            // Use RocksDbStore via LevelDBStore alias for compatibility
-            auto store = std::make_shared<persistence::LevelDBStore>(persistence::RocksDbConfig{.db_path = storePath_});
-            if (!store->Open())
-            {
-                return false;
-            }
-            // Hold underlying store and wrap in a StoreCache view
-            store_impl_ = std::static_pointer_cast<persistence::IStore>(store);
-            dataCache_ = std::make_shared<persistence::StoreCache>(*store_impl_);
-#else
-            // Fallback: use a memory-backed store cache
-            auto memStore = std::make_shared<persistence::MemoryStore>();
-            store_impl_ = std::static_pointer_cast<persistence::IStore>(memStore);
-            dataCache_ = std::make_shared<persistence::StoreCache>(*store_impl_);
-#endif
-        }
-        else
-        {
-            // Fallback to in-memory for unknown storage engine strings
-            auto memStore2 = std::make_shared<persistence::MemoryStore>();
-            store_impl_ = std::static_pointer_cast<persistence::IStore>(memStore2);
-            dataCache_ = std::make_shared<persistence::StoreCache>(*store_impl_);
-        }
-
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        return false;
-    }
-}
-
-bool NeoSystem::InitializeBlockchain()
-{
-    try
-    {
-        blockchain_ = nullptr; // Not wired in this minimal node build
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        return false;
-    }
-}
-
-bool NeoSystem::InitializeMemoryPool()
-{
-    try
-    {
-        memoryPool_ = std::make_shared<ledger::MemoryPool>();
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        return false;
-    }
-}
-
-bool NeoSystem::InitializeNetworking()
-{
-    try
-    {
-        // Networking disabled in minimal configuration
-        p2pServer_.reset();
-
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        return false;
-    }
-}
-
-bool NeoSystem::InitializeNativeContracts()
-{
-    try
-    {
-        // Initialize all native contracts
-        auto gasToken = smartcontract::native::GasToken::GetInstance();
-        auto neoToken = smartcontract::native::NeoToken::GetInstance();
-        auto policyContract = smartcontract::native::PolicyContract::GetInstance();
-        auto roleManagement = smartcontract::native::RoleManagement::GetInstance();
-        auto contractManagement = smartcontract::native::ContractManagement::GetInstance();
-
-        RegisterNativeContract(gasToken);
-        RegisterNativeContract(neoToken);
-        RegisterNativeContract(policyContract);
-        RegisterNativeContract(roleManagement);
-        RegisterNativeContract(contractManagement);
-
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        return false;
-    }
-}
-
-void NeoSystem::CleanupStorage()
-{
-    if (dataCache_)
-    {
-        // Stop storage if it has a Stop method
-        dataCache_.reset();
-    }
-    if (store_impl_)
-    {
-        store_impl_.reset();
-    }
-}
-
-void NeoSystem::CleanupNetworking()
-{
-    if (p2pServer_)
-    {
-        // p2pServer_->Stop();
-        p2pServer_.reset();
-    }
-}
-
-void NeoSystem::CleanupNativeContracts()
-{
-    nativeContracts_.clear();
-    nativeContractMap_.clear();
-}
 }  // namespace neo::node

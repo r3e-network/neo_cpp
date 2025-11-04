@@ -222,53 +222,22 @@ class JsonWriter
     /**
      * @brief Writes the start of an array to the JSON.
      */
-    void WriteStartArray()
-    {
-        if (!currentPropertyName_.empty())
-        {
-            json_[currentPropertyName_] = nlohmann::json::array();
-            currentArray_ = &json_[currentPropertyName_];
-            currentPropertyName_.clear();
-        }
-        else
-        {
-            json_ = nlohmann::json::array();
-            currentArray_ = &json_;
-        }
-    }
+    void WriteStartArray();
 
     /**
      * @brief Writes the end of an array to the JSON.
      */
-    void WriteEndArray() { currentArray_ = nullptr; }
+    void WriteEndArray();
 
     /**
      * @brief Writes the start of an object to the JSON.
      */
-    void WriteStartObject()
-    {
-        if (currentArray_ != nullptr)
-        {
-            currentArray_->push_back(nlohmann::json::object());
-            currentObject_ = &currentArray_->back();
-        }
-        else if (!currentPropertyName_.empty())
-        {
-            json_[currentPropertyName_] = nlohmann::json::object();
-            currentObject_ = &json_[currentPropertyName_];
-            currentPropertyName_.clear();
-        }
-        else
-        {
-            json_ = nlohmann::json::object();
-            currentObject_ = &json_;
-        }
-    }
+    void WriteStartObject();
 
     /**
      * @brief Writes the end of an object to the JSON.
      */
-    void WriteEndObject() { currentObject_ = nullptr; }
+    void WriteEndObject();
 
     /**
      * @brief Writes an array to the JSON.

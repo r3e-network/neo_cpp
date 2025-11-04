@@ -156,6 +156,11 @@ class Signer : public io::ISerializable, public io::IJsonSerializable
     void SetRules(const std::vector<WitnessRule>& rules);
 
     /**
+     * @brief Returns all witness rules implied by the current scopes.
+     */
+    std::vector<WitnessRule> GetAllRules() const;
+
+    /**
      * @brief Serializes the Signer to a binary writer.
      * @param writer The binary writer.
      */

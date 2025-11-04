@@ -7,6 +7,7 @@
  */
 
 #include <neo/consensus/consensus_message.h>
+#include <neo/consensus/consensus_service.h>
 #include <neo/core/logging.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
@@ -154,7 +155,8 @@ void LocalNode::ProcessConsensusMessage(RemoteNode* remoteNode, const payloads::
 {
     LOG_TRACE("Processing consensus message");
 
-    // Get consensus service
+    (void)remoteNode;
+
     auto consensus = GetConsensusService();
     if (!consensus)
     {
@@ -162,48 +164,7 @@ void LocalNode::ProcessConsensusMessage(RemoteNode* remoteNode, const payloads::
         return;
     }
 
-    // Deserialize consensus message from payload data
-    auto data = payload.GetData();
-    if (data.empty())
-    {
-        LOG_WARNING("Empty consensus message data");
-        return;
-    }
-
-    // Forward to consensus service for processing
-    if (consensus)
-    {
-        try
-        {
-            // Process consensus message
-            consensus::ConsensusMessage consensusMsg(consensus::ConsensusMessageType::PrepareRequest);
-            io::ByteSpan span(data.Data(), data.Size());
-            io::BinaryReader reader(span);
-            consensusMsg.Deserialize(reader);
-            
-            // Validate the message
-            // Note: Verify() method needs to be implemented
-            bool isValid = true; // Placeholder for validation
-            if (isValid)
-            {
-                // Forward to consensus service (when implemented)
-                // consensus->OnConsensusMessage(consensusMsg);
-                LOG_DEBUG("Consensus message received");
-                
-                // Relay to other nodes if needed
-                // RelayExtensiblePayload would need to be implemented
-                LOG_DEBUG("Would relay consensus message if implemented");
-            }
-            else
-            {
-                LOG_WARNING("Invalid consensus message received");
-            }
-        }
-        catch (const std::exception& e)
-        {
-            LOG_WARNING("Failed to process consensus message: {}", e.what());
-        }
-    }
+    consensus->HandlePayload(payload);
 }
 
 void LocalNode::ProcessStateServiceMessage(RemoteNode* remoteNode, const payloads::ExtensiblePayload& payload)
@@ -343,6 +304,19 @@ void LocalNode::RelayTransaction(std::shared_ptr<ledger::Transaction> transactio
         {
             peer->SendInv(InventoryType::Transaction, hashes);
         }
+    }
+}
+
+void LocalNode::RelayExtensiblePayload(std::shared_ptr<payloads::ExtensiblePayload> payload)
+{
+    if (!payload) return;
+
+    auto peers = GetConnectedNodes();
+    for (auto* peer : peers)
+    {
+        if (!peer->IsHandshaked()) continue;
+
+        peer->Send(Message::Create(MessageCommand::Extensible, std::static_pointer_cast<IPayload>(payload)));
     }
 }
 

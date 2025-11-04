@@ -65,3 +65,20 @@ set_tests_properties(smartcontract_native_complete PROPERTIES TIMEOUT 60)
 set_tests_properties(smartcontract_nep_complete PROPERTIES TIMEOUT 60)
 
 neo_add_test(test_application_engine_stack test_application_engine_stack.cpp)
+
+add_executable(test_application_engine_committee test_application_engine_committee.cpp)
+target_link_libraries(test_application_engine_committee
+    PRIVATE
+        neo_cpp
+        gtest
+        gtest_main
+)
+
+target_include_directories(test_application_engine_committee
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/tests/include
+)
+
+add_test(NAME smartcontract_committee_helpers COMMAND test_application_engine_committee)
+set_tests_properties(smartcontract_committee_helpers PROPERTIES TIMEOUT 30)

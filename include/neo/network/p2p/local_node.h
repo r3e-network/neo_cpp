@@ -49,6 +49,11 @@
 #include <unordered_map>
 #include <vector>
 
+namespace neo::consensus
+{
+class ConsensusService;
+}
+
 namespace neo::network::p2p
 {
 /**
@@ -111,6 +116,12 @@ class LocalNode
     uint32_t GetNonce() const;
 
     /**
+     * @brief Gets the listening port for the local node.
+     * @return The TCP listening port if available, otherwise 0.
+     */
+    uint16_t GetPort() const;
+
+    /**
      * @brief Gets the connected remote nodes.
      * @return The connected remote nodes.
      */
@@ -121,6 +132,18 @@ class LocalNode
      * @return The number of connected remote nodes.
      */
     size_t GetConnectedCount() const;
+
+    /**
+     * @brief Gets the number of connected remote nodes (compatibility alias).
+     * @return The number of connected remote nodes.
+     */
+    size_t GetConnectedPeersCount() const { return GetConnectedCount(); }
+
+    /**
+     * @brief Gets the connected peers as shared pointers.
+     * @return Vector of connected peers.
+     */
+    std::vector<std::shared_ptr<RemoteNode>> GetConnectedPeers() const;
 
     /**
      * @brief Creates a version payload for the local node.
@@ -147,6 +170,11 @@ class LocalNode
      * @brief Stops the local node.
      */
     void Stop();
+
+    /**
+     * @brief Checks whether the local node is currently running.
+     */
+    bool IsRunning() const { return running_.load(); }
 
     /**
      * @brief Connects to a remote node.
@@ -551,6 +579,7 @@ class LocalNode
      */
     void RelayBlock(std::shared_ptr<ledger::Block> block);
     void RelayTransaction(std::shared_ptr<ledger::Transaction> transaction);
+    void RelayExtensiblePayload(std::shared_ptr<payloads::ExtensiblePayload> payload);
 
     /**
      * @brief Request blocks from a remote node
@@ -566,8 +595,10 @@ class LocalNode
     /**
      * @brief Get consensus and state services
      */
-    std::shared_ptr<class ConsensusService> GetConsensusService() const { return consensusService_; }
+    std::shared_ptr<consensus::ConsensusService> GetConsensusService() const { return consensusService_; }
     std::shared_ptr<class StateService> GetStateService() const { return stateService_; }
+
+    void SetConsensusService(std::shared_ptr<consensus::ConsensusService> service) { consensusService_ = service; }
 
    private:
     LocalNode();
@@ -585,8 +616,9 @@ class LocalNode
     std::unordered_map<std::string, std::unique_ptr<RemoteNode>> connectedNodes_;
     mutable std::mutex connectedNodesMutex_;
     size_t maxConnections_;
+    uint16_t listeningPort_{0};
 
-    std::shared_ptr<class ConsensusService> consensusService_;
+    std::shared_ptr<consensus::ConsensusService> consensusService_;
     std::shared_ptr<class StateService> stateService_;
     std::atomic<bool> running_;
 

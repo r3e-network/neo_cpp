@@ -14,6 +14,7 @@ add_library(neo_core OBJECT
     fixed8.cpp
     neo_system.cpp
     neo_system_factory.cpp  # Factory for proper NeoSystem initialization
+    configuration_manager.cpp
     logging.cpp
     common_logging.cpp     # Common logging implementation
     exceptions.cpp         # Comprehensive exception framework

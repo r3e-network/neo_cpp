@@ -17,10 +17,6 @@ namespace node
 {
 class NeoSystem;
 }
-namespace persistence
-{
-class RocksDbStore;
-}
 namespace ledger
 {
 class Blockchain;
@@ -125,7 +121,6 @@ class CLIService
 
     // Core components - using shared_ptr to avoid incomplete type issues
     std::shared_ptr<node::NeoSystem> neo_system_;
-    std::unique_ptr<persistence::RocksDbStore> store_;
     std::unique_ptr<network::P2PServer> p2p_server_;
     std::unique_ptr<rpc::RpcServer> rpc_server_;
     std::unique_ptr<consensus::DbftConsensus> consensus_;
@@ -151,7 +146,6 @@ class CLIService
     void InitializeLogging();
     void InitializeMetrics();
     void InitializeHealthChecks();
-    void InitializeStorage();
     void InitializeNeoSystem();
     void InitializeNetwork();
     void InitializeRPC();

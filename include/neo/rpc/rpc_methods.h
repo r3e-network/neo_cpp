@@ -8,11 +8,14 @@
 
 #pragma once
 
+#include <neo/consensus/consensus_service.h>
 #include <neo/io/json.h>
-#include <neo/core/neo_system.h>
+#include <neo/node/neo_system.h>
 
 #include <memory>
+#include <optional>
 #include <string>
+#include <vector>
 
 // Forward declaration to avoid heavy includes
 namespace neo { namespace smartcontract { class ContractState; } }
@@ -31,7 +34,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetVersion(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetVersion(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the block count.
@@ -39,7 +42,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetBlockCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetBlockCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets a block.
@@ -47,7 +50,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetBlock(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets a block hash.
@@ -55,7 +58,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetBlockHash(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets a block header.
@@ -63,7 +66,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetBlockHeader(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetBlockHeader(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the raw memory pool.
@@ -71,7 +74,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetRawMemPool(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets a raw transaction.
@@ -79,7 +82,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetRawTransaction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets a transaction height.
@@ -87,7 +90,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetTransactionHeight(std::shared_ptr<neo::NeoSystem> neoSystem,
+    static nlohmann::json GetTransactionHeight(std::shared_ptr<node::NeoSystem> neoSystem,
                                                const nlohmann::json& params);
 
     /**
@@ -96,7 +99,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json SendRawTransaction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json SendRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Invokes a function.
@@ -104,7 +107,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json InvokeFunction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json InvokeFunction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Invokes a script.
@@ -112,7 +115,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json InvokeScript(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json InvokeScript(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets a contract state.
@@ -120,7 +123,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetContractState(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetContractState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets unclaimed gas.
@@ -128,7 +131,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetUnclaimedGas(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetUnclaimedGas(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the connection count.
@@ -136,7 +139,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetConnectionCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetConnectionCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the peers.
@@ -144,7 +147,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetPeers(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetPeers(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the committee.
@@ -152,7 +155,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetCommittee(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetCommittee(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the validators.
@@ -160,7 +163,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetValidators(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetValidators(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the next block validators.
@@ -168,7 +171,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetNextBlockValidators(std::shared_ptr<neo::NeoSystem> neoSystem,
+    static nlohmann::json GetNextBlockValidators(std::shared_ptr<node::NeoSystem> neoSystem,
                                                  const nlohmann::json& params);
 
     /**
@@ -177,7 +180,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetBestBlockHash(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetBestBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets the block header count.
@@ -185,7 +188,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetBlockHeaderCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetBlockHeaderCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets storage items.
@@ -193,7 +196,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetStorage(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Finds storage items.
@@ -201,7 +204,19 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json FindStorage(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json FindStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+    /**
+     * @brief Returns the current consensus state snapshot.
+     * @param neoSystem The Neo system.
+     * @param params The parameters (unused).
+     * @return The result.
+     */
+    static nlohmann::json GetConsensusState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+    static void SetConsensusServiceOverrideForTesting(
+        std::optional<consensus::ConsensusService::Status> status,
+        std::vector<io::UInt160> validatorHashes = {});
 
     /**
      * @brief Gets validator candidates.
@@ -209,7 +224,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetCandidates(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetCandidates(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets native contracts.
@@ -217,7 +232,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json GetNativeContracts(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetNativeContracts(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Submits a block.
@@ -225,7 +240,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json SubmitBlock(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json SubmitBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Validates an address.
@@ -233,7 +248,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json ValidateAddress(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json ValidateAddress(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Traverses an iterator.
@@ -241,7 +256,15 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json TraverseIterator(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json TraverseIterator(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+    /**
+     * @brief Lists loaded plugins.
+     * @param neoSystem The Neo system (unused).
+     * @param params The parameters.
+     * @return The result.
+     */
+    static nlohmann::json ListPlugins(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Terminates a session.
@@ -249,7 +272,7 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json TerminateSession(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Invokes contract verification.
@@ -257,19 +280,19 @@ class RPCMethods
      * @param params The parameters.
      * @return The result.
      */
-    static nlohmann::json InvokeContractVerify(std::shared_ptr<neo::NeoSystem> neoSystem,
+    static nlohmann::json InvokeContractVerify(std::shared_ptr<node::NeoSystem> neoSystem,
                                                const nlohmann::json& params);
 
     // State service
     /**
      * @brief Gets state root for a given index.
      */
-    static nlohmann::json GetStateRoot(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetStateRoot(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Gets state for a given contract hash and key.
      */
-    static nlohmann::json GetState(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json GetState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
    private:
     /**

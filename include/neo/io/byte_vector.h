@@ -338,6 +338,20 @@ class ByteVector
     static ByteVector FromBase64String(const std::string& base64);
 
     /**
+     * @brief Creates a ByteVector filled with random bytes.
+     * @param size Number of bytes to generate.
+     * @return The random ByteVector.
+     */
+    static ByteVector GenerateRandom(size_t size);
+
+    /**
+     * @brief Creates a ByteVector from a string (byte-per-char).
+     * @param value The string value.
+     * @return The ByteVector containing the ASCII bytes.
+     */
+    static ByteVector FromString(const std::string& value);
+
+    /**
      * @brief Checks if this ByteVector is less than another ByteVector.
      * @param other The other ByteVector.
      * @return True if this ByteVector is less than the other ByteVector, false otherwise.

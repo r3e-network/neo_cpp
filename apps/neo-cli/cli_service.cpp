@@ -16,8 +16,10 @@
 #include <neo/monitoring/health_check.h>
 #include <neo/monitoring/prometheus_exporter.h>
 #include <neo/network/connection_manager.h>
+#include <neo/network/ip_address.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/channels_config.h>
 #include <neo/network/p2p_server.h>
-#include <neo/persistence/rocksdb_store.h>
 #include <neo/rpc/rate_limiter.h>
 #include <neo/rpc/rpc_server.h>
 
@@ -47,7 +49,6 @@ void CLIService::Initialize()
     InitializeLogging();
     InitializeMetrics();
     InitializeHealthChecks();
-    InitializeStorage();
     InitializeNeoSystem();
     InitializeNetwork();
 
@@ -78,7 +79,6 @@ CLIService::~CLIService()
     p2p_server_ = nullptr;
     rpc_server_ = nullptr;
     consensus_ = nullptr;
-    store_ = nullptr;
 }
 
 void CLIService::Start()
@@ -359,21 +359,6 @@ void CLIService::InitializeLogging()
     // core::LogManager::Initialize(log_path, console_output);
 }
 
-void CLIService::InitializeStorage()
-{
-    auto engine = config_["Storage"]["Engine"].get<std::string>();
-    auto path = config_["Storage"]["Path"].get<std::string>();
-
-    if (engine == "RocksDBStore")
-    {
-        store_ = std::make_unique<persistence::RocksDbStore>(persistence::RocksDbConfig{path});
-    }
-    else
-    {
-        throw std::runtime_error("Unknown storage engine: " + engine);
-    }
-}
-
 void CLIService::InitializeNeoSystem()
 {
         auto magic = config_["Magic"].get<uint32_t>();
@@ -383,19 +368,61 @@ void CLIService::InitializeNeoSystem()
         settings->SetNetwork(magic);
 
         // Create Neo system
-        neo_system_ = std::make_shared<node::NeoSystem>(settings, "RocksDBStore", config_["Storage"]["Path"].get<std::string>());
+        auto engine = config_["Storage"]["Engine"].get<std::string>();
+        auto path = config_["Storage"]["Path"].get<std::string>();
+        neo_system_ = std::make_shared<node::NeoSystem>(settings, engine, path);
+
+        network::p2p::ChannelsConfig channelsConfig;
+        if (config_.contains("P2P") && config_["P2P"].contains("Port"))
+        {
+            auto port = config_["P2P"]["Port"].get<uint16_t>();
+            channelsConfig.SetTcp(network::IPEndPoint(network::IPAddress::Any(), port));
+
+            if (config_["P2P"].contains("SeedList"))
+            {
+                std::vector<network::IPEndPoint> seeds;
+                for (const auto& seed : config_["P2P"]["SeedList"])
+                {
+                    network::IPEndPoint endpoint;
+                    if (network::IPEndPoint::TryParse(seed.get<std::string>(), endpoint))
+                    {
+                        seeds.push_back(endpoint);
+                    }
+                }
+                if (!seeds.empty())
+                {
+                    channelsConfig.SetSeedList(seeds);
+                }
+            }
+
+            if (config_["P2P"].contains("MinDesiredConnections"))
+            {
+                channelsConfig.SetMinDesiredConnections(config_["P2P"]["MinDesiredConnections"].get<uint32_t>());
+            }
+            if (config_["P2P"].contains("MaxConnections"))
+            {
+                channelsConfig.SetMaxConnections(config_["P2P"]["MaxConnections"].get<uint32_t>());
+            }
+            if (config_["P2P"].contains("MaxConnectionsPerAddress"))
+            {
+                channelsConfig.SetMaxConnectionsPerAddress(
+                    config_["P2P"]["MaxConnectionsPerAddress"].get<uint32_t>());
+            }
+        }
+        neo_system_->SetNetworkConfig(channelsConfig);
     }
 
 void CLIService::InitializeNetwork()
 {
         auto port = config_["P2P"]["Port"].get<uint16_t>();
         auto ws_port = config_["P2P"]["WsPort"].get<uint16_t>();
+        auto bindAddress = config_["P2P"].value("BindAddress", std::string("0.0.0.0"));
 
         // P2PServer constructor expects different parameters
         if (!io_context_) {
             io_context_ = std::make_unique<boost::asio::io_context>();
         }
-        network::IPEndPoint endpoint("0.0.0.0", port);
+        network::IPEndPoint endpoint(bindAddress, port);
         std::string userAgent = "NEO-CPP/3.6.0";
         uint32_t startHeight = 0;
         p2p_server_ = std::make_unique<network::P2PServer>(*io_context_, endpoint, userAgent, startHeight);

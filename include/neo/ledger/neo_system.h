@@ -8,18 +8,21 @@
 
 #pragma once
 
-#include <neo/config/protocol_settings.h>
+#include <neo/common/contains_transaction_type.h>
+#include <neo/protocol_settings.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/persistence/data_cache.h>
-// #include <neo/network/p2p/local_node.h> // Disabled until network module is enabled
-#include <neo/common/contains_transaction_type.h>
+#include <neo/persistence/store_cache.h>
+#include <neo/network/p2p/channels_config.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
+#include <neo/smartcontract/native/native_contract.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/role_management.h>
 
 #include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -38,6 +41,20 @@ class LocalNode;
 namespace neo::smartcontract::native
 {
 class LedgerContract;
+class NeoToken;
+class GasToken;
+class RoleManagement;
+}
+
+namespace neo::persistence
+{
+class IStore;
+class StoreCache;
+}  // namespace neo::persistence
+
+namespace neo
+{
+class NeoSystem;
 }
 
 namespace neo::ledger
@@ -65,14 +82,16 @@ namespace neo::ledger
  * auto snapshot = system->GetStoreView();
  * ```
  */
-class NeoSystem
+class NeoSystem : public std::enable_shared_from_this<NeoSystem>
 {
    public:
     /**
      * @brief Constructs a new NeoSystem with the specified settings.
      * @param settings Protocol settings for the Neo network
      */
-    explicit NeoSystem(std::shared_ptr<config::ProtocolSettings> settings);
+    explicit NeoSystem(std::shared_ptr<neo::ProtocolSettings> settings);
+    NeoSystem(std::shared_ptr<neo::ProtocolSettings> settings, std::string storage_provider,
+              std::string storage_path);
 
     /**
      * @brief Destructor
@@ -101,7 +120,7 @@ class NeoSystem
      * @brief Gets the protocol settings.
      * @return Shared pointer to the protocol settings
      */
-    std::shared_ptr<config::ProtocolSettings> GetSettings() const;
+    std::shared_ptr<neo::ProtocolSettings> GetSettings() const;
 
     /**
      * @brief Gets a snapshot of the current store state.
@@ -155,6 +174,12 @@ class NeoSystem
     void Dispose();
 
     /**
+     * @brief Sets the P2P network configuration used when starting the local node.
+     * @param config Channels configuration describing listening ports and limits.
+     */
+    void SetNetworkConfig(const network::p2p::ChannelsConfig& config);
+
+    /**
      * @brief Gets the genesis block.
      * @return Shared pointer to the genesis block
      */
@@ -166,6 +191,12 @@ class NeoSystem
      * @return Pointer to the native contract or nullptr if not found
      */
     smartcontract::native::NativeContract* GetNativeContract(const io::UInt160& hash) const;
+
+    /**
+     * @brief Gets all registered native contracts.
+     * @return Vector of native contracts
+     */
+    std::vector<std::shared_ptr<smartcontract::native::NativeContract>> GetNativeContracts() const;
 
     /**
      * @brief Gets the maximum number of traceable blocks.
@@ -194,21 +225,20 @@ class NeoSystem
      */
     bool ContainsConflictHash(const io::UInt256& hash, const std::vector<io::UInt160>& signers) const;
 
-   private:
-    std::shared_ptr<config::ProtocolSettings> settings_;
+  private:
+    std::shared_ptr<neo::ProtocolSettings> settings_;
+    std::string storage_provider_;
+    std::string storage_path_;
+    std::shared_ptr<neo::NeoSystem> core_system_;
     std::shared_ptr<Blockchain> blockchain_;
     std::shared_ptr<MemoryPool> memory_pool_;
     std::shared_ptr<network::p2p::LocalNode> local_node_;
-    std::shared_ptr<smartcontract::native::LedgerContract> ledger_contract_;
+    mutable std::shared_ptr<smartcontract::native::LedgerContract> ledger_contract_;
     bool is_running_;
     bool is_disposed_;
+    std::optional<network::p2p::ChannelsConfig> channels_config_;
 
-    // Initialize components
-    void InitializeComponents();
-    void InitializeBlockchain();
-    void InitializeMemoryPool();
-    void InitializeLocalNode();
-    void InitializeLedgerContract();
+    std::string NormalizeProviderName(const std::string& provider) const;
 };
 
 }  // namespace neo::ledger

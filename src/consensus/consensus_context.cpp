@@ -352,9 +352,24 @@ std::shared_ptr<network::p2p::payloads::ExtensiblePayload> ConsensusContext::Mak
         }
         recovery->SetCommitMessages(commits);
 
+        // Include transactions in recovery message following original proposal order
+        std::vector<network::p2p::payloads::Neo3Transaction> transactions;
+        transactions.reserve(TransactionHashes.size());
+        for (const auto& hash : TransactionHashes)
+        {
+            auto tx_it = Transactions.find(hash);
+            if (tx_it != Transactions.end() && tx_it->second)
+            {
+                transactions.push_back(*tx_it->second);
+            }
+        }
+        recovery->SetTransactions(transactions);
+
         LOG_DEBUG(
-            "Prepared recovery message for view {} with {} change views, {} prepare reqs, {} prepare resps, {} commits",
-            ViewNumber, changeViews.size(), prepareRequests.size(), prepareResponses.size(), commits.size());
+            "Prepared recovery message for view {} with {} change views, {} prepare reqs, {} prepare resps, {} commits, "
+            "{} txs",
+            ViewNumber, changeViews.size(), prepareRequests.size(), prepareResponses.size(), commits.size(),
+            transactions.size());
     }
     catch (const std::exception& e)
     {

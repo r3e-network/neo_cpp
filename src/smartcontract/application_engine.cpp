@@ -8,10 +8,13 @@
 
 #include <neo/cryptography/hash.h>
 #include <neo/io/byte_span.h>
+#include <neo/ledger/witness_rule.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/vm/internal/byte_vector.h>
+#include <neo/vm/script_builder.h>
+#include <nlohmann/json.hpp>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/crypto_lib.h>
 #include <neo/smartcontract/native/gas_token.h>
@@ -28,7 +31,12 @@
 #include <neo/smartcontract/system_call_exception.h>
 #include <neo/smartcontract/transaction_verifier.h>
 #include <neo/vm/script.h>
+#include <neo/vm/internal/byte_span.h>
 
+#include <algorithm>
+#include <chrono>
+#include <cstring>
+#include <optional>
 #include <sstream>
 
 namespace neo::smartcontract
@@ -90,8 +98,8 @@ void ApplicationEngine::LoadScript(const std::vector<uint8_t>& script, int32_t o
 {
     io::UInt160 hash = cryptography::Hash::Hash160(io::ByteSpan(script.data(), script.size()));
 
-    vm::internal::ByteVector internalScript(script.begin(), script.end());
-    vm::ExecutionEngine::LoadScript(vm::Script(internalScript), offset);
+    vm::Script scriptObject{vm::internal::ByteSpan(script)};
+    vm::ExecutionEngine::LoadScript(scriptObject, offset);
 
     scriptHashes_.push_back(hash);
 }
@@ -183,29 +191,7 @@ void ApplicationEngine::AddGas(int64_t gas)
     gasConsumed_ += gas;
 }
 
-bool ApplicationEngine::CheckWitness(const io::UInt160& hash) const
-{
-    // Check if the hash is the current script hash
-    if (GetCurrentScriptHash() == hash) return true;
-
-    // Check if the hash is in the calling chain
-    for (const auto& scriptHash : scriptHashes_)
-    {
-        if (scriptHash == hash) return true;
-    }
-
-    // Check if the hash is in the transaction signers
-    auto tx = GetTransaction();
-    if (tx)
-    {
-        for (const auto& signer : tx->GetSigners())
-        {
-            if (signer == hash) return true;
-        }
-    }
-
-    return false;
-}
+bool ApplicationEngine::CheckWitness(const io::UInt160& hash) const { return CheckWitnessInternal(hash); }
 
 bool ApplicationEngine::CheckWitness(const io::UInt256& hash) const
 {
@@ -446,6 +432,311 @@ bool ApplicationEngine::IsHardforkEnabled(int hardfork) const
 {
     const uint32_t height = persistingBlock_ ? persistingBlock_->GetIndex() : 0;
     return protocolSettings_.IsHardforkEnabled(static_cast<Hardfork>(hardfork), height);
+}
+
+uint32_t ApplicationEngine::GetNetworkMagic() const { return protocolSettings_.GetNetwork(); }
+
+int64_t ApplicationEngine::GetInvocationCount(const io::UInt160& scriptHash) const
+{
+    auto it = invocationCounts_.find(scriptHash);
+    return it != invocationCounts_.end() ? it->second : 0;
+}
+
+void ApplicationEngine::SetInvocationCount(const io::UInt160& scriptHash, int64_t count)
+{
+    invocationCounts_[scriptHash] = count;
+}
+
+uint32_t ApplicationEngine::GetCurrentBlockHeight() const
+{
+    return persistingBlock_ ? persistingBlock_->GetIndex() : 0;
+}
+
+bool ApplicationEngine::IsCommitteeHash(const io::UInt256& hash) const
+{
+    auto resolve_committee_hash = [&]() -> std::optional<io::UInt160> {
+        if (snapshot_)
+        {
+            try
+            {
+                auto neoToken = native::NeoToken::GetInstance();
+                if (neoToken)
+                {
+                    auto committeeAddress = neoToken->GetCommitteeAddress(snapshot_);
+                    if (!committeeAddress.IsZero()) return committeeAddress;
+                }
+            }
+            catch (const std::exception&)
+            {
+                // Fallback to standby committee logic below
+            }
+        }
+
+        auto committee = GetCommittee();
+        if (committee.empty()) return std::nullopt;
+
+        auto script = CreateCommitteeMultiSigScript(committee);
+        if (script.IsEmpty()) return std::nullopt;
+
+        return cryptography::Hash::Hash160(io::ByteSpan(script.Data(), script.Size()));
+    };
+
+    const auto committeeHash = resolve_committee_hash();
+    if (!committeeHash) return false;
+
+    io::UInt160 target(io::ByteSpan(hash.Data(), io::UInt160::Size));
+    return target == *committeeHash;
+}
+
+bool ApplicationEngine::VerifyCommitteeConsensus(const io::UInt256& hash) const
+{
+    auto committeeHash = [&]() -> std::optional<io::UInt160> {
+        if (snapshot_)
+        {
+            try
+            {
+                auto neoToken = native::NeoToken::GetInstance();
+                if (neoToken)
+                {
+                    auto committeeAddress = neoToken->GetCommitteeAddress(snapshot_);
+                    if (!committeeAddress.IsZero()) return committeeAddress;
+                }
+            }
+            catch (const std::exception&)
+            {
+                // Fallback to standby committee
+            }
+        }
+
+        auto committee = GetCommittee();
+        if (committee.empty()) return std::nullopt;
+
+        auto script = CreateCommitteeMultiSigScript(committee);
+        if (script.IsEmpty()) return std::nullopt;
+
+        return cryptography::Hash::Hash160(io::ByteSpan(script.Data(), script.Size()));
+    }();
+
+    if (!committeeHash) return false;
+
+    io::UInt160 target(io::ByteSpan(hash.Data(), io::UInt160::Size));
+    if (target != *committeeHash) return false;
+
+    return CheckWitnessInternal(*committeeHash);
+}
+
+bool ApplicationEngine::VerifyMultiSignatureHash(const io::UInt256& hash) const
+{
+    const uint8_t* data = hash.Data();
+    io::ByteSpan span(data, io::UInt160::Size);
+    io::UInt160 scriptHash(span);
+    return CheckWitnessInternal(scriptHash);
+}
+
+bool ApplicationEngine::CheckWitnessInternal(const io::UInt160& hash) const
+{
+    if (hash == GetCallingScriptHash()) return true;
+
+    if (const auto* tx = GetTransaction())
+    {
+        const std::vector<ledger::Signer>* signersPtr = nullptr;
+        std::vector<ledger::Signer> oracleSigners;
+
+        const auto& attributes = tx->GetAttributes();
+        std::optional<uint64_t> oracleRequestId;
+        for (const auto& attribute : attributes)
+        {
+            if (!attribute || attribute->GetUsage() != ledger::TransactionAttribute::Usage::OracleResponse) continue;
+
+            const auto& data = attribute->GetData();
+            if (data.Size() >= sizeof(uint64_t) + 1)
+            {
+                uint64_t id = 0;
+                std::memcpy(&id, data.Data(), sizeof(uint64_t));
+                oracleRequestId = id;
+            }
+            break;
+        }
+
+        if (oracleRequestId && snapshot_)
+        {
+            auto oracleContract = native::OracleContract::GetInstance();
+            auto ledgerContract = native::LedgerContract::GetInstance();
+            if (oracleContract && ledgerContract)
+            {
+                try
+                {
+                    auto request = oracleContract->GetRequest(snapshot_, *oracleRequestId);
+                    auto originalTransaction = ledgerContract->GetTransaction(snapshot_, request.GetOriginalTxid());
+                    if (originalTransaction)
+                    {
+                        const auto& originalSigners = originalTransaction->GetSigners();
+                        oracleSigners.assign(originalSigners.begin(), originalSigners.end());
+                        signersPtr = &oracleSigners;
+                    }
+                }
+                catch (const std::exception&)
+                {
+                    // fall back to the current transaction's signers
+                }
+            }
+        }
+
+        if (!signersPtr)
+        {
+            signersPtr = &tx->GetSigners();
+        }
+
+        const auto& signers = *signersPtr;
+        auto signerIt = std::find_if(signers.begin(), signers.end(),
+                                     [&](const ledger::Signer& signer) { return signer.GetAccount() == hash; });
+        if (signerIt == signers.end()) return false;
+
+        auto rules = signerIt->GetAllRules();
+        for (const auto& rule : rules)
+        {
+            if (rule.Matches(*this))
+            {
+                return rule.GetAction() == ledger::WitnessRuleAction::Allow;
+            }
+        }
+
+        return false;
+    }
+
+    const auto* verifiable = dynamic_cast<const network::p2p::payloads::IVerifiable*>(container_);
+    if (!verifiable) return false;
+
+    ValidateCallFlags(CallFlags::ReadStates);
+    auto hashes = verifiable->GetScriptHashesForVerifying();
+    return std::find(hashes.begin(), hashes.end(), hash) != hashes.end();
+}
+
+std::vector<cryptography::ecc::ECPoint> ApplicationEngine::GetCommittee() const
+{
+    if (snapshot_)
+    {
+        try
+        {
+            auto neoToken = native::NeoToken::GetInstance();
+            if (neoToken)
+            {
+                auto committee = neoToken->GetCommittee(snapshot_);
+                if (!committee.empty())
+                {
+                    std::sort(committee.begin(), committee.end());
+                    return committee;
+                }
+            }
+        }
+        catch (const std::exception&)
+        {
+            // Fall through to standby committee
+        }
+    }
+
+    auto standby = protocolSettings_.GetStandbyCommittee();
+    std::vector<cryptography::ecc::ECPoint> ordered(standby.begin(), standby.end());
+    std::sort(ordered.begin(), ordered.end());
+    return ordered;
+}
+
+bool ApplicationEngine::IsCalledByEntry() const { return scriptHashes_.size() <= 1; }
+
+void ApplicationEngine::ValidateCallFlags(CallFlags required) const
+{
+    if (!HasFlag(required))
+    {
+        switch (required)
+        {
+            case CallFlags::ReadStates:
+                throw MissingFlagsException("CheckWitness", "ReadStates");
+            case CallFlags::WriteStates:
+                throw MissingFlagsException("CheckWitness", "WriteStates");
+            default:
+                throw MissingFlagsException("CheckWitness", "RequiredCallFlags");
+        }
+    }
+}
+
+bool ApplicationEngine::IsContractGroupMember(const cryptography::ecc::ECPoint& group) const
+{
+    ValidateCallFlags(CallFlags::ReadStates);
+
+    if (!snapshot_) return false;
+
+    const auto callingScript = GetCallingScriptHash();
+    if (callingScript.IsZero()) return false;
+
+    auto contractManagement = native::ContractManagement::GetInstance();
+    if (!contractManagement) return false;
+
+    auto contractState = contractManagement->GetContract(*snapshot_, callingScript);
+    if (!contractState) return false;
+
+    const auto& manifestJson = contractState->GetManifest();
+    if (manifestJson.empty()) return false;
+
+    try
+    {
+        auto document = nlohmann::json::parse(manifestJson);
+        if (!document.contains("groups")) return false;
+
+        for (const auto& entry : document["groups"])
+        {
+            if (!entry.contains("pubkey")) continue;
+            std::string pubkeyHex = entry["pubkey"].get<std::string>();
+            if (pubkeyHex.rfind("0x", 0) == 0)
+            {
+                pubkeyHex.erase(0, 2);
+            }
+
+            auto groupPoint = cryptography::ecc::ECPoint::FromHex(pubkeyHex);
+            if (groupPoint == group) return true;
+        }
+    }
+    catch (...)
+    {
+        return false;
+    }
+
+    return false;
+}
+
+void ApplicationEngine::Log(const std::string& message)
+{
+    auto scriptHash = GetCurrentScriptHash();
+    uint64_t timestamp =
+        static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                  std::chrono::system_clock::now().time_since_epoch())
+                                  .count());
+    logs_.emplace_back(scriptHash, message, timestamp);
+}
+
+io::ByteVector ApplicationEngine::CreateCommitteeMultiSigScript(
+    const std::vector<cryptography::ecc::ECPoint>& committee) const
+{
+    if (committee.empty()) return io::ByteVector();
+
+    std::vector<cryptography::ecc::ECPoint> ordered(committee.begin(), committee.end());
+    std::sort(ordered.begin(), ordered.end());
+
+    const auto memberCount = ordered.size();
+    const auto threshold = static_cast<int64_t>(memberCount - (memberCount - 1) / 2);
+
+    vm::ScriptBuilder builder;
+    builder.EmitPush(threshold);
+
+    for (const auto& member : ordered)
+    {
+        auto bytes = member.ToArray();
+        builder.EmitPush(io::ByteSpan(bytes.Data(), bytes.Size()));
+    }
+
+    builder.EmitPush(static_cast<int64_t>(memberCount));
+    builder.EmitSysCall("System.Crypto.CheckMultisig");
+
+    return builder.ToArray();
 }
 
 native::NativeContract* ApplicationEngine::GetNativeContract(const io::UInt160& hash) const

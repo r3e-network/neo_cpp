@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <neo/io/byte_span.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
@@ -18,6 +19,7 @@
 // Using Neo N3 transactions for consensus
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/consensus_state.h>
+#include <neo/consensus/recovery_message.h>
 #include <neo/core/logging.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 
@@ -27,6 +29,7 @@
 #include <map>
 #include <memory>
 #include <optional>
+#include <unordered_map>
 #include <thread>
 #include <vector>
 
@@ -55,7 +58,9 @@ struct ConsensusConfig
  */
 class DbftConsensus
 {
+    friend class ConsensusService;
    public:
+    using SignatureProvider = std::function<io::ByteVector(const io::ByteSpan&)>;
     using TransactionVerifier = std::function<bool(const network::p2p::payloads::Neo3Transaction&)>;
     using BlockPersister = std::function<bool(const std::shared_ptr<ledger::Block>&)>;
     using MessageBroadcaster = std::function<void(const ConsensusMessage&)>;
@@ -79,13 +84,19 @@ class DbftConsensus
     io::UInt160 node_id_;
     uint32_t validator_index_;
     std::vector<io::UInt160> validators_;
+    SignatureProvider signature_provider_;
+    std::unordered_map<io::UInt160, cryptography::ecc::ECPoint> validator_public_keys_;
+    std::atomic<bool> missing_signature_warning_emitted_{false};
 
     // Timing
     std::chrono::steady_clock::time_point view_started_;
     std::chrono::steady_clock::time_point last_block_time_;
+    std::chrono::steady_clock::time_point last_commit_relay_;
 
     // Consensus message tracking
     std::map<uint32_t, std::shared_ptr<CommitMessage>> commit_messages_;
+    std::unordered_map<uint32_t, io::ByteVector> commit_invocation_scripts_;
+    uint32_t last_broadcast_change_view_{0};
 
     // External dependencies
     std::shared_ptr<ledger::MemoryPool> mempool_;
@@ -116,6 +127,21 @@ class DbftConsensus
     void Stop();
 
     /**
+     * @brief Returns true if the consensus engine threads are running.
+     */
+    bool IsRunning() const { return running_.load(); }
+
+    /**
+     * @brief Primary index for the current view.
+     */
+    uint32_t GetPrimaryIndex() const;
+
+    /**
+     * @brief Validator index of this node.
+     */
+    uint32_t GetValidatorIndex() const { return validator_index_; }
+
+    /**
      * @brief Process incoming consensus message
      * @param message The consensus message to process
      * @return true if message was processed successfully
@@ -128,6 +154,7 @@ class DbftConsensus
      * @return true if transaction was added successfully
      */
     bool AddTransaction(const network::p2p::payloads::Neo3Transaction& tx);
+    void RemoveCachedTransaction(const io::UInt256& hash);
 
     /**
      * @brief Get current consensus state
@@ -140,6 +167,18 @@ class DbftConsensus
      * @param verifier Callback to verify transactions
      */
     void SetTransactionVerifier(TransactionVerifier verifier) { tx_verifier_ = verifier; }
+
+    /**
+     * @brief Inject validator public keys corresponding to configured script hashes.
+     * @param public_keys Validator ECPoints ordered by validator index.
+     */
+    void SetValidatorPublicKeys(const std::vector<cryptography::ecc::ECPoint>& public_keys);
+
+    /**
+     * @brief Provide a signing delegate used for commit payload signatures.
+     * @param provider Delegate that signs the supplied message hash.
+     */
+    void SetSignatureProvider(SignatureProvider provider);
 
     /**
      * @brief Set block persister callback
@@ -176,11 +215,17 @@ class DbftConsensus
     bool IsPrimary() const;
 
     /**
+     * @brief Check if this node is watch-only (not part of validator set)
+     * @return true if watch-only
+     */
+    bool IsWatchOnly() const;
+
+    /**
      * @brief Get the primary node index for given view
      * @param view_number View number
      * @return Primary node index
      */
-    uint32_t GetPrimaryIndex(uint32_t view_number) const;
+    uint32_t ComputePrimaryIndex(uint32_t view_number) const;
 
     /**
      * @brief Create and broadcast prepare request (primary only)
@@ -218,13 +263,17 @@ class DbftConsensus
     /**
      * @brief Request view change
      */
-    void RequestViewChange();
+    void RequestViewChange(ChangeViewReason reason = ChangeViewReason::Timeout);
 
     /**
      * @brief Process view change message
      * @param message View change message
      */
     void ProcessViewChange(const ViewChangeMessage& message);
+    void BroadcastChangeView(uint32_t new_view, ChangeViewReason reason);
+    void EvaluateExpectedView(uint32_t target_view);
+    std::shared_ptr<RecoveryMessage> BuildRecoveryMessage() const;
+    void RecordSentPayload(const ConsensusMessage& message, const ledger::Witness& witness);
 
     /**
      * @brief Check if we have enough prepare responses
@@ -237,12 +286,6 @@ class DbftConsensus
      * @return true if we have 2f+1 commits
      */
     bool HasEnoughCommits() const;
-
-    /**
-     * @brief Check if we have enough view changes
-     * @return true if we have f+1 view changes
-     */
-    bool HasEnoughViewChanges() const;
 
     /**
      * @brief Calculate f value (maximum Byzantine nodes)

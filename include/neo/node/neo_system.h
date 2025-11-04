@@ -10,6 +10,10 @@
 
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
+#include <neo/ledger/neo_system.h>
+#include <neo/network/p2p/local_node.h>
+#include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p_server.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/protocol_settings.h>
@@ -18,7 +22,10 @@
 
 #include <functional>
 #include <memory>
+#include <mutex>
 #include <string>
+#include <unordered_map>
+#include <optional>
 #include <vector>
 
 namespace neo::node
@@ -91,7 +98,12 @@ class NeoSystem
      * @brief Gets the local P2P node instance.
      * @return The local P2P node
      */
-    std::shared_ptr<network::P2PServer> GetLocalNode() const { return GetP2PServer(); }
+    std::shared_ptr<network::p2p::LocalNode> GetLocalNode() const;
+
+    /**
+     * @brief Sets the P2P channels configuration that should be used when starting the ledger system.
+     */
+    void SetNetworkConfig(const network::p2p::ChannelsConfig& config);
 
     /**
      * @brief Gets the P2P server instance
@@ -196,36 +208,19 @@ class NeoSystem
    private:
     // Core components
     std::shared_ptr<ProtocolSettings> protocolSettings_;
-    std::shared_ptr<persistence::DataCache> dataCache_;
-    std::shared_ptr<persistence::IStore> store_impl_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<ledger::MemoryPool> memoryPool_;
     std::shared_ptr<network::P2PServer> p2pServer_;
+    std::shared_ptr<network::p2p::LocalNode> localNode_;
+    std::optional<network::p2p::ChannelsConfig> networkConfig_;
+    std::shared_ptr<ledger::NeoSystem> ledgerSystem_;
 
-    // Native contracts
-    std::vector<std::shared_ptr<smartcontract::native::NativeContract>> nativeContracts_;
-    std::unordered_map<io::UInt160, smartcontract::native::NativeContract*> nativeContractMap_;
-
-    // System state
     bool running_;
     std::string storageEngine_;
     std::string storePath_;
 
-    // Callbacks
     std::unordered_map<int32_t, std::function<void(std::shared_ptr<ledger::Block>)>> blockPersistCallbacks_;
     int32_t nextCallbackId_;
     mutable std::mutex callbackMutex_;
-
-    // Initialization methods
-    bool InitializeStorage();
-    bool InitializeBlockchain();
-    bool InitializeMemoryPool();
-    bool InitializeNetworking();
-    bool InitializeNativeContracts();
-
-    // Cleanup methods
-    void CleanupStorage();
-    void CleanupNetworking();
-    void CleanupNativeContracts();
 };
 }  // namespace neo::node

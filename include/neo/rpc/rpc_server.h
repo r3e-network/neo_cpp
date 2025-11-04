@@ -29,7 +29,7 @@ namespace httplib {
 class Request;
 class Server;
 }
-namespace neo { class NeoSystem; }
+namespace neo::node { class NeoSystem; }
 
 namespace neo::rpc
 {
@@ -71,7 +71,7 @@ class RpcServer
     RpcConfig config_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<network::p2p::LocalNode> local_node_;
-    std::shared_ptr<NeoSystem> neo_system_;
+    std::shared_ptr<node::NeoSystem> neo_system_;
     std::shared_ptr<core::Logger> logger_;
     std::thread server_thread_;
    std::shared_ptr<httplib::Server> http_server_;
@@ -96,7 +96,7 @@ class RpcServer
     /**
      * @brief Construct RPC server with NeoSystem
      */
-    RpcServer(const RpcConfig& config, std::shared_ptr<NeoSystem> neo_system);
+    RpcServer(const RpcConfig& config, std::shared_ptr<node::NeoSystem> neo_system);
     
     /**
      * @brief Construct RPC server with dependencies

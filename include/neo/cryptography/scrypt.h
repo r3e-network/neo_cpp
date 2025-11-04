@@ -48,9 +48,5 @@ class Scrypt
     static std::vector<uint8_t> DeriveKey(const std::vector<uint8_t>& password, const std::vector<uint8_t>& salt,
                                           uint32_t n = 16384, uint32_t r = 8, uint32_t p = 8, uint32_t dkLen = 64);
 
-   private:
-    static void BlockMix(std::vector<uint8_t>& B, uint32_t r);
-    static void Salsa20_8(std::vector<uint8_t>& B);
-    static void XorBytes(std::vector<uint8_t>& dest, const std::vector<uint8_t>& src);
 };
 }  // namespace neo::cryptography

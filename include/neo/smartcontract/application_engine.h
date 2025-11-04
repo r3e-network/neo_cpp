@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
@@ -36,6 +37,12 @@
 namespace neo::smartcontract::native
 {
 class NativeContract;
+}
+
+namespace neo::ledger
+{
+class GroupCondition;
+class CalledByGroupCondition;
 }
 
 namespace neo::smartcontract
@@ -479,10 +486,13 @@ class ApplicationEngine : public vm::ExecutionEngine
      */
     void RegisterSystemCalls();
 
+    // Test accessor for unit tests.
+    friend class ApplicationEngineTestAccessor;
+
     // Helper methods for witness verification
     bool IsCalledByEntry() const;
-    bool IsInAllowedContracts(const ledger::Signer& signer, const io::UInt160& calling_script) const;
-    bool IsInAllowedGroups(const ledger::Signer& signer, const io::UInt160& calling_script) const;
+    bool IsContractGroupMember(const cryptography::ecc::ECPoint& group) const;
+    void ValidateCallFlags(CallFlags required) const;
     bool IsCommitteeHash(const io::UInt256& hash) const;
     bool VerifyCommitteeConsensus(const io::UInt256& hash) const;
     bool VerifyMultiSignatureHash(const io::UInt256& hash) const;
@@ -493,5 +503,9 @@ class ApplicationEngine : public vm::ExecutionEngine
     std::shared_ptr<ContractState> GetContract(const io::UInt160& scriptHash) const;
     io::ByteVector CreateCommitteeMultiSigScript(const std::vector<cryptography::ecc::ECPoint>& committee) const;
     bool IsMultiSignatureContract(const io::ByteVector& script) const;
+
+    friend class ledger::GroupCondition;
+    friend class ledger::CalledByGroupCondition;
+    friend class ledger::CalledByEntryCondition;
 };
 }  // namespace neo::smartcontract

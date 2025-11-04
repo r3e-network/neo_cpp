@@ -7,6 +7,7 @@
  */
 
 #include <neo/core/logging.h>
+#include <neo/persistence/file_store.h>
 #include <neo/persistence/memory_store.h>
 #include <neo/persistence/store_factory.h>
 
@@ -28,6 +29,10 @@ std::shared_ptr<IStoreProvider> StoreFactory::get_store_provider(const std::stri
     if (engine == "memory" || engine.empty())
     {
         return std::make_shared<MemoryStoreProvider>();
+    }
+    else if (engine == "file")
+    {
+        return std::make_shared<FileStoreProvider>();
     }
 #ifdef NEO_HAS_ROCKSDB
     else if (engine == "rocksdb")
@@ -60,6 +65,12 @@ std::shared_ptr<IStoreProvider> StoreFactory::get_store_provider(
     if (engine == "memory" || engine.empty())
     {
         return std::make_shared<MemoryStoreProvider>();
+    }
+    else if (engine == "file")
+    {
+        auto it = config.find("db_path");
+        std::string base = (it != config.end()) ? it->second : "./data/file-store";
+        return std::make_shared<FileStoreProvider>(base);
     }
 #ifdef NEO_HAS_ROCKSDB
     else if (engine == "rocksdb")

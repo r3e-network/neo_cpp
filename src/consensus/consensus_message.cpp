@@ -66,6 +66,7 @@ void ViewChangeMessage::Serialize(io::BinaryWriter& writer) const
     ConsensusMessage::Serialize(writer);
     writer.Write(new_view_number_);
     writer.Write(static_cast<int64_t>(timestamp_.time_since_epoch().count()));
+    writer.Write(static_cast<uint8_t>(reason_));
 }
 
 void ViewChangeMessage::Deserialize(io::BinaryReader& reader)
@@ -74,6 +75,7 @@ void ViewChangeMessage::Deserialize(io::BinaryReader& reader)
     new_view_number_ = reader.ReadUInt32();
     auto ticks = reader.ReadInt64();
     timestamp_ = std::chrono::system_clock::time_point(std::chrono::system_clock::duration(ticks));
+    reason_ = static_cast<ChangeViewReason>(reader.ReadByte());
 }
 
 // PrepareRequestMessage implementation
@@ -148,9 +150,17 @@ void CommitMessage::Deserialize(io::BinaryReader& reader)
 // RecoveryRequestMessage implementation
 RecoveryRequestMessage::RecoveryRequestMessage() : ConsensusMessage(ConsensusMessageType::RecoveryRequest) {}
 
-void RecoveryRequestMessage::Serialize(io::BinaryWriter& writer) const { ConsensusMessage::Serialize(writer); }
+void RecoveryRequestMessage::Serialize(io::BinaryWriter& writer) const
+{
+    ConsensusMessage::Serialize(writer);
+    writer.Write(timestamp_);
+}
 
-void RecoveryRequestMessage::Deserialize(io::BinaryReader& reader) { ConsensusMessage::Deserialize(reader); }
+void RecoveryRequestMessage::Deserialize(io::BinaryReader& reader)
+{
+    ConsensusMessage::Deserialize(reader);
+    timestamp_ = reader.ReadUInt64();
+}
 
 // RecoveryMessage implementation is in recovery_message.cpp
 }  // namespace neo::consensus

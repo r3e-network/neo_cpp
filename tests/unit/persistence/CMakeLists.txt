@@ -9,6 +9,7 @@ add_executable(test_persistence
     test_data_cache.cpp
     test_cloned_cache.cpp
     test_store_cache.cpp
+    test_store_factory_selection.cpp
 )
 
 # Include directories

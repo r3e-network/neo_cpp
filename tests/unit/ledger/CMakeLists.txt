@@ -54,12 +54,27 @@ target_link_libraries(test_blockchain_complete
         gtest_main
 )
 
+add_executable(test_signer_json test_signer_json.cpp)
+target_link_libraries(test_signer_json
+    PRIVATE
+        neo_cpp
+        gtest
+        gtest_main
+)
+target_include_directories(test_signer_json
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/src
+)
+
 # Add tests to CTest
 add_test(NAME ledger_basic COMMAND test_ledger)
 add_test(NAME ledger_transaction_complete COMMAND test_transaction_complete)
 add_test(NAME ledger_blockchain_complete COMMAND test_blockchain_complete)
+add_test(NAME ledger_signer_json COMMAND test_signer_json)
 
 # Set test properties
 set_tests_properties(ledger_basic PROPERTIES TIMEOUT 30)
 set_tests_properties(ledger_transaction_complete PROPERTIES TIMEOUT 60)
 set_tests_properties(ledger_blockchain_complete PROPERTIES TIMEOUT 60)
+set_tests_properties(ledger_signer_json PROPERTIES TIMEOUT 30)

@@ -13,15 +13,105 @@
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/hash.h>
 #include <neo/ledger/block.h>
+#include <neo/ledger/transaction.h>
+#include <neo/ledger/transaction_validator.h>
+#include <neo/ledger/transaction_verification_context.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script_builder.h>
 
 #include <algorithm>
+#include <limits>
 #include <map>
 #include <random>
 
 namespace neo::consensus
 {
+namespace
+{
+const char* ChangeViewReasonToString(ChangeViewReason reason)
+{
+    switch (reason)
+    {
+        case ChangeViewReason::Timeout:
+            return "Timeout";
+        case ChangeViewReason::ChangeAgreement:
+            return "ChangeAgreement";
+        case ChangeViewReason::TxNotFound:
+            return "TxNotFound";
+        case ChangeViewReason::TxInvalid:
+            return "TxInvalid";
+        case ChangeViewReason::TxRejectedByPolicy:
+            return "TxRejectedByPolicy";
+        case ChangeViewReason::BlockRejectedByPolicy:
+            return "BlockRejectedByPolicy";
+        default:
+            return "Unknown";
+    }
+}
+
+const char* ValidationResultToString(ledger::ValidationResult result)
+{
+    using ledger::ValidationResult;
+    switch (result)
+    {
+        case ValidationResult::Valid:
+            return "Valid";
+        case ValidationResult::InvalidFormat:
+            return "InvalidFormat";
+        case ValidationResult::InvalidSize:
+            return "InvalidSize";
+        case ValidationResult::InvalidAttribute:
+            return "InvalidAttribute";
+        case ValidationResult::InvalidScript:
+            return "InvalidScript";
+        case ValidationResult::InvalidWitness:
+            return "InvalidWitness";
+        case ValidationResult::InsufficientFunds:
+            return "InsufficientFunds";
+        case ValidationResult::InvalidSignature:
+            return "InvalidSignature";
+        case ValidationResult::AlreadyExists:
+            return "AlreadyExists";
+        case ValidationResult::Expired:
+            return "Expired";
+        case ValidationResult::InvalidSystemFee:
+            return "InvalidSystemFee";
+        case ValidationResult::InvalidNetworkFee:
+            return "InvalidNetworkFee";
+        case ValidationResult::PolicyViolation:
+            return "PolicyViolation";
+        case ValidationResult::Unknown:
+        default:
+            return "Unknown";
+    }
+}
+
+ChangeViewReason MapValidationResultToReason(ledger::ValidationResult result)
+{
+    using ledger::ValidationResult;
+    switch (result)
+    {
+        case ValidationResult::PolicyViolation:
+            return ChangeViewReason::TxRejectedByPolicy;
+        case ValidationResult::AlreadyExists:
+        case ValidationResult::InvalidFormat:
+        case ValidationResult::InvalidSize:
+        case ValidationResult::InvalidAttribute:
+        case ValidationResult::InvalidScript:
+        case ValidationResult::InvalidWitness:
+        case ValidationResult::InsufficientFunds:
+        case ValidationResult::InvalidSignature:
+        case ValidationResult::Expired:
+        case ValidationResult::InvalidSystemFee:
+        case ValidationResult::InvalidNetworkFee:
+        case ValidationResult::Unknown:
+        case ValidationResult::Valid:
+            return ChangeViewReason::TxInvalid;
+    }
+    return ChangeViewReason::TxInvalid;
+}
+}  // namespace
+
 DbftConsensus::DbftConsensus(const ConsensusConfig& config, const io::UInt160& node_id,
                              const std::vector<io::UInt160>& validators, std::shared_ptr<ledger::MemoryPool> mempool,
                              std::shared_ptr<ledger::Blockchain> blockchain)
@@ -164,13 +254,50 @@ bool DbftConsensus::ProcessMessage(const ConsensusMessage& message)
 
 bool DbftConsensus::AddTransaction(const network::p2p::payloads::Neo3Transaction& tx)
 {
+    state_->AddTransaction(tx);
+
     if (!mempool_)
     {
         LOG_DEBUG("Memory pool not available");
         return false;
     }
 
+    const auto hash = tx.GetHash();
+    if (mempool_->Contains(hash))
+    {
+        LOG_TRACE("Consensus cache received transaction {} already present in mempool", hash.ToString());
+        return true;
+    }
+
     return mempool_->TryAdd(tx);
+}
+
+void DbftConsensus::RemoveCachedTransaction(const io::UInt256& hash)
+{
+    state_->RemoveTransaction(hash);
+}
+
+void DbftConsensus::SetValidatorPublicKeys(const std::vector<cryptography::ecc::ECPoint>& public_keys)
+{
+    validator_public_keys_.clear();
+    for (const auto& key : public_keys)
+    {
+        try
+        {
+            auto script = cryptography::Crypto::CreateSignatureRedeemScript(key);
+            auto script_hash = cryptography::Hash::Hash160(script.AsSpan());
+            validator_public_keys_.emplace(script_hash, key);
+        }
+        catch (const std::exception& ex)
+        {
+            LOG_WARNING("Failed to cache validator public key: {}", ex.what());
+        }
+    }
+}
+
+void DbftConsensus::SetSignatureProvider(SignatureProvider provider)
+{
+    signature_provider_ = std::move(provider);
 }
 
 const ConsensusState& DbftConsensus::GetState() const { return *state_; }
@@ -248,12 +375,46 @@ void DbftConsensus::TimerLoop()
         auto now = std::chrono::steady_clock::now();
         auto elapsed = now - view_started_;
 
-        if (elapsed > config_.view_timeout)
+        uint32_t view_number = state_->GetViewNumber();
+
+        auto multiplier_shift = static_cast<uint32_t>(std::min<uint32_t>(view_number + 1, 8));
+        auto multiplier = static_cast<uint64_t>(1) << multiplier_shift;
+        auto adjusted_timeout = config_.view_timeout * static_cast<int64_t>(multiplier);
+        if (elapsed > adjusted_timeout)
         {
             OnTimeout();
         }
 
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        auto self_commit = commit_messages_.find(validator_index_);
+        if (self_commit != commit_messages_.end() && state_->GetPhase() == ConsensusPhase::BlockSent &&
+            !HasEnoughCommits())
+        {
+            auto resend_interval = config_.block_time * 2;
+            if (resend_interval.count() <= 0)
+            {
+                resend_interval = std::chrono::milliseconds(1000);
+            }
+
+            if (last_commit_relay_.time_since_epoch().count() == 0 || now - last_commit_relay_ >= resend_interval)
+            {
+                LOG_INFO("Rebroadcasting commit for block {} (view {}, validator {})", state_->GetBlockIndex(),
+                         state_->GetViewNumber(), validator_index_);
+                if (message_broadcaster_)
+                {
+                    if (auto recovery = BuildRecoveryMessage())
+                    {
+                        message_broadcaster_(*recovery);
+                    }
+                }
+                if (message_broadcaster_ && self_commit->second)
+                {
+                    message_broadcaster_(*self_commit->second);
+                }
+                last_commit_relay_ = std::chrono::steady_clock::now();
+            }
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 
     LOG_INFO("Timer loop stopped");
@@ -264,6 +425,8 @@ void DbftConsensus::StartNewRound()
     LOG_DEBUG("Starting new consensus round");
 
     view_started_ = std::chrono::steady_clock::now();
+    last_broadcast_change_view_ = state_->GetViewNumber();
+    last_commit_relay_ = std::chrono::steady_clock::time_point{};
 
     if (IsPrimary())
     {
@@ -275,9 +438,16 @@ void DbftConsensus::StartNewRound()
     }
 }
 
-bool DbftConsensus::IsPrimary() const { return validator_index_ == GetPrimaryIndex(state_->GetViewNumber()); }
+bool DbftConsensus::IsPrimary() const { return validator_index_ == ComputePrimaryIndex(state_->GetViewNumber()); }
 
-uint32_t DbftConsensus::GetPrimaryIndex(uint32_t view_number) const
+bool DbftConsensus::IsWatchOnly() const { return validator_index_ == std::numeric_limits<uint32_t>::max(); }
+
+uint32_t DbftConsensus::GetPrimaryIndex() const
+{
+    return ComputePrimaryIndex(state_->GetViewNumber());
+}
+
+uint32_t DbftConsensus::ComputePrimaryIndex(uint32_t view_number) const
 {
     // Fixed: Use block height + view_number (not subtraction)
     // This matches the C# implementation: (block_height + view_number) % validators_.size()
@@ -286,23 +456,109 @@ uint32_t DbftConsensus::GetPrimaryIndex(uint32_t view_number) const
 
 void DbftConsensus::SendPrepareRequest()
 {
+    if (IsWatchOnly())
+    {
+        LOG_DEBUG("Watch-only node skipping prepare request");
+        return;
+    }
+
     LOG_INFO("Sending prepare request as primary");
 
     // Select transactions for block from memory pool
-    auto mempool_transactions = mempool_->GetTransactionsForBlock(config_.max_transactions_per_block);
+    auto transactions = mempool_->GetTransactionsForBlock(config_.max_transactions_per_block);
 
-    // Convert to Neo3Transaction format for consensus state
-    std::vector<network::p2p::payloads::Neo3Transaction> transactions;
-    transactions.reserve(mempool_transactions.size());
+    std::vector<io::UInt256> tx_hashes;
+    tx_hashes.reserve(transactions.size());
 
-    for (const auto& tx : mempool_transactions)
+    auto verification_context = std::make_shared<ledger::TransactionVerificationContext>();
+    size_t total_block_size = 0;
+    int64_t total_system_fee = 0;
+    int64_t total_network_fee = 0;
+    bool has_conflict = false;
+    ChangeViewReason conflict_reason = ChangeViewReason::TxInvalid;
+
+    for (const auto& tx : transactions)
     {
-        // Convert ledger::Transaction to Neo3Transaction
-        // Convert transaction format for consensus processing
-        network::p2p::payloads::Neo3Transaction neo_tx;
-        // neo_tx.SetHash(tx.GetHash());
-        // Additional conversion logic would go here
-        transactions.push_back(neo_tx);
+        tx_hashes.push_back(tx.GetHash());
+
+        if (static_cast<size_t>(tx.GetSize()) >
+            static_cast<size_t>(network::p2p::payloads::Neo3Transaction::MaxTransactionSize))
+        {
+            LOG_WARNING("Transaction {} exceeds maximum transaction size ({} > {})", tx.GetHash().ToString(),
+                        tx.GetSize(), network::p2p::payloads::Neo3Transaction::MaxTransactionSize);
+            has_conflict = true;
+            conflict_reason = ChangeViewReason::TxRejectedByPolicy;
+            break;
+        }
+
+        try
+        {
+            total_block_size = common::SafeMath::Add<size_t>(total_block_size, static_cast<size_t>(tx.GetSize()));
+            total_system_fee = common::SafeMath::Add<int64_t>(total_system_fee, tx.GetSystemFee());
+            total_network_fee = common::SafeMath::Add<int64_t>(total_network_fee, tx.GetNetworkFee());
+        }
+        catch (const std::exception& ex)
+        {
+            LOG_ERROR("Overflow calculating block metrics for tx {}: {}", tx.GetHash().ToString(), ex.what());
+            has_conflict = true;
+            conflict_reason = ChangeViewReason::BlockRejectedByPolicy;
+            break;
+        }
+
+        auto validation_result = ledger::ValidateTransaction(tx, blockchain_, nullptr);
+        if (validation_result != ledger::ValidationResult::Valid)
+        {
+            LOG_WARNING("Transaction {} failed consensus validation: {}", tx.GetHash().ToString(),
+                        ValidationResultToString(validation_result));
+            has_conflict = true;
+            conflict_reason = MapValidationResultToReason(validation_result);
+            break;
+        }
+
+        if (verification_context)
+        {
+            auto tx_ptr = std::make_shared<ledger::Transaction>(tx);
+            if (!verification_context->CheckTransaction(tx_ptr))
+            {
+                LOG_WARNING("Transaction {} conflicts with current proposal context", tx.GetHash().ToString());
+                has_conflict = true;
+                conflict_reason = ChangeViewReason::TxInvalid;
+                break;
+            }
+            else
+            {
+                verification_context->AddTransaction(tx_ptr);
+            }
+        }
+    }
+
+    if (has_conflict)
+    {
+        LOG_WARNING("Prepare request aborted due to {}", ChangeViewReasonToString(conflict_reason));
+        RequestViewChange(conflict_reason);
+        return;
+    }
+
+    if (total_block_size > config_.max_block_size)
+    {
+        LOG_WARNING("Prepare request exceeded max block size: {} > {}", total_block_size, config_.max_block_size);
+        RequestViewChange(ChangeViewReason::BlockRejectedByPolicy);
+        return;
+    }
+
+    if (total_system_fee < 0)
+    {
+        LOG_WARNING("Prepare request contained transaction with negative system fee");
+        RequestViewChange(ChangeViewReason::TxInvalid);
+        return;
+    }
+
+    if (static_cast<uint64_t>(total_system_fee) > config_.max_block_system_fee)
+    {
+        LOG_WARNING("Prepare request exceeded max block system fee: {} > {}", total_system_fee,
+                    config_.max_block_system_fee);
+        RequestViewChange(ChangeViewReason::BlockRejectedByPolicy);
+        return;
     }
 
     // Create prepare request
@@ -313,16 +569,11 @@ void DbftConsensus::SendPrepareRequest()
     request.SetTimestamp(std::chrono::system_clock::now());
     request.SetNonce(GenerateNonce());
 
-    // Set transaction hashes
-    std::vector<io::UInt256> tx_hashes;
-    for (const auto& tx : transactions)
-    {
-        tx_hashes.push_back(tx.GetHash());
-    }
     request.SetTransactionHashes(tx_hashes);
 
     // Update state
-    state_->SetPrepareRequest(request.GetHash(), transactions, request.GetTimestamp(), request.GetNonce());
+    state_->SetPrepareRequest(request.GetHash(), transactions, tx_hashes, request.GetTimestamp(), request.GetNonce(),
+                              verification_context, total_block_size, total_system_fee, total_network_fee);
     state_->SetPhase(ConsensusPhase::RequestSent);
 
     // Broadcast
@@ -337,7 +588,7 @@ void DbftConsensus::ProcessPrepareRequest(const PrepareRequestMessage& message)
     LOG_DEBUG("Processing prepare request from validator {}", message.GetValidatorIndex());
 
     // Verify primary
-    if (message.GetValidatorIndex() != GetPrimaryIndex(message.GetViewNumber()))
+    if (message.GetValidatorIndex() != ComputePrimaryIndex(message.GetViewNumber()))
     {
         LOG_WARNING("Prepare request from non-primary");
         return;
@@ -346,6 +597,13 @@ void DbftConsensus::ProcessPrepareRequest(const PrepareRequestMessage& message)
     // Complete transaction verification for consensus
     // Verify transactions exist and are valid
     std::vector<network::p2p::payloads::Neo3Transaction> txs;
+    std::vector<io::UInt256> tx_hashes = message.GetTransactionHashes();
+    auto verification_context = std::make_shared<ledger::TransactionVerificationContext>();
+    size_t total_block_size = 0;
+    int64_t total_system_fee = 0;
+    int64_t total_network_fee = 0;
+    bool has_conflict = false;
+    ChangeViewReason conflict_reason = ChangeViewReason::TxInvalid;
 
     try
     {
@@ -358,28 +616,79 @@ void DbftConsensus::ProcessPrepareRequest(const PrepareRequestMessage& message)
         }
 
         // Verify each transaction hash in the prepare request
-        auto tx_hashes = message.GetTransactionHashes();
         txs.reserve(tx_hashes.size());
 
         for (const auto& tx_hash : tx_hashes)
         {
-            auto tx_ptr = mempool->GetTransaction(tx_hash);
-            if (!tx_ptr)
+            network::p2p::payloads::Neo3Transaction tx;
+            if (auto cached = state_->GetCachedTransaction(tx_hash))
             {
-                LOG_WARNING("Transaction {} not found in memory pool", tx_hash.ToString());
-                return;  // Cannot proceed without all transactions
+                tx = *cached;
+                LOG_DEBUG("Using cached transaction {} for prepare request", tx_hash.ToString());
+            }
+            else
+            {
+                auto tx_ptr = mempool->GetTransaction(tx_hash);
+                if (!tx_ptr)
+                {
+                    LOG_WARNING("Transaction {} not found in memory pool", tx_hash.ToString());
+                    RequestViewChange(ChangeViewReason::TxNotFound);
+                    return;  // Cannot proceed without all transactions
+                }
+
+                LOG_DEBUG("Found transaction {} in memory pool", tx_hash.ToString());
+                tx = *tx_ptr;
+                state_->AddTransaction(tx);
             }
 
-            // Verify transaction exists and is valid
-            // Transaction verification includes:
-            // - Signature verification
-            // - Balance checks
-            // - Script execution validation
-            // - Fee calculation
-            // Basic validation: transaction exists and is in valid state
-            LOG_DEBUG("Found transaction {} in memory pool", tx_hash.ToString());
+            txs.push_back(tx);
 
-            txs.push_back(*tx_ptr);
+            if (static_cast<size_t>(tx.GetSize()) >
+                static_cast<size_t>(network::p2p::payloads::Neo3Transaction::MaxTransactionSize))
+            {
+                LOG_WARNING("Transaction {} exceeds maximum transaction size ({} > {})", tx_hash.ToString(),
+                            tx.GetSize(), network::p2p::payloads::Neo3Transaction::MaxTransactionSize);
+                has_conflict = true;
+                conflict_reason = ChangeViewReason::TxRejectedByPolicy;
+                break;
+            }
+
+            try
+            {
+                total_block_size = common::SafeMath::Add<size_t>(total_block_size, static_cast<size_t>(tx.GetSize()));
+                total_system_fee = common::SafeMath::Add<int64_t>(total_system_fee, tx.GetSystemFee());
+                total_network_fee = common::SafeMath::Add<int64_t>(total_network_fee, tx.GetNetworkFee());
+            }
+            catch (const std::exception& ex)
+            {
+                LOG_ERROR("Overflow calculating block metrics for tx {}: {}", tx_hash.ToString(), ex.what());
+                has_conflict = true;
+                conflict_reason = ChangeViewReason::BlockRejectedByPolicy;
+                break;
+            }
+
+            auto validation_result = ledger::ValidateTransaction(tx, blockchain_, nullptr);
+            if (validation_result != ledger::ValidationResult::Valid)
+            {
+                LOG_WARNING("Transaction {} failed validation during prepare request: {}", tx_hash.ToString(),
+                            ValidationResultToString(validation_result));
+                has_conflict = true;
+                conflict_reason = MapValidationResultToReason(validation_result);
+                break;
+            }
+
+            if (verification_context)
+            {
+                auto tx_ptr_copy = std::make_shared<ledger::Transaction>(tx);
+                if (!verification_context->CheckTransaction(tx_ptr_copy))
+                {
+                    LOG_WARNING("Transaction {} conflicts with prepare request verification context", tx_hash.ToString());
+                    has_conflict = true;
+                    conflict_reason = ChangeViewReason::TxInvalid;
+                    break;
+                }
+                verification_context->AddTransaction(tx_ptr_copy);
+            }
         }
 
         LOG_DEBUG("Verified {} transactions for consensus", txs.size());
@@ -390,13 +699,49 @@ void DbftConsensus::ProcessPrepareRequest(const PrepareRequestMessage& message)
         return;
     }
 
+    if (has_conflict)
+    {
+        LOG_WARNING("Prepare request validation failed with reason {}", ChangeViewReasonToString(conflict_reason));
+        RequestViewChange(conflict_reason);
+        return;
+    }
+
+    if (total_block_size > config_.max_block_size)
+    {
+        LOG_WARNING("Prepare request block size {} exceeds limit {}", total_block_size, config_.max_block_size);
+        RequestViewChange(ChangeViewReason::BlockRejectedByPolicy);
+        return;
+    }
+
+    if (total_system_fee < 0)
+    {
+        LOG_WARNING("Prepare request contained transaction with negative system fee");
+        RequestViewChange(ChangeViewReason::TxInvalid);
+        return;
+    }
+
+    if (static_cast<uint64_t>(total_system_fee) > config_.max_block_system_fee)
+    {
+        LOG_WARNING("Prepare request block system fee {} exceeds limit {}", total_system_fee,
+                    config_.max_block_system_fee);
+        RequestViewChange(ChangeViewReason::BlockRejectedByPolicy);
+        return;
+    }
+
     // Update state with verified transactions
-    state_->SetPrepareRequest(message.GetHash(), txs, message.GetTimestamp(), message.GetNonce());
+    state_->SetPrepareRequest(message.GetHash(), txs, tx_hashes, message.GetTimestamp(), message.GetNonce(),
+                              verification_context, total_block_size, total_system_fee, total_network_fee);
     state_->SetPhase(ConsensusPhase::RequestReceived);
 }
 
 void DbftConsensus::SendPrepareResponse()
 {
+    if (IsWatchOnly())
+    {
+        LOG_DEBUG("Watch-only node skipping prepare response");
+        return;
+    }
+
     LOG_DEBUG("Sending prepare response");
 
     PrepareResponseMessage response;
@@ -406,7 +751,7 @@ void DbftConsensus::SendPrepareResponse()
     response.SetPrepareRequestHash(state_->GetPrepareRequestHash());
 
     // Add our response to state
-    state_->AddPrepareResponse(validator_index_, state_->GetPrepareRequestHash());
+    state_->AddPrepareResponse(validator_index_, state_->GetPrepareRequestHash(), io::ByteVector());
     state_->SetPhase(ConsensusPhase::SignatureSent);
 
     // Broadcast
@@ -414,6 +759,8 @@ void DbftConsensus::SendPrepareResponse()
     {
         message_broadcaster_(response);
     }
+
+    last_commit_relay_ = std::chrono::steady_clock::now();
 }
 
 void DbftConsensus::ProcessPrepareResponse(const PrepareResponseMessage& message)
@@ -424,10 +771,12 @@ void DbftConsensus::ProcessPrepareResponse(const PrepareResponseMessage& message
     if (message.GetPrepareRequestHash() != state_->GetPrepareRequestHash())
     {
         LOG_WARNING("Prepare response for different request");
+        RequestViewChange(ChangeViewReason::ChangeAgreement);
         return;
     }
 
-    state_->AddPrepareResponse(message.GetValidatorIndex(), message.GetPrepareRequestHash());
+    state_->AddPrepareResponse(message.GetValidatorIndex(), message.GetPrepareRequestHash(),
+                               message.GetInvocationScript());
 
     // Check if we have enough responses
     if (HasEnoughPrepareResponses() && state_->GetPhase() == ConsensusPhase::SignatureSent)
@@ -438,6 +787,12 @@ void DbftConsensus::ProcessPrepareResponse(const PrepareResponseMessage& message
 
 void DbftConsensus::SendCommit()
 {
+    if (IsWatchOnly())
+    {
+        LOG_DEBUG("Watch-only node skipping commit broadcast");
+        return;
+    }
+
     LOG_DEBUG("Sending commit");
 
     // Create block data for signing
@@ -452,31 +807,32 @@ void DbftConsensus::SendCommit()
     auto block_hash = block->GetHash();
     std::vector<uint8_t> signature;
 
-    // Create signature using this node's private key
-    // Using configured validator private key from consensus settings
+    if (!signature_provider_)
+    {
+        if (!missing_signature_warning_emitted_.exchange(true))
+        {
+            LOG_WARNING("Consensus signature provider not configured; skipping commit broadcast");
+        }
+        else
+        {
+            LOG_DEBUG("Skip commit broadcast: signature provider still absent");
+        }
+        return;
+    }
+
     try
     {
-        // Create a deterministic signature for testing purposes
-        // Production implementation would use proper ECDSA signing
-        signature.resize(64);  // Standard ECDSA signature size
-
-        // Use validator index and block hash to create deterministic bytes
-        std::hash<std::string> hasher;
-        auto hash_input = std::to_string(validator_index_) + block_hash.ToString();
-        auto hash_result = hasher(hash_input);
-
-        // Fill signature with deterministic data
-        std::memcpy(signature.data(), &hash_result, std::min(sizeof(hash_result), signature.size()));
-
-        // Fill remaining bytes with pattern
-        for (size_t i = sizeof(hash_result); i < signature.size(); i++)
+        auto signature_bytes = signature_provider_(block_hash.AsSpan());
+        if (signature_bytes.IsEmpty())
         {
-            signature[i] = static_cast<uint8_t>((validator_index_ + i) % 256);
+            LOG_WARNING("Consensus signature provider returned empty signature");
+            return;
         }
+        signature.assign(signature_bytes.Data(), signature_bytes.Data() + signature_bytes.Size());
     }
     catch (const std::exception& e)
     {
-        LOG_ERROR("Error creating block signature: {}", e.what());
+        LOG_ERROR("Consensus signature provider threw exception: {}", e.what());
         return;
     }
 
@@ -528,8 +884,9 @@ void DbftConsensus::ProcessCommit(const CommitMessage& message)
         }
 
         // Verify the digital signature
-        bool signature_valid =
-            cryptography::Crypto::VerifySignature(block_hash.AsSpan(), message.GetSignature(), *validator_key);
+        bool signature_valid = cryptography::Crypto::VerifySignature(
+            block_hash.AsSpan(),
+            io::ByteSpan(message.GetSignature().data(), message.GetSignature().size()), *validator_key);
 
         if (!signature_valid)
         {
@@ -550,6 +907,12 @@ void DbftConsensus::ProcessCommit(const CommitMessage& message)
 
     // Store commit message for witness assembly
     commit_messages_[message.GetValidatorIndex()] = std::make_shared<CommitMessage>(message);
+    commit_invocation_scripts_[message.GetValidatorIndex()] = message.GetInvocationScript();
+
+    if (message.GetValidatorIndex() == validator_index_)
+    {
+        last_commit_relay_ = std::chrono::steady_clock::now();
+    }
 
     // Check if we have enough commits
     if (HasEnoughCommits() && state_->GetPhase() == ConsensusPhase::BlockSent)
@@ -566,53 +929,206 @@ void DbftConsensus::ProcessCommit(const CommitMessage& message)
     }
 }
 
-void DbftConsensus::RequestViewChange()
+void DbftConsensus::RequestViewChange(ChangeViewReason reason)
 {
-    LOG_INFO("Requesting view change");
+    if (validator_index_ == std::numeric_limits<uint32_t>::max())
+    {
+        LOG_DEBUG("Ignoring view change request for watch-only node");
+        return;
+    }
 
-    ViewChangeMessage view_change;
-    view_change.SetBlockIndex(state_->GetBlockIndex());
-    view_change.SetViewNumber(state_->GetViewNumber());
-    view_change.SetValidatorIndex(validator_index_);
-    view_change.SetNewViewNumber(state_->GetViewNumber() + 1);
-    view_change.SetTimestamp(std::chrono::system_clock::now());
+    LOG_INFO("Requesting view change: {}", ChangeViewReasonToString(reason));
 
-    state_->AddViewChange(validator_index_);
+    const auto next_view = state_->GetViewNumber() + 1;
+    state_->AddViewChange(validator_index_, state_->GetViewNumber(), next_view, reason, io::ByteVector(), 0);
     state_->SetPhase(ConsensusPhase::ViewChanging);
 
-    // Broadcast
-    if (message_broadcaster_)
-    {
-        message_broadcaster_(view_change);
-    }
+    BroadcastChangeView(next_view, reason);
+    EvaluateExpectedView(next_view);
 }
 
 void DbftConsensus::ProcessViewChange(const ViewChangeMessage& message)
 {
-    LOG_DEBUG("Processing view change from validator {}", message.GetValidatorIndex());
+    LOG_DEBUG("Processing view change from validator {} reason {}", message.GetValidatorIndex(),
+              ChangeViewReasonToString(message.GetReason()));
 
     if (message.GetNewViewNumber() <= state_->GetViewNumber())
     {
         return;
     }
 
-    state_->AddViewChange(message.GetValidatorIndex());
+    const auto timestamp_ms = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::milliseconds>(message.GetTimestamp().time_since_epoch()).count());
+    state_->AddViewChange(message.GetValidatorIndex(), message.GetViewNumber(), message.GetNewViewNumber(),
+                          message.GetReason(), message.GetInvocationScript(), timestamp_ms);
+    EvaluateExpectedView(message.GetNewViewNumber());
+}
 
-    if (HasEnoughViewChanges())
+void DbftConsensus::BroadcastChangeView(uint32_t new_view, ChangeViewReason reason)
+{
+    if (validator_index_ == std::numeric_limits<uint32_t>::max())
     {
-        LOG_INFO("View change to view {}", message.GetNewViewNumber());
-        state_->SetViewNumber(message.GetNewViewNumber());
-        state_->ResetForViewChange();
-        view_started_ = std::chrono::steady_clock::now();
-        StartNewRound();
+        return;
+    }
+
+    ViewChangeMessage view_change;
+    view_change.SetBlockIndex(state_->GetBlockIndex());
+    view_change.SetViewNumber(state_->GetViewNumber());
+    view_change.SetValidatorIndex(validator_index_);
+    view_change.SetNewViewNumber(new_view);
+    view_change.SetTimestamp(std::chrono::system_clock::now());
+    view_change.SetReason(reason);
+
+    if (message_broadcaster_)
+    {
+        message_broadcaster_(view_change);
+    }
+
+    last_broadcast_change_view_ = std::max(last_broadcast_change_view_, new_view);
+}
+
+void DbftConsensus::EvaluateExpectedView(uint32_t target_view)
+{
+    if (target_view <= state_->GetViewNumber())
+    {
+        return;
+    }
+
+    const auto confirmations = state_->CountViewChangesAtOrAbove(target_view);
+    if (confirmations < GetM())
+    {
+        return;
+    }
+
+    // If we have not yet broadcasted agreement for this view, do so now.
+    if (validator_index_ != std::numeric_limits<uint32_t>::max() && last_broadcast_change_view_ < target_view)
+    {
+        state_->AddViewChange(validator_index_, state_->GetViewNumber(), target_view,
+                              ChangeViewReason::ChangeAgreement, io::ByteVector(), 0);
+        BroadcastChangeView(target_view, ChangeViewReason::ChangeAgreement);
+    }
+
+    LOG_INFO("Advancing to view {} after receiving {} change view messages", target_view, confirmations);
+    state_->SetViewNumber(target_view);
+    state_->ResetForViewChange();
+    view_started_ = std::chrono::steady_clock::now();
+    StartNewRound();
+}
+
+std::shared_ptr<RecoveryMessage> DbftConsensus::BuildRecoveryMessage() const
+{
+    auto recovery = std::make_shared<RecoveryMessage>(static_cast<uint8_t>(state_->GetViewNumber()));
+    recovery->SetBlockIndex(state_->GetBlockIndex());
+    recovery->SetViewNumber(state_->GetViewNumber());
+    recovery->SetValidatorIndex(validator_index_);
+
+    const auto maxEntries = static_cast<size_t>(GetM());
+
+    size_t changeCount = 0;
+    for (const auto& [index, info] : state_->GetViewChanges())
+    {
+        RecoveryMessage::ChangeViewPayloadCompact payload;
+        payload.validator_index = index;
+        payload.original_view_number = info.original_view;
+        payload.timestamp = info.timestamp;
+        payload.invocation_script = info.invocation_script;
+        recovery->AddChangeViewPayload(payload);
+
+        if (++changeCount >= maxEntries) break;
+    }
+
+    auto prepare_hash = state_->GetPrepareRequestHash();
+    auto transaction_hashes = state_->GetTransactionHashes();
+    const bool has_transactions = !transaction_hashes.empty();
+    if (!prepare_hash.IsZero())
+    {
+        if (has_transactions)
+        {
+            auto prepare = std::make_shared<PrepareRequestMessage>();
+            prepare->SetBlockIndex(state_->GetBlockIndex());
+            prepare->SetViewNumber(state_->GetViewNumber());
+            prepare->SetValidatorIndex(ComputePrimaryIndex(state_->GetViewNumber()));
+            prepare->SetNonce(state_->GetNonce());
+            prepare->SetTimestamp(state_->GetTimestamp());
+            prepare->SetTransactionHashes(transaction_hashes);
+            recovery->SetPrepareRequest(prepare);
+        }
+        else
+        {
+            recovery->SetPreparationHash(prepare_hash);
+        }
+    }
+
+    auto responses = state_->GetPrepareResponses();
+    size_t responseCount = 0;
+    for (const auto& [index, info] : responses)
+    {
+        RecoveryMessage::PreparationPayloadCompact compact;
+        compact.validator_index = index;
+        compact.invocation_script = info.invocation_script;
+        recovery->AddPreparationPayload(compact);
+
+        if (++responseCount >= maxEntries) break;
+    }
+
+    for (const auto& [index, commitMsg] : commit_messages_)
+    {
+        if (commitMsg)
+        {
+            RecoveryMessage::CommitPayloadCompact compact;
+            compact.view_number = commitMsg->GetViewNumber();
+            compact.validator_index = commitMsg->GetValidatorIndex();
+            compact.signature = io::ByteVector(commitMsg->GetSignature());
+            auto script_it = commit_invocation_scripts_.find(index);
+            compact.invocation_script = script_it != commit_invocation_scripts_.end() ? script_it->second
+                                                                                       : io::ByteVector();
+            recovery->AddCommitPayload(compact);
+        }
+    }
+
+    const auto transactions = state_->GetTransactions();
+    if (!transactions.empty())
+    {
+        recovery->SetTransactions(transactions);
+    }
+
+    return recovery;
+}
+
+void DbftConsensus::RecordSentPayload(const ConsensusMessage& message, const ledger::Witness& witness)
+{
+    const auto script = witness.GetInvocationScript();
+    switch (message.GetType())
+    {
+        case ConsensusMessageType::ChangeView:
+        {
+            auto& change = static_cast<const ViewChangeMessage&>(message);
+            state_->AddViewChange(validator_index_, change.GetViewNumber(), change.GetNewViewNumber(),
+                                  change.GetReason(), script,
+                                  static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                                            change.GetTimestamp().time_since_epoch())
+                                                            .count()));
+            break;
+        }
+        case ConsensusMessageType::PrepareResponse:
+        {
+            auto& response = static_cast<const PrepareResponseMessage&>(message);
+            state_->AddPrepareResponse(response.GetValidatorIndex(), response.GetPrepareRequestHash(), script);
+            break;
+        }
+        case ConsensusMessageType::Commit:
+        {
+            commit_invocation_scripts_[message.GetValidatorIndex()] = script;
+            break;
+        }
+        default:
+            break;
     }
 }
 
 bool DbftConsensus::HasEnoughPrepareResponses() const { return state_->GetPrepareResponseCount() >= 2 * GetF() + 1; }
 
 bool DbftConsensus::HasEnoughCommits() const { return state_->GetCommitCount() >= 2 * GetF() + 1; }
-
-bool DbftConsensus::HasEnoughViewChanges() const { return state_->GetViewChangeCount() >= GetF() + 1; }
 
 uint32_t DbftConsensus::GetF() const { return (validators_.size() - 1) / 3; }
 
@@ -794,7 +1310,10 @@ void DbftConsensus::Reset()
     state_->SetBlockIndex(state_->GetBlockIndex() + 1);
     state_->SetViewNumber(0);
     commit_messages_.clear();  // Clear commit messages for new round
+    commit_invocation_scripts_.clear();
     view_started_ = std::chrono::steady_clock::now();
+    last_broadcast_change_view_ = state_->GetViewNumber();
+    last_commit_relay_ = std::chrono::steady_clock::time_point{};
     StartNewRound();
 }
 
@@ -804,7 +1323,16 @@ void DbftConsensus::OnTimeout()
 
     if (state_->GetPhase() != ConsensusPhase::ViewChanging)
     {
-        RequestViewChange();
+        auto reason = ChangeViewReason::Timeout;
+
+        const auto expected = state_->GetTransactionHashes().size();
+        const auto received = state_->GetTransactions().size();
+        if (expected > 0 && received < expected)
+        {
+            reason = ChangeViewReason::TxNotFound;
+        }
+
+        RequestViewChange(reason);
     }
 }
 
@@ -894,6 +1422,12 @@ io::ByteVector DbftConsensus::CreateConsensusVerificationScript()
 
 std::optional<cryptography::ecc::ECPoint> DbftConsensus::GetValidatorPublicKey(const io::UInt160& validator_id)
 {
+    auto cached = validator_public_keys_.find(validator_id);
+    if (cached != validator_public_keys_.end())
+    {
+        return cached->second;
+    }
+
     try
     {
         // Implementation approach:
@@ -1141,79 +1675,125 @@ uint32_t DbftConsensus::GetCurrentBlockHeight()
 
 bool DbftConsensus::VerifyConsensusWitness(const ledger::Witness& witness, const io::UInt256& block_hash)
 {
-    try
-    {
-        // Verify the multi-signature witness against the block hash
-        auto invocation_script = witness.GetInvocationScript();
-        auto verification_script = witness.GetVerificationScript();
+    const auto& invocation_script = witness.GetInvocationScript();
 
-        if (invocation_script.empty() || verification_script.empty())
+    if (invocation_script.empty())
+    {
+        LOG_WARNING("Consensus witness invocation script is empty");
+        return false;
+    }
+
+    std::vector<std::optional<io::ByteVector>> signatures;
+    signatures.reserve(validators_.size());
+
+    size_t pos = 0;
+    while (pos < invocation_script.size())
+    {
+        uint8_t opcode = invocation_script[pos++];
+
+        if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHNULL))
         {
-            LOG_WARNING("Empty witness scripts");
+            signatures.emplace_back(std::nullopt);
+            continue;
+        }
+
+        size_t length = 0;
+        if (opcode >= 0x01 && opcode <= 0x4B)
+        {
+            length = opcode;
+        }
+        else if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHDATA1))
+        {
+            if (pos >= invocation_script.size())
+            {
+                LOG_WARNING("Malformed consensus invocation script (PUSHDATA1 length missing)");
+                return false;
+            }
+            length = invocation_script[pos++];
+        }
+        else if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHDATA2))
+        {
+            if (pos + 1 >= invocation_script.size())
+            {
+                LOG_WARNING("Malformed consensus invocation script (PUSHDATA2 length missing)");
+                return false;
+            }
+            length = static_cast<size_t>(invocation_script[pos]) |
+                     (static_cast<size_t>(invocation_script[pos + 1]) << 8);
+            pos += 2;
+        }
+        else if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHDATA4))
+        {
+            if (pos + 3 >= invocation_script.size())
+            {
+                LOG_WARNING("Malformed consensus invocation script (PUSHDATA4 length missing)");
+                return false;
+            }
+            length = static_cast<size_t>(invocation_script[pos]) |
+                     (static_cast<size_t>(invocation_script[pos + 1]) << 8) |
+                     (static_cast<size_t>(invocation_script[pos + 2]) << 16) |
+                     (static_cast<size_t>(invocation_script[pos + 3]) << 24);
+            pos += 4;
+        }
+        else
+        {
+            LOG_WARNING("Unexpected opcode in consensus invocation script: 0x{:02x}", opcode);
             return false;
         }
 
-        // Parse invocation script to extract signatures
-        std::vector<io::ByteVector> signatures;
-        size_t pos = 0;
-
-        while (pos < invocation_script.size())
+        if (pos + length > invocation_script.size())
         {
-            uint8_t opcode = invocation_script[pos++];
+            LOG_WARNING("Consensus invocation script length exceeds buffer");
+            return false;
+        }
 
-            if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHNULL))
+        signatures.emplace_back(io::ByteVector(invocation_script.Data() + pos, length));
+        pos += length;
+    }
+
+    if (signatures.size() < validators_.size())
+    {
+        LOG_WARNING("Consensus witness contained {} signatures but {} validators are expected", signatures.size(),
+                    validators_.size());
+        return false;
+    }
+
+    const bool has_cached_keys = !validator_public_keys_.empty();
+    size_t valid_signatures = 0;
+
+    for (size_t index = 0; index < validators_.size(); ++index)
+    {
+        const auto& slot = signatures[index];
+        if (!slot || slot->IsEmpty())
+        {
+            continue;
+        }
+
+        if (has_cached_keys)
+        {
+            auto validator_key = GetValidatorPublicKey(validators_[index]);
+            if (!validator_key)
             {
-                signatures.emplace_back();  // Empty signature
+                LOG_WARNING("Missing public key for validator {}", validators_[index].ToString());
+                return false;
             }
-            else if (opcode >= 0x01 && opcode <= 0x4B)
+
+            if (!cryptography::Crypto::VerifySignature(block_hash.AsSpan(), slot->AsSpan(), *validator_key))
             {
-                // Push data
-                size_t length = opcode;
-                if (pos + length <= invocation_script.size())
-                {
-                    signatures.push_back(io::ByteVector(invocation_script.Data() + pos, length));
-                    pos += length;
-                }
-                else
-                {
-                    LOG_WARNING("Invalid invocation script format");
-                    return false;
-                }
-            }
-            else
-            {
-                LOG_WARNING("Unexpected opcode in invocation script: 0x{:02x}", opcode);
+                LOG_WARNING("Invalid consensus signature provided by validator {}", index);
                 return false;
             }
         }
 
-        // Verify we have enough valid signatures
-        size_t valid_signatures = 0;
-        for (const auto& sig : signatures)
-        {
-            if (!sig.empty())
-            {
-                valid_signatures++;
-            }
-        }
-
-        if (valid_signatures < GetM())
-        {
-            LOG_WARNING("Insufficient signatures: {} < {}", valid_signatures, GetM());
-            return false;
-        }
-
-        // Full signature verification implemented:
-        // 1. Extracted signatures from invocation script
-        // 2. Verified minimum signature count requirement
-        // 3. Cryptographic signature verification using validator keys
-
-        return true;
+        ++valid_signatures;
     }
-    catch (const std::exception& e)
+
+    if (valid_signatures < GetM())
     {
-        LOG_ERROR("Error verifying consensus witness: {}", e.what());
+        LOG_WARNING("Insufficient valid consensus signatures: {} < {}", valid_signatures, GetM());
         return false;
     }
+
+    return true;
 }
 }  // namespace neo::consensus

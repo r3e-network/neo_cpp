@@ -11,6 +11,7 @@
 #include <neo/io/byte_vector.h>
 
 #include <iomanip>
+#include <random>
 #include <sstream>
 #include <stdexcept>
 
@@ -139,4 +140,24 @@ size_t ByteVector::GetVarSize() const
 std::string ByteVector::ToBase64String() const { return extensions::Base64::Encode(AsSpan()); }
 
 ByteVector ByteVector::FromBase64String(const std::string& base64) { return extensions::Base64::Decode(base64); }
+
+ByteVector ByteVector::GenerateRandom(size_t size)
+{
+    ByteVector result(size);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<uint16_t> dist(0, 255);
+    for (auto& byte : result.data_)
+    {
+        byte = static_cast<uint8_t>(dist(gen));
+    }
+    return result;
+}
+
+ByteVector ByteVector::FromString(const std::string& value)
+{
+    ByteVector result;
+    result.data_.assign(value.begin(), value.end());
+    return result;
+}
 }  // namespace neo::io
