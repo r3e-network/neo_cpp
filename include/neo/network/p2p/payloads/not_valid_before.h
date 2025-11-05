@@ -13,6 +13,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/ledger/transaction_attribute.h>
+#include <neo/ledger/transaction_attribute_type.h>
 
 #include <cstdint>
 
@@ -25,6 +26,32 @@ class NotValidBefore : public ledger::TransactionAttribute
 {
    private:
     uint32_t height_;
+    struct TypeProxy
+    {
+        NotValidBefore* owner_;
+        explicit TypeProxy(NotValidBefore* owner) : owner_(owner) {}
+        TypeProxy& operator=(ledger::TransactionAttributeType value)
+        {
+            (void)value;
+            return *this;
+        }
+        operator ledger::TransactionAttributeType() const
+        {
+            return ledger::TransactionAttributeType::NotValidBefore;
+        }
+    };
+
+    struct HeightProxy
+    {
+        NotValidBefore* owner_;
+        explicit HeightProxy(NotValidBefore* owner) : owner_(owner) {}
+        HeightProxy& operator=(uint32_t value)
+        {
+            owner_->SetHeight(value);
+            return *this;
+        }
+        operator uint32_t() const { return owner_->GetHeight(); }
+    };
 
    public:
     /**
@@ -37,6 +64,13 @@ class NotValidBefore : public ledger::TransactionAttribute
      * @param height The block height.
      */
     explicit NotValidBefore(uint32_t height);
+    NotValidBefore(const NotValidBefore& other);
+    NotValidBefore& operator=(const NotValidBefore& other);
+    NotValidBefore(NotValidBefore&& other) noexcept;
+    NotValidBefore& operator=(NotValidBefore&& other) noexcept;
+
+    TypeProxy Type;
+    HeightProxy Height;
 
     /**
      * @brief Gets the block height.

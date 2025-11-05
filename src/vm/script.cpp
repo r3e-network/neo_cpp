@@ -26,6 +26,8 @@ Script::Script(const internal::ByteVector& script) : script_(script) {}
 
 Script::Script(const internal::ByteSpan& script) : script_(script) {}
 
+Script::Script(const std::vector<uint8_t>& script) : script_(internal::ByteSpan(script)) {}
+
 const internal::ByteVector& Script::GetScript() const { return script_; }
 
 size_t Script::GetLength() const { return script_.Size(); }

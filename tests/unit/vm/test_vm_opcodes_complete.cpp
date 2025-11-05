@@ -25,7 +25,7 @@ protected:
     }
     
     Script CreateScript(const ByteVector& data) {
-        return Script(data);
+        return Script(neo::vm::internal::ByteSpan(data.Data(), data.Size()));
     }
     
     void ExecuteScript(const ByteVector& script) {
@@ -67,7 +67,8 @@ TEST_F(VMOpcodeCompleteTest, Opcode_PUSHDATA1) {
 
 TEST_F(VMOpcodeCompleteTest, Opcode_PUSHDATA2) {
     ScriptBuilder sb;
-    ByteVector data(256, 0xAB); // Requires 2-byte length
+    ByteVector data(256u);
+    std::fill(data.begin(), data.end(), static_cast<uint8_t>(0xAB));
     sb.EmitPush(data);
     ExecuteScript(sb.ToArray());
     
@@ -77,7 +78,8 @@ TEST_F(VMOpcodeCompleteTest, Opcode_PUSHDATA2) {
 
 TEST_F(VMOpcodeCompleteTest, Opcode_PUSHDATA4) {
     ScriptBuilder sb;
-    ByteVector data(65536, 0xCD); // Requires 4-byte length
+    ByteVector data(65536u);
+    std::fill(data.begin(), data.end(), static_cast<uint8_t>(0xCD));
     sb.EmitPush(data);
     ExecuteScript(sb.ToArray());
     

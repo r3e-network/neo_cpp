@@ -131,7 +131,11 @@ std::shared_ptr<StackItem> StackItem::DeepCopy(ReferenceCounter* refCounter, boo
     return std::const_pointer_cast<StackItem>(shared_from_this());
 }
 
-bool StackItem::IsNull() const { return GetType() == StackItemType::Any; }
+bool StackItem::IsNull() const
+{
+    auto type = GetType();
+    return type == StackItemType::Any || type == StackItemType::Null;
+}
 
 bool StackItem::IsInterop() const { return GetType() == StackItemType::InteropInterface; }
 
@@ -322,6 +326,7 @@ std::shared_ptr<StackItem> StackItem::Deserialize(io::BinaryReader& reader)
             return CreateBuffer(data);
         }
         case StackItemType::Any:
+        case StackItemType::Null:
             return Null();
         case StackItemType::InteropInterface:
             // InteropInterface cannot be serialized/deserialized safely
@@ -382,6 +387,7 @@ void StackItem::Serialize(std::shared_ptr<StackItem> item, io::BinaryWriter& wri
             break;
         }
         case StackItemType::Any:
+        case StackItemType::Null:
             // Null item - already wrote the type
             break;
         case StackItemType::InteropInterface:

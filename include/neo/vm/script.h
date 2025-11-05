@@ -46,6 +46,12 @@ class Script
     explicit Script(const internal::ByteSpan& script);
 
     /**
+     * @brief Constructs a Script from a standard byte vector.
+     * @param script The script bytes.
+     */
+    explicit Script(const std::vector<uint8_t>& script);
+
+    /**
      * @brief Gets the script.
      * @return The script.
      */

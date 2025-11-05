@@ -393,20 +393,19 @@ void JumpTableArithmeticNumeric::LT(ExecutionEngine& engine, const Instruction& 
     auto item2 = engine.Pop();
     auto item1 = engine.Pop();
 
-    // Check for invalid types for numeric comparison
-    auto type1 = item1->GetType();
-    auto type2 = item2->GetType();
+    auto isNumericComparable = [](const std::shared_ptr<StackItem>& item) {
+        auto type = item->GetType();
+        return type == StackItemType::Integer || type == StackItemType::Boolean || item->IsNull();
+    };
 
-    // Only allow Integer, Boolean, and Null types for numeric comparison
-    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
-        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null))
+    if (!isNumericComparable(item1) || !isNumericComparable(item2))
     {
         throw std::runtime_error("Invalid comparison operation");
     }
 
     // Handle null values - treat null as integer 0
-    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
-    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    int64_t x2 = item2->IsNull() ? 0 : item2->GetInteger();
+    int64_t x1 = item1->IsNull() ? 0 : item1->GetInteger();
 
     engine.Push(StackItem::Create(x1 < x2));
 }
@@ -422,20 +421,19 @@ void JumpTableArithmeticNumeric::GT(ExecutionEngine& engine, const Instruction& 
     auto item2 = engine.Pop();
     auto item1 = engine.Pop();
 
-    // Check for invalid types for numeric comparison
-    auto type1 = item1->GetType();
-    auto type2 = item2->GetType();
+    auto isNumericComparable = [](const std::shared_ptr<StackItem>& item) {
+        auto type = item->GetType();
+        return type == StackItemType::Integer || type == StackItemType::Boolean || item->IsNull();
+    };
 
-    // Only allow Integer, Boolean, and Null types for numeric comparison
-    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
-        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null))
+    if (!isNumericComparable(item1) || !isNumericComparable(item2))
     {
         throw std::runtime_error("Invalid comparison operation");
     }
 
     // Handle null values - treat null as integer 0
-    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
-    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    int64_t x2 = item2->IsNull() ? 0 : item2->GetInteger();
+    int64_t x1 = item1->IsNull() ? 0 : item1->GetInteger();
 
     engine.Push(StackItem::Create(x1 > x2));
 }
@@ -451,20 +449,19 @@ void JumpTableArithmeticNumeric::LE(ExecutionEngine& engine, const Instruction& 
     auto item2 = engine.Pop();
     auto item1 = engine.Pop();
 
-    // Check for invalid types for numeric comparison
-    auto type1 = item1->GetType();
-    auto type2 = item2->GetType();
+    auto isNumericComparable = [](const std::shared_ptr<StackItem>& item) {
+        auto type = item->GetType();
+        return type == StackItemType::Integer || type == StackItemType::Boolean || item->IsNull();
+    };
 
-    // Only allow Integer, Boolean, and Null types for numeric comparison
-    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
-        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null))
+    if (!isNumericComparable(item1) || !isNumericComparable(item2))
     {
         throw std::runtime_error("Invalid comparison operation");
     }
 
     // Handle null values - treat null as integer 0
-    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
-    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    int64_t x2 = item2->IsNull() ? 0 : item2->GetInteger();
+    int64_t x1 = item1->IsNull() ? 0 : item1->GetInteger();
 
     engine.Push(StackItem::Create(x1 <= x2));
 }
@@ -480,20 +477,19 @@ void JumpTableArithmeticNumeric::GE(ExecutionEngine& engine, const Instruction& 
     auto item2 = engine.Pop();
     auto item1 = engine.Pop();
 
-    // Check for invalid types for numeric comparison
-    auto type1 = item1->GetType();
-    auto type2 = item2->GetType();
+    auto isNumericComparable = [](const std::shared_ptr<StackItem>& item) {
+        auto type = item->GetType();
+        return type == StackItemType::Integer || type == StackItemType::Boolean || item->IsNull();
+    };
 
-    // Only allow Integer, Boolean, and Null types for numeric comparison
-    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
-        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null))
+    if (!isNumericComparable(item1) || !isNumericComparable(item2))
     {
         throw std::runtime_error("Invalid comparison operation");
     }
 
     // Handle null values - treat null as integer 0
-    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
-    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    int64_t x2 = item2->IsNull() ? 0 : item2->GetInteger();
+    int64_t x1 = item1->IsNull() ? 0 : item1->GetInteger();
 
     engine.Push(StackItem::Create(x1 >= x2));
 }

@@ -18,8 +18,12 @@ namespace neo::vm
 enum class VMState : uint8_t
 {
     None = 0x00,
+    NONE = None,
     Halt = 0x01,
+    HALT = Halt,
     Fault = 0x02,
-    Break = 0x04
+    FAULT = Fault,
+    Break = 0x04,
+    BREAK = Break
 };
 }  // namespace neo::vm

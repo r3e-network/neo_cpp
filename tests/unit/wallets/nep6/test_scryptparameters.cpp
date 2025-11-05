@@ -265,7 +265,7 @@ TEST_F(ScryptParametersTest, InvalidJsonHandling)
     wrongTypeJson["r"] = testR;
     wrongTypeJson["p"] = testP;
 
-    EXPECT_NO_THROW(params.FromJson(wrongTypeJson));
+    EXPECT_THROW(params.FromJson(wrongTypeJson), nlohmann::json::type_error);
 }
 
 TEST_F(ScryptParametersTest, NEP6Compliance)

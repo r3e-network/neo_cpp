@@ -1,179 +1,210 @@
 #include <gtest/gtest.h>
-#include <neo/io/byte_vector.h>
+
 #include <neo/vm/debugger.h>
 #include <neo/vm/execution_engine.h>
+#include <neo/vm/opcode.h>
 #include <neo/vm/script.h>
+#include <neo/vm/script_builder.h>
 
-using namespace neo::vm;
-using ByteVector = neo::vm::internal::ByteVector;
-
-// Test fixture for Debugger tests
+namespace neo::vm::tests
+{
 class DebuggerTest : public ::testing::Test
 {
   protected:
-    void SetUp() override
-    {
-        // Create a simple script with PUSH1, PUSH2, ADD operations
-        script_ = Script(ByteVector::Parse("111293"));
-        engine_ = std::make_unique<ExecutionEngine>();
-        debugger_ = std::make_unique<Debugger>(*engine_);
-    }
+    void SetUp() override { engine_ = std::make_unique<ExecutionEngine>(); }
 
-    Script script_;
     std::unique_ptr<ExecutionEngine> engine_;
-    std::unique_ptr<Debugger> debugger_;
 };
 
-// Test StepInto functionality
-TEST_F(DebuggerTest, StepInto)
+TEST_F(DebuggerTest, BreakpointsPauseExecution)
 {
-    // Load script into engine
-    engine_->LoadScript(script_);
+    ScriptBuilder builder;
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
 
-    // Initially in BREAK state
-    EXPECT_EQ(engine_->GetState(), VMState::Break);
+    Script script(builder.ToArray());
+    engine_->LoadScript(script);
 
-    // Step into first instruction (PUSH1)
-    VMState state = debugger_->StepInto();
+    Debugger debugger(*engine_);
 
-    // Should still be in BREAK state
-    EXPECT_EQ(state, VMState::Break);
+    const auto& contextScript = engine_->GetCurrentContext().GetScript();
+    EXPECT_FALSE(debugger.RemoveBreakPoint(contextScript, 3));
 
-    // Stack should have one item with value 1
-    EXPECT_EQ(engine_->GetCurrentContext().GetEvaluationStack().size(), 1);
-    EXPECT_EQ(engine_->GetCurrentContext().Peek()->GetInteger(), 1);
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
-    // Step into second instruction (PUSH2)
-    state = debugger_->StepInto();
+    debugger.AddBreakPoint(contextScript, 2);
+    debugger.AddBreakPoint(contextScript, 3);
 
-    // Should still be in BREAK state
-    EXPECT_EQ(state, VMState::Break);
+    EXPECT_EQ(VMState::Break, debugger.Execute());
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
+    EXPECT_EQ(2, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
-    // Stack should have two items with values 1 and 2
-    EXPECT_EQ(engine_->GetCurrentContext().GetEvaluationStack().size(), 2);
-    EXPECT_EQ(engine_->GetCurrentContext().Peek()->GetInteger(), 2);
-    EXPECT_EQ(engine_->GetCurrentContext().Peek(1)->GetInteger(), 1);
+    EXPECT_TRUE(debugger.RemoveBreakPoint(contextScript, 2));
+    EXPECT_FALSE(debugger.RemoveBreakPoint(contextScript, 2));
+    EXPECT_TRUE(debugger.RemoveBreakPoint(contextScript, 3));
+    EXPECT_FALSE(debugger.RemoveBreakPoint(contextScript, 3));
 
-    // Step into third instruction (ADD)
-    state = debugger_->StepInto();
-
-    // Should still be in BREAK state
-    EXPECT_EQ(state, VMState::Break);
-
-    // Stack should have one item with value 3 (1+2)
-    EXPECT_EQ(engine_->GetCurrentContext().GetEvaluationStack().size(), 1);
-    EXPECT_EQ(engine_->GetCurrentContext().Peek()->GetInteger(), 3);
-
-    // Script is now complete, stepping again should halt
-    state = debugger_->StepInto();
-
-    // Should now be in HALT state
-    EXPECT_EQ(state, VMState::Halt);
+    EXPECT_EQ(VMState::Halt, debugger.Execute());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
-// Test StepOut functionality
-#if 0
-// DISABLED: Complex debugging scenario - low priority
-TEST_F(DebuggerTest, StepOut)
+TEST_F(DebuggerTest, ExecuteWithoutBreakpointsRunsToCompletion)
 {
-    // Create a script with a CALL to a function that pushes two values and adds them
-    // Main script: PUSH1, CALL (to func), RET
-    // Function: PUSH2, PUSH3, ADD, RET
-    auto mainScript = ByteVector::Parse("1134040040");
-    auto funcStartPos = 2;  // Position of function start (PUSH2)
-    
-    Script script(mainScript);
-    auto engine = std::make_unique<ExecutionEngine>();
-    auto debugger = std::make_unique<Debugger>(*engine);
-    
-    // Load script into engine
-    engine->LoadScript(script);
-    
-    // Step into first instruction (PUSH1)
-    VMState state = debugger->StepInto();
-    EXPECT_EQ(state, VMState::Break);
-    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 1);
-    
-    // Step into CALL instruction, which should create a new frame for the function
-    state = debugger->StepInto();
-    EXPECT_EQ(state, VMState::Break);
-    EXPECT_EQ(engine->GetInvocationStack().size(), 2);
-    
-    // Now we're at the beginning of the function, step out should execute until the function returns
-    state = debugger->StepOut();
-    EXPECT_EQ(state, VMState::Break);
-    
-    // Should be back to main script with one stack frame
-    EXPECT_EQ(engine->GetInvocationStack().size(), 1);
-    
-    // Stack should have the result of the function (5)
-    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 2);
-    EXPECT_EQ(engine->GetCurrentContext().Peek()->GetInteger(), 5);
-}
-#endif
+    ScriptBuilder builder;
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
 
-#if 0
-// Test StepOver functionality
-// DISABLED: Complex debugging scenario - low priority
-TEST_F(DebuggerTest, StepOver)
+    Script script(builder.ToArray());
+    engine_->LoadScript(script);
+
+    Debugger debugger(*engine_);
+
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
+    EXPECT_EQ(VMState::Halt, debugger.Execute());
+    EXPECT_TRUE(engine_->GetInvocationStack().empty());
+    EXPECT_EQ(VMState::Halt, engine_->State());
+}
+
+TEST_F(DebuggerTest, ExecutionWithoutDebuggerHalts)
 {
-    // Create a script with a CALL to a function
-    // Main script: PUSH1, CALL (to func), PUSH4, ADD, RET
-    // Function: PUSH2, PUSH3, ADD, RET
-    auto mainScript = ByteVector::Parse("113404145E40");
-    auto funcStartPos = 2;  // Position of function start (PUSH2)
-    
-    Script script(mainScript);
-    auto engine = std::make_unique<ExecutionEngine>();
-    auto debugger = std::make_unique<Debugger>(*engine);
-    
-    // Load script into engine
-    engine->LoadScript(script);
-    
-    // Step into first instruction (PUSH1)
-    VMState state = debugger->StepInto();
-    EXPECT_EQ(state, VMState::Break);
-    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 1);
-    
-    // Step over CALL instruction, which should execute the entire function
-    state = debugger->StepOver();
-    EXPECT_EQ(state, VMState::Break);
-    
-    // Should still be in main script with result of function call
-    EXPECT_EQ(engine->GetInvocationStack().size(), 1);
-    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 2);
-    EXPECT_EQ(engine->GetCurrentContext().Peek()->GetInteger(), 5);
-    
-    // Step over PUSH4
-    state = debugger->StepOver();
-    EXPECT_EQ(state, VMState::Break);
-    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 3);
-    EXPECT_EQ(engine->GetCurrentContext().Peek()->GetInteger(), 4);
-    
-    // Step over ADD
-    state = debugger->StepOver();
-    EXPECT_EQ(state, VMState::Break);
-    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 2);
-    EXPECT_EQ(engine->GetCurrentContext().Peek()->GetInteger(), 9); // 5 + 4 = 9
-}
-#endif
+    ScriptBuilder builder;
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
+    builder.Emit(OpCode::NOP);
 
-// Test Continue functionality
-TEST_F(DebuggerTest, Continue)
+    Script script(builder.ToArray());
+    engine_->LoadScript(script);
+
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
+    EXPECT_EQ(VMState::Halt, engine_->Execute());
+    EXPECT_TRUE(engine_->GetInvocationStack().empty());
+    EXPECT_EQ(VMState::Halt, engine_->State());
+}
+
+TEST_F(DebuggerTest, StepOverSkipsMethodBodies)
 {
-    // Load script into engine
-    engine_->LoadScript(script_);
+    ScriptBuilder builder;
+    builder.EmitCall(4);
+    builder.Emit(OpCode::NOT);
+    builder.Emit(OpCode::RET);
+    builder.Emit(OpCode::PUSH0);
+    builder.Emit(OpCode::RET);
 
-    // Initially in BREAK state
-    EXPECT_EQ(engine_->GetState(), VMState::Break);
+    Script script(builder.ToArray());
+    engine_->LoadScript(script);
 
-    // Continue execution until completion
-    VMState state = debugger_->Execute();
+    Debugger debugger(*engine_);
 
-    // Should now be in HALT state
-    EXPECT_EQ(state, VMState::Halt);
+    auto nextInstruction = engine_->GetCurrentContext().GetNextInstructionObject();
+    ASSERT_NE(nextInstruction, nullptr);
+    EXPECT_EQ(OpCode::NOT, nextInstruction->opcode);
 
-    // Stack should have one item with value 3 (1+2)
-    EXPECT_EQ(engine_->GetResultStack().size(), 1);
-    EXPECT_EQ(engine_->GetResultStack()[0]->GetInteger(), 3);
+    EXPECT_EQ(VMState::Break, debugger.StepOver());
+    EXPECT_EQ(2, engine_->GetCurrentContext().GetInstructionPointer());
+    nextInstruction = engine_->GetCurrentContext().GetNextInstructionObject();
+    ASSERT_NE(nextInstruction, nullptr);
+    EXPECT_EQ(OpCode::RET, nextInstruction->opcode);
+    EXPECT_EQ(VMState::Break, engine_->State());
+
+    EXPECT_EQ(VMState::Halt, debugger.Execute());
+    auto result = engine_->ResultStack().Pop();
+    ASSERT_NE(result, nullptr);
+    EXPECT_TRUE(result->GetBoolean());
+    EXPECT_EQ(VMState::Halt, engine_->State());
+
+    EXPECT_EQ(VMState::Halt, debugger.StepOver());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
+
+TEST_F(DebuggerTest, StepIntoTraversesCalls)
+{
+    ScriptBuilder builder;
+    builder.EmitCall(4);
+    builder.Emit(OpCode::NOT);
+    builder.Emit(OpCode::RET);
+    builder.Emit(OpCode::PUSH0);
+    builder.Emit(OpCode::RET);
+
+    Script script(builder.ToArray());
+    engine_->LoadScript(script);
+
+    Debugger debugger(*engine_);
+
+    auto entryContext = engine_->GetInvocationStack().back();
+    ASSERT_TRUE(entryContext);
+    EXPECT_EQ(entryContext.get(), &engine_->GetCurrentContext());
+    EXPECT_EQ(entryContext.get(), engine_->GetEntryContext().get());
+
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
+    EXPECT_NE(entryContext.get(), &engine_->GetCurrentContext());
+    EXPECT_EQ(entryContext.get(), engine_->GetEntryContext().get());
+
+    auto nextInstruction = engine_->GetCurrentContext().GetNextInstructionObject();
+    ASSERT_NE(nextInstruction, nullptr);
+    EXPECT_EQ(OpCode::RET, nextInstruction->opcode);
+
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
+
+    EXPECT_EQ(entryContext.get(), &engine_->GetCurrentContext());
+    EXPECT_EQ(entryContext.get(), engine_->GetEntryContext().get());
+
+    nextInstruction = engine_->GetCurrentContext().GetNextInstructionObject();
+    ASSERT_NE(nextInstruction, nullptr);
+    EXPECT_EQ(OpCode::RET, nextInstruction->opcode);
+
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
+    EXPECT_EQ(VMState::Halt, debugger.StepInto());
+
+    auto result = engine_->ResultStack().Pop();
+    ASSERT_NE(result, nullptr);
+    EXPECT_TRUE(result->GetBoolean());
+    EXPECT_EQ(VMState::Halt, engine_->State());
+
+    EXPECT_EQ(VMState::Halt, debugger.StepInto());
+    EXPECT_EQ(VMState::Halt, engine_->State());
+}
+
+TEST_F(DebuggerTest, StepOutReturnsToCallerContext)
+{
+    ScriptBuilder builder;
+    builder.EmitCall(4);
+    builder.Emit(OpCode::NOT);
+    builder.Emit(OpCode::RET);
+    builder.Emit(OpCode::PUSH0);
+    builder.Emit(OpCode::RET);
+
+    Script script(builder.ToArray());
+    engine_->LoadScript(script);
+
+    Debugger debugger(*engine_);
+
+    auto entryContext = engine_->GetInvocationStack().back();
+    ASSERT_TRUE(entryContext);
+
+    // Enter the called context.
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
+    EXPECT_NE(entryContext.get(), &engine_->GetCurrentContext());
+
+    // Step out should return to the caller and pause in Break state.
+    EXPECT_EQ(VMState::Break, debugger.StepOut());
+    EXPECT_EQ(entryContext.get(), &engine_->GetCurrentContext());
+    EXPECT_EQ(VMState::Break, engine_->State());
+
+    auto nextInstruction = engine_->GetCurrentContext().GetNextInstructionObject();
+    ASSERT_NE(nextInstruction, nullptr);
+    EXPECT_EQ(OpCode::RET, nextInstruction->opcode);
+
+    // Finish execution to confirm the returned value propagates correctly.
+    EXPECT_EQ(VMState::Halt, debugger.Execute());
+    auto result = engine_->ResultStack().Pop();
+    ASSERT_NE(result, nullptr);
+    EXPECT_TRUE(result->GetBoolean());
+}
+}  // namespace neo::vm::tests

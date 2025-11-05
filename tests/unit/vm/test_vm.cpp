@@ -5,6 +5,7 @@
 
 #include <gtest/gtest.h>
 #include <neo/vm/vm.h>
+#include <neo/vm/execution_engine.h>
 #include <neo/vm/script_builder.h>
 #include <neo/vm/opcode.h>
 

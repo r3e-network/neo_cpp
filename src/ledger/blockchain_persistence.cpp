@@ -71,7 +71,10 @@ void Blockchain::ProcessBlock(std::shared_ptr<Block> block)
         // Persist blocks
         for (const auto& block_to_persist : blocks_to_persist)
         {
-            PersistBlock(block_to_persist);
+            if (!skip_block_persistence_for_tests_)
+            {
+                PersistBlock(block_to_persist);
+            }
 
             // Clean up caches
             block_cache_unverified_.erase(block_to_persist->GetIndex());
@@ -231,6 +234,11 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
 
 bool Blockchain::VerifyBlock(std::shared_ptr<Block> block, std::shared_ptr<persistence::DataCache> snapshot)
 {
+    if (skip_block_verification_for_tests_)
+    {
+        return true;
+    }
+
     try
     {
         // Basic block verification
@@ -296,33 +304,103 @@ void Blockchain::ProcessUnverifiedBlocks(uint32_t height)
 {
     std::shared_ptr<UnverifiedBlocksList> unverified_list;
     {
-        std::unique_lock<std::shared_mutex> cacheLock(blockchain_mutex_);
+        std::shared_lock<std::shared_mutex> cache_lock(blockchain_mutex_);
         auto it = block_cache_unverified_.find(height);
         if (it == block_cache_unverified_.end())
         {
             return;
         }
         unverified_list = it->second;
-        block_cache_unverified_.erase(it);
     }
 
     if (!unverified_list || unverified_list->blocks.empty())
     {
+        std::unique_lock<std::shared_mutex> cache_lock(blockchain_mutex_);
+        block_cache_unverified_.erase(height);
         return;
     }
 
-    // Process all unverified blocks for this height
+    auto ledger_contract = system_ ? system_->GetLedgerContract() : nullptr;
+    if (!ledger_contract || !data_cache_)
+    {
+        std::cerr << "ProcessUnverifiedBlocks: ledger contract unavailable for height " << height << std::endl;
+        return;
+    }
+
+    const auto current_height =
+        test_current_height_override_ ? test_current_height_override_() : ledger_contract->GetCurrentIndex(data_cache_);
+    std::vector<std::shared_ptr<Block>> remaining;
+    remaining.reserve(unverified_list->blocks.size());
+
     for (const auto& unverified_block : unverified_list->blocks)
     {
-        if (!unverified_block) continue;
+        if (!unverified_block)
+        {
+            continue;
+        }
 
-        // If headers are now available, validate inline; otherwise queue for later.
+        const auto block_index = unverified_block->GetIndex();
+        if (block_index > current_height + 1)
+        {
+            // Still waiting for intermediate blocks.
+            remaining.push_back(unverified_block);
+            continue;
+        }
+
+        if (block_index > 0)
+        {
+            auto expected_prev = GetBlockHash(block_index - 1);
+            if (expected_prev.IsZero())
+            {
+                remaining.push_back(unverified_block);
+                continue;
+            }
+            if (expected_prev != unverified_block->GetPrevHash())
+            {
+                std::cerr << "ProcessUnverifiedBlocks: dropping block " << block_index
+                          << " due to previous hash mismatch" << std::endl;
+                continue;
+            }
+        }
+
+        bool header_conflict = false;
+        {
+            std::shared_lock<std::shared_mutex> cache_lock(blockchain_mutex_);
+            auto header_it = header_hash_by_index_.find(block_index);
+            if (header_it != header_hash_by_index_.end())
+            {
+                const auto& known_hash = header_it->second;
+                if (!known_hash.IsZero() && known_hash != unverified_block->GetHash())
+                {
+                    header_conflict = true;
+                }
+            }
+        }
+
+        if (header_conflict)
+        {
+            std::cerr << "ProcessUnverifiedBlocks: conflicting cached header for height " << block_index << std::endl;
+            continue;
+        }
+
         auto result = OnNewBlock(unverified_block);
         if (result == VerifyResult::UnableToVerify)
         {
-            std::unique_lock<std::mutex> proc_lock(processing_mutex_);
-            processing_queue_.push([this, unverified_block]() { OnNewBlock(unverified_block); });
-            processing_cv_.notify_one();
+            // Still missing dependencies; keep the block cached.
+            remaining.push_back(unverified_block);
+        }
+    }
+
+    {
+        std::unique_lock<std::shared_mutex> cache_lock(blockchain_mutex_);
+        if (remaining.empty())
+        {
+            block_cache_unverified_.erase(height);
+        }
+        else
+        {
+            unverified_list->blocks = std::move(remaining);
+            block_cache_unverified_[height] = unverified_list;
         }
     }
 }

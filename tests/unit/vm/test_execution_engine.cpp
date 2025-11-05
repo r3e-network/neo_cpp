@@ -5,6 +5,7 @@
 #include <neo/vm/vm_state.h>
 #include <neo/vm/evaluation_stack.h>
 #include <neo/vm/primitive_items.h>
+#include <neo/vm/debugger.h>
 
 namespace neo {
 namespace vm {
@@ -24,7 +25,12 @@ protected:
     
     // Helper to create a script from opcodes
     std::shared_ptr<Script> CreateScript(std::initializer_list<uint8_t> opcodes) {
-        return std::make_shared<Script>(std::vector<uint8_t>(opcodes));
+        internal::ByteVector bytes;
+        bytes.Reserve(opcodes.size());
+        for (auto opcode : opcodes) {
+            bytes.Push(opcode);
+        }
+        return std::make_shared<Script>(bytes);
     }
 };
 
@@ -32,12 +38,12 @@ protected:
 TEST_F(ExecutionEngineTest, PushAndAdd) {
     // Create script: PUSH1 PUSH2 ADD
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::ADD)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::ADD)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -50,12 +56,12 @@ TEST_F(ExecutionEngineTest, PushAndAdd) {
 TEST_F(ExecutionEngineTest, PushAndSubtract) {
     // Create script: PUSH5 PUSH3 SUB
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH5),
-        static_cast<uint8_t>(Opcode::PUSH3),
-        static_cast<uint8_t>(Opcode::SUB)
+        static_cast<uint8_t>(OpCode::PUSH5),
+        static_cast<uint8_t>(OpCode::PUSH3),
+        static_cast<uint8_t>(OpCode::SUB)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -68,12 +74,12 @@ TEST_F(ExecutionEngineTest, PushAndSubtract) {
 TEST_F(ExecutionEngineTest, PushAndMultiply) {
     // Create script: PUSH3 PUSH4 MUL
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH3),
-        static_cast<uint8_t>(Opcode::PUSH4),
-        static_cast<uint8_t>(Opcode::MUL)
+        static_cast<uint8_t>(OpCode::PUSH3),
+        static_cast<uint8_t>(OpCode::PUSH4),
+        static_cast<uint8_t>(OpCode::MUL)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -87,12 +93,12 @@ TEST_F(ExecutionEngineTest, PushAndMultiply) {
 TEST_F(ExecutionEngineTest, ComparisonEqual) {
     // Create script: PUSH2 PUSH2 EQUAL
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::EQUAL)
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::EQUAL)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -105,12 +111,12 @@ TEST_F(ExecutionEngineTest, ComparisonEqual) {
 TEST_F(ExecutionEngineTest, ComparisonNotEqual) {
     // Create script: PUSH1 PUSH2 EQUAL
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::EQUAL)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::EQUAL)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -123,12 +129,12 @@ TEST_F(ExecutionEngineTest, ComparisonNotEqual) {
 TEST_F(ExecutionEngineTest, ComparisonLessThan) {
     // Create script: PUSH1 PUSH2 LT
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::LT)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::LT)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -142,12 +148,12 @@ TEST_F(ExecutionEngineTest, ComparisonLessThan) {
 TEST_F(ExecutionEngineTest, LogicalAnd) {
     // Create script: PUSH1 PUSH1 BOOLAND
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::BOOLAND)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::BOOLAND)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -160,12 +166,12 @@ TEST_F(ExecutionEngineTest, LogicalAnd) {
 TEST_F(ExecutionEngineTest, LogicalOr) {
     // Create script: PUSH0 PUSH1 BOOLOR
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH0),
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::BOOLOR)
+        static_cast<uint8_t>(OpCode::PUSH0),
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::BOOLOR)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -178,11 +184,11 @@ TEST_F(ExecutionEngineTest, LogicalOr) {
 TEST_F(ExecutionEngineTest, LogicalNot) {
     // Create script: PUSH0 NOT
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH0),
-        static_cast<uint8_t>(Opcode::NOT)
+        static_cast<uint8_t>(OpCode::PUSH0),
+        static_cast<uint8_t>(OpCode::NOT)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -196,11 +202,11 @@ TEST_F(ExecutionEngineTest, LogicalNot) {
 TEST_F(ExecutionEngineTest, StackDuplicate) {
     // Create script: PUSH1 DUP
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::DUP)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::DUP)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -215,12 +221,12 @@ TEST_F(ExecutionEngineTest, StackDuplicate) {
 TEST_F(ExecutionEngineTest, StackSwap) {
     // Create script: PUSH1 PUSH2 SWAP
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::SWAP)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::SWAP)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -235,12 +241,12 @@ TEST_F(ExecutionEngineTest, StackSwap) {
 TEST_F(ExecutionEngineTest, StackDrop) {
     // Create script: PUSH1 PUSH2 DROP
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::DROP)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::DROP)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -254,16 +260,16 @@ TEST_F(ExecutionEngineTest, StackDrop) {
 TEST_F(ExecutionEngineTest, ConditionalJumpTrue) {
     // Create script: PUSH1 JMPIF [skip] PUSH0 [target] PUSH5
     std::vector<uint8_t> script_bytes = {
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::JMPIF),
-        0x02,  // Jump offset (skip PUSH0)
-        static_cast<uint8_t>(Opcode::PUSH0),
-        static_cast<uint8_t>(Opcode::PUSH5)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::JMPIF),
+        0x03,  // Jump offset (skip PUSH0)
+        static_cast<uint8_t>(OpCode::PUSH0),
+        static_cast<uint8_t>(OpCode::PUSH5)
     };
     
     auto script = std::make_shared<Script>(script_bytes);
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -276,16 +282,16 @@ TEST_F(ExecutionEngineTest, ConditionalJumpTrue) {
 TEST_F(ExecutionEngineTest, ConditionalJumpFalse) {
     // Create script: PUSH0 JMPIF [skip] PUSH3 [target] PUSH5
     std::vector<uint8_t> script_bytes = {
-        static_cast<uint8_t>(Opcode::PUSH0),
-        static_cast<uint8_t>(Opcode::JMPIF),
+        static_cast<uint8_t>(OpCode::PUSH0),
+        static_cast<uint8_t>(OpCode::JMPIF),
         0x02,  // Jump offset (would skip PUSH3 if condition was true)
-        static_cast<uint8_t>(Opcode::PUSH3),
-        static_cast<uint8_t>(Opcode::PUSH5)
+        static_cast<uint8_t>(OpCode::PUSH3),
+        static_cast<uint8_t>(OpCode::PUSH5)
     };
     
     auto script = std::make_shared<Script>(script_bytes);
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -301,14 +307,19 @@ TEST_F(ExecutionEngineTest, ConditionalJumpFalse) {
 TEST_F(ExecutionEngineTest, NopOperation) {
     // Create script: PUSH1 NOP PUSH2
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::NOP),
-        static_cast<uint8_t>(Opcode::PUSH2)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::NOP),
+        static_cast<uint8_t>(OpCode::PUSH2)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
+    if (engine->State() != VMState::HALT)
+    {
+        std::cout << "State after NOP test: "
+                  << static_cast<int>(static_cast<VMState>(engine->State())) << std::endl;
+    }
     EXPECT_EQ(engine->State(), VMState::HALT);
     EXPECT_EQ(engine->ResultStack().Count(), 2);
 }
@@ -317,10 +328,10 @@ TEST_F(ExecutionEngineTest, NopOperation) {
 TEST_F(ExecutionEngineTest, StackUnderflow) {
     // Create script: ADD (without pushing any values)
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::ADD)
+        static_cast<uint8_t>(OpCode::ADD)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::FAULT);
@@ -329,12 +340,12 @@ TEST_F(ExecutionEngineTest, StackUnderflow) {
 TEST_F(ExecutionEngineTest, DivisionByZero) {
     // Create script: PUSH1 PUSH0 DIV
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH0),
-        static_cast<uint8_t>(Opcode::DIV)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH0),
+        static_cast<uint8_t>(OpCode::DIV)
     });
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::FAULT);
@@ -344,19 +355,19 @@ TEST_F(ExecutionEngineTest, DivisionByZero) {
 TEST_F(ExecutionEngineTest, CallAndReturn) {
     // Create script with CALL and RET
     std::vector<uint8_t> script_bytes = {
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::CALL),
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::CALL),
         0x04,  // Jump to subroutine
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::RET),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::RET),
         // Subroutine
-        static_cast<uint8_t>(Opcode::PUSH3),
-        static_cast<uint8_t>(Opcode::RET)
+        static_cast<uint8_t>(OpCode::PUSH3),
+        static_cast<uint8_t>(OpCode::RET)
     };
     
     auto script = std::make_shared<Script>(script_bytes);
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     EXPECT_EQ(engine->State(), VMState::HALT);
@@ -370,12 +381,12 @@ TEST_F(ExecutionEngineTest, MaxStackSize) {
     
     // Push many items to exceed stack limit
     for (int i = 0; i < 2050; i++) {
-        script_bytes.push_back(static_cast<uint8_t>(Opcode::PUSH1));
+        script_bytes.push_back(static_cast<uint8_t>(OpCode::PUSH1));
     }
     
     auto script = std::make_shared<Script>(script_bytes);
     
-    engine->LoadScript(script);
+    engine->LoadScript(*script);
     engine->Execute();
     
     // Should fault due to stack overflow
@@ -386,28 +397,37 @@ TEST_F(ExecutionEngineTest, MaxStackSize) {
 TEST_F(ExecutionEngineTest, StepExecution) {
     // Create script: PUSH1 PUSH2 ADD
     auto script = CreateScript({
-        static_cast<uint8_t>(Opcode::PUSH1),
-        static_cast<uint8_t>(Opcode::PUSH2),
-        static_cast<uint8_t>(Opcode::ADD)
+        static_cast<uint8_t>(OpCode::PUSH1),
+        static_cast<uint8_t>(OpCode::PUSH2),
+        static_cast<uint8_t>(OpCode::ADD)
     });
     
-    engine->LoadScript(script);
-    
+    engine->LoadScript(*script);
+
+    Debugger debugger(*engine);
+
     // Step 1: PUSH1
-    engine->StepInto();
-    EXPECT_EQ(engine->State(), VMState::NONE);
-    EXPECT_EQ(engine->ResultStack().Count(), 1);
-    
+    EXPECT_EQ(debugger.StepInto(), VMState::Break);
+    ASSERT_FALSE(engine->GetInvocationStack().empty());
+    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 1u);
+
     // Step 2: PUSH2
-    engine->StepInto();
-    EXPECT_EQ(engine->State(), VMState::NONE);
-    EXPECT_EQ(engine->ResultStack().Count(), 2);
-    
-    // Step 3: ADD
-    engine->StepInto();
-    EXPECT_EQ(engine->State(), VMState::HALT);
+    EXPECT_EQ(debugger.StepInto(), VMState::Break);
+    ASSERT_FALSE(engine->GetInvocationStack().empty());
+    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 2u);
+
+    // Step 3: ADD (result stays on evaluation stack until RET executes)
+    EXPECT_EQ(debugger.StepInto(), VMState::Break);
+    ASSERT_FALSE(engine->GetInvocationStack().empty());
+    EXPECT_EQ(engine->GetCurrentContext().GetEvaluationStack().size(), 1u);
+    auto top = engine->GetCurrentContext().Peek(0);
+    EXPECT_EQ(top->GetInteger(), 3);
+
+    // Step 4: implicit RET moves evaluation result onto the result stack
+    EXPECT_EQ(debugger.StepInto(), VMState::Halt);
+    EXPECT_TRUE(engine->GetInvocationStack().empty());
     EXPECT_EQ(engine->ResultStack().Count(), 1);
-    
+
     auto result = engine->ResultStack().Pop();
     EXPECT_EQ(result->GetInteger(), 3);
 }

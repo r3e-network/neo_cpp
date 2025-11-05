@@ -49,7 +49,7 @@ StackItemType ArrayItem::GetType() const { return StackItemType::Array; }
 
 bool ArrayItem::GetBoolean() const { return true; }
 
-int64_t ArrayItem::GetInteger() const { return 0; }
+int64_t ArrayItem::GetInteger() const { throw InvalidCastException("Cannot convert Array to integer"); }
 
 std::vector<std::shared_ptr<StackItem>> ArrayItem::GetArray() const { return value_; }
 
@@ -314,6 +314,17 @@ void MapItem::Remove(const std::shared_ptr<StackItem>& key)
             return;
         }
     }
+}
+
+bool MapItem::ContainsKey(const std::shared_ptr<StackItem>& key) const
+{
+    for (const auto& [existingKey, _] : value_)
+    {
+        (void)_;
+        if (existingKey->Equals(*key)) return true;
+    }
+
+    return false;
 }
 
 size_t MapItem::Size() const { return value_.size(); }

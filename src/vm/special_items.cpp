@@ -7,10 +7,12 @@
  */
 
 #include <neo/vm/exceptions.h>
+#include <neo/vm/script.h>
 #include <neo/vm/special_items.h>
 
 #include <algorithm>
 #include <stdexcept>
+#include <utility>
 
 namespace neo::vm
 {
@@ -36,7 +38,10 @@ bool InteropInterfaceItem::Equals(const StackItem& other) const
 }
 
 // PointerItem implementation
-PointerItem::PointerItem(int32_t position, std::shared_ptr<StackItem> value) : position_(position), value_(value) {}
+PointerItem::PointerItem(std::shared_ptr<Script> script, int32_t position)
+    : script_(std::move(script)), position_(position)
+{
+}
 
 StackItemType PointerItem::GetType() const { return StackItemType::Pointer; }
 
@@ -44,20 +49,18 @@ bool PointerItem::GetBoolean() const { return true; }
 
 int32_t PointerItem::GetPosition() const { return position_; }
 
-std::shared_ptr<StackItem> PointerItem::GetValue() const { return value_; }
+std::shared_ptr<Script> PointerItem::GetScript() const { return script_; }
 
 bool PointerItem::Equals(const StackItem& other) const
 {
     if (other.GetType() != StackItemType::Pointer) return false;
 
-    auto otherPointer = dynamic_cast<const PointerItem&>(other);
-    return position_ == otherPointer.GetPosition() &&
-           ((value_ == nullptr && otherPointer.GetValue() == nullptr) ||
-            (value_ != nullptr && otherPointer.GetValue() != nullptr && value_->Equals(*otherPointer.GetValue())));
+    const auto& otherPointer = static_cast<const PointerItem&>(other);
+    return position_ == otherPointer.GetPosition() && script_ == otherPointer.GetScript();
 }
 
 // NullItem implementation
-StackItemType NullItem::GetType() const { return StackItemType::Null; }
+StackItemType NullItem::GetType() const { return StackItemType::Any; }
 
 bool NullItem::GetBoolean() const { return false; }
 
@@ -65,11 +68,11 @@ int64_t NullItem::GetInteger() const { throw InvalidOperationException("Cannot c
 
 std::shared_ptr<StackItem> NullItem::ConvertTo(StackItemType type) const
 {
-    if (type == StackItemType::Any || !IsValidStackItemType(type))
+    if (type == StackItemType::Any || type == StackItemType::Null || !IsValidStackItemType(type))
         throw InvalidCastException("Type Null can't be converted to StackItemType: " +
                                    std::to_string(static_cast<int>(type)));
     return std::const_pointer_cast<StackItem>(shared_from_this());
 }
 
-bool NullItem::Equals(const StackItem& other) const { return other.GetType() == StackItemType::Any; }
+bool NullItem::Equals(const StackItem& other) const { return other.IsNull(); }
 }  // namespace neo::vm

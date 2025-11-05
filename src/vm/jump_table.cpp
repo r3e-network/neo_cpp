@@ -66,6 +66,7 @@ JumpTable::JumpTable()
     SetHandler(OpCode::PUSH14, JumpTableConstants::PUSH14);
     SetHandler(OpCode::PUSH15, JumpTableConstants::PUSH15);
     SetHandler(OpCode::PUSH16, JumpTableConstants::PUSH16);
+    SetHandler(OpCode::NOP, [](ExecutionEngine&, const Instruction&) {});
 
     // Flow control - Jump operations
     SetHandler(OpCode::JMP, JumpTableControlJump::JMP);

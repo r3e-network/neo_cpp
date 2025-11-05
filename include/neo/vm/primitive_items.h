@@ -10,6 +10,8 @@
 
 #include <neo/vm/stack_item.h>
 
+#include <neo/io/byte_span.h>
+
 namespace neo::vm
 {
 /**
@@ -167,6 +169,12 @@ class ByteStringItem : public StackItem
     io::ByteVector GetByteArray() const override;
 
     /**
+     * @brief Gets a read-only view over the underlying bytes.
+     * @return A ByteSpan referencing the stored bytes.
+     */
+    io::ByteSpan GetByteSpan() const;
+
+    /**
      * @brief Gets the string value of the stack item.
      * @return The string value of the stack item.
      */
@@ -224,6 +232,18 @@ class BufferItem : public StackItem
      * @return The byte array value of the stack item.
      */
     io::ByteVector GetByteArray() const override;
+
+    /**
+     * @brief Returns a mutable span over the underlying buffer.
+     * @return Reference to the mutable byte vector.
+     */
+    io::ByteVector& GetSpan();
+
+    /**
+     * @brief Returns a read-only view over the underlying buffer.
+     * @return Const reference to the byte vector.
+     */
+    const io::ByteVector& GetSpan() const;
 
     /**
      * @brief Gets the string value of the stack item.

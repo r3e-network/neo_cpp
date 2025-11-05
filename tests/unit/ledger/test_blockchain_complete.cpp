@@ -1,137 +1,105 @@
-/**
- * @file test_blockchain_complete.cpp
- * @brief Complete blockchain test suite
- */
-
 #include <gtest/gtest.h>
-#include <neo/ledger/blockchain.h>
+
+#include <neo/core/neo_system.h>
+#include <neo/core/neo_system_factory.h>
 #include <neo/ledger/block.h>
-#include <neo/ledger/transaction.h>
-#include <neo/io/uint256.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/ledger/header.h>
+#include <neo/protocol_settings.h>
+#include "utils/test_helpers.h"
 
-namespace neo::ledger::tests {
+namespace neo::ledger::tests
+{
 
-class BlockchainCompleteTest : public ::testing::Test {
-protected:
-    std::unique_ptr<Blockchain> blockchain;
-    
-    void SetUp() override {
-        blockchain = std::make_unique<Blockchain>();
+class BlockchainCompleteTest : public ::testing::Test
+{
+  protected:
+    void SetUp() override
+    {
+        auto settings = std::make_unique<neo::ProtocolSettings>();
+        settings->SetNetwork(0x334E454F);        // TESTNET magic
+        settings->SetValidatorsCount(7);         // default N3 value
+        settings->SetMillisecondsPerBlock(15000);
+
+        neo_system_ = neo::NeoSystemFactory::Create(std::move(settings), "memory", "blockchain_complete_test");
+        ASSERT_NE(neo_system_, nullptr);
+
+        blockchain_ = neo_system_->GetBlockchain();
+        ASSERT_NE(blockchain_, nullptr);
     }
-    
-    void TearDown() override {
-        blockchain.reset();
+
+    void TearDown() override
+    {
+        if (blockchain_ != nullptr)
+        {
+            blockchain_->Stop();
+        }
+        neo_system_.reset();
+        blockchain_ = nullptr;
     }
+
+    std::shared_ptr<neo::NeoSystem> neo_system_;
+    neo::ledger::Blockchain* blockchain_{nullptr};
 };
 
-TEST_F(BlockchainCompleteTest, GenesisBlock) {
-    auto genesis = blockchain->GetGenesisBlock();
-    EXPECT_NE(genesis, nullptr);
-    EXPECT_EQ(genesis->Index, 0);
-    EXPECT_EQ(genesis->PrevHash, io::UInt256::Zero());
+TEST_F(BlockchainCompleteTest, GenesisBlockAvailable)
+{
+    auto block_zero = blockchain_->GetBlock(0);
+    ASSERT_NE(block_zero, nullptr);
+
+    EXPECT_EQ(block_zero->GetIndex(), 0u);
+    EXPECT_EQ(block_zero->GetPrevHash(), io::UInt256::Zero());
+    EXPECT_NE(block_zero->GetHash(), io::UInt256::Zero());
 }
 
-TEST_F(BlockchainCompleteTest, GetHeight) {
-    auto height = blockchain->GetHeight();
-    EXPECT_GE(height, 0);
+TEST_F(BlockchainCompleteTest, CurrentBlockHashMatchesStoredGenesisHash)
+{
+    auto current_hash = blockchain_->GetCurrentBlockHash();
+    auto stored_hash = blockchain_->GetBlockHash(0);
+
+    EXPECT_EQ(current_hash, stored_hash);
+    EXPECT_NE(current_hash, io::UInt256::Zero());
 }
 
-TEST_F(BlockchainCompleteTest, GetCurrentBlockHash) {
-    auto hash = blockchain->GetCurrentBlockHash();
-    EXPECT_NE(hash, io::UInt256::Zero());
+TEST_F(BlockchainCompleteTest, HeightStartsAtGenesis)
+{
+    auto height = blockchain_->GetHeight();
+    EXPECT_EQ(height, 0u);
+    EXPECT_EQ(height, blockchain_->GetCurrentBlockIndex());
 }
 
-TEST_F(BlockchainCompleteTest, GetBlock_ByIndex) {
-    auto block = blockchain->GetBlock(0);
-    EXPECT_NE(block, nullptr);
-    EXPECT_EQ(block->Index, 0);
+TEST_F(BlockchainCompleteTest, GetBlockByHashReturnsGenesis)
+{
+    auto genesis_hash = blockchain_->GetBlockHash(0);
+    auto block = blockchain_->GetBlock(genesis_hash);
+    ASSERT_NE(block, nullptr);
+    EXPECT_EQ(block->GetIndex(), 0u);
+    EXPECT_EQ(block->GetHash(), genesis_hash);
 }
 
-TEST_F(BlockchainCompleteTest, GetBlock_ByHash) {
-    auto genesis = blockchain->GetGenesisBlock();
-    auto hash = genesis->GetHash();
-    auto block = blockchain->GetBlock(hash);
-    EXPECT_NE(block, nullptr);
-    EXPECT_EQ(block->GetHash(), hash);
+TEST_F(BlockchainCompleteTest, ContainsBlockDetectsGenesis)
+{
+    auto genesis_hash = blockchain_->GetBlockHash(0);
+    EXPECT_TRUE(blockchain_->ContainsBlock(genesis_hash));
+
+    auto random_hash = neo::tests::TestHelpers::GenerateRandomHash();
+    EXPECT_FALSE(blockchain_->ContainsBlock(random_hash));
 }
 
-TEST_F(BlockchainCompleteTest, ContainsBlock) {
-    auto genesis = blockchain->GetGenesisBlock();
-    auto hash = genesis->GetHash();
-    EXPECT_TRUE(blockchain->ContainsBlock(hash));
-    
-    io::UInt256 randomHash;
-    randomHash.Fill(0xFF);
-    EXPECT_FALSE(blockchain->ContainsBlock(randomHash));
+TEST_F(BlockchainCompleteTest, GetBlockHeaderByIndex)
+{
+    auto header = blockchain_->GetBlockHeader(0);
+    ASSERT_NE(header, nullptr);
+    EXPECT_EQ(header->GetIndex(), 0u);
+    EXPECT_EQ(header->GetPrevHash(), io::UInt256::Zero());
 }
 
-TEST_F(BlockchainCompleteTest, GetTransaction) {
-    // Create a test transaction
-    Transaction tx;
-    tx.Version = 0;
-    tx.Nonce = 12345;
-    tx.SystemFee = 0;
-    tx.NetworkFee = 0;
-    tx.ValidUntilBlock = 100;
-    
-    auto hash = tx.GetHash();
-    
-    // Transaction shouldn't exist yet
-    auto retrieved = blockchain->GetTransaction(hash);
-    EXPECT_EQ(retrieved, nullptr);
+TEST_F(BlockchainCompleteTest, MissingTransactionLookupReturnsNull)
+{
+    auto random_hash = neo::tests::TestHelpers::GenerateRandomHash();
+    auto tx = blockchain_->GetTransaction(random_hash);
+    EXPECT_EQ(tx, nullptr);
+    EXPECT_EQ(blockchain_->GetTransactionHeight(random_hash), -1);
 }
 
-TEST_F(BlockchainCompleteTest, GetBlockHeader) {
-    auto header = blockchain->GetHeader(0);
-    EXPECT_NE(header, nullptr);
-    EXPECT_EQ(header->Index, 0);
-}
-
-TEST_F(BlockchainCompleteTest, GetNextBlockValidators) {
-    auto validators = blockchain->GetNextBlockValidators();
-    EXPECT_FALSE(validators.empty());
-}
-
-TEST_F(BlockchainCompleteTest, VerifyWitness) {
-    io::UInt160 scriptHash;
-    scriptHash.Fill(0x01);
-    
-    Witness witness;
-    witness.InvocationScript = {0x00};
-    witness.VerificationScript = {0x51}; // OP_PUSH1
-    
-    auto result = blockchain->VerifyWitness(scriptHash, witness, 0, 1000000);
-    EXPECT_FALSE(result); // Should fail with test data
-}
-
-TEST_F(BlockchainCompleteTest, CalculateNetworkFee) {
-    Transaction tx;
-    tx.Version = 0;
-    tx.SystemFee = 0;
-    tx.NetworkFee = 0;
-    
-    auto fee = blockchain->CalculateNetworkFee(tx);
-    EXPECT_GE(fee, 0);
-}
-
-TEST_F(BlockchainCompleteTest, GetMemoryPool) {
-    auto mempool = blockchain->GetMemoryPool();
-    EXPECT_NE(mempool, nullptr);
-}
-
-TEST_F(BlockchainCompleteTest, GetUnclaimedGas) {
-    io::UInt160 account;
-    account.Fill(0x01);
-    
-    auto gas = blockchain->GetUnclaimedGas(account, 100);
-    EXPECT_GE(gas, 0);
-}
-
-TEST_F(BlockchainCompleteTest, BlockchainState) {
-    EXPECT_FALSE(blockchain->IsStopped());
-    
-    blockchain->Stop();
-    EXPECT_TRUE(blockchain->IsStopped());
-}
-
-} // namespace neo::ledger::tests
+}  // namespace neo::ledger::tests

@@ -10,7 +10,29 @@
 
 namespace neo::network::p2p::payloads
 {
-HighPriority::HighPriority() {}
+HighPriority::HighPriority() : Type(this) {}
+
+HighPriority::HighPriority(const HighPriority& other) : ledger::TransactionAttribute(other), Type(this) {}
+
+HighPriority& HighPriority::operator=(const HighPriority& other)
+{
+    if (this != &other)
+    {
+        // No payload to copy.
+    }
+    return *this;
+}
+
+HighPriority::HighPriority(HighPriority&& other) noexcept : ledger::TransactionAttribute(std::move(other)), Type(this) {}
+
+HighPriority& HighPriority::operator=(HighPriority&& other) noexcept
+{
+    if (this != &other)
+    {
+        // Nothing to move.
+    }
+    return *this;
+}
 
 ledger::TransactionAttribute::Usage HighPriority::GetType() const
 {

@@ -43,29 +43,30 @@ TEST_F(DebuggerAllMethodsTest, TestBreakPoint)
     Debugger debugger(*engine_);
 
     // Test removing non-existent breakpoint
-    EXPECT_FALSE(debugger.RemoveBreakPoint(engine_->CurrentContext()->Script(), 3));
+    const Script& script_obj = engine_->GetCurrentContext().GetScript();
+    EXPECT_FALSE(debugger.RemoveBreakPoint(script_obj, 3));
 
-    EXPECT_EQ(OpCode::NOP, engine_->CurrentContext()->NextInstruction());
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Add breakpoints
-    debugger.AddBreakPoint(engine_->CurrentContext()->Script(), 2);
-    debugger.AddBreakPoint(engine_->CurrentContext()->Script(), 3);
+    debugger.AddBreakPoint(script_obj, 2);
+    debugger.AddBreakPoint(script_obj, 3);
 
     // Execute until first breakpoint
     debugger.Execute();
-    EXPECT_EQ(OpCode::NOP, engine_->CurrentContext()->NextInstruction());
-    EXPECT_EQ(2, engine_->CurrentContext()->InstructionPointer());
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
+    EXPECT_EQ(2, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     // Test removing breakpoints
-    EXPECT_TRUE(debugger.RemoveBreakPoint(engine_->CurrentContext()->Script(), 2));
-    EXPECT_FALSE(debugger.RemoveBreakPoint(engine_->CurrentContext()->Script(), 2));  // Already removed
-    EXPECT_TRUE(debugger.RemoveBreakPoint(engine_->CurrentContext()->Script(), 3));
-    EXPECT_FALSE(debugger.RemoveBreakPoint(engine_->CurrentContext()->Script(), 3));  // Already removed
+    EXPECT_TRUE(debugger.RemoveBreakPoint(script_obj, 2));
+    EXPECT_FALSE(debugger.RemoveBreakPoint(script_obj, 2));  // Already removed
+    EXPECT_TRUE(debugger.RemoveBreakPoint(script_obj, 3));
+    EXPECT_FALSE(debugger.RemoveBreakPoint(script_obj, 3));  // Already removed
 
     // Continue execution - should complete without hitting more breakpoints
     debugger.Execute();
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
 // C# Test Method: TestWithoutBreakPoints()
@@ -81,13 +82,12 @@ TEST_F(DebuggerAllMethodsTest, TestWithoutBreakPoints)
 
     Debugger debugger(*engine_);
 
-    EXPECT_EQ(OpCode::NOP, engine_->CurrentContext()->NextInstruction());
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Execute without breakpoints - should run to completion
     debugger.Execute();
 
-    EXPECT_EQ(nullptr, engine_->CurrentContext());
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
 // C# Test Method: TestWithoutDebugger()
@@ -101,13 +101,12 @@ TEST_F(DebuggerAllMethodsTest, TestWithoutDebugger)
 
     engine_->LoadScript(script.ToArray());
 
-    EXPECT_EQ(OpCode::NOP, engine_->CurrentContext()->NextInstruction());
+    EXPECT_EQ(OpCode::NOP, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Execute without debugger - should run to completion
     engine_->Execute();
 
-    EXPECT_EQ(nullptr, engine_->CurrentContext());
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
 // C# Test Method: TestStepOver()
@@ -129,21 +128,21 @@ TEST_F(DebuggerAllMethodsTest, TestStepOver)
 
     Debugger debugger(*engine_);
 
-    EXPECT_EQ(OpCode::NOT, engine_->CurrentContext()->NextInstruction());
-    EXPECT_EQ(VMState::BREAK, debugger.StepOver());
-    EXPECT_EQ(2, engine_->CurrentContext()->InstructionPointer());
-    EXPECT_EQ(VMState::BREAK, engine_->State());
-    EXPECT_EQ(OpCode::RET, engine_->CurrentContext()->NextInstruction());
+    EXPECT_EQ(OpCode::NOT, engine_->GetCurrentContext().GetNextInstructionOpCode());
+    EXPECT_EQ(VMState::Break, debugger.StepOver());
+    EXPECT_EQ(2, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
+    EXPECT_EQ(OpCode::RET, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Continue execution
     debugger.Execute();
 
     EXPECT_TRUE(engine_->ResultStack().Pop()->GetBoolean());
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 
     // Test step over again (should remain in HALT state)
-    EXPECT_EQ(VMState::HALT, debugger.StepOver());
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, debugger.StepOver());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
 // C# Test Method: TestStepInto()
@@ -165,38 +164,38 @@ TEST_F(DebuggerAllMethodsTest, TestStepInto)
 
     Debugger debugger(*engine_);
 
-    auto context = engine_->CurrentContext();
+    auto context = &engine_->GetCurrentContext();
 
-    EXPECT_EQ(context, engine_->CurrentContext());
-    EXPECT_EQ(context, engine_->EntryContext());
-    EXPECT_EQ(OpCode::NOT, engine_->CurrentContext()->NextInstruction());
+    EXPECT_EQ(context, &engine_->GetCurrentContext());
+    EXPECT_EQ(context, engine_->GetEntryContext().get());
+    EXPECT_EQ(OpCode::NOT, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Step into CALL - should create new context
-    EXPECT_EQ(VMState::BREAK, debugger.StepInto());
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
 
-    EXPECT_NE(context, engine_->CurrentContext());
-    EXPECT_EQ(context, engine_->EntryContext());
-    EXPECT_EQ(OpCode::RET, engine_->CurrentContext()->NextInstruction());
+    EXPECT_NE(context, &engine_->GetCurrentContext());
+    EXPECT_EQ(context, engine_->GetEntryContext().get());
+    EXPECT_EQ(OpCode::RET, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Step into RET and NOT
-    EXPECT_EQ(VMState::BREAK, debugger.StepInto());
-    EXPECT_EQ(VMState::BREAK, debugger.StepInto());
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
 
     // Should be back to original context
-    EXPECT_EQ(context, engine_->CurrentContext());
-    EXPECT_EQ(context, engine_->EntryContext());
-    EXPECT_EQ(OpCode::RET, engine_->CurrentContext()->NextInstruction());
+    EXPECT_EQ(context, &engine_->GetCurrentContext());
+    EXPECT_EQ(context, engine_->GetEntryContext().get());
+    EXPECT_EQ(OpCode::RET, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Step into final RET
-    EXPECT_EQ(VMState::BREAK, debugger.StepInto());
-    EXPECT_EQ(VMState::HALT, debugger.StepInto());
+    EXPECT_EQ(VMState::Break, debugger.StepInto());
+    EXPECT_EQ(VMState::Halt, debugger.StepInto());
 
     EXPECT_TRUE(engine_->ResultStack().Pop()->GetBoolean());
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 
     // Test step into again (should remain in HALT state)
-    EXPECT_EQ(VMState::HALT, debugger.StepInto());
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, debugger.StepInto());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
 // C# Test Method: TestBreakPointStepOver()
@@ -218,21 +217,21 @@ TEST_F(DebuggerAllMethodsTest, TestBreakPointStepOver)
 
     Debugger debugger(*engine_);
 
-    EXPECT_EQ(OpCode::NOT, engine_->CurrentContext()->NextInstruction());
+    EXPECT_EQ(OpCode::NOT, engine_->GetCurrentContext().GetNextInstructionOpCode());
 
     // Add breakpoint at position 5 (after PUSH0)
-    debugger.AddBreakPoint(engine_->CurrentContext()->Script(), 5);
-    EXPECT_EQ(VMState::BREAK, debugger.StepOver());
+    debugger.AddBreakPoint(engine_->GetCurrentContext().GetScript(), 5);
+    EXPECT_EQ(VMState::Break, debugger.StepOver());
 
-    EXPECT_EQ(nullptr, engine_->CurrentContext()->NextInstruction());  // At end of script
-    EXPECT_EQ(5, engine_->CurrentContext()->InstructionPointer());
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(nullptr, engine_->GetCurrentContext().GetNextInstructionObject());  // At end of script
+    EXPECT_EQ(5, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     // Continue execution
     debugger.Execute();
 
     EXPECT_TRUE(engine_->ResultStack().Pop()->GetBoolean());
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
 // Additional comprehensive tests for complete debugger coverage
@@ -264,7 +263,7 @@ TEST_F(DebuggerAllMethodsTest, TestStepOut)
     // Now we should be in the innermost context
     // Step out should return to the previous context
     auto result = debugger.StepOut();
-    EXPECT_TRUE(result == VMState::BREAK || result == VMState::HALT);
+    EXPECT_TRUE(result == VMState::Break || result == VMState::Halt);
 }
 
 // Test Method: TestDebuggerStateManagement()
@@ -285,14 +284,14 @@ TEST_F(DebuggerAllMethodsTest, TestDebuggerStateManagement)
 
     // Step should change to BREAK
     debugger.StepInto();
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     // Continue stepping
     debugger.StepInto();  // PUSH2
     debugger.StepInto();  // ADD
     debugger.StepInto();  // RET
 
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 
     // Verify result
     EXPECT_EQ(3, engine_->ResultStack().Pop()->GetBigInteger().ToInt32());
@@ -311,7 +310,7 @@ TEST_F(DebuggerAllMethodsTest, TestBreakpointManagement)
 
     Debugger debugger(*engine_);
 
-    auto script_obj = engine_->CurrentContext()->Script();
+    auto script_obj = engine_->GetCurrentContext().GetScript();
 
     // Add multiple breakpoints
     debugger.AddBreakPoint(script_obj, 2);
@@ -321,20 +320,20 @@ TEST_F(DebuggerAllMethodsTest, TestBreakpointManagement)
 
     // Test execution hits each breakpoint
     debugger.Execute();
-    EXPECT_EQ(2, engine_->CurrentContext()->InstructionPointer());
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(2, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     debugger.Execute();
-    EXPECT_EQ(4, engine_->CurrentContext()->InstructionPointer());
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(4, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     debugger.Execute();
-    EXPECT_EQ(6, engine_->CurrentContext()->InstructionPointer());
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(6, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     debugger.Execute();
-    EXPECT_EQ(8, engine_->CurrentContext()->InstructionPointer());
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(8, engine_->GetCurrentContext().GetInstructionPointer());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     // Remove some breakpoints
     EXPECT_TRUE(debugger.RemoveBreakPoint(script_obj, 4));
@@ -342,7 +341,7 @@ TEST_F(DebuggerAllMethodsTest, TestBreakpointManagement)
 
     // Continue execution - should complete without hitting removed breakpoints
     debugger.Execute();
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 }
 
 // Test Method: TestDebuggerWithExceptions()
@@ -359,10 +358,10 @@ TEST_F(DebuggerAllMethodsTest, TestDebuggerWithExceptions)
 
     // Step through until fault
     debugger.StepInto();  // PUSH0
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     debugger.StepInto();  // PUSH0
-    EXPECT_EQ(VMState::BREAK, engine_->State());
+    EXPECT_EQ(VMState::Break, engine_->State());
 
     debugger.StepInto();  // DIV - should fault
     EXPECT_EQ(VMState::FAULT, engine_->State());
@@ -396,7 +395,7 @@ TEST_F(DebuggerAllMethodsTest, TestDebuggerPerformance)
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
 
-    EXPECT_EQ(VMState::HALT, engine_->State());
+    EXPECT_EQ(VMState::Halt, engine_->State());
 
     // Should complete reasonably quickly (less than 1 second for 1000 NOPs)
     EXPECT_LT(duration.count(), 1000);

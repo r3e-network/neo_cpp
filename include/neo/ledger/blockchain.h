@@ -353,19 +353,25 @@ class Blockchain
     // Network module disabled - InventoryHandler registration commented out
     // void RegisterInventoryHandler(InventoryHandler handler);
 
-  private:
+  public:
+    std::shared_ptr<NeoSystem> GetSystem() const { return system_; }
+    io::UInt256 GetBestBlockHash() const { return GetCurrentBlockHash(); }
+    void SetSkipBlockVerificationForTests(bool value) { skip_block_verification_for_tests_ = value; }
+    void SetSkipBlockPersistenceForTests(bool value) { skip_block_persistence_for_tests_ = value; }
+    void SetTestCurrentHeightOverride(std::function<uint32_t()> override_fn)
+    {
+        test_current_height_override_ = std::move(override_fn);
+    }
+    void ProcessUnverifiedBlocksForTests(uint32_t height) { ProcessUnverifiedBlocks(height); }
+
+  protected:
     void StoreBlockInCache(const std::shared_ptr<Block>& block);
+  private:
     /**
      * @brief Gets the header cache.
      * @return The header cache.
      */
     std::shared_ptr<neo::network::p2p::payloads::HeaderCache> GetHeaderCache() const { return header_cache_; }
-
-    /**
-     * @brief Gets the Neo system.
-     * @return The Neo system.
-     */
-    std::shared_ptr<NeoSystem> GetSystem() const { return system_; }
 
     // ========== MISSING C# METHODS - ADDING FOR EXACT COMPATIBILITY ==========
     
@@ -423,12 +429,6 @@ class Blockchain
      */
     static void* CreateProps(std::shared_ptr<NeoSystem> system);
     
-    /**
-     * @brief Get best block hash (C# property equivalent)
-     * @return The best block hash
-     */
-    io::UInt256 GetBestBlockHash() const { return GetCurrentBlockHash(); }
-
    private:
     /**
      * @brief Processes a block through the validation and persistence pipeline
@@ -497,6 +497,9 @@ class Blockchain
     // Extensible payload whitelist
     std::unordered_set<io::UInt160> extensible_witness_whitelist_;
     bool extensible_whitelist_cached_;
+    bool skip_block_verification_for_tests_{false};
+    bool skip_block_persistence_for_tests_{false};
+    std::function<uint32_t()> test_current_height_override_;
 
     // Event handlers
     std::vector<CommittingHandler> committing_handlers_;

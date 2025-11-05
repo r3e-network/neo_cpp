@@ -74,15 +74,20 @@ class InteropInterfaceItem : public StackItem
 /**
  * @brief Represents a pointer stack item.
  */
+class Script;
+
+/**
+ * @brief Represents a pointer stack item.
+ */
 class PointerItem : public StackItem
 {
    public:
     /**
      * @brief Constructs a PointerItem.
-     * @param position The position.
-     * @param value The value (optional).
+     * @param script The script containing this pointer.
+     * @param position The position within the script.
      */
-    explicit PointerItem(int32_t position, std::shared_ptr<StackItem> value = nullptr);
+    PointerItem(std::shared_ptr<Script> script, int32_t position);
 
     /**
      * @brief Conversion operator to std::shared_ptr<StackItem>.
@@ -109,10 +114,16 @@ class PointerItem : public StackItem
     int32_t GetPosition() const;
 
     /**
-     * @brief Gets the value.
-     * @return The value.
+     * @brief C#-style accessor for the position.
+     * @return The position.
      */
-    std::shared_ptr<StackItem> GetValue() const;
+    int32_t Position() const { return GetPosition(); }
+
+    /**
+     * @brief Gets the script associated with the pointer.
+     * @return The script.
+     */
+    std::shared_ptr<Script> GetScript() const;
 
     /**
      * @brief Checks if this stack item is equal to another stack item.
@@ -122,8 +133,8 @@ class PointerItem : public StackItem
     bool Equals(const StackItem& other) const override;
 
    private:
+    std::shared_ptr<Script> script_;
     int32_t position_;
-    std::shared_ptr<StackItem> value_;
 };
 
 /**

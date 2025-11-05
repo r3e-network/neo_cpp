@@ -6,6 +6,7 @@
  * @copyright MIT License
  */
 
+#include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
@@ -20,6 +21,73 @@
 
 namespace neo::vm
 {
+namespace
+{
+int GetOperandSize(OpCode opcode)
+{
+    switch (opcode)
+    {
+        case OpCode::PUSHINT8:
+            return 1;
+        case OpCode::PUSHINT16:
+            return 2;
+        case OpCode::PUSHINT32:
+            return 4;
+        case OpCode::PUSHINT64:
+            return 8;
+        case OpCode::PUSHINT128:
+            return 16;
+        case OpCode::PUSHINT256:
+            return 32;
+        case OpCode::PUSHA:
+            return 4;
+        case OpCode::JMP:
+        case OpCode::JMPIF:
+        case OpCode::JMPIFNOT:
+        case OpCode::JMPEQ:
+        case OpCode::JMPNE:
+        case OpCode::JMPGT:
+        case OpCode::JMPGE:
+        case OpCode::JMPLT:
+        case OpCode::JMPLE:
+        case OpCode::CALL:
+        case OpCode::ENDTRY:
+        case OpCode::INITSLOT:
+        case OpCode::INITSSLOT:
+        case OpCode::LDSFLD:
+        case OpCode::STSFLD:
+        case OpCode::LDLOC:
+        case OpCode::STLOC:
+        case OpCode::LDARG:
+        case OpCode::STARG:
+        case OpCode::NEWARRAY_T:
+        case OpCode::ISTYPE:
+        case OpCode::CONVERT:
+            return 1;
+        case OpCode::JMP_L:
+        case OpCode::JMPIF_L:
+        case OpCode::JMPIFNOT_L:
+        case OpCode::JMPEQ_L:
+        case OpCode::JMPNE_L:
+        case OpCode::JMPGT_L:
+        case OpCode::JMPGE_L:
+        case OpCode::JMPLT_L:
+        case OpCode::JMPLE_L:
+        case OpCode::CALL_L:
+        case OpCode::ENDTRY_L:
+        case OpCode::SYSCALL:
+            return 4;
+        case OpCode::CALLT:
+        case OpCode::TRY:
+            return 2;
+        case OpCode::TRY_L:
+            return 8;
+        default:
+            return 0;
+    }
+}
+}  // namespace
+
 ScriptBuilder::ScriptBuilder(size_t initialCapacity) : script_(initialCapacity)
 {
     // Create a memory stream for the script
@@ -35,6 +103,47 @@ ScriptBuilder& ScriptBuilder::Emit(OpCode opcode, const io::ByteSpan& operand)
         writer_->Write(operand);
     }
     return *this;
+}
+
+ScriptBuilder& ScriptBuilder::Emit(OpCode opcode, int32_t operand)
+{
+    int operandSize = GetOperandSize(opcode);
+
+    if (operandSize == 0)
+    {
+        return Emit(opcode);
+    }
+
+    io::ByteVector bytes(static_cast<size_t>(operandSize));
+
+    switch (operandSize)
+    {
+        case 1:
+            bytes[0] = static_cast<uint8_t>(static_cast<int8_t>(operand));
+            break;
+        case 2:
+        {
+            int16_t value = static_cast<int16_t>(operand);
+            std::memcpy(bytes.Data(), &value, sizeof(value));
+            break;
+        }
+        case 4:
+        {
+            int32_t value = static_cast<int32_t>(operand);
+            std::memcpy(bytes.Data(), &value, sizeof(value));
+            break;
+        }
+        case 8:
+        {
+            int64_t value = static_cast<int64_t>(operand);
+            std::memcpy(bytes.Data(), &value, sizeof(value));
+            break;
+        }
+        default:
+            throw std::invalid_argument("Unsupported operand size for Emit(OpCode, int32_t)");
+    }
+
+    return Emit(opcode, io::ByteSpan(bytes.Data(), bytes.Size()));
 }
 
 ScriptBuilder& ScriptBuilder::EmitCall(int32_t offset)
@@ -95,6 +204,12 @@ ScriptBuilder& ScriptBuilder::EmitPush(int64_t value)
 }
 
 ScriptBuilder& ScriptBuilder::EmitPush(bool value) { return Emit(value ? OpCode::PUSHT : OpCode::PUSHF); }
+
+ScriptBuilder& ScriptBuilder::EmitPush(const cryptography::ecc::ECPoint& point)
+{
+    auto encoded = point.ToBytes(true);
+    return EmitPush(encoded.AsSpan());
+}
 
 ScriptBuilder& ScriptBuilder::EmitPush(const io::ByteSpan& data)
 {

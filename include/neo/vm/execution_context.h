@@ -116,6 +116,12 @@ class ExecutionContext
     const std::vector<std::shared_ptr<StackItem>>& GetEvaluationStack() const;
 
     /**
+     * @brief Provides mutable access to the evaluation stack.
+     * @return Reference to the underlying evaluation stack.
+     */
+    std::vector<std::shared_ptr<StackItem>>& GetEvaluationStackMutable();
+
+    /**
      * @brief Gets the try count.
      * @return The try count.
      */

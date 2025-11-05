@@ -10,9 +10,37 @@
 
 namespace neo::network::p2p::payloads
 {
-NotValidBefore::NotValidBefore() : height_(0) {}
+NotValidBefore::NotValidBefore() : height_(0), Type(this), Height(this) {}
 
-NotValidBefore::NotValidBefore(uint32_t height) : height_(height) {}
+NotValidBefore::NotValidBefore(uint32_t height) : height_(height), Type(this), Height(this) {}
+
+NotValidBefore::NotValidBefore(const NotValidBefore& other)
+    : ledger::TransactionAttribute(other), height_(other.height_), Type(this), Height(this)
+{
+}
+
+NotValidBefore& NotValidBefore::operator=(const NotValidBefore& other)
+{
+    if (this != &other)
+    {
+        height_ = other.height_;
+    }
+    return *this;
+}
+
+NotValidBefore::NotValidBefore(NotValidBefore&& other) noexcept
+    : ledger::TransactionAttribute(std::move(other)), height_(other.height_), Type(this), Height(this)
+{
+}
+
+NotValidBefore& NotValidBefore::operator=(NotValidBefore&& other) noexcept
+{
+    if (this != &other)
+    {
+        height_ = other.height_;
+    }
+    return *this;
+}
 
 uint32_t NotValidBefore::GetHeight() const { return height_; }
 

@@ -15,6 +15,7 @@ add_library(neo_ledger OBJECT
     transaction_attribute.cpp
     transaction_output.cpp
     coin_reference.cpp
+    oracle_response.cpp
     witness.cpp
     signer.cpp
     witness_rule.cpp

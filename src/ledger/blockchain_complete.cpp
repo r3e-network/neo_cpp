@@ -455,7 +455,10 @@ void Blockchain::ProcessBlock(std::shared_ptr<Block> block)
     }
 
     // Persist block
-    PersistBlock(block);
+    if (!skip_block_persistence_for_tests_)
+    {
+        PersistBlock(block);
+    }
 }
 
 void Blockchain::PersistBlock(std::shared_ptr<Block> block)
@@ -595,6 +598,11 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
 
 bool Blockchain::VerifyBlock(std::shared_ptr<Block> block, std::shared_ptr<persistence::DataCache> snapshot)
 {
+    if (skip_block_verification_for_tests_)
+    {
+        return true;
+    }
+
     // Basic verification
     if (!block) return false;
 

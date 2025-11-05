@@ -50,7 +50,7 @@ TEST_F(SlotTest, StaticFields)
     EXPECT_EQ(context_->LoadStaticField(1), item2);
     // Uninitialized static fields should be null items, not nullptr
     EXPECT_NE(context_->LoadStaticField(2), nullptr);
-    EXPECT_EQ(context_->LoadStaticField(2)->GetType(), StackItemType::Null);
+    EXPECT_EQ(context_->LoadStaticField(2)->GetType(), StackItemType::Any);
 
     // Test out-of-range access
     EXPECT_THROW(context_->LoadStaticField(3), std::out_of_range);

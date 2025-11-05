@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <neo/vm/execution_engine.h>
+#include <neo/vm/script.h>
 #include <neo/vm/script_builder.h>
 #include <neo/vm/opcodes.h>
 #include <neo/vm/vm_state.h>
@@ -17,7 +18,7 @@ protected:
     }
     
     Script CreateScript(const ByteVector& data) {
-        return Script(data);
+        return Script(neo::vm::internal::ByteSpan(data.Data(), data.Size()));
     }
 };
 
@@ -45,7 +46,7 @@ TEST_F(VMBasicTest, TestSimpleScript) {
     sb.Emit(OpCode::RET);
     
     auto script = CreateScript(sb.ToArray());
-    EXPECT_GT(script.Size(), 0u);
+    EXPECT_GT(script.GetLength(), 0u);
 }
 
 TEST_F(VMBasicTest, TestScriptBuilderPush) {

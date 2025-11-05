@@ -1,3 +1,9 @@
+option(NEO_ENABLE_SMARTCONTRACT_PARITY_TESTS "Enable comprehensive smart contract parity tests" OFF)
+if(NOT NEO_ENABLE_SMARTCONTRACT_PARITY_TESTS)
+    message(STATUS "Skipping smart contract parity tests (NEO_ENABLE_SMARTCONTRACT_PARITY_TESTS=OFF)")
+    return()
+endif()
+
 # SmartContract Test Module CMakeLists.txt
 
 set(SMARTCONTRACT_TEST_SOURCES

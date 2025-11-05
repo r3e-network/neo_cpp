@@ -13,6 +13,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/ledger/transaction_attribute.h>
+#include <neo/ledger/transaction_attribute_type.h>
 
 namespace neo::network::p2p::payloads
 {
@@ -21,11 +22,32 @@ namespace neo::network::p2p::payloads
  */
 class HighPriority : public ledger::TransactionAttribute
 {
+    struct TypeProxy
+    {
+        HighPriority* owner_;
+        explicit TypeProxy(HighPriority* owner) : owner_(owner) {}
+        TypeProxy& operator=(ledger::TransactionAttributeType value)
+        {
+            (void)value;
+            return *this;
+        }
+        operator ledger::TransactionAttributeType() const
+        {
+            return ledger::TransactionAttributeType::HighPriority;
+        }
+    };
+
    public:
     /**
      * @brief Constructs a HighPriority attribute.
      */
     HighPriority();
+    HighPriority(const HighPriority& other);
+    HighPriority& operator=(const HighPriority& other);
+    HighPriority(HighPriority&& other) noexcept;
+    HighPriority& operator=(HighPriority&& other) noexcept;
+
+    TypeProxy Type;
 
     /**
      * @brief Gets the transaction attribute type.

@@ -38,7 +38,7 @@ void JumpTableType::ISNULL(ExecutionEngine& engine, const Instruction& instructi
 {
     (void)instruction;  // Suppress unused parameter warning
     auto item = engine.Pop();
-    bool isNull = item->GetType() == StackItemType::Null;
+    bool isNull = item->IsNull();
     engine.Push(StackItem::Create(isNull));
 }
 

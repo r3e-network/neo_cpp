@@ -142,7 +142,7 @@ TEST_F(BinarySerializerTest, SerializeDeserialize_Null)
     ASSERT_NE(nullptr, deserialized);
 
     // Verify type
-    EXPECT_EQ(StackItemType::Null, deserialized->GetType());
+    EXPECT_EQ(StackItemType::Any, deserialized->GetType());
 }
 
 TEST_F(BinarySerializerTest, SerializeDeserialize_Array)

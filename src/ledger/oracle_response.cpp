@@ -55,9 +55,12 @@ void OracleResponse::Deserialize(io::BinaryReader& reader)
 
 size_t OracleResponse::GetSize() const
 {
-    return TransactionAttribute::GetSize() + sizeof(uint64_t) +  // id_
-           sizeof(uint8_t) +                                     // code_
-           result_.GetVarSize();                                 // result_
+    // Base TransactionAttribute contributes a single usage byte. OracleResponse stores
+    // its fields explicitly: id (uint64), code (byte), and the result payload as VarBytes.
+    return sizeof(uint8_t) +        // usage from TransactionAttribute base
+           sizeof(uint64_t) +       // id_
+           sizeof(uint8_t) +        // code_
+           result_.GetVarSize();    // result_ payload
 }
 
 bool OracleResponse::operator==(const OracleResponse& other) const

@@ -131,6 +131,8 @@ int64_t ByteStringItem::GetInteger() const
 
 io::ByteVector ByteStringItem::GetByteArray() const { return value_; }
 
+io::ByteSpan ByteStringItem::GetByteSpan() const { return value_.AsSpan(); }
+
 std::string ByteStringItem::GetString() const
 {
     return std::string(reinterpret_cast<const char*>(value_.Data()), value_.Size());
@@ -168,6 +170,10 @@ StackItemType BufferItem::GetType() const { return StackItemType::Buffer; }
 bool BufferItem::GetBoolean() const { return value_.Size() > 0; }
 
 io::ByteVector BufferItem::GetByteArray() const { return value_; }
+
+io::ByteVector& BufferItem::GetSpan() { return value_; }
+
+const io::ByteVector& BufferItem::GetSpan() const { return value_; }
 
 std::string BufferItem::GetString() const
 {

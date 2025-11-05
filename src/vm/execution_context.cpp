@@ -77,6 +77,8 @@ const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetArguments() 
 
 const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetEvaluationStack() const { return evaluationStack_; }
 
+std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetEvaluationStackMutable() { return evaluationStack_; }
+
 int32_t ExecutionContext::GetTryCount() const { return static_cast<int32_t>(tryStack_.size()); }
 
 void ExecutionContext::InitializeStaticFields(int32_t count)

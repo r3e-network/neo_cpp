@@ -156,6 +156,7 @@ class JumpTable
     static void SYSCALL(ExecutionEngine& engine, const Instruction& instruction);
     static void LEAVE(ExecutionEngine& engine, const Instruction& instruction);
     static void LEAVE_L(ExecutionEngine& engine, const Instruction& instruction);
+    static void NOP(ExecutionEngine& engine, const Instruction& instruction);
 
     // Stack operations
     static void DEPTH(ExecutionEngine& engine, const Instruction& instruction);

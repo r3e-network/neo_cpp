@@ -10,9 +10,36 @@
 
 namespace neo::network::p2p::payloads
 {
-Conflicts::Conflicts() {}
+Conflicts::Conflicts() : hash_(io::UInt256::Zero()), Type(this), Hash(this) {}
 
-Conflicts::Conflicts(const io::UInt256& hash) : hash_(hash) {}
+Conflicts::Conflicts(const io::UInt256& hash) : hash_(hash), Type(this), Hash(this) {}
+
+Conflicts::Conflicts(const Conflicts& other) : ledger::TransactionAttribute(other), hash_(other.hash_), Type(this), Hash(this)
+{
+}
+
+Conflicts& Conflicts::operator=(const Conflicts& other)
+{
+    if (this != &other)
+    {
+        hash_ = other.hash_;
+    }
+    return *this;
+}
+
+Conflicts::Conflicts(Conflicts&& other) noexcept
+    : ledger::TransactionAttribute(std::move(other)), hash_(std::move(other.hash_)), Type(this), Hash(this)
+{
+}
+
+Conflicts& Conflicts::operator=(Conflicts&& other) noexcept
+{
+    if (this != &other)
+    {
+        hash_ = std::move(other.hash_);
+    }
+    return *this;
+}
 
 const io::UInt256& Conflicts::GetHash() const { return hash_; }
 

@@ -14,6 +14,7 @@
 #include <neo/io/json_writer.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/transaction_attribute.h>
+#include <neo/ledger/transaction_attribute_type.h>
 
 namespace neo::network::p2p::payloads
 {
@@ -24,6 +25,33 @@ class Conflicts : public ledger::TransactionAttribute
 {
    private:
     io::UInt256 hash_;
+    struct TypeProxy
+    {
+        Conflicts* owner_;
+        explicit TypeProxy(Conflicts* owner) : owner_(owner) {}
+        TypeProxy& operator=(ledger::TransactionAttributeType value)
+        {
+            // Type is fixed to Conflicts; ignore value but allow assignment for parity.
+            (void)value;
+            return *this;
+        }
+        operator ledger::TransactionAttributeType() const
+        {
+            return ledger::TransactionAttributeType::Conflicts;
+        }
+    };
+
+    struct HashProxy
+    {
+        Conflicts* owner_;
+        explicit HashProxy(Conflicts* owner) : owner_(owner) {}
+        HashProxy& operator=(const io::UInt256& value)
+        {
+            owner_->SetHash(value);
+            return *this;
+        }
+        operator const io::UInt256&() const { return owner_->GetHash(); }
+    };
 
    public:
     /**
@@ -36,6 +64,13 @@ class Conflicts : public ledger::TransactionAttribute
      * @param hash The conflicting transaction hash.
      */
     explicit Conflicts(const io::UInt256& hash);
+    Conflicts(const Conflicts& other);
+    Conflicts& operator=(const Conflicts& other);
+    Conflicts(Conflicts&& other) noexcept;
+    Conflicts& operator=(Conflicts&& other) noexcept;
+
+    TypeProxy Type;
+    HashProxy Hash;
 
     /**
      * @brief Gets the conflicting transaction hash.

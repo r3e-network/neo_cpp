@@ -10,6 +10,9 @@
 
 #include <neo/vm/execution_engine.h>
 
+#include <cstdint>
+#include <string>
+#include <unordered_map>
 #include <unordered_set>
 
 namespace neo::vm
@@ -52,15 +55,18 @@ class Debugger
 
     /**
      * @brief Add a breakpoint at the specified position.
+     * @param script The script that owns the breakpoint.
      * @param position The position to add the breakpoint.
      */
-    void AddBreakPoint(int position);
+    void AddBreakPoint(const Script& script, uint32_t position);
 
     /**
      * @brief Remove a breakpoint at the specified position.
+     * @param script The script that owns the breakpoint.
      * @param position The position to remove the breakpoint.
+     * @return True if the breakpoint was removed; otherwise false.
      */
-    void RemoveBreakPoint(int position);
+    bool RemoveBreakPoint(const Script& script, uint32_t position);
 
     /**
      * @brief Clear all breakpoints.
@@ -69,7 +75,12 @@ class Debugger
 
    private:
     ExecutionEngine& engine_;
-    std::unordered_set<int> breakpoints_;
+    using BreakpointSet = std::unordered_set<uint32_t>;
+    std::unordered_map<std::string, BreakpointSet> breakpoints_;
     int initialContextCount_ = 0;
+
+    void ExecuteAndCheckBreakPoints();
+    bool ShouldBreakOnCurrentInstruction() const;
+    static std::string MakeScriptKey(const Script& script);
 };
 }  // namespace neo::vm

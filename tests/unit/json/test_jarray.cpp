@@ -409,7 +409,8 @@ TEST_F(JArrayComplexTest, ToStringWithNullMatchesJsonDump)
     expected.push_back(nlohmann::json::parse(alice->ToString()));
     expected.push_back(nlohmann::json::parse(bob->ToString()));
 
-    EXPECT_EQ(expected.dump(), array.ToString());
+    auto actual = nlohmann::json::parse(array.ToString());
+    EXPECT_EQ(expected, actual);
 }
 
 TEST(JArrayParseTest, ParseHandlesNullEntries)

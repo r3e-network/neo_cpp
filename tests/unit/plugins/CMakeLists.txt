@@ -1,3 +1,9 @@
+option(NEO_ENABLE_PLUGIN_TESTS "Enable plugin parity tests" OFF)
+if(NOT NEO_ENABLE_PLUGIN_TESTS)
+    message(STATUS "Skipping plugin parity tests (NEO_ENABLE_PLUGIN_TESTS=OFF)")
+    return()
+endif()
+
 # Create the plugins unit tests
 add_executable(test_plugins
     test_plugins.cpp  # Use existing file

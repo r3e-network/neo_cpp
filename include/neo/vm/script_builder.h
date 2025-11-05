@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
@@ -42,6 +43,7 @@ class ScriptBuilder
      * @return A reference to this instance after the emit operation has completed.
      */
     ScriptBuilder& Emit(OpCode opcode, const io::ByteSpan& operand = io::ByteSpan());
+    ScriptBuilder& Emit(OpCode opcode, int32_t operand);
 
     /**
      * @brief Emits a call instruction with the specified offset.
@@ -64,6 +66,7 @@ class ScriptBuilder
      * @return A reference to this instance after the emit operation has completed.
      */
     ScriptBuilder& EmitPush(int64_t value);
+    ScriptBuilder& EmitPush(int32_t value) { return EmitPush(static_cast<int64_t>(value)); }
 
     /**
      * @brief Emits a push instruction with the specified boolean value.
@@ -78,6 +81,14 @@ class ScriptBuilder
      * @return A reference to this instance after the emit operation has completed.
      */
     ScriptBuilder& EmitPush(const io::ByteSpan& data);
+
+    /**
+     * @brief Emits a push instruction with the specified byte vector.
+     * @param data The data to be pushed.
+     * @return A reference to this instance after the emit operation has completed.
+     */
+    ScriptBuilder& EmitPush(const io::ByteVector& data) { return EmitPush(data.AsSpan()); }
+    ScriptBuilder& EmitPush(const std::vector<uint8_t>& data) { return EmitPush(io::ByteVector(data)); }
 
     /**
      * @brief Emits a push instruction with the specified string.
@@ -139,6 +150,13 @@ class ScriptBuilder
      * @return A reference to this instance after the emit operation has completed.
      */
     ScriptBuilder& EmitPushData(const io::ByteVector& data) { return EmitPush(data.AsSpan()); }
+
+    /**
+     * @brief Emits a push instruction with the specified elliptic curve point.
+     * @param point The ECPoint to be pushed (compressed format).
+     * @return A reference to this instance after the emit operation has completed.
+     */
+    ScriptBuilder& EmitPush(const cryptography::ecc::ECPoint& point);
 
     /**
      * @brief Emits a push instruction with the specified number (alias for EmitPush).

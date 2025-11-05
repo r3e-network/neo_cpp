@@ -25,22 +25,42 @@ static JumpTable defaultJumpTable;
 
 // ExecutionEngine implementation
 ExecutionEngine::ExecutionEngine()
-    : state_(VMState::None), jumpTable_(defaultJumpTable), jumping_(false), limits_(ExecutionEngineLimits::Default)
+    : ResultStack(*this),
+      State(*this),
+      state_(VMState::None),
+      jumpTable_(defaultJumpTable),
+      jumping_(false),
+      limits_(ExecutionEngineLimits::Default)
 {
 }
 
 ExecutionEngine::ExecutionEngine(const JumpTable& jumpTable)
-    : state_(VMState::None), jumpTable_(jumpTable), jumping_(false), limits_(ExecutionEngineLimits::Default)
+    : ResultStack(*this),
+      State(*this),
+      state_(VMState::None),
+      jumpTable_(jumpTable),
+      jumping_(false),
+      limits_(ExecutionEngineLimits::Default)
 {
 }
 
 ExecutionEngine::ExecutionEngine(const ExecutionEngineLimits& limits)
-    : state_(VMState::None), jumpTable_(defaultJumpTable), jumping_(false), limits_(limits)
+    : ResultStack(*this),
+      State(*this),
+      state_(VMState::None),
+      jumpTable_(defaultJumpTable),
+      jumping_(false),
+      limits_(limits)
 {
 }
 
 ExecutionEngine::ExecutionEngine(const JumpTable& jumpTable, const ExecutionEngineLimits& limits)
-    : state_(VMState::None), jumpTable_(jumpTable), jumping_(false), limits_(limits)
+    : ResultStack(*this),
+      State(*this),
+      state_(VMState::None),
+      jumpTable_(jumpTable),
+      jumping_(false),
+      limits_(limits)
 {
 }
 
@@ -184,6 +204,13 @@ std::shared_ptr<ExecutionContext> ExecutionEngine::LoadScript(const Script& scri
 
     LoadContext(context);
     return context;
+}
+
+std::shared_ptr<ExecutionContext> ExecutionEngine::LoadScript(const io::ByteVector& script, int32_t initialPosition,
+                                                              std::function<void(ExecutionContext&)> configureContext)
+{
+    internal::ByteVector internalScript(internal::ByteSpan(script.Data(), script.Size()));
+    return LoadScript(Script(internalScript), initialPosition, std::move(configureContext));
 }
 
 void ExecutionEngine::LoadContext(std::shared_ptr<ExecutionContext> context)
@@ -426,54 +453,29 @@ void ExecutionEngine::OnFault() { OnFault(std::current_exception()); }
 
 bool ExecutionEngine::ExecuteRet()
 {
-    auto& context = GetCurrentContext();
-    auto rvcount = context.GetRVCount();
-    auto evaluationStack = context.GetEvaluationStack();
+    auto context = invocationStack_.back();
+    const auto& evaluationStack = context->GetEvaluationStack();
 
-    if (invocationStack_.size() <= 1)
+    // Determine target stack: result stack for final context, otherwise caller's evaluation stack
+    if (invocationStack_.size() == 1)
     {
-        // For the last context (main script), move evaluation stack to result stack
-        // When rvcount is -1 (default), return only the top value if any
-        if (rvcount == -1 && !evaluationStack.empty())
-        {
-            // Return only the top value
-            resultStack_.push_back(evaluationStack.back());
-        }
-        else
-        {
-            // Return all values from evaluation stack in reverse order
-            for (auto it = evaluationStack.rbegin(); it != evaluationStack.rend(); ++it)
-            {
-                resultStack_.push_back(*it);
-            }
-        }
+        resultStack_.insert(resultStack_.end(), evaluationStack.begin(), evaluationStack.end());
+
+        invocationStack_.pop_back();
+        UnloadContext(*context);
+
         SetState(VMState::Halt);
-        // Clean up any remaining zero-referenced items when execution completes
         referenceCounter_.CheckZeroReferred();
         return false;
     }
 
-    // Extract the return values based on rvcount
-    if (rvcount >= 0)
-    {
-        int count = std::min(static_cast<int>(evaluationStack.size()), rvcount);
-        for (int i = 0; i < count; i++)
-        {
-            resultStack_.push_back(evaluationStack[evaluationStack.size() - count + i]);
-        }
-    }
-    else
-    {
-        // Return all values
-        for (auto it = evaluationStack.rbegin(); it != evaluationStack.rend(); ++it)
-        {
-            resultStack_.push_back(*it);
-        }
-    }
+    auto parentContext = invocationStack_[invocationStack_.size() - 2];
+    auto& parentEvalStack = parentContext->GetEvaluationStackMutable();
 
-    // Unload the context
-    UnloadContext(GetCurrentContext());
+    parentEvalStack.insert(parentEvalStack.end(), evaluationStack.begin(), evaluationStack.end());
+
     invocationStack_.pop_back();
+    UnloadContext(*context);
 
     return true;
 }

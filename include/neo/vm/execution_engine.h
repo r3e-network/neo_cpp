@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <neo/io/byte_vector.h>
+#include <neo/vm/internal/byte_span.h>
 #include <neo/vm/execution_context.h>
 #include <neo/vm/execution_engine_limits.h>
 #include <neo/vm/internal/byte_vector.h>
@@ -16,6 +18,7 @@
 #include <neo/vm/script.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/vm_state.h>
+#include <neo/vm/exceptions.h>
 
 #include <functional>
 #include <map>
@@ -71,6 +74,64 @@ class SystemCall
 class ExecutionEngine
 {
    public:
+    class ResultStackView
+    {
+      public:
+        ResultStackView() : engine_(nullptr) {}
+        explicit ResultStackView(ExecutionEngine& engine) : engine_(&engine) {}
+        void Bind(ExecutionEngine& engine) { engine_ = &engine; }
+        size_t size() const { return engine_->resultStack_.size(); }
+        int Count() const { return static_cast<int>(engine_->resultStack_.size()); }
+        int GetCount() const { return Count(); }
+        std::shared_ptr<StackItem>& operator[](size_t index)
+        {
+            if (index >= engine_->resultStack_.size())
+                throw InvalidOperationException("Result stack index out of range");
+            return engine_->resultStack_[index];
+        }
+        const std::shared_ptr<StackItem>& operator[](size_t index) const
+        {
+            if (index >= engine_->resultStack_.size())
+                throw InvalidOperationException("Result stack index out of range");
+            return engine_->resultStack_[index];
+        }
+        std::shared_ptr<StackItem> Pop()
+        {
+            if (engine_->resultStack_.empty()) throw InvalidOperationException("Result stack is empty");
+            auto item = engine_->resultStack_.back();
+            engine_->resultStack_.pop_back();
+            return item;
+        }
+
+        ResultStackView& operator()() { return *this; }
+        const ResultStackView& operator()() const { return *this; }
+
+      private:
+        ExecutionEngine* engine_;
+    };
+    ResultStackView ResultStack;
+
+    class StateProxy
+    {
+      public:
+        StateProxy() : engine_(nullptr) {}
+        explicit StateProxy(ExecutionEngine& engine) : engine_(&engine) {}
+        void Bind(ExecutionEngine& engine) { engine_ = &engine; }
+        operator VMState() const { return engine_->GetState(); }
+        StateProxy& operator=(VMState state)
+        {
+            engine_->SetState(state);
+            return *this;
+        }
+
+        StateProxy& operator()() { return *this; }
+        const StateProxy& operator()() const { return *this; }
+
+      private:
+        ExecutionEngine* engine_;
+    };
+    StateProxy State;
+
     /**
      * @brief Constructs an ExecutionEngine with default settings.
      */
@@ -156,6 +217,8 @@ class ExecutionEngine
      * @return The loaded execution context.
      */
     std::shared_ptr<ExecutionContext> LoadScript(const Script& script, int32_t initialPosition = 0,
+                                                 std::function<void(ExecutionContext&)> configureContext = nullptr);
+    std::shared_ptr<ExecutionContext> LoadScript(const io::ByteVector& script, int32_t initialPosition = 0,
                                                  std::function<void(ExecutionContext&)> configureContext = nullptr);
 
     /**

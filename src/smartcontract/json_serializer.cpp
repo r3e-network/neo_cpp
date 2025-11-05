@@ -60,6 +60,7 @@ nlohmann::json JsonSerializer::SerializeStackItem(std::shared_ptr<vm::StackItem>
     // Serialize based on stack item type
     switch (item->GetType())
     {
+        case vm::StackItemType::Any:
         case vm::StackItemType::Null:
             return nlohmann::json::value_t::null;
 

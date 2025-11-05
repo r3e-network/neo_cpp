@@ -107,6 +107,12 @@ class ArrayItem : public StackItem
     size_t Size() const override;
 
     /**
+     * @brief Returns the number of elements in the array.
+     * @return Element count.
+     */
+    size_t Count() const { return value_.size(); }
+
+    /**
      * @brief Clears the array.
      */
     void Clear();
@@ -271,6 +277,12 @@ class MapItem : public StackItem
     size_t GetSize() const;
 
     /**
+     * @brief Gets the number of entries in the map.
+     * @return Entry count.
+     */
+    size_t Count() const { return value_.size(); }
+
+    /**
      * @brief Gets an item from the map.
      * @param key The key.
      * @return The item.
@@ -289,6 +301,13 @@ class MapItem : public StackItem
      * @param key The key.
      */
     void Remove(const std::shared_ptr<StackItem>& key);
+
+    /**
+     * @brief Checks whether the map contains a key that equals the provided one.
+     * @param key The key to search for.
+     * @return True if the key exists, false otherwise.
+     */
+    bool ContainsKey(const std::shared_ptr<StackItem>& key) const;
 
     /**
      * @brief Gets the size of the map.

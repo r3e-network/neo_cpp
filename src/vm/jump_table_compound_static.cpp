@@ -128,7 +128,7 @@ void JumpTableCompound::PACKSTRUCT(ExecutionEngine& engine, const Instruction& i
 void JumpTableCompound::ISNULL(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto item = engine.Pop();
-    bool isNull = (item->GetType() == StackItemType::Null);
+    bool isNull = item->IsNull();
     engine.Push(StackItem::Create(isNull));
 }
 

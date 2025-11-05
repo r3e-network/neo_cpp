@@ -32,7 +32,7 @@ std::string StackItemTypeToString(vm::StackItemType type)
     switch (type)
     {
         case StackItemType::Any:
-            return "Any";
+            return "Null";
         case StackItemType::Pointer:
             return "Pointer";
         case StackItemType::Boolean:
