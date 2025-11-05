@@ -107,12 +107,18 @@ std::string SimpleHttpClient::Post(const std::string& url, const std::string& co
 
     // Create HTTP client
     std::unique_ptr<httplib::Client> cli;
+#ifdef CPPHTTPLIB_OPENSSL_SUPPORT
     if (protocol == "https")
     {
         cli = std::make_unique<httplib::SSLClient>(host, port);
     }
     else
+#endif
     {
+        if (protocol == "https")
+        {
+            throw std::runtime_error("HTTPS support requires CPPHTTPLIB_OPENSSL_SUPPORT");
+        }
         cli = std::make_unique<httplib::Client>(host, port);
     }
 
@@ -205,14 +211,15 @@ std::future<RpcResponse> RpcClient::SendAsync(const RpcRequest& request, bool th
     return std::async(std::launch::async, [this, request, throw_on_error]() { return Send(request, throw_on_error); });
 }
 
-json::JToken RpcClient::RpcSend(const std::string& method, const std::vector<json::JToken>& params)
+nlohmann::json RpcClient::RpcSend(const std::string& method, const std::vector<nlohmann::json>& params)
 {
     auto request = CreateRequest(method, params);
     auto response = Send(request);
     return response.GetResult();
 }
 
-std::future<json::JToken> RpcClient::RpcSendAsync(const std::string& method, const std::vector<json::JToken>& params)
+std::future<nlohmann::json> RpcClient::RpcSendAsync(const std::string& method,
+                                                   const std::vector<nlohmann::json>& params)
 {
     return std::async(std::launch::async, [this, method, params]() { return RpcSend(method, params); });
 }
@@ -221,7 +228,11 @@ std::future<json::JToken> RpcClient::RpcSendAsync(const std::string& method, con
 std::string RpcClient::GetBestBlockHash()
 {
     auto result = RpcSend("getbestblockhash");
-    return result.AsString();
+    if (!result.is_string())
+    {
+        throw std::runtime_error("Unexpected RPC result type for getbestblockhash");
+    }
+    return result.get<std::string>();
 }
 
 std::future<std::string> RpcClient::GetBestBlockHashAsync()
@@ -232,7 +243,15 @@ std::future<std::string> RpcClient::GetBestBlockHashAsync()
 uint32_t RpcClient::GetBlockCount()
 {
     auto result = RpcSend("getblockcount");
-    return static_cast<uint32_t>(result.AsNumber());
+    if (result.is_number_unsigned())
+    {
+        return result.get<uint32_t>();
+    }
+    if (result.is_number_integer())
+    {
+        return static_cast<uint32_t>(result.get<int64_t>());
+    }
+    throw std::runtime_error("Unexpected RPC result type for getblockcount");
 }
 
 std::future<uint32_t> RpcClient::GetBlockCountAsync()
@@ -240,51 +259,55 @@ std::future<uint32_t> RpcClient::GetBlockCountAsync()
     return std::async(std::launch::async, [this]() { return GetBlockCount(); });
 }
 
-json::JToken RpcClient::GetBlock(const std::string& hash, bool verbose)
+nlohmann::json RpcClient::GetBlock(const std::string& hash, bool verbose)
 {
-    std::vector<json::JToken> params;
-    params.push_back(json::JString(hash));
-    params.push_back(json::JBoolean(verbose));
+    std::vector<nlohmann::json> params;
+    params.emplace_back(hash);
+    params.emplace_back(verbose);
     return RpcSend("getblock", params);
 }
 
-std::future<json::JToken> RpcClient::GetBlockAsync(const std::string& hash, bool verbose)
+std::future<nlohmann::json> RpcClient::GetBlockAsync(const std::string& hash, bool verbose)
 {
     return std::async(std::launch::async, [this, hash, verbose]() { return GetBlock(hash, verbose); });
 }
 
-json::JToken RpcClient::GetBlock(uint32_t index, bool verbose)
+nlohmann::json RpcClient::GetBlock(uint32_t index, bool verbose)
 {
-    std::vector<json::JToken> params;
-    params.push_back(json::JNumber(static_cast<double>(index)));
-    params.push_back(json::JBoolean(verbose));
+    std::vector<nlohmann::json> params;
+    params.emplace_back(index);
+    params.emplace_back(verbose);
     return RpcSend("getblock", params);
 }
 
-std::future<json::JToken> RpcClient::GetBlockAsync(uint32_t index, bool verbose)
+std::future<nlohmann::json> RpcClient::GetBlockAsync(uint32_t index, bool verbose)
 {
     return std::async(std::launch::async, [this, index, verbose]() { return GetBlock(index, verbose); });
 }
 
-json::JToken RpcClient::GetTransaction(const std::string& hash, bool verbose)
+nlohmann::json RpcClient::GetTransaction(const std::string& hash, bool verbose)
 {
-    std::vector<json::JToken> params;
-    params.push_back(json::JString(hash));
-    params.push_back(json::JBoolean(verbose));
+    std::vector<nlohmann::json> params;
+    params.emplace_back(hash);
+    params.emplace_back(verbose);
     return RpcSend("getrawtransaction", params);
 }
 
-std::future<json::JToken> RpcClient::GetTransactionAsync(const std::string& hash, bool verbose)
+std::future<nlohmann::json> RpcClient::GetTransactionAsync(const std::string& hash, bool verbose)
 {
     return std::async(std::launch::async, [this, hash, verbose]() { return GetTransaction(hash, verbose); });
 }
 
 std::string RpcClient::SendRawTransaction(const std::string& hex)
 {
-    std::vector<json::JToken> params;
-    params.push_back(json::JString(hex));
+    std::vector<nlohmann::json> params;
+    params.emplace_back(hex);
     auto result = RpcSend("sendrawtransaction", params);
-    return result.AsString();
+    if (result.is_string())
+    {
+        return result.get<std::string>();
+    }
+    return result.dump();
 }
 
 std::future<std::string> RpcClient::SendRawTransactionAsync(const std::string& hex)
@@ -292,128 +315,40 @@ std::future<std::string> RpcClient::SendRawTransactionAsync(const std::string& h
     return std::async(std::launch::async, [this, hex]() { return SendRawTransaction(hex); });
 }
 
-json::JToken RpcClient::InvokeFunction(const std::string& script_hash, const std::string& operation,
-                                       const std::vector<json::JToken>& params)
+nlohmann::json RpcClient::InvokeFunction(const std::string& script_hash, const std::string& operation,
+                                        const std::vector<nlohmann::json>& params)
 {
-    std::vector<json::JToken> rpc_params;
-    rpc_params.push_back(json::JString(script_hash));
-    rpc_params.push_back(json::JString(operation));
+    std::vector<nlohmann::json> rpc_params;
+    rpc_params.emplace_back(script_hash);
+    rpc_params.emplace_back(operation);
 
     if (!params.empty())
     {
-        auto params_array = json::JArray();
-        for (const auto& param : params)
-        {
-            params_array.Add(param);
-        }
-        rpc_params.push_back(params_array);
+        rpc_params.emplace_back(params);
     }
 
     return RpcSend("invokefunction", rpc_params);
 }
 
-std::future<json::JToken> RpcClient::InvokeFunctionAsync(const std::string& script_hash, const std::string& operation,
-                                                         const std::vector<json::JToken>& params)
+std::future<nlohmann::json> RpcClient::InvokeFunctionAsync(const std::string& script_hash,
+                                                           const std::string& operation,
+                                                           const std::vector<nlohmann::json>& params)
 {
     return std::async(std::launch::async, [this, script_hash, operation, params]()
                       { return InvokeFunction(script_hash, operation, params); });
 }
 
-json::JToken RpcClient::GetVersion() { return RpcSend("getversion"); }
+nlohmann::json RpcClient::GetVersion() { return RpcSend("getversion"); }
 
-std::future<json::JToken> RpcClient::GetVersionAsync()
+std::future<nlohmann::json> RpcClient::GetVersionAsync()
 {
     return std::async(std::launch::async, [this]() { return GetVersion(); });
 }
 
-RpcRequest RpcClient::CreateRequest(const std::string& method, const std::vector<json::JToken>& params)
+RpcRequest RpcClient::CreateRequest(const std::string& method, const std::vector<nlohmann::json>& params)
 {
     nlohmann::json json_params = nlohmann::json::array();
-    for (const auto& param : params)
-    {
-        // Complete JToken to nlohmann::json conversion
-        // Handle all JToken types properly
-        nlohmann::json json_param;
-
-        switch (param.GetType())
-        {
-            case json::JTokenType::Null:
-                json_param = nlohmann::json::value_t::null;
-                break;
-
-            case json::JTokenType::Boolean:
-                try
-                {
-                    json_param = param.GetBoolean();
-                }
-                catch (const std::exception&)
-                {
-                    json_param = param.AsBoolean();
-                }
-                break;
-
-            case json::JTokenType::Number:
-                try
-                {
-                    json_param = param.GetNumber();
-                }
-                catch (const std::exception&)
-                {
-                    json_param = param.AsNumber();
-                }
-                break;
-
-            case json::JTokenType::String:
-                try
-                {
-                    json_param = param.GetString();
-                }
-                catch (const std::exception&)
-                {
-                    json_param = param.AsString();
-                }
-                break;
-
-            case json::JTokenType::Array:
-            {
-                // Parse the JSON string representation to preserve array structure
-                try
-                {
-                    std::string json_str = param.ToString();
-                    json_param = nlohmann::json::parse(json_str);
-                }
-                catch (const std::exception&)
-                {
-                    // Fallback to empty array
-                    json_param = nlohmann::json::array();
-                }
-            }
-            break;
-
-            case json::JTokenType::Object:
-            {
-                // Parse the JSON string representation to preserve object structure
-                try
-                {
-                    std::string json_str = param.ToString();
-                    json_param = nlohmann::json::parse(json_str);
-                }
-                catch (const std::exception&)
-                {
-                    // Fallback to empty object
-                    json_param = nlohmann::json::object();
-                }
-            }
-            break;
-
-            default:
-                // Unknown type - fallback to string representation
-                json_param = param.ToString();
-                break;
-        }
-
-        json_params.push_back(json_param);
-    }
+    json_params = params;
 
     return RpcRequest("2.0", method, json_params, nlohmann::json(next_id_++));
 }
@@ -425,9 +360,12 @@ RpcResponse RpcClient::ProcessResponse(const std::string& response, bool throw_o
         auto json = nlohmann::json::parse(response);
         auto rpc_response = RpcResponse::FromJson(json);
 
-        if (throw_on_error && rpc_response.GetError().GetCode() != 0)
+        const auto& errorJson = rpc_response.GetError();
+        if (throw_on_error && !errorJson.is_null())
         {
-            throw std::runtime_error("RPC Error: " + rpc_response.GetError().GetMessage());
+            const int code = errorJson.value("code", -1);
+            const std::string message = errorJson.value("message", std::string("RPC error"));
+            throw std::runtime_error("RPC Error: " + message + " (code " + std::to_string(code) + ")");
         }
 
         return rpc_response;
@@ -441,10 +379,11 @@ RpcResponse RpcClient::ProcessResponse(const std::string& response, bool throw_o
 
         // Return error response
         RpcResponse error_response;
-        RpcResponseError error;
-        error.SetCode(-1);
-        error.SetMessage("Failed to parse response");
-        error_response.SetError(error);
+        nlohmann::json errorJson;
+        errorJson["code"] = -1;
+        errorJson["message"] = "Failed to parse response";
+        error_response.SetError(errorJson);
+        error_response.SetResult(nullptr);
         return error_response;
     }
 }

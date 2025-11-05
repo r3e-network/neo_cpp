@@ -77,6 +77,14 @@ class RPCMethods
     static nlohmann::json GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
+     * @brief Gets the application log for a transaction.
+     * @param neoSystem The Neo system.
+     * @param params The parameters.
+     * @return The result.
+     */
+    static nlohmann::json GetApplicationLog(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+    /**
      * @brief Gets a raw transaction.
      * @param neoSystem The Neo system.
      * @param params The parameters.

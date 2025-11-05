@@ -1,23 +1,156 @@
 /**
  * @file application_logs_plugin.cpp
- * @brief Application Logs Plugin
- * @author Neo C++ Team
- * @date 2025
- * @copyright MIT License
+ * @brief Application log storage for RPC consumption
  */
 
-#include <neo/io/binary_reader.h>
-#include <neo/io/binary_writer.h>
-#include <neo/io/json.h>
-#include <neo/ledger/blockchain.h>
 #include <neo/plugins/application_logs_plugin.h>
 
+#include <neo/cryptography/base64.h>
+#include <neo/core/neo_system.h>
+#include <neo/ledger/block.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/ledger/neo_system.h>
+#include <neo/node/neo_system.h>
+#include <neo/persistence/data_cache.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/trigger_type.h>
+#include <neo/vm/special_items.h>
+#include <neo/vm/stack_item.h>
+#include <neo/vm/stack_item_types.h>
+
+#include <algorithm>
 #include <filesystem>
-#include <fstream>
-#include <iostream>
+#include <unordered_set>
 
 namespace neo::plugins
 {
+namespace
+{
+std::string StackItemTypeToString(vm::StackItemType type)
+{
+    using vm::StackItemType;
+    switch (type)
+    {
+        case StackItemType::Any:
+            return "Any";
+        case StackItemType::Pointer:
+            return "Pointer";
+        case StackItemType::Boolean:
+            return "Boolean";
+        case StackItemType::Integer:
+            return "Integer";
+        case StackItemType::ByteString:
+            return "ByteString";
+        case StackItemType::Buffer:
+            return "Buffer";
+        case StackItemType::Array:
+            return "Array";
+        case StackItemType::Struct:
+            return "Struct";
+        case StackItemType::Map:
+            return "Map";
+        case StackItemType::InteropInterface:
+            return "InteropInterface";
+        case StackItemType::Null:
+            return "Null";
+        default:
+            return "Any";
+    }
+}
+
+nlohmann::json SerializeStackItemInternal(const std::shared_ptr<vm::StackItem>& item,
+                                          std::unordered_set<const vm::StackItem*>& seen)
+{
+    nlohmann::json result = nlohmann::json::object();
+    if (!item)
+    {
+        result["type"] = "Any";
+        return result;
+    }
+
+    const auto type = item->GetType();
+    result["type"] = StackItemTypeToString(type);
+
+    switch (type)
+    {
+        case vm::StackItemType::Boolean:
+            result["value"] = item->GetBoolean();
+            break;
+        case vm::StackItemType::Integer:
+            result["value"] = std::to_string(item->GetInteger());
+            break;
+        case vm::StackItemType::ByteString:
+        case vm::StackItemType::Buffer:
+        {
+            auto bytes = item->GetByteArray();
+            result["value"] = cryptography::Base64::Encode(bytes.AsSpan());
+            break;
+        }
+        case vm::StackItemType::Array:
+        case vm::StackItemType::Struct:
+        {
+            const auto* raw = item.get();
+            if (!seen.insert(raw).second)
+            {
+                result["value"] = nlohmann::json::array();
+                break;
+            }
+
+            nlohmann::json arrayJson = nlohmann::json::array();
+            for (const auto& element : item->GetArray())
+            {
+                arrayJson.push_back(SerializeStackItemInternal(element, seen));
+            }
+            seen.erase(raw);
+            result["value"] = std::move(arrayJson);
+            break;
+        }
+        case vm::StackItemType::Map:
+        {
+            const auto* raw = item.get();
+            if (!seen.insert(raw).second)
+            {
+                result["value"] = nlohmann::json::array();
+                break;
+            }
+
+            nlohmann::json mapJson = nlohmann::json::array();
+            for (const auto& [key, value] : item->GetMap())
+            {
+                nlohmann::json entry = nlohmann::json::object();
+                entry["key"] = SerializeStackItemInternal(key, seen);
+                entry["value"] = SerializeStackItemInternal(value, seen);
+                mapJson.push_back(std::move(entry));
+            }
+            seen.erase(raw);
+            result["value"] = std::move(mapJson);
+            break;
+        }
+        case vm::StackItemType::Pointer:
+        {
+            if (auto pointer = std::dynamic_pointer_cast<vm::PointerItem>(item))
+            {
+                result["value"] = pointer->GetPosition();
+            }
+            break;
+        }
+        case vm::StackItemType::InteropInterface:
+        case vm::StackItemType::Any:
+        case vm::StackItemType::Null:
+        default:
+            break;
+    }
+
+    return result;
+}
+
+nlohmann::json SerializeStackItem(const std::shared_ptr<vm::StackItem>& item)
+{
+    std::unordered_set<const vm::StackItem*> seen;
+    return SerializeStackItemInternal(item, seen);
+}
+}  // namespace
+
 ApplicationLogsPlugin::ApplicationLogsPlugin()
     : PluginBase("ApplicationLogs", "Provides application logs functionality", "1.0", "Neo C++ Team"),
       logPath_("ApplicationLogs")
@@ -26,224 +159,215 @@ ApplicationLogsPlugin::ApplicationLogsPlugin()
 
 bool ApplicationLogsPlugin::OnInitialize(const std::unordered_map<std::string, std::string>& settings)
 {
-    // Parse settings
-    for (const auto& [key, value] : settings)
+    auto it = settings.find("LogPath");
+    if (it != settings.end())
     {
-        if (key == "LogPath")
+        logPath_ = it->second;
+    }
+
+    auto maxIt = settings.find("MaxCachedLogs");
+    if (maxIt != settings.end())
+    {
+        try
         {
-            logPath_ = value;
+            auto parsed = std::stoull(maxIt->second);
+            if (parsed > 0)
+            {
+                maxCachedLogs_ = parsed;
+            }
+        }
+        catch (const std::exception&)
+        {
+            // Ignore invalid value and keep the default
         }
     }
 
-    // Create log directory if it doesn't exist
-    std::filesystem::create_directories(logPath_);
-
-    // Load logs
-    LoadLogs();
-
+    std::error_code ec;
+    std::filesystem::create_directories(logPath_, ec);
+    (void)ec;
     return true;
 }
 
 bool ApplicationLogsPlugin::OnStart()
 {
-    // Register callbacks
-    auto& blockchain = GetNeoSystem()->GetBlockchain();
-    blockchain.RegisterBlockPersistenceCallback([this](std::shared_ptr<ledger::Block> block)
-                                                { OnBlockPersisted(block); });
+    auto neoSystem = GetNeoSystem();
+    if (!neoSystem) return false;
+    auto blockchain = neoSystem->GetBlockchain();
+    if (!blockchain) return false;
 
-    blockchain.RegisterTransactionExecutionCallback([this](std::shared_ptr<ledger::Transaction> transaction)
-                                                    { OnTransactionExecuted(transaction); });
+    if (!handlerRegistered_)
+    {
+        std::weak_ptr<ApplicationLogsPlugin> weakSelf =
+            std::static_pointer_cast<ApplicationLogsPlugin>(shared_from_this());
+        blockchain->RegisterCommittingHandler(
+            [weakSelf](std::shared_ptr<neo::NeoSystem>,
+                       std::shared_ptr<ledger::Block> block,
+                       std::shared_ptr<persistence::DataCache>,
+                       const std::vector<ledger::ApplicationExecuted>& executions)
+            {
+                if (auto self = weakSelf.lock())
+                {
+                    self->HandleCommitting(std::move(block), executions);
+                }
+            });
+        handlerRegistered_ = true;
+    }
 
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        subscribed_ = true;
+    }
     return true;
 }
 
 bool ApplicationLogsPlugin::OnStop()
 {
-    // Save logs
-    SaveLogs();
-
+    std::lock_guard<std::mutex> lock(mutex_);
+    subscribed_ = false;
     return true;
 }
 
-std::shared_ptr<ApplicationLog> ApplicationLogsPlugin::GetApplicationLog(const io::UInt256& txHash) const
+std::shared_ptr<ApplicationLog> ApplicationLogsPlugin::GetApplicationLog(const io::UInt256& hash) const
 {
     std::lock_guard<std::mutex> lock(mutex_);
-
-    auto it = logs_.find(txHash);
-    if (it != logs_.end()) return it->second;
-
-    return nullptr;
+    auto it = logs_.find(hash);
+    if (it == logs_.end()) return nullptr;
+    return it->second;
 }
 
-void ApplicationLogsPlugin::OnBlockPersisted(std::shared_ptr<ledger::Block> block)
+void ApplicationLogsPlugin::AddLog(std::shared_ptr<ApplicationLog> log)
 {
-    // Save logs
-    SaveLogs();
-}
-
-void ApplicationLogsPlugin::OnTransactionExecuted(std::shared_ptr<ledger::Transaction> transaction)
-{
-    // Create application log
-    auto log = std::make_shared<ApplicationLog>();
-    log->TxHash = transaction->GetHash();
-
-    // Get application engine
-    auto engine = transaction->GetApplicationEngine();
-    if (engine)
+    if (!log) return;
+    std::lock_guard<std::mutex> lock(mutex_);
+    if (log->TxHash.has_value())
     {
-        log->State = engine->GetState();
-        log->GasConsumed = engine->GetGasConsumed();
-        log->Stack = engine->GetResultStack();
-        log->Notifications = engine->GetNotifications();
-        log->Exception = engine->GetException();
+        auto key = *log->TxHash;
+        StoreLog(key, std::move(log));
     }
-
-    // Add log
-    std::lock_guard<std::mutex> lock(mutex_);
-    logs_[log->TxHash] = log;
-}
-
-void ApplicationLogsPlugin::SaveLogs()
-{
-    std::lock_guard<std::mutex> lock(mutex_);
-
-    for (const auto& [txHash, log] : logs_)
+    else if (log->BlockHash.has_value())
     {
-        // Create log file
-        std::string logFile = logPath_ + "/" + txHash.ToString() + ".json";
-
-        // Create log JSON
-        nlohmann::json json;
-        json["txid"] = txHash.ToString();
-        json["state"] = log->State == smartcontract::VMState::HALT ? "HALT" : "FAULT";
-        json["gasconsumed"] = log->GasConsumed;
-        json["exception"] = log->Exception;
-
-        // Add stack
-        json["stack"] = nlohmann::json::array();
-        for (const auto& item : log->Stack)
-        {
-            nlohmann::json stackItem;
-
-            if (item->GetType() == smartcontract::vm::StackItemType::Integer)
-            {
-                stackItem["type"] = "Integer";
-                stackItem["value"] = item->GetInteger();
-            }
-            else if (item->GetType() == smartcontract::vm::StackItemType::Boolean)
-            {
-                stackItem["type"] = "Boolean";
-                stackItem["value"] = item->GetBoolean();
-            }
-            else if (item->GetType() == smartcontract::vm::StackItemType::ByteString)
-            {
-                stackItem["type"] = "ByteString";
-                stackItem["value"] = item->GetByteArray().ToHexString();
-            }
-            else if (item->GetType() == smartcontract::vm::StackItemType::Buffer)
-            {
-                stackItem["type"] = "Buffer";
-                stackItem["value"] = item->GetByteArray().ToHexString();
-            }
-            else
-            {
-                stackItem["type"] = "Unknown";
-                stackItem["value"] = nullptr;
-            }
-
-            json["stack"].push_back(stackItem);
-        }
-
-        // Add notifications
-        json["notifications"] = nlohmann::json::array();
-        for (const auto& notification : log->Notifications)
-        {
-            nlohmann::json notificationJson;
-            notificationJson["contract"] = notification.ScriptHash.ToString();
-            notificationJson["eventname"] = notification.EventName;
-
-            // Add arguments
-            notificationJson["state"] = nlohmann::json::array();
-            for (const auto& arg : notification.State)
-            {
-                nlohmann::json argJson;
-
-                if (arg->GetType() == smartcontract::vm::StackItemType::Integer)
-                {
-                    argJson["type"] = "Integer";
-                    argJson["value"] = arg->GetInteger();
-                }
-                else if (arg->GetType() == smartcontract::vm::StackItemType::Boolean)
-                {
-                    argJson["type"] = "Boolean";
-                    argJson["value"] = arg->GetBoolean();
-                }
-                else if (arg->GetType() == smartcontract::vm::StackItemType::ByteString)
-                {
-                    argJson["type"] = "ByteString";
-                    argJson["value"] = arg->GetByteArray().ToHexString();
-                }
-                else if (arg->GetType() == smartcontract::vm::StackItemType::Buffer)
-                {
-                    argJson["type"] = "Buffer";
-                    argJson["value"] = arg->GetByteArray().ToHexString();
-                }
-                else
-                {
-                    argJson["type"] = "Unknown";
-                    argJson["value"] = nullptr;
-                }
-
-                notificationJson["state"].push_back(argJson);
-            }
-
-            json["notifications"].push_back(notificationJson);
-        }
-
-        // Write log file
-        std::ofstream file(logFile);
-        file << json.dump(4);
-        file.close();
+        auto key = *log->BlockHash;
+        StoreLog(key, std::move(log));
     }
 }
 
-void ApplicationLogsPlugin::LoadLogs()
+void ApplicationLogsPlugin::HandleCommitting(std::shared_ptr<ledger::Block> block,
+                                             const std::vector<ledger::ApplicationExecuted>& executions)
 {
+    if (!block) return;
+
     std::lock_guard<std::mutex> lock(mutex_);
+    if (!subscribed_) return;
 
-    // Clear logs
-    logs_.clear();
+    const auto blockHash = block->GetHash();
+    RemoveKey(blockHash);
 
-    // Check if log directory exists
-    if (!std::filesystem::exists(logPath_)) return;
+    auto blockLog = std::make_shared<ApplicationLog>();
+    blockLog->BlockHash = blockHash;
+    bool hasBlockExecutions = false;
 
-    // Load log files
-    for (const auto& entry : std::filesystem::directory_iterator(logPath_))
+    for (const auto& executed : executions)
     {
-        if (entry.path().extension() != ".json") continue;
-
-        try
+        auto execution = CreateExecution(executed);
+        if (executed.transaction)
         {
-            // Read log file
-            std::ifstream file(entry.path());
-            nlohmann::json json = nlohmann::json::parse(file);
-            file.close();
-
-            // Create application log
-            auto log = std::make_shared<ApplicationLog>();
-            log->TxHash = io::UInt256::Parse(json["txid"].get<std::string>());
-            log->State = json["state"].get<std::string>() == "HALT" ? smartcontract::VMState::HALT
-                                                                    : smartcontract::VMState::FAULT;
-            log->GasConsumed = json["gasconsumed"].get<int64_t>();
-            log->Exception = json["exception"].get<std::string>();
-
-            // Add log
-            logs_[log->TxHash] = log;
+            auto txHash = executed.transaction->GetHash();
+            auto txLog = std::make_shared<ApplicationLog>();
+            txLog->TxHash = txHash;
+            txLog->BlockHash = blockHash;
+            txLog->Executions.push_back(std::move(execution));
+            StoreLog(txHash, std::move(txLog));
         }
-        catch (const std::exception& ex)
+        else
         {
-            std::cerr << "Failed to load log file: " << entry.path() << " - " << ex.what() << std::endl;
+            hasBlockExecutions = true;
+            blockLog->Executions.push_back(std::move(execution));
         }
+    }
+
+    if (hasBlockExecutions)
+    {
+        StoreLog(blockHash, std::move(blockLog));
+    }
+}
+
+ApplicationLog::Execution ApplicationLogsPlugin::CreateExecution(const ledger::ApplicationExecuted& executed) const
+{
+    ApplicationLog::Execution execution;
+    execution.GasConsumed = static_cast<int64_t>(executed.gas_consumed);
+    execution.VmState = executed.vm_state;
+    execution.Exception = executed.exception_message;
+
+    if (executed.engine)
+    {
+        execution.Trigger = executed.engine->GetTrigger();
+
+        auto resultStack = executed.engine->GetResultStack();
+        execution.Stack.reserve(resultStack.size());
+        for (const auto& item : resultStack)
+        {
+            execution.Stack.push_back(SerializeStackItem(item));
+        }
+    }
+    else
+    {
+        execution.Trigger = smartcontract::TriggerType::Application;
+    }
+
+    for (const auto& notify : executed.notifications)
+    {
+        ApplicationLog::Notification notification;
+        notification.Contract = notify.script_hash;
+        notification.EventName = notify.event_name;
+
+        nlohmann::json stateArray = nlohmann::json::array();
+        for (const auto& stateItem : notify.state)
+        {
+            stateArray.push_back(SerializeStackItem(stateItem));
+        }
+        notification.State = nlohmann::json{
+            {"type", "Array"},
+            {"value", std::move(stateArray)},
+        };
+
+        execution.Notifications.push_back(std::move(notification));
+    }
+
+    return execution;
+}
+
+void ApplicationLogsPlugin::StoreLog(const io::UInt256& key, std::shared_ptr<ApplicationLog> log)
+{
+    RemoveKey(key);
+    logs_.insert_or_assign(key, std::move(log));
+    cacheOrder_.push_back(key);
+    PruneCacheIfNeeded();
+}
+
+void ApplicationLogsPlugin::RemoveKey(const io::UInt256& key)
+{
+    auto removed = logs_.erase(key);
+    if (removed == 0)
+    {
+        return;
+    }
+
+    auto it = std::remove(cacheOrder_.begin(), cacheOrder_.end(), key);
+    cacheOrder_.erase(it, cacheOrder_.end());
+}
+
+void ApplicationLogsPlugin::PruneCacheIfNeeded()
+{
+    while (maxCachedLogs_ > 0 && logs_.size() > maxCachedLogs_)
+    {
+        if (cacheOrder_.empty())
+        {
+            logs_.clear();
+            break;
+        }
+        const auto& oldest = cacheOrder_.front();
+        logs_.erase(oldest);
+        cacheOrder_.pop_front();
     }
 }
 }  // namespace neo::plugins

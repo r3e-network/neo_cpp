@@ -23,13 +23,7 @@ add_executable(test_io ${IO_TEST_SOURCES})
 
 target_link_libraries(test_io
     PRIVATE
-        neo_io
-        neo_cryptography
-        neo_extensions
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        nlohmann_json::nlohmann_json
-        spdlog::spdlog
+        neo_cpp
         gtest
         gtest_main
 )

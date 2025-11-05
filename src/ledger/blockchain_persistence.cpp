@@ -294,22 +294,36 @@ void Blockchain::AddUnverifiedBlockToCache(std::shared_ptr<Block> block, const s
 
 void Blockchain::ProcessUnverifiedBlocks(uint32_t height)
 {
-    auto it = block_cache_unverified_.find(height);
-    if (it == block_cache_unverified_.end())
+    std::shared_ptr<UnverifiedBlocksList> unverified_list;
+    {
+        std::unique_lock<std::shared_mutex> cacheLock(blockchain_mutex_);
+        auto it = block_cache_unverified_.find(height);
+        if (it == block_cache_unverified_.end())
+        {
+            return;
+        }
+        unverified_list = it->second;
+        block_cache_unverified_.erase(it);
+    }
+
+    if (!unverified_list || unverified_list->blocks.empty())
     {
         return;
     }
 
-    auto unverified_list = it->second;
-    block_cache_unverified_.erase(it);
-
     // Process all unverified blocks for this height
     for (const auto& unverified_block : unverified_list->blocks)
     {
-        // Queue for processing without relaying
-        std::unique_lock<std::mutex> proc_lock(processing_mutex_);
-        processing_queue_.push([this, unverified_block]() { OnNewBlock(unverified_block); });
-        processing_cv_.notify_one();
+        if (!unverified_block) continue;
+
+        // If headers are now available, validate inline; otherwise queue for later.
+        auto result = OnNewBlock(unverified_block);
+        if (result == VerifyResult::UnableToVerify)
+        {
+            std::unique_lock<std::mutex> proc_lock(processing_mutex_);
+            processing_queue_.push([this, unverified_block]() { OnNewBlock(unverified_block); });
+            processing_cv_.notify_one();
+        }
     }
 }
 

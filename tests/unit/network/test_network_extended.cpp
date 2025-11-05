@@ -1,11 +1,12 @@
 #include <gtest/gtest.h>
-#include <neo/network/remote_node.h>
-#include <neo/network/p2p/payloads/version_payload.h>
-#include <neo/network/p2p/payloads/addr_payload.h>
-#include <neo/network/p2p/payloads/inv_payload.h>
-#include <neo/network/p2p/payloads/getblocks_payload.h>
-#include <neo/network/p2p/payloads/merkleblock_payload.h>
-#include <neo/network/message.h>
+#if __has_include(<neo/network/remote_node.h>)
+#    include <neo/network/remote_node.h>
+#    include <neo/network/p2p/payloads/version_payload.h>
+#    include <neo/network/p2p/payloads/addr_payload.h>
+#    include <neo/network/p2p/payloads/inv_payload.h>
+#    include <neo/network/p2p/payloads/getblocks_payload.h>
+#    include <neo/network/p2p/payloads/merkleblock_payload.h>
+#    include <neo/network/message.h>
 
 using namespace neo::network;
 using namespace neo::network::p2p::payloads;
@@ -194,3 +195,11 @@ TEST_F(NetworkExtendedTest, TestMerkleBlockPayload)
     EXPECT_EQ(deserialized.TxCount, payload.TxCount);
     EXPECT_EQ(deserialized.MerkleRoot, payload.MerkleRoot);
 }
+#else
+
+TEST(NetworkExtendedUnavailable, RemoteNodeHeaderMissing)
+{
+    GTEST_SKIP() << "neo/network/remote_node.h not available; skipping extended network tests.";
+}
+
+#endif

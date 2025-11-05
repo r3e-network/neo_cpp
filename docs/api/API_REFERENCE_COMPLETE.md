@@ -529,7 +529,8 @@ getblockhash(height) -> hash
 
 // Transaction methods
 getrawtransaction(txid, verbose) -> Transaction
-sendrawtransaction(hex) -> hash
+sendrawtransaction(base64_tx) -> { hash }
+submitblock(block_base64, relay?) -> { hash }
 gettransactionheight(txid) -> height
 
 // Contract methods
@@ -550,7 +551,9 @@ getpeers() -> PeerList
 getversion() -> Version
 
 // Plugin methods
-getapplicationlog(txid) -> ApplicationLog
+listplugins() -> [ { name, version, interfaces } ]
+getapplicationlog(txid, triggerType?) -> ApplicationLog
+// ApplicationLogs plugin settings: optional `MaxCachedLogs` (default 1000) limits cached entries
 getnep17balances(address) -> Balances
 getnep17transfers(address, timestamp) -> Transfers
 ```

@@ -4,6 +4,8 @@
 #include <neo/json/jobject.h>
 #include <neo/json/jstring.h>
 
+#include <vector>
+
 namespace neo::json::tests
 {
 class JObjectTest : public ::testing::Test
@@ -156,5 +158,58 @@ TEST_F(JObjectTest, TestToString)
     EXPECT_FALSE(json_str.empty());
     EXPECT_NE(json_str.find("alice"), std::string::npos);
     EXPECT_NE(json_str.find("30"), std::string::npos);
+}
+
+TEST_F(JObjectTest, EnumeratorPreservesInsertionOrder)
+{
+    std::vector<std::string> expectedKeys = {"name", "age", "score", "isMarried", "pet"};
+    const auto& props = alice->GetProperties();
+
+    ASSERT_EQ(expectedKeys.size(), props.size());
+    for (size_t i = 0; i < props.size(); ++i)
+    {
+        EXPECT_EQ(expectedKeys[i], props.key_at(i));
+    }
+}
+
+TEST_F(JObjectTest, SetPropertyReplacesExistingValue)
+{
+    alice->SetProperty("name", std::make_shared<JString>("charlie"));
+    EXPECT_EQ("charlie", (*alice)["name"]->AsString());
+    EXPECT_EQ(static_cast<size_t>(5), alice->Count());
+
+    std::vector<std::string> expectedKeys = {"name", "age", "score", "isMarried", "pet"};
+    const auto& props = alice->GetProperties();
+    for (size_t i = 0; i < props.size(); ++i)
+    {
+        EXPECT_EQ(expectedKeys[i], props.key_at(i));
+    }
+}
+
+TEST_F(JObjectTest, SetPropertyAllowsNullAssignments)
+{
+    alice->SetProperty("nickname", nullptr);
+    EXPECT_TRUE(alice->ContainsProperty("nickname"));
+    EXPECT_EQ(nullptr, (*alice)["nickname"]);
+    EXPECT_EQ(static_cast<size_t>(6), alice->Count());
+}
+
+TEST_F(JObjectTest, CloneProducesDeepCopy)
+{
+    auto clone = std::dynamic_pointer_cast<JObject>(alice->Clone());
+    ASSERT_NE(clone, nullptr);
+
+    clone->SetProperty("name", std::make_shared<JString>("different"));
+    EXPECT_EQ("alice", (*alice)["name"]->AsString());
+    EXPECT_EQ("different", (*clone)["name"]->AsString());
+
+    auto clonePet = std::dynamic_pointer_cast<JObject>((*clone)["pet"]);
+    ASSERT_NE(clonePet, nullptr);
+    clonePet->SetProperty("name", std::make_shared<JString>("Changed"));
+
+    auto originalPet = std::dynamic_pointer_cast<JObject>((*alice)["pet"]);
+    ASSERT_NE(originalPet, nullptr);
+    EXPECT_EQ("Tom", (*originalPet)["name"]->AsString());
+    EXPECT_EQ("Changed", (*clonePet)["name"]->AsString());
 }
 }  // namespace neo::json::tests

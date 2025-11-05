@@ -8,6 +8,7 @@
 
 #include <neo/core/neo_system.h>
 #include <neo/ledger/blockchain.h>
+#include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/persistence/memory_store.h>
 
 namespace neo::ledger
@@ -32,6 +33,18 @@ Blockchain::~Blockchain()
     {
         processing_thread_.join();
     }
+}
+
+void Blockchain::StoreBlockInCache(const std::shared_ptr<Block>& block)
+{
+    if (!block)
+    {
+        return;
+    }
+    const auto hash = block->GetHash();
+    block_cache_[hash] = block;
+    header_cache_by_hash_[hash] = std::make_shared<BlockHeader>(*block);
+    header_hash_by_index_[block->GetIndex()] = hash;
 }
 
 void Blockchain::Initialize()
@@ -157,7 +170,7 @@ std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
     block->Deserialize(reader);
 
     // Cache the block
-    const_cast<Blockchain*>(this)->block_cache_[hash] = block;
+    const_cast<Blockchain*>(this)->StoreBlockInCache(block);
 
     return block;
 }

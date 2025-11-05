@@ -64,6 +64,18 @@ Blockchain::~Blockchain()
     Stop(); 
 }
 
+void Blockchain::StoreBlockInCache(const std::shared_ptr<Block>& block)
+{
+    if (!block)
+    {
+        return;
+    }
+    const auto hash = block->GetHash();
+    block_cache_[hash] = block;
+    header_cache_by_hash_[hash] = std::make_shared<BlockHeader>(*block);
+    header_hash_by_index_[block->GetIndex()] = hash;
+}
+
 void Blockchain::Initialize()
 {
     // Acquire exclusive lock for initialization
@@ -160,26 +172,50 @@ std::shared_ptr<Block> Blockchain::GetBlock(uint32_t index) const
 
 io::UInt256 Blockchain::GetBlockHash(uint32_t index) const
 {
-    std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
-    return system_->GetLedgerContract()->GetBlockHash(data_cache_, index);
+    std::shared_lock<std::shared_mutex> shared_lock(blockchain_mutex_);
+    auto cached = header_hash_by_index_.find(index);
+    if (cached != header_hash_by_index_.end())
+    {
+        return cached->second;
+    }
+    shared_lock.unlock();
+
+    auto hash = system_->GetLedgerContract()->GetBlockHash(data_cache_, index);
+    if (!hash.IsZero())
+    {
+        std::unique_lock<std::shared_mutex> unique_lock(blockchain_mutex_);
+        header_hash_by_index_[index] = hash;
+    }
+    return hash;
 }
 
 std::shared_ptr<Header> Blockchain::GetBlockHeader(const io::UInt256& hash) const
 {
-    std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+    std::shared_lock<std::shared_mutex> shared_lock(blockchain_mutex_);
+    auto cached = header_cache_by_hash_.find(hash);
+    if (cached != header_cache_by_hash_.end())
+    {
+        return cached->second;
+    }
+    shared_lock.unlock();
 
-    // Header cache disabled - load full block and return header directly
-    auto block = GetBlock(hash);
-    return block ? std::make_shared<BlockHeader>(*block) : nullptr;
+    auto block = system_->GetLedgerContract()->GetBlock(data_cache_, hash);
+    if (!block)
+    {
+        return nullptr;
+    }
+
+    auto header = std::make_shared<BlockHeader>(*block);
+    std::unique_lock<std::shared_mutex> unique_lock(blockchain_mutex_);
+    header_cache_by_hash_[hash] = header;
+    header_hash_by_index_[block->GetIndex()] = hash;
+    return header;
 }
 
 std::shared_ptr<Header> Blockchain::GetBlockHeader(uint32_t index) const
 {
-    std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
-
-    // Header cache disabled - load from storage directly
-    io::UInt256 block_hash = system_->GetLedgerContract()->GetBlockHash(data_cache_, index);
-    return block_hash.IsZero() ? nullptr : GetBlockHeader(block_hash);
+    auto hash = GetBlockHash(index);
+    return hash.IsZero() ? nullptr : GetBlockHeader(hash);
 }
 
 std::shared_ptr<Transaction> Blockchain::GetTransaction(const io::UInt256& hash) const
@@ -285,7 +321,7 @@ VerifyResult Blockchain::OnNewBlock(std::shared_ptr<Block> block)
     }
 
     // Add to cache
-    block_cache_[block->GetHash()] = block;
+    StoreBlockInCache(block);
 
     // Process if ready for persistence
     if (block->GetIndex() == current_height + 1)

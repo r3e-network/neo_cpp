@@ -23,11 +23,7 @@ if(NEO_ENABLE_FULL_CRYPTO_TESTS)
 
     target_link_libraries(test_cryptography
         PRIVATE
-            neo_cryptography
-            neo_io
-            neo_extensions
-            OpenSSL::SSL
-            OpenSSL::Crypto
+            neo_cpp
             gtest
             gtest_main
             gmock
@@ -49,11 +45,7 @@ endif()
 add_executable(test_crypto_sign test_crypto_sign.cpp)
 target_link_libraries(test_crypto_sign
     PRIVATE
-        neo_cryptography
-        neo_io
-        neo_extensions
-        OpenSSL::SSL
-        OpenSSL::Crypto
+        neo_cpp
         gtest
         gtest_main
 )
@@ -77,11 +69,7 @@ set_tests_properties(crypto_sign PROPERTIES TIMEOUT 15)
 add_executable(test_crypto_base58 test_base58.cpp)
 target_link_libraries(test_crypto_base58
     PRIVATE
-        neo_cryptography
-        neo_io
-        neo_extensions
-        OpenSSL::SSL
-        OpenSSL::Crypto
+        neo_cpp
         gtest
         gtest_main
 )
@@ -105,11 +93,7 @@ if(NEO_ENABLE_CRYPTO_SCRYPT_TESTS)
     add_executable(test_crypto_scrypt test_scrypt.cpp)
     target_link_libraries(test_crypto_scrypt
         PRIVATE
-            neo_cryptography
-            neo_io
-            neo_extensions
-            OpenSSL::SSL
-            OpenSSL::Crypto
+            neo_cpp
             gtest
             gtest_main
     )
@@ -134,11 +118,7 @@ endif()
 add_executable(test_crypto_merkle test_merkle_tree.cpp)
 target_link_libraries(test_crypto_merkle
     PRIVATE
-        neo_cryptography
-        neo_io
-        neo_extensions
-        OpenSSL::SSL
-        OpenSSL::Crypto
+        neo_cpp
         gtest
         gtest_main
 )

@@ -6,7 +6,7 @@
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/scrypt.h>
 #include <neo/io/byte_vector.h>
-#include <neo/smartcontract/contract.h>
+#include <neo/vm/opcode.h>
 
 #include <array>
 #include <cstring>
@@ -75,6 +75,31 @@ void aes256_ecb_decrypt(const uint8_t* key, const uint8_t* input, uint8_t* outpu
     check(static_cast<size_t>(outLen + finalLen) == length, "AES output length mismatch");
 
     EVP_CIPHER_CTX_free(ctx);
+}
+
+io::ByteVector CreateSignatureVerificationScript(const io::ByteVector& publicKey)
+{
+    using neo::vm::OpCode;
+
+    if (publicKey.IsEmpty())
+    {
+        throw std::invalid_argument("Public key cannot be empty");
+    }
+
+    std::vector<uint8_t> script;
+    script.reserve(2 + publicKey.Size() + 5);
+    script.push_back(static_cast<uint8_t>(OpCode::PUSHDATA1));
+    script.push_back(static_cast<uint8_t>(publicKey.Size()));
+    script.insert(script.end(), publicKey.Data(), publicKey.Data() + publicKey.Size());
+    script.push_back(static_cast<uint8_t>(OpCode::SYSCALL));
+
+    constexpr uint32_t kCheckSigSyscall = 0x9147a939;  // Hash of "System.Crypto.CheckSig"
+    script.push_back(static_cast<uint8_t>(kCheckSigSyscall & 0xFF));
+    script.push_back(static_cast<uint8_t>((kCheckSigSyscall >> 8) & 0xFF));
+    script.push_back(static_cast<uint8_t>((kCheckSigSyscall >> 16) & 0xFF));
+    script.push_back(static_cast<uint8_t>((kCheckSigSyscall >> 24) & 0xFF));
+
+    return io::ByteVector(script);
 }
 }  // namespace
 
@@ -292,7 +317,7 @@ std::string Secp256r1::ToNEP2(const io::ByteVector& privateKey, const std::strin
                               int scryptP)
 {
     auto publicKey = ComputePublicKey(privateKey);
-    auto script = smartcontract::Contract::CreateSignatureContract(ECPoint::FromBytes(publicKey.AsSpan())).GetScript();
+    auto script = CreateSignatureVerificationScript(publicKey);
     auto scriptHash = Hash::Hash160(script.AsSpan());
     auto doubleHash = Hash::Sha256(Hash::Sha256(scriptHash.AsSpan()).AsSpan());
 
@@ -349,7 +374,7 @@ io::ByteVector Secp256r1::FromNEP2(const std::string& nep2, const std::string& p
     }
 
     auto publicKey = ComputePublicKey(privateKey);
-    auto script = smartcontract::Contract::CreateSignatureContract(ECPoint::FromBytes(publicKey.AsSpan())).GetScript();
+    auto script = CreateSignatureVerificationScript(publicKey);
     auto scriptHash = Hash::Hash160(script.AsSpan());
     auto doubleHash = Hash::Sha256(Hash::Sha256(scriptHash.AsSpan()).AsSpan());
 

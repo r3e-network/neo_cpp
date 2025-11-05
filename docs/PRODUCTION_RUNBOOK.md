@@ -251,6 +251,13 @@ sudo systemctl enable neo-node
 sudo systemctl start neo-node
 ```
 
+### ApplicationLogs plugin
+
+- The `getapplicationlog` RPC requires the ApplicationLogs plugin. Verify it remains enabled in
+  `PluginConfiguration.Plugins.ApplicationLogs` within your node configuration.
+- The plugin uses an in-memory cache with a default size of 1,000 entries. Set `MaxCachedLogs` under the same
+  configuration block to adjust retention and avoid unbounded growth if you expect heavy log volume.
+
 ## Post-Deployment Verification
 
 ### 1. Service Health Check

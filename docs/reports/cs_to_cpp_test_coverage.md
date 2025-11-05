@@ -4,25 +4,27 @@
 
 | Metric | C# Tests | C++ Tests | Coverage |
 |--------|----------|-----------|----------|
-| **Total Tests** | 1515 | 5291 | 48.4% |
+| **Total Tests** | 1594 | 5413 | 48.6% |
 | **Categories** | 11 | 12 | - |
 
 ## Category Coverage
 
 | Category | C# Tests | C++ Tests | Coverage | Status |
 |----------|----------|-----------|----------|--------|
-| **Consensus** | 6 | 169 | 100.0% | ✅ |
-| **Cryptography** | 211 | 495 | 37.9% | ❌ |
+| **Consensus** | 6 | 179 | 100.0% | ✅ |
+| **Cryptography** | 211 | 494 | 37.9% | ❌ |
 | **Extensions** | 0 | 54 | 100.0% | ✅ |
-| **IO** | 261 | 1291 | 46.4% | ❌ |
-| **Json** | 92 | 113 | 31.5% | ❌ |
-| **Ledger** | 94 | 237 | 60.6% | ❌ |
-| **Network** | 104 | 629 | 57.7% | ❌ |
-| **Other** | 200 | 497 | 51.5% | ❌ |
+| **IO** | 288 | 1309 | 42.7% | ❌ |
+| **Json** | 92 | 134 | 41.3% | ❌ |
+| **Ledger** | 94 | 239 | 60.6% | ❌ |
+| **Network** | 105 | 633 | 57.1% | ❌ |
+| **Other** | 206 | 497 | 48.5% | ❌ |
 | **Persistence** | 45 | 154 | 33.3% | ❌ |
-| **RPC** | 67 | 183 | 16.4% | ❌ |
-| **SmartContract** | 324 | 1229 | 58.6% | ❌ |
-| **Wallet** | 111 | 240 | 55.0% | ❌ |
+| **RPC** | 68 | 250 | 36.8% | ❌ |
+| **SmartContract** | 328 | 1229 | 58.2% | ❌ |
+| **Wallet** | 151 | 241 | 53.0% | ❌ |
+
+**Recent progress (2025-11-05):** Wrapped the ApplicationLogs plugin parity work by wiring `getapplicationlog` through the production plugin stack, added configurable caching via `MaxCachedLogs`, and ported the RPC `getrawmempool` variants to the C++ suite. JSON helpers (`JArray` and friends) now mirror the C# semantics for null-handling and copy/insert operations, and the RPC client utilities (`GetKeyPair`, `ToBigInteger`, `RpcStack`) have smoke coverage to guard against regressions. Added `sendrawtransaction` happy-path and failure semantics (invalid format, signature, script, policy, duplication) plus the `submitblock` duplicate/queued future-block validation coverage to match the C# `RpcServer.Node` tests. The blockchain replay loop now uses cached headers so staged blocks persist automatically once missing parents arrive, mirroring the C# header cache behaviour.
 
 ## Missing Test Conversions
 
@@ -40,7 +42,7 @@
 - `TestTest`
 - ... and 121 more
 
-### IO (140 missing)
+### IO (165 missing)
 
 - `Test_StackItemState`
 - `Test_ExecutionState`
@@ -52,21 +54,21 @@
 - `TestCollectionAddAndContains`
 - `TestCollectionCopyTo`
 - `TestCollectionRemove`
-- ... and 130 more
+- ... and 155 more
 
-### Json (63 missing)
+### Json (54 missing)
 
-- `TestSetItem`
-- `TestCopyTo`
-- `TestInsert`
-- `TestIndexOf`
-- `TestIsReadOnly`
 - `TestGetEnumerator`
 - `TestInvalidIndexAccess`
-- `TestEmptyEnumeration`
 - `TestImplicitConversionFromJTokenArray`
-- `TestAddNullValues`
-- ... and 53 more
+- `TestReadOnlyBehavior`
+- `TestSetNull`
+- `TestInsertNull`
+- `TestRemoveNull`
+- `TestContainsNull`
+- `TestCopyToWithNull`
+- `TestFromStringWithNull`
+- ... and 44 more
 
 ### Ledger (37 missing)
 
@@ -82,33 +84,33 @@
 - `TestFindStorage_Pagination`
 - ... and 27 more
 
-### Network (44 missing)
+### Network (45 missing)
 
 - `GetTimeOut`
 - `NoService`
 - `RemoteNode_Test_Abort_DifferentNetwork`
 - `RemoteNode_Test_Accept_IfSameNetwork`
 - `TestDefaults`
+- `ProcessesTcpConnectedAfterConfigArrives`
 - `TaskManager_Test_IsHighPriority`
 - `RemoteNode_Test_IsHighPriority`
 - `Size_Get`
 - `Size_Get`
-- `Size_Get`
-- ... and 34 more
+- ... and 35 more
 
-### Other (97 missing)
+### Other (106 missing)
 
 - `TestFilter`
+- `TestGetStateHeight_Basic`
+- `TestGetStateRoot_WithInvalidIndex_ShouldThrowRpcException`
+- `TestGetProof_WithInvalidKey_ShouldThrowRpcException`
+- `TestGetStateRoot_WithMockData_ShouldReturnStateRoot`
+- `TestGetProof_WithMockData_ShouldReturnProof`
+- `TestGetState_WithMockData_ShouldReturnValue`
+- `TestFindStates_WithMockData_ShouldReturnResults`
 - `TestCachedFind_Between`
 - `TestCachedFind_Last`
-- `TestCachedFind_Empty`
-- `TestBigDecimalConstructor`
-- `TestGetDecimals`
-- `TestGernerator1`
-- `TestGernerator2`
-- `TestGernerator3`
-- `TestOperatorEqual`
-- ... and 87 more
+- ... and 96 more
 
 ### Persistence (30 missing)
 
@@ -124,21 +126,21 @@
 - `TestAccessByDeletedKey`
 - ... and 20 more
 
-### RPC (56 missing)
+### RPC (43 missing)
 
-- `TestRpcStack`
-- `TestGetKeyPair`
 - `TestTransactionAttribute`
 - `TestWitnessRule`
-- `TestToBigInteger`
 - `TestConstructorByUrlAndDispose`
-- `TestConstructorWithBasicAuth`
-- `TestGetPeers_NoUnconnected`
-- `TestGetPeers_NoConnected`
-- `TestGetVersion_HardforksStructure`
-- ... and 46 more
+- `TestSendRawTransaction_Normal`
+- `TestSendRawTransaction_InvalidTransactionFormat`
+- `TestSendRawTransaction_InsufficientBalance`
+- `TestSendRawTransaction_InvalidScript`
+- `TestSendRawTransaction_InvalidAttribute`
+- `TestSendRawTransaction_Oversized`
+- `TestSendRawTransaction_Expired`
+- ... and 33 more
 
-### SmartContract (134 missing)
+### SmartContract (137 missing)
 
 - `TestMinIntegerAbs`
 - `TestInvokeFunction`
@@ -150,9 +152,9 @@
 - `TestInvokeFunction_InvalidWitnessInvocation`
 - `TestInvokeFunction_InvalidWitnessVerification`
 - `TestInvokeFunction_InvalidContractParameter`
-- ... and 124 more
+- ... and 127 more
 
-### Wallet (50 missing)
+### Wallet (71 missing)
 
 - `TestOpenInvalidWallet`
 - `TestDumpPrivKey`
@@ -164,25 +166,25 @@
 - `TestGetWalletBalance_InvalidAssetIdFormat`
 - `TestGetWalletUnclaimedGas`
 - `TestImportPrivKey`
-- ... and 40 more
+- ... and 61 more
 
 
 ## Recommendations
 
 ### Priority Actions
-1. **Current Coverage**: 48.4%
+1. **Current Coverage**: 48.6%
 2. **Target Coverage**: 90%+
-3. **Tests to Convert**: 782
+3. **Tests to Convert**: 819
 
 ### Priority Categories for Conversion
 
-- **RPC**: 16.4% coverage (56 tests missing)
-- **Json**: 31.5% coverage (63 tests missing)
 - **Persistence**: 33.3% coverage (30 tests missing)
+- **RPC**: 36.8% coverage (43 tests missing)
 - **Cryptography**: 37.9% coverage (131 tests missing)
-- **IO**: 46.4% coverage (140 tests missing)
-- **Other**: 51.5% coverage (97 tests missing)
-- **Wallet**: 55.0% coverage (50 tests missing)
-- **Network**: 57.7% coverage (44 tests missing)
-- **SmartContract**: 58.6% coverage (134 tests missing)
+- **Json**: 41.3% coverage (54 tests missing)
+- **IO**: 42.7% coverage (165 tests missing)
+- **Other**: 48.5% coverage (106 tests missing)
+- **Wallet**: 53.0% coverage (71 tests missing)
+- **Network**: 57.1% coverage (45 tests missing)
+- **SmartContract**: 58.2% coverage (137 tests missing)
 - **Ledger**: 60.6% coverage (37 tests missing)

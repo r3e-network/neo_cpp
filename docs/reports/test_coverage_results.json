@@ -277,7 +277,51 @@
   "coverage_summary": {
     "total_csharp_tests": 520,
     "total_cpp_tests": 2900,
-    "missing_count": 91,
-    "coverage_percentage": 557.6923076923076
+    "missing_count": 83,
+    "coverage_percentage": 557.6923076923077
+  },
+  "ApplicationLogs": {
+    "unit_tests": [
+      "constructor",
+      "initialize_default",
+      "initialize_custom_logpath",
+      "start_stop",
+      "log_eviction"
+    ],
+    "integration_tests": [],
+    "status": "covered"
+  },
+  "rpc_cases": {
+    "submitblock": {
+      "tests": [
+        "SubmitBlockReturnsHashOnSuccess",
+        "SubmitBlockRejectsInvalidRelayType",
+        "SubmitBlockAlreadyExistsThrows",
+        "SubmitBlockInvalidWitnessThrowsVerificationFailed",
+        "SubmitBlockInvalidPrevHashThrowsVerificationFailed",
+        "SubmitBlockInvalidIndexThrowsVerificationFailed",
+        "SubmitBlockFutureBlockQueuedUntilParentArrives",
+        "SubmitBlockMultipleFutureBlocksDrainInOrder",
+        "SubmitBlockDuplicateAfterSuccessThrows"
+      ]
+    },
+    "sendrawtransaction": {
+      "tests": [
+        "SendRawTransaction_ReturnsHashOnSuccess",
+        "SendRawTransaction_InvalidBase64ThrowsInvalidParams",
+        "SendRawTransaction_MalformedPayloadThrowsInvalidParams",
+        "SendRawTransaction_InvalidSignatureThrows",
+        "SendRawTransaction_InsufficientFundsThrows",
+        "SendRawTransaction_InvalidScriptThrows",
+        "SendRawTransaction_InvalidAttributeThrows",
+        "SendRawTransaction_OversizedPayloadThrowsInvalidParams",
+        "SendRawTransaction_ExpiredThrows",
+        "SendRawTransaction_PolicyFailedThrows",
+        "SendRawTransaction_AlreadyInPoolThrows",
+        "SendRawTransaction_AlreadyInBlockchainThrows",
+        "SendRawTransaction_NullInputThrowsInvalidParams",
+        "SendRawTransaction_EmptyInputThrowsInvalidParams"
+      ]
+    }
   }
 }

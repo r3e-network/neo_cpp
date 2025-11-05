@@ -44,3 +44,27 @@ target_link_libraries(test_rpc_methods
 )
 
 add_test(NAME test_rpc_methods COMMAND test_rpc_methods)
+
+add_executable(test_rpc_utility
+    test_rpc_utility.cpp
+)
+
+target_sources(test_rpc_utility
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/src/rpc/rpc_client.cpp
+        ${CMAKE_SOURCE_DIR}/src/rpc/rpc_request.cpp
+        ${CMAKE_SOURCE_DIR}/src/rpc/rpc_response.cpp
+)
+
+target_include_directories(test_rpc_utility
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_rpc_utility
+    PRIVATE
+        neo_cpp
+        ${GTEST_LIBRARIES}
+)
+
+add_test(NAME test_rpc_utility COMMAND test_rpc_utility)

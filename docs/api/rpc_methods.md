@@ -35,14 +35,33 @@ Returns version information about the Neo node.
   "id": 1,
   "result": {
     "tcpport": 10333,
-    "wsport": 10334,
     "nonce": 1234567890,
     "useragent": "/Neo:3.6.0/",
+    "rpc": {
+      "maxiteratorresultitems": 100,
+      "sessionenabled": false
+    },
     "protocol": {
       "addressversion": 53,
       "network": 860833102,
       "validatorscount": 7,
-      "msperblock": 15000
+      "msperblock": 15000,
+      "maxtraceableblocks": 2102400,
+      "maxvaliduntilblockincrement": 5760,
+      "maxtransactionsperblock": 512,
+      "memorypoolmaxtransactions": 50000,
+      "initialgasdistribution": 5200000000000000,
+      "hardforks": [
+        { "name": "Aspidochelone", "blockheight": 0 },
+        { "name": "Basilisk", "blockheight": 100 }
+      ],
+      "standbycommittee": [
+        "02b35...fa12"
+      ],
+      "seedlist": [
+        "seed1.neo.org:10333",
+        "seed2.neo.org:10333"
+      ]
     }
   }
 }
@@ -130,11 +149,14 @@ Submits a signed block to the node for verification and optional relay.
 
 **Parameters:**
 - `block`: Base64-encoded block payload in Neo binary wire format.
-- `relay` (optional, default `true`): When `true`, the node relays the block to its peers after successful verification.
+- `relay` (optional): Either a boolean (`true`/`false`) or a numeric flag (`1`/`0`). When omitted or evaluates to true, the node relays the block to its peers after successful verification.
 
 **Responses:**
 - On success, returns an object with a single `hash` field containing the block hash.
-- On failure, the RPC call returns an error whose message includes the `VerifyResult` reason (for example `AlreadyExists`, `UnableToVerify`, etc.), matching the C# node behaviour.
+- On failure, the RPC call returns error codes that mirror the C# node:
+  - `InvalidParams` when the payload is missing, not Base64, or empty.
+  - `RpcAlreadyExists` when the block is already known/persisted.
+  - `RpcVerificationFailed` when header validation fails (invalid index, previous hash, or witness data). The node queues out-of-order blocks and automatically revalidates them once the missing predecessors arrive.
 
 ### 3. Transaction Methods
 
@@ -187,7 +209,7 @@ Broadcasts a signed transaction to the network.
 }
 ```
 
-If the transaction fails validation the RPC call returns an error whose message contains the verification reason (for example `AlreadyExists`, `PolicyFail`, etc.).
+If the transaction fails validation the RPC call returns an error whose message contains the verification reason (for example `AlreadyExists`, `PolicyFail`, `InvalidScript`, `InvalidSignature`). The error codes match the C# node (`RpcAlreadyExists`, `RpcPolicyFailed`, `RpcInvalidTransactionScript`, and so on).
 
 #### gettransactionheight
 Returns the block height containing a transaction.
@@ -350,6 +372,8 @@ Validates a Neo address.
 }
 ```
 
+> **Note:** The C++ implementation mirrors the C# node: besides validating the Base58 checksum it also requires the leading version byte to match the configured `ProtocolSettings.AddressVersion`. An address from a different network therefore returns `isvalid: false`.
+
 ### 8. Governance Methods
 
 #### getcommittee
@@ -463,17 +487,90 @@ Returns the current contents of the memory pool.
 #### listplugins
 Returns loaded plugins.
 
+**Response:**
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": [
+    {
+      "name": "AlphaPlugin",
+      "version": "1.0.0",
+      "interfaces": []
+    },
+    {
+      "name": "RpcServer",
+      "version": "3.6.0",
+      "interfaces": [
+        "RpcServerPlugin"
+      ]
+    }
+  ]
+}
+```
+
 #### calculatenetworkfee *(not yet implemented in neo_cpp)*
 Calculates network fee for a transaction on the C# node. This RPC is not yet available in the C++ port.
 
 **Parameters:**
 - `tx`: Transaction in base64
 
-#### getapplicationlog *(not yet implemented in neo_cpp)*
-Returns application execution logs on the C# node. This RPC is not yet available in the C++ port.
+#### getapplicationlog
+Returns the execution log recorded by the ApplicationLogs plugin for the specified transaction.
+
+> **Prerequisite:** The `ApplicationLogs` plugin must be loaded. When the plugin is disabled the
+> method returns `ApplicationLogNotFound`.
+
+> **Retention:** The plugin keeps a limited in-memory cache of recent logs.  By default it stores the
+> most recent 1,000 entries; operators can override this with the optional `MaxCachedLogs` setting in
+> the plugin configuration.
 
 **Parameters:**
-- `txid`: Transaction ID
+- `txid`: Transaction hash as a string (e.g., `0x...`)
+- `triggerType` *(optional)*: Filter executions by trigger (`OnPersist`, `PostPersist`, `Verification`, `Application`, `System`, or `All`).  
+  The comparison is case-insensitive. An invalid value raises `InvalidParams`.
+
+**Plugin configuration:**
+
+```json
+{
+  "PluginConfiguration": {
+    "Plugins": {
+      "ApplicationLogs": {
+        "Enabled": true,
+        "Path": "ApplicationLogs_{0}",
+        "MaxCachedLogs": 1000
+      }
+    }
+  }
+}
+```
+
+`MaxCachedLogs` is optional; omit it to use the default (1,000 entries).
+
+**Response:**
+```json
+{
+  "txid": "0x2f6c...",
+  "blockhash": "0xe2b4...",
+  "executions": [
+    {
+      "trigger": "Application",
+      "vmstate": "HALT",
+      "gasconsumed": "42",
+      "exception": "",
+      "stack": [],
+      "notifications": [
+        {
+          "contract": "0xfe924b7cfe89ddd271abaf7210a80a7e11178758",
+          "eventname": "Transfer",
+          "state": { "type": "ByteArray", "value": "" }
+        }
+      ]
+    }
+  ]
+}
+```
 
 ### 10. Native Contract Methods
 

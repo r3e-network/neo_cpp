@@ -25,7 +25,7 @@ add_test(NAME ExtensionsTests COMMAND test_extensions)
 add_executable(test_extensions_comprehensive_converted test_extensions_comprehensive_converted.cpp)
 target_link_libraries(test_extensions_comprehensive_converted
     PRIVATE
-        neo_core
+        neo_cpp
         gtest
         gtest_main
 )

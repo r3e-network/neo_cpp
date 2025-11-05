@@ -67,6 +67,22 @@ class PluginManager
                      std::shared_ptr<rpc::RpcServer> rpcServer = nullptr);
 
     /**
+     * @brief Adds a plugin instance.
+     * @param plugin The plugin to add.
+     */
+    void AddPlugin(std::shared_ptr<Plugin> plugin);
+
+    /**
+     * @brief Clears all registered plugin factories.
+     */
+    void ClearFactories();
+
+    /**
+     * @brief Clears all loaded plugins.
+     */
+    void ClearPlugins();
+
+    /**
      * @brief Starts plugins.
      * @return True if the plugins were started, false otherwise.
      */

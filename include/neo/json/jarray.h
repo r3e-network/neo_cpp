@@ -54,6 +54,14 @@ class JArray : public JToken
     std::shared_ptr<JToken> operator[](int index) const override;
 
     /**
+     * @brief Sets the child token at the specified index.
+     * @param index The zero-based index of the child token to set.
+     * @param value The new token value.
+     * @throws std::out_of_range if index is invalid.
+     */
+    void SetItem(int index, std::shared_ptr<JToken> value);
+
+    /**
      * @brief Converts this token to a string representation.
      * @return The JSON string representation.
      */
@@ -79,11 +87,26 @@ class JArray : public JToken
     void Add(std::shared_ptr<JToken> item);
 
     /**
+     * @brief Inserts an item at the specified index.
+     * @param index The zero-based index at which the item should be inserted.
+     * @param item The item to insert.
+     * @throws std::out_of_range if index is invalid.
+     */
+    void Insert(int index, std::shared_ptr<JToken> item);
+
+    /**
      * @brief Removes an item at the specified index.
      * @param index The index of the item to remove.
      * @throws std::out_of_range if index is invalid.
      */
     void RemoveAt(int index);
+
+    /**
+     * @brief Removes the first occurrence of the specified item.
+     * @param item The item to remove.
+     * @return True if the item was removed; otherwise, false.
+     */
+    bool Remove(const std::shared_ptr<JToken>& item);
 
     /**
      * @brief Clears all items from the array.
@@ -101,6 +124,34 @@ class JArray : public JToken
      * @return True if empty, false otherwise.
      */
     bool IsEmpty() const;
+
+    /**
+     * @brief Gets a value indicating whether the array is read-only.
+     * @return Always false (arrays are mutable).
+     */
+    bool IsReadOnly() const;
+
+    /**
+     * @brief Determines whether the array contains a specific value.
+     * @param item The object to locate in the array.
+     * @return True if found; otherwise, false.
+     */
+    bool Contains(const std::shared_ptr<JToken>& item) const;
+
+    /**
+     * @brief Copies the elements of the array to an existing vector starting at a particular index.
+     * @param destination The destination vector.
+     * @param index The zero-based index in destination at which copying begins.
+     * @throws std::out_of_range if index is invalid or destination does not have sufficient capacity.
+     */
+    void CopyTo(std::vector<std::shared_ptr<JToken>>& destination, size_t index) const;
+
+    /**
+     * @brief Searches for the specified object and returns the zero-based index of the first occurrence.
+     * @param item The item to locate in the array.
+     * @return The zero-based index if found; otherwise, -1.
+     */
+    int IndexOf(const std::shared_ptr<JToken>& item) const;
 
     /**
      * @brief Gets the items.

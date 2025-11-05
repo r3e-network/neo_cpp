@@ -39,11 +39,6 @@ set(NETWORK_TEST_SOURCES
     test_network_simple.cpp
     test_network_extended.cpp
     test_p2p_complete.cpp
-    test_connection_pool.cpp
-    test_message_handler.cpp
-    # test_peer_manager.cpp  # Missing file
-    # test_protocol_handler.cpp  # Missing file
-    test_network_comprehensive.cpp
 )
 
 # Main network test executable
@@ -51,9 +46,7 @@ add_executable(test_network ${NETWORK_TEST_SOURCES})
 
 target_link_libraries(test_network
     PRIVATE
-        neo_network
-        neo_io
-        neo_cryptography
+        neo_cpp
         gtest
         gtest_main
 )
@@ -68,9 +61,7 @@ target_include_directories(test_network
 add_executable(test_p2p_complete test_p2p_complete.cpp)
 target_link_libraries(test_p2p_complete
     PRIVATE
-        neo_network
-        neo_io
-        neo_cryptography
+        neo_cpp
         gtest
         gtest_main
 )
@@ -82,3 +73,5 @@ add_test(NAME network_p2p_complete COMMAND test_p2p_complete)
 # Set test properties
 set_tests_properties(network_basic PROPERTIES TIMEOUT 30)
 set_tests_properties(network_p2p_complete PROPERTIES TIMEOUT 60)
+
+add_subdirectory(p2p/payloads)

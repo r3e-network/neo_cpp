@@ -5,9 +5,9 @@ add_subdirectory(statistics)
 add_library(neo_plugins STATIC
     plugin_manager.cpp
     plugin_base.cpp
+    application_logs_plugin.cpp
     # rpc_server_plugin.cpp  # Disabled - RpcServer constructor mismatch
     # rpc_plugin.cpp  # Keep disabled due to missing dependencies
-    # application_logs_plugin.cpp  # Disabled - API mismatches
     # state_service_plugin.cpp  # Disabled - API mismatches
     # dbft_plugin.cpp  # Disabled - API mismatches
     # plugin_registration_impl.cpp  # Disabled - conflicts with existing PluginFactory class

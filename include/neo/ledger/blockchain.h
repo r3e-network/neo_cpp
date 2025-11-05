@@ -353,6 +353,8 @@ class Blockchain
     // Network module disabled - InventoryHandler registration commented out
     // void RegisterInventoryHandler(InventoryHandler handler);
 
+  private:
+    void StoreBlockInCache(const std::shared_ptr<Block>& block);
     /**
      * @brief Gets the header cache.
      * @return The header cache.
@@ -479,6 +481,8 @@ class Blockchain
     
     /// @brief Cache for block headers
     std::shared_ptr<neo::network::p2p::payloads::HeaderCache> header_cache_;
+    mutable std::unordered_map<io::UInt256, std::shared_ptr<BlockHeader>> header_cache_by_hash_;
+    mutable std::unordered_map<uint32_t, io::UInt256> header_hash_by_index_;
     
     /// @brief Main data cache for blockchain state
     std::shared_ptr<persistence::DataCache> data_cache_;

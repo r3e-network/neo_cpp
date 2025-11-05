@@ -29,7 +29,7 @@ add_test(NAME JsonTests COMMAND test_json)
 add_executable(test_json_comprehensive_converted test_json_comprehensive_converted.cpp)
 target_link_libraries(test_json_comprehensive_converted
     PRIVATE
-        neo_core
+        neo_cpp
         gtest
         gtest_main
 )

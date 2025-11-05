@@ -11,8 +11,10 @@
 #include <neo/ledger/blockchain.h>
 #include <neo/persistence/store_factory.h>
 #include <neo/smartcontract/native/native_contract_manager.h>
+#include <neo/smartcontract/native/ledger_contract.h>
 
 #include <chrono>
+#include <algorithm>
 
 namespace neo::ledger
 {
@@ -27,6 +29,18 @@ Blockchain::Blockchain(std::shared_ptr<NeoSystem> system)
     {
         data_cache_ = std::make_shared<persistence::StoreCache>(*system->GetStore());
     }
+}
+
+void Blockchain::StoreBlockInCache(const std::shared_ptr<Block>& block)
+{
+    if (!block)
+    {
+        return;
+    }
+    const auto hash = block->GetHash();
+    block_cache_[hash] = block;
+    header_cache_by_hash_[hash] = std::make_shared<BlockHeader>(*block);
+    header_hash_by_index_[block->GetIndex()] = hash;
 }
 
 // Destructor
@@ -112,7 +126,7 @@ std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
         block->Deserialize(reader);
 
         // Cache the block
-        const_cast<Blockchain*>(this)->block_cache_[hash] = block;
+        const_cast<Blockchain*>(this)->StoreBlockInCache(block);
 
         return block;
     }
@@ -227,8 +241,13 @@ std::shared_ptr<smartcontract::ContractState> Blockchain::GetContract(const io::
 // Check if block exists
 bool Blockchain::ContainsBlock(const io::UInt256& hash) const
 {
-    // Check cache first
-    if (block_cache_.find(hash) != block_cache_.end()) return true;
+    {
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        if (block_cache_.find(hash) != block_cache_.end())
+        {
+            return true;
+        }
+    }
 
     // Check storage (LedgerContract block prefix 0x05)
     if (!data_cache_) return false;
@@ -251,6 +270,93 @@ VerifyResult Blockchain::OnNewBlock(std::shared_ptr<Block> block)
     if (!block) return VerifyResult::Invalid;
 
     LOG_INFO("Processing new block: {} at height {}", block->GetHash().ToString(), block->GetIndex());
+
+    auto ledgerContract = system_ ? system_->GetLedgerContract() : nullptr;
+    if (!ledgerContract || !data_cache_)
+    {
+        LOG_ERROR("Ledger contract or data cache unavailable while processing block {}", block->GetIndex());
+        return VerifyResult::UnableToVerify;
+    }
+
+    const auto hash = block->GetHash();
+
+    // Reject duplicates that are already persisted or cached.
+    if (ContainsBlock(hash))
+    {
+        return VerifyResult::AlreadyExists;
+    }
+    {
+        std::shared_lock<std::shared_mutex> cacheLock(blockchain_mutex_);
+        if (block_cache_.find(hash) != block_cache_.end())
+        {
+            return VerifyResult::AlreadyExists;
+        }
+    }
+
+    const auto currentHeight = ledgerContract->GetCurrentIndex(data_cache_);
+    const auto blockIndex = block->GetIndex();
+
+    if (blockIndex <= currentHeight)
+    {
+        // Older or already persisted block.
+        return VerifyResult::AlreadyExists;
+    }
+
+    if (blockIndex > currentHeight + 1)
+    {
+        // Future block; store for later verification.
+        std::unique_lock<std::shared_mutex> cacheLock(blockchain_mutex_);
+        auto& pending = block_cache_unverified_[blockIndex];
+        if (!pending)
+        {
+            pending = std::make_shared<UnverifiedBlocksList>();
+        }
+        pending->blocks.push_back(block);
+        return VerifyResult::UnableToVerify;
+    }
+
+    // Validate previous hash linkage.
+    if (blockIndex == 0)
+    {
+        if (!block->GetPreviousHash().IsZero())
+        {
+            return VerifyResult::Invalid;
+        }
+    }
+    else
+    {
+        auto expectedPrevHash = GetBlockHash(blockIndex - 1);
+        if (expectedPrevHash.IsZero() || expectedPrevHash != block->GetPreviousHash())
+        {
+            return VerifyResult::Invalid;
+        }
+    }
+
+    // Basic witness presence check.
+    const auto& witness = block->GetWitness();
+    if (witness.GetInvocationScript().IsEmpty() || witness.GetVerificationScript().IsEmpty())
+    {
+        return VerifyResult::Invalid;
+    }
+
+    // Cache block before persistence so future duplicate checks succeed.
+    {
+        std::unique_lock<std::shared_mutex> cacheLock(blockchain_mutex_);
+        StoreBlockInCache(block);
+        auto pendingIt = block_cache_unverified_.find(blockIndex);
+        if (pendingIt != block_cache_unverified_.end() && pendingIt->second)
+        {
+            auto& pendingBlocks = pendingIt->second->blocks;
+            pendingBlocks.erase(std::remove_if(pendingBlocks.begin(), pendingBlocks.end(),
+                                               [&hash](const std::shared_ptr<Block>& candidate)
+                                               { return candidate && candidate->GetHash() == hash; }),
+                                pendingBlocks.end());
+            if (pendingBlocks.empty())
+            {
+                block_cache_unverified_.erase(pendingIt);
+            }
+        }
+    }
 
     // Add to processing queue
     {
@@ -484,7 +590,7 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
     FireBlockPersistedEvent(block);
 
     // Cache the block
-    block_cache_[block->GetHash()] = block;
+    StoreBlockInCache(block);
 }
 
 bool Blockchain::VerifyBlock(std::shared_ptr<Block> block, std::shared_ptr<persistence::DataCache> snapshot)

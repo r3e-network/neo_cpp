@@ -1,5 +1,6 @@
 #include <neo/rpc/rpc_methods.h>
 
+#include <neo/cryptography/base58.h>
 #include <neo/cryptography/base64.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -13,6 +14,7 @@
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
+#include <neo/network/p2p_server.h>
 #include <neo/node/neo_system.h>
 #include <neo/protocol_settings.h>
 #include <neo/rpc/error_codes.h>
@@ -22,17 +24,22 @@
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
+#include <neo/plugins/application_logs_plugin.h>
+#include <neo/smartcontract/trigger_type.h>
+#include <neo/vm/vm_state.h>
 #include <neo/wallets/helper.h>
 #include <neo/plugins/plugin_manager.h>
 
 #include <algorithm>
 #include <cctype>
 #include <iomanip>
+#include <iterator>
 #include <limits>
 #include <optional>
 #include <random>
 #include <sstream>
 #include <unordered_set>
+#include <vector>
 
 namespace neo::rpc
 {
@@ -41,8 +48,93 @@ namespace
 using neo::ledger::ValidationResult;
 using neo::ledger::VerifyResult;
 using neo::ProtocolSettings;
+using neo::Hardfork;
+using neo::HardforkToString;
 
 constexpr size_t kFindStoragePageSize = 100;
+
+template <typename UIntType>
+std::string ToPrefixedHex(const UIntType& value)
+{
+    return "0x" + value.ToString();
+}
+
+std::string TriggerTypeToString(smartcontract::TriggerType trigger)
+{
+    switch (trigger)
+    {
+        case smartcontract::TriggerType::OnPersist:
+            return "OnPersist";
+        case smartcontract::TriggerType::PostPersist:
+            return "PostPersist";
+        case smartcontract::TriggerType::Verification:
+            return "Verification";
+        case smartcontract::TriggerType::Application:
+            return "Application";
+        case smartcontract::TriggerType::System:
+            return "System";
+        case smartcontract::TriggerType::All:
+            return "All";
+        default:
+            return "Application";
+    }
+}
+
+bool TryParseTriggerType(const std::string& value, smartcontract::TriggerType& result)
+{
+    std::string normalized;
+    normalized.reserve(value.size());
+    std::transform(value.begin(), value.end(), std::back_inserter(normalized),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+
+    if (normalized == "onpersist")
+    {
+        result = smartcontract::TriggerType::OnPersist;
+        return true;
+    }
+    if (normalized == "postpersist")
+    {
+        result = smartcontract::TriggerType::PostPersist;
+        return true;
+    }
+    if (normalized == "verification")
+    {
+        result = smartcontract::TriggerType::Verification;
+        return true;
+    }
+    if (normalized == "application")
+    {
+        result = smartcontract::TriggerType::Application;
+        return true;
+    }
+    if (normalized == "system")
+    {
+        result = smartcontract::TriggerType::System;
+        return true;
+    }
+    if (normalized == "all")
+    {
+        result = smartcontract::TriggerType::All;
+        return true;
+    }
+    return false;
+}
+
+std::string VMStateToString(neo::vm::VMState state)
+{
+    switch (state)
+    {
+        case neo::vm::VMState::Halt:
+            return "HALT";
+        case neo::vm::VMState::Fault:
+            return "FAULT";
+        case neo::vm::VMState::Break:
+            return "BREAK";
+        case neo::vm::VMState::None:
+        default:
+            return "NONE";
+    }
+}
 
 nlohmann::json SerializeJsonObject(const io::IJsonSerializable& value)
 {
@@ -586,7 +678,16 @@ nlohmann::json SerializeBlockHeader(const ledger::BlockHeader& header, bool verb
 
 network::p2p::payloads::Neo3Transaction DeserializeNeo3Transaction(const std::string& base64)
 {
-    const auto data = cryptography::Base64::Decode(base64);
+    io::ByteVector data;
+    try
+    {
+        data = cryptography::Base64::Decode(base64);
+    }
+    catch (const std::exception& ex)
+    {
+        throw RpcException(ErrorCode::InvalidParams,
+                           std::string("Invalid transaction format: ") + ex.what());
+    }
     if (data.empty())
     {
         throw RpcException(ErrorCode::InvalidParams, "Transaction payload is empty");
@@ -600,8 +701,8 @@ network::p2p::payloads::Neo3Transaction DeserializeNeo3Transaction(const std::st
     }
     catch (const std::exception& ex)
     {
-        throw RpcException(ErrorCode::TransactionVerificationFailed,
-                           std::string("Transaction rejected: ") + ex.what());
+        throw RpcException(ErrorCode::InvalidParams,
+                           std::string("Invalid transaction format: ") + ex.what());
     }
     return tx;
 }
@@ -613,23 +714,97 @@ nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem
     (void)params;
     nlohmann::json result = nlohmann::json::object();
 
+    auto localNode = neoSystem ? neoSystem->GetLocalNode() : nullptr;
+    auto p2pServer = neoSystem ? neoSystem->GetP2PServer() : nullptr;
     auto settings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
-    if (settings)
+
+    uint16_t tcpPort = 0;
+    if (p2pServer)
     {
-        result["network"] = settings->GetNetwork();
+        tcpPort = p2pServer->GetPort();
+    }
+    else if (localNode)
+    {
+        tcpPort = localNode->GetPort();
+    }
+    result["tcpport"] = tcpPort;
+
+    if (localNode)
+    {
+        result["nonce"] = localNode->GetNonce();
+        result["useragent"] = localNode->GetUserAgent();
     }
     else
     {
-        result["network"] = nullptr;
+        result["nonce"] = 0;
+        result["useragent"] = "/neo-cpp:0.1.0/";
     }
 
-    result["port"] = 0;
+    nlohmann::json rpcSettings = nlohmann::json::object();
+    rpcSettings["maxiteratorresultitems"] = 100;
+    rpcSettings["sessionenabled"] = false;
+    result["rpc"] = std::move(rpcSettings);
 
-    std::random_device rd;
-    std::mt19937_64 gen(rd());
-    result["nonce"] = static_cast<uint64_t>(gen());
+    nlohmann::json protocol = nlohmann::json::object();
+    if (settings)
+    {
+        protocol["addressversion"] = settings->GetAddressVersion();
+        protocol["network"] = settings->GetNetwork();
+        protocol["validatorscount"] = settings->GetValidatorsCount();
+        protocol["msperblock"] = settings->GetMillisecondsPerBlock();
+        protocol["maxtraceableblocks"] = settings->GetMaxTraceableBlocks();
+        protocol["maxvaliduntilblockincrement"] = settings->GetMaxValidUntilBlockIncrement();
+        protocol["maxtransactionsperblock"] = settings->GetMaxTransactionsPerBlock();
+        protocol["memorypoolmaxtransactions"] = settings->GetMemoryPoolMaxTransactions();
+        protocol["initialgasdistribution"] = settings->GetInitialGasDistribution();
 
-    result["useragent"] = "/neo-cpp:0.1.0/";
+        nlohmann::json hardforks = nlohmann::json::array();
+        std::vector<std::pair<Hardfork, uint32_t>> sortedHardforks;
+        sortedHardforks.reserve(settings->GetHardforks().size());
+        for (const auto& [hardfork, height] : settings->GetHardforks())
+        {
+            sortedHardforks.emplace_back(hardfork, height);
+        }
+        std::sort(sortedHardforks.begin(), sortedHardforks.end(),
+                  [](const auto& lhs, const auto& rhs) { return static_cast<int>(lhs.first) < static_cast<int>(rhs.first); });
+
+        for (const auto& [hardfork, height] : sortedHardforks)
+        {
+            nlohmann::json hardforkJson = nlohmann::json::object();
+            std::string name = HardforkToString(hardfork);
+            const std::string prefix = "HF_";
+            if (name.find(prefix) == 0)
+            {
+                name.erase(0, prefix.size());
+            }
+            hardforkJson["name"] = std::move(name);
+            hardforkJson["blockheight"] = height;
+            hardforks.push_back(std::move(hardforkJson));
+        }
+        protocol["hardforks"] = std::move(hardforks);
+
+        nlohmann::json standbyCommittee = nlohmann::json::array();
+        for (const auto& member : settings->GetStandbyCommittee())
+        {
+            standbyCommittee.push_back(member.ToString());
+        }
+        protocol["standbycommittee"] = std::move(standbyCommittee);
+
+        nlohmann::json seedList = nlohmann::json::array();
+        for (const auto& seed : settings->GetSeedList())
+        {
+            seedList.push_back(seed);
+        }
+        protocol["seedlist"] = std::move(seedList);
+    }
+    else
+    {
+        protocol["hardforks"] = nlohmann::json::array();
+        protocol["standbycommittee"] = nlohmann::json::array();
+        protocol["seedlist"] = nlohmann::json::array();
+    }
+
+    result["protocol"] = std::move(protocol);
 
     return result;
 }
@@ -818,6 +993,112 @@ nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSys
 
     result["verified"] = std::move(verified);
     result["unverified"] = std::move(unverified);
+    return result;
+}
+
+nlohmann::json RPCMethods::GetApplicationLog(std::shared_ptr<node::NeoSystem> neoSystem,
+                                            const nlohmann::json& params)
+{
+    (void)neoSystem;
+    if (params.empty() || !params[0].is_string())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "getapplicationlog requires a transaction hash string");
+    }
+
+    const auto hashString = params[0].get<std::string>();
+    io::UInt256 txHash;
+    if (!io::UInt256::TryParse(hashString, txHash))
+    {
+        throw RpcException(ErrorCode::InvalidParams, "invalid transaction hash");
+    }
+
+    std::shared_ptr<plugins::ApplicationLogsPlugin> logPlugin;
+    auto& pluginManager = plugins::PluginManager::GetInstance();
+    for (const auto& plugin : pluginManager.GetPlugins())
+    {
+        if (auto candidate = std::dynamic_pointer_cast<plugins::ApplicationLogsPlugin>(plugin))
+        {
+            logPlugin = candidate;
+            break;
+        }
+    }
+
+    if (!logPlugin)
+    {
+        throw RpcException(ErrorCode::ApplicationLogNotFound, "application logs plugin not loaded");
+    }
+
+    smartcontract::TriggerType triggerFilter = smartcontract::TriggerType::All;
+    bool filterEnabled = false;
+    if (params.size() > 1)
+    {
+        if (!params[1].is_string())
+        {
+            throw RpcException(ErrorCode::InvalidParams, "trigger type must be a string");
+        }
+        const auto triggerParam = params[1].get<std::string>();
+        if (!triggerParam.empty())
+        {
+            if (!TryParseTriggerType(triggerParam, triggerFilter))
+            {
+                throw RpcException(ErrorCode::InvalidParams, "invalid trigger type");
+            }
+            filterEnabled = triggerFilter != smartcontract::TriggerType::All;
+        }
+    }
+
+    auto log = logPlugin->GetApplicationLog(txHash);
+    if (!log)
+    {
+        throw RpcException(ErrorCode::ApplicationLogNotFound, "application log not found");
+    }
+
+    nlohmann::json result = nlohmann::json::object();
+    if (log->TxHash.has_value())
+    {
+        result["txid"] = ToPrefixedHex(*log->TxHash);
+    }
+    if (log->BlockHash.has_value())
+    {
+        result["blockhash"] = ToPrefixedHex(*log->BlockHash);
+    }
+
+    nlohmann::json executions = nlohmann::json::array();
+    for (const auto& execution : log->Executions)
+    {
+        if (filterEnabled && execution.Trigger != triggerFilter)
+        {
+            continue;
+        }
+
+        nlohmann::json executionJson = nlohmann::json::object();
+        executionJson["trigger"] = TriggerTypeToString(execution.Trigger);
+        executionJson["vmstate"] = VMStateToString(execution.VmState);
+        executionJson["gasconsumed"] = std::to_string(execution.GasConsumed);
+        executionJson["exception"] = execution.Exception;
+
+        nlohmann::json stack = nlohmann::json::array();
+        for (const auto& item : execution.Stack)
+        {
+            stack.push_back(item);
+        }
+        executionJson["stack"] = std::move(stack);
+
+        nlohmann::json notifications = nlohmann::json::array();
+        for (const auto& notification : execution.Notifications)
+        {
+            nlohmann::json notificationJson = nlohmann::json::object();
+            notificationJson["contract"] = notification.Contract.ToString();
+            notificationJson["eventname"] = notification.EventName;
+            notificationJson["state"] = notification.State;
+            notifications.push_back(std::move(notificationJson));
+        }
+        executionJson["notifications"] = std::move(notifications);
+
+        executions.push_back(std::move(executionJson));
+    }
+
+    result["executions"] = std::move(executions);
     return result;
 }
 
@@ -1261,16 +1542,38 @@ nlohmann::json RPCMethods::GetPeers(std::shared_ptr<node::NeoSystem> neoSystem, 
         return peers;
     }
 
+    auto& peerList = localNode->GetPeerList();
+
+    for (const auto& peer : peerList.GetUnconnectedPeers())
+    {
+        const auto& endpoint = peer.GetEndPoint();
+        nlohmann::json entry;
+        entry["address"] = endpoint.GetAddress().ToString();
+        entry["port"] = endpoint.GetPort();
+        peers["unconnected"].push_back(std::move(entry));
+    }
+
+    for (const auto& peer : peerList.GetBadPeers())
+    {
+        const auto& endpoint = peer.GetEndPoint();
+        nlohmann::json entry;
+        entry["address"] = endpoint.GetAddress().ToString();
+        entry["port"] = endpoint.GetPort();
+        peers["bad"].push_back(std::move(entry));
+    }
+
     auto connected = localNode->GetConnectedPeers();
     for (const auto& peer : connected)
     {
-        if (!peer) continue;
-        nlohmann::json entry;
+        if (!peer)
+        {
+            continue;
+        }
         const auto endpoint = peer->GetRemoteEndPoint();
-        entry["address"] = endpoint.ToString();
+        nlohmann::json entry;
+        entry["address"] = endpoint.GetAddress().ToString();
         entry["port"] = endpoint.GetPort();
-        entry["id"] = peer->GetConnection() ? peer->GetConnection()->GetId() : 0;
-        peers["connected"].push_back(entry);
+        peers["connected"].push_back(std::move(entry));
     }
 
     return peers;
@@ -1620,6 +1923,41 @@ nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSyste
                            std::string("Invalid block serialization: ") + ex.what());
     }
 
+    const auto blockHash = block->GetHash();
+    if (blockchain->ContainsBlock(blockHash))
+    {
+        throw RpcException(ErrorCode::RpcAlreadyExists, "Block rejected: AlreadyExists");
+    }
+
+    const auto currentHeight = blockchain->GetHeight();
+    const auto blockIndex = block->GetIndex();
+    if (blockIndex > currentHeight + 1)
+    {
+        throw RpcException(ErrorCode::RpcVerificationFailed, "Block rejected: InvalidIndex");
+    }
+
+    if (blockIndex == 0)
+    {
+        if (!block->GetPreviousHash().IsZero())
+        {
+            throw RpcException(ErrorCode::RpcVerificationFailed, "Block rejected: InvalidPreviousHash");
+        }
+    }
+    else
+    {
+        auto expectedPrevHash = blockchain->GetBlockHash(blockIndex - 1);
+        if (expectedPrevHash.IsZero() || block->GetPreviousHash() != expectedPrevHash)
+        {
+            throw RpcException(ErrorCode::RpcVerificationFailed, "Block rejected: InvalidPreviousHash");
+        }
+    }
+
+    const auto& witness = block->GetWitness();
+    if (witness.GetInvocationScript().IsEmpty() || witness.GetVerificationScript().IsEmpty())
+    {
+        throw RpcException(ErrorCode::RpcVerificationFailed, "Block rejected: InvalidWitness");
+    }
+
     auto verifyResult = blockchain->OnNewBlock(block);
     if (verifyResult != VerifyResult::Succeed)
     {
@@ -1641,7 +1979,6 @@ nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSyste
 
 nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    (void)neoSystem;
     if (params.empty() || !params[0].is_string())
     {
         throw RpcException(ErrorCode::InvalidParams, "validateaddress requires an address string");
@@ -1649,6 +1986,26 @@ nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<node::NeoSystem> neoS
 
     const auto address = params[0].get<std::string>();
     bool isValid = wallets::Helper::IsValidAddress(address);
+
+    if (isValid)
+    {
+        auto settings = neoSystem ? neoSystem->GetProtocolSettings() : nullptr;
+        if (settings)
+        {
+            try
+            {
+                auto decoded = cryptography::Base58::Decode(address);
+                if (decoded.size() != 25 || decoded[0] != settings->GetAddressVersion())
+                {
+                    isValid = false;
+                }
+            }
+            catch (const std::exception&)
+            {
+                isValid = false;
+            }
+        }
+    }
 
     nlohmann::json result;
     result["address"] = address;
@@ -1663,15 +2020,26 @@ nlohmann::json RPCMethods::ListPlugins(std::shared_ptr<node::NeoSystem> neoSyste
 
     auto& manager = plugins::PluginManager::GetInstance();
     nlohmann::json result = nlohmann::json::array();
+
+    std::vector<std::shared_ptr<plugins::Plugin>> plugins;
+    plugins.reserve(manager.GetPlugins().size());
     for (const auto& plugin : manager.GetPlugins())
     {
-        if (!plugin) continue;
+        if (plugin)
+        {
+            plugins.push_back(plugin);
+        }
+    }
+
+    std::sort(plugins.begin(), plugins.end(), [](const auto& lhs, const auto& rhs)
+              { return lhs->GetName() < rhs->GetName(); });
+
+    for (const auto& plugin : plugins)
+    {
         nlohmann::json entry;
         entry["name"] = plugin->GetName();
-        entry["description"] = plugin->GetDescription();
         entry["version"] = plugin->GetVersion();
-        entry["author"] = plugin->GetAuthor();
-        entry["running"] = plugin->IsRunning();
+        entry["interfaces"] = nlohmann::json::array();
         result.push_back(std::move(entry));
     }
     return result;

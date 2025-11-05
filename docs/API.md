@@ -177,19 +177,58 @@ curl -X POST http://localhost:10334 \
 
 #### sendrawtransaction
 
-Submit a new transaction.
+Broadcast a signed transaction.
 
 **Parameters**:
-- `hex`: `string` - Base64 encoded transaction
+- `tx`: `string` - Base64-encoded transaction payload
 
-**Returns**: `boolean` - Success status
+**Returns**: `{ "hash": string }`
 
 **Example**:
 ```bash
 curl -X POST http://localhost:10334 \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"sendrawtransaction","params":["AAAAAACYloU..."],"id":1}'
+  -d '{"jsonrpc":"2.0","method":"sendrawtransaction","params":["AEHAAQ=="],"id":1}'
 ```
+
+**Response**:
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": { "hash": "0x1f6901..." }
+}
+```
+
+**Errors**: `InvalidParams`, `RpcAlreadyExists`, `RpcVerificationFailed`, `RpcInvalidTransactionScript`, `RpcInvalidSignature`, `RpcPolicyFailed`, etc., matching the C# node.
+
+#### submitblock
+
+Submit a signed block for verification and optional relay.
+
+**Parameters**:
+- `block`: `string` - Base64-encoded block payload
+- `relay` (optional): `boolean|number` - Relay flag (`true`/`1` to relay, defaults to `true`)
+
+**Returns**: `{ "hash": string }`
+
+**Example**:
+```bash
+curl -X POST http://localhost:10334 \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"submitblock","params":["AEHAAQ==", true],"id":1}'
+```
+
+**Response**:
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": { "hash": "0x8f04..." }
+}
+```
+
+**Errors**: `InvalidParams`, `RpcAlreadyExists`, `RpcVerificationFailed`. Future blocks are queued and revalidated automatically once missing predecessors arrive.
 
 #### gettransactionheight
 
@@ -320,7 +359,7 @@ Get information about connected peers.
     "bad": [],
     "connected": [
         {
-            "address": "127.0.0.1:10333",
+            "address": "127.0.0.1",
             "port": 10333
         }
     ]
@@ -339,9 +378,12 @@ Get node version information.
 ```json
 {
     "tcpport": 10333,
-    "wsport": 10334,
     "nonce": 1234567890,
     "useragent": "/Neo:3.6.0/",
+    "rpc": {
+        "maxiteratorresultitems": 100,
+        "sessionenabled": false
+    },
     "protocol": {
         "addressversion": 53,
         "network": 860833102,
@@ -351,7 +393,18 @@ Get node version information.
         "maxvaliduntilblockincrement": 5760,
         "maxtransactionsperblock": 512,
         "memorypoolmaxtransactions": 50000,
-        "initialgasdistribution": 5200000000000000
+        "initialgasdistribution": 5200000000000000,
+        "hardforks": [
+            { "name": "Aspidochelone", "blockheight": 0 },
+            { "name": "Basilisk", "blockheight": 100 }
+        ],
+        "standbycommittee": [
+            "02b35...fa12"
+        ],
+        "seedlist": [
+            "seed1.neo.org:10333",
+            "seed2.neo.org:10333"
+        ]
     }
 }
 ```
@@ -469,6 +522,66 @@ Validate an address format.
 {
     "address": "NXjtqYERuvSWGawjVux8UerNejvwdYg7eE",
     "isvalid": true
+}
+```
+
+> **Note:** The C++ node performs the same checks as the C# implementation, including verifying that the decoded version byte equals the node's `ProtocolSettings.AddressVersion`. Addresses from other networks therefore yield `"isvalid": false`.
+
+#### listplugins
+
+List the RPC/console plugins currently loaded by the node.
+
+**Parameters**: None
+
+**Returns**: Array of plugin descriptors sorted by name
+
+**Example Response**:
+```json
+[
+    {
+        "name": "RpcServer",
+        "version": "1.0.0",
+        "interfaces": []
+    }
+]
+```
+
+#### getapplicationlog
+
+Return the execution log captured by the `ApplicationLogs` plugin for a given transaction.
+
+**Parameters**:
+- `txid`: `string` – Transaction hash (e.g., `0x...`)
+- `triggerType` *(optional)*: `string` – Filter executions by trigger (`OnPersist`, `PostPersist`, `Verification`,
+  `Application`, `System`, or `All`). Invalid values raise `InvalidParams`.
+
+**Returns**: Object containing the transaction hash, optional block hash, and a list of execution entries with trigger,
+VM state, gas consumed, exception information, stack, and notifications.
+
+> **Retention:** The ApplicationLogs plugin keeps a bounded in-memory cache (default 1,000 entries).  Set
+> `MaxCachedLogs` in the plugin configuration to change the limit.
+
+**Example Response**:
+```json
+{
+    "txid": "0x2f6c...",
+    "blockhash": "0xe2b4...",
+    "executions": [
+        {
+            "trigger": "Application",
+            "vmstate": "HALT",
+            "gasconsumed": "42",
+            "exception": "",
+            "stack": [],
+            "notifications": [
+                {
+                    "contract": "0xfe924b7cfe89ddd271abaf7210a80a7e11178758",
+                    "eventname": "Transfer",
+                    "state": { "type": "ByteArray", "value": "" }
+                }
+            ]
+        }
+    ]
 }
 ```
 

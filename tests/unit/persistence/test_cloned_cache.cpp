@@ -63,7 +63,7 @@ class TestDataCache : public DataCache
         return nullptr;
     }
 
-    std::optional<StorageItem> TryGet(const StorageKey& key) const override
+    std::optional<StorageItem> TryGetValue(const StorageKey& key) const override
     {
         auto it = items_.find(key);
         if (it == items_.end())

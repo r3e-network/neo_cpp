@@ -83,6 +83,18 @@ bool PluginManager::LoadPlugins(std::shared_ptr<node::NeoSystem> neoSystem,
     return result;
 }
 
+void PluginManager::AddPlugin(std::shared_ptr<Plugin> plugin)
+{
+    if (plugin)
+    {
+        plugins_.push_back(std::move(plugin));
+    }
+}
+
+void PluginManager::ClearFactories() { factories_.clear(); }
+
+void PluginManager::ClearPlugins() { plugins_.clear(); }
+
 bool PluginManager::StartPlugins()
 {
     bool result = true;
