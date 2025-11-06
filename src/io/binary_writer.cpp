@@ -41,23 +41,23 @@ void BinaryWriter::Write(uint8_t value)
 
 void BinaryWriter::WriteByte(uint8_t value) { Write(value); }
 
-void BinaryWriter::Write(uint16_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
+void BinaryWriter::Write(uint16_t value) { WriteLittleEndianValue(value); }
 
 void BinaryWriter::WriteUInt16(uint16_t value) { Write(value); }
 
-void BinaryWriter::Write(uint32_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
+void BinaryWriter::Write(uint32_t value) { WriteLittleEndianValue(value); }
 
-void BinaryWriter::Write(uint64_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
+void BinaryWriter::Write(uint64_t value) { WriteLittleEndianValue(value); }
 
 void BinaryWriter::WriteUInt64(uint64_t value) { Write(value); }
 
-void BinaryWriter::Write(int8_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
+void BinaryWriter::Write(int8_t value) { WriteLittleEndianValue(value); }
 
-void BinaryWriter::Write(int16_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
+void BinaryWriter::Write(int16_t value) { WriteLittleEndianValue(value); }
 
-void BinaryWriter::Write(int32_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
+void BinaryWriter::Write(int32_t value) { WriteLittleEndianValue(value); }
 
-void BinaryWriter::Write(int64_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
+void BinaryWriter::Write(int64_t value) { WriteLittleEndianValue(value); }
 
 void BinaryWriter::WriteInt64(int64_t value) { Write(value); }
 

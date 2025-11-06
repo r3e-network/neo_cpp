@@ -14,9 +14,12 @@
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 
+#include <array>
+#include <bit>
 #include <cstdint>
 #include <ostream>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 namespace neo::io
@@ -249,7 +252,7 @@ class BinaryWriter
      */
     void WriteBytes(const ByteVector& data);
 
-   private:
+  private:
     std::ostream* stream_;
     ByteVector* buffer_;
     bool owns_stream_;
@@ -260,5 +263,19 @@ class BinaryWriter
      * @param size Number of bytes to write.
      */
     void WriteRawBytes(const uint8_t* data, size_t size);
+
+    template <typename T>
+    void WriteLittleEndianValue(T value)
+    {
+        static_assert(std::is_integral_v<T>, "integral type required");
+        using Unsigned = std::make_unsigned_t<T>;
+        Unsigned bits = std::bit_cast<Unsigned>(value);
+        std::array<uint8_t, sizeof(T)> buffer{};
+        for (size_t i = 0; i < buffer.size(); ++i)
+        {
+            buffer[i] = static_cast<uint8_t>((bits >> (i * 8)) & static_cast<Unsigned>(0xFF));
+        }
+        WriteRawBytes(buffer.data(), buffer.size());
+    }
 };
 }  // namespace neo::io

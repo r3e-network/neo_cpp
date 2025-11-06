@@ -357,5 +357,20 @@ class BinaryReader
      * @param size Number of bytes to read.
      */
     void ReadRawBytes(uint8_t* data, size_t size);
+
+    template <typename T>
+    T ReadLittleEndianValue()
+    {
+        static_assert(std::is_integral_v<T>, "integral type required");
+        std::array<uint8_t, sizeof(T)> buffer{};
+        ReadRawBytes(buffer.data(), buffer.size());
+        using Unsigned = std::make_unsigned_t<T>;
+        Unsigned result = 0;
+        for (size_t i = 0; i < buffer.size(); ++i)
+        {
+            result |= static_cast<Unsigned>(buffer[i]) << (i * 8);
+        }
+        return std::bit_cast<T>(result);
+    }
 };
 }  // namespace neo::io

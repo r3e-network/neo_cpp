@@ -100,51 +100,37 @@ uint8_t BinaryReader::PeekUInt8()
 
 uint16_t BinaryReader::ReadUInt16()
 {
-    uint16_t value;
-    ReadRawBytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
-    return value;
+    return ReadLittleEndianValue<uint16_t>();
 }
 
 uint32_t BinaryReader::ReadUInt32()
 {
-    uint32_t value;
-    ReadRawBytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
-    return value;
+    return ReadLittleEndianValue<uint32_t>();
 }
 
 uint64_t BinaryReader::ReadUInt64()
 {
-    uint64_t value;
-    ReadRawBytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
-    return value;
+    return ReadLittleEndianValue<uint64_t>();
 }
 
 int8_t BinaryReader::ReadInt8()
 {
-    int8_t value;
-    ReadRawBytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
-    return value;
+    return ReadLittleEndianValue<int8_t>();
 }
 
 int16_t BinaryReader::ReadInt16()
 {
-    int16_t value;
-    ReadRawBytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
-    return value;
+    return ReadLittleEndianValue<int16_t>();
 }
 
 int32_t BinaryReader::ReadInt32()
 {
-    int32_t value;
-    ReadRawBytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
-    return value;
+    return ReadLittleEndianValue<int32_t>();
 }
 
 int64_t BinaryReader::ReadInt64()
 {
-    int64_t value;
-    ReadRawBytes(reinterpret_cast<uint8_t*>(&value), sizeof(value));
-    return value;
+    return ReadLittleEndianValue<int64_t>();
 }
 
 ByteVector BinaryReader::ReadBytes(size_t count)
