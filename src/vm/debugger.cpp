@@ -8,8 +8,6 @@
 #include <neo/vm/execution_context.h>
 #include <neo/vm/script.h>
 
-#include <string>
-
 namespace neo::vm
 {
 Debugger::Debugger(ExecutionEngine& engine) : engine_(engine)
@@ -94,15 +92,11 @@ VMState Debugger::StepOut()
     return engine_.GetState();
 }
 
-void Debugger::AddBreakPoint(const Script& script, uint32_t position)
-{
-    breakpoints_[MakeScriptKey(script)].insert(position);
-}
+void Debugger::AddBreakPoint(const Script& script, uint32_t position) { breakpoints_[&script].insert(position); }
 
 bool Debugger::RemoveBreakPoint(const Script& script, uint32_t position)
 {
-    auto key = MakeScriptKey(script);
-    auto it = breakpoints_.find(key);
+    auto it = breakpoints_.find(&script);
     if (it == breakpoints_.end()) return false;
 
     const auto removed = it->second.erase(position);
@@ -131,17 +125,10 @@ bool Debugger::ShouldBreakOnCurrentInstruction() const
     if (invocationStack.empty()) return false;
 
     const ExecutionContext& context = *invocationStack.back();
-    auto key = MakeScriptKey(context.GetScript());
-    auto it = breakpoints_.find(key);
+    auto it = breakpoints_.find(&context.GetScript());
     if (it == breakpoints_.end()) return false;
 
     const auto position = static_cast<uint32_t>(context.GetInstructionPointer());
     return it->second.find(position) != it->second.end();
-}
-
-std::string Debugger::MakeScriptKey(const Script& script)
-{
-    const auto& data = script.GetScript();
-    return std::string(reinterpret_cast<const char*>(data.Data()), data.Size());
 }
 }  // namespace neo::vm

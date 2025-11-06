@@ -14,15 +14,52 @@
 #include <neo/vm/script.h>
 #include <neo/vm/script_builder.h>
 
+#include <algorithm>
+#include <bit>
 #include <cstdint>
 #include <cstring>
 #include <sstream>
 #include <stdexcept>
+#include <type_traits>
 
 namespace neo::vm
 {
 namespace
 {
+template <typename T>
+internal::ByteVector ToLittleEndianBytes(T value)
+{
+    static_assert(std::is_integral_v<T>, "integral type required");
+    using Unsigned = std::make_unsigned_t<T>;
+    Unsigned bits = std::bit_cast<Unsigned>(value);
+    internal::ByteVector bytes(sizeof(T));
+    for (size_t i = 0; i < sizeof(T); ++i)
+    {
+        bytes[i] = static_cast<uint8_t>((bits >> (i * 8)) & static_cast<Unsigned>(0xFF));
+    }
+    return bytes;
+}
+
+internal::ByteVector ToLittleEndianWithPadding(int32_t value, size_t size)
+{
+    internal::ByteVector bytes(size);
+    int64_t extended = static_cast<int64_t>(value);
+    size_t copyBytes = std::min<size_t>(size, sizeof(extended));
+    for (size_t i = 0; i < copyBytes; ++i)
+    {
+        bytes[i] =
+            static_cast<uint8_t>((static_cast<uint64_t>(extended) >> (i * 8)) & static_cast<uint64_t>(0xFF));
+    }
+
+    uint8_t pad = value < 0 ? 0xFF : 0x00;
+    for (size_t i = copyBytes; i < size; ++i)
+    {
+        bytes[i] = pad;
+    }
+
+    return bytes;
+}
+
 int GetOperandSize(OpCode opcode)
 {
     switch (opcode)
@@ -119,24 +156,34 @@ ScriptBuilder& ScriptBuilder::Emit(OpCode opcode, int32_t operand)
     switch (operandSize)
     {
         case 1:
-            bytes[0] = static_cast<uint8_t>(static_cast<int8_t>(operand));
+        {
+            auto encoded = ToLittleEndianBytes(static_cast<int8_t>(operand));
+            std::memcpy(bytes.Data(), encoded.Data(), encoded.Size());
             break;
+        }
         case 2:
         {
-            int16_t value = static_cast<int16_t>(operand);
-            std::memcpy(bytes.Data(), &value, sizeof(value));
+            auto encoded = ToLittleEndianBytes(static_cast<int16_t>(operand));
+            std::memcpy(bytes.Data(), encoded.Data(), encoded.Size());
             break;
         }
         case 4:
         {
-            int32_t value = static_cast<int32_t>(operand);
-            std::memcpy(bytes.Data(), &value, sizeof(value));
+            auto encoded = ToLittleEndianBytes(static_cast<int32_t>(operand));
+            std::memcpy(bytes.Data(), encoded.Data(), encoded.Size());
             break;
         }
         case 8:
         {
-            int64_t value = static_cast<int64_t>(operand);
-            std::memcpy(bytes.Data(), &value, sizeof(value));
+            auto encoded = ToLittleEndianBytes(static_cast<int64_t>(operand));
+            std::memcpy(bytes.Data(), encoded.Data(), encoded.Size());
+            break;
+        }
+        case 16:
+        case 32:
+        {
+            auto encoded = ToLittleEndianWithPadding(operand, static_cast<size_t>(operandSize));
+            std::memcpy(bytes.Data(), encoded.Data(), encoded.Size());
             break;
         }
         default:
@@ -149,11 +196,14 @@ ScriptBuilder& ScriptBuilder::Emit(OpCode opcode, int32_t operand)
 ScriptBuilder& ScriptBuilder::EmitCall(int32_t offset)
 {
     if (offset < INT8_MIN || offset > INT8_MAX)
-        return Emit(OpCode::CALL_L, io::ByteSpan(reinterpret_cast<const uint8_t*>(&offset), sizeof(offset)));
+    {
+        auto bytes = ToLittleEndianBytes(static_cast<int32_t>(offset));
+        return Emit(OpCode::CALL_L, io::ByteSpan(bytes.Data(), bytes.Size()));
+    }
     else
     {
-        int8_t offsetByte = static_cast<int8_t>(offset);
-        return Emit(OpCode::CALL, io::ByteSpan(reinterpret_cast<const uint8_t*>(&offsetByte), sizeof(offsetByte)));
+        auto bytes = ToLittleEndianBytes(static_cast<int8_t>(offset));
+        return Emit(OpCode::CALL, io::ByteSpan(bytes.Data(), bytes.Size()));
     }
 }
 
@@ -168,12 +218,13 @@ ScriptBuilder& ScriptBuilder::EmitJump(OpCode opcode, int32_t offset)
 
     if (static_cast<int>(opcode) % 2 == 0)
     {
-        int8_t offsetByte = static_cast<int8_t>(offset);
-        return Emit(opcode, io::ByteSpan(reinterpret_cast<const uint8_t*>(&offsetByte), sizeof(offsetByte)));
+        auto bytes = ToLittleEndianBytes(static_cast<int8_t>(offset));
+        return Emit(opcode, io::ByteSpan(bytes.Data(), bytes.Size()));
     }
     else
     {
-        return Emit(opcode, io::ByteSpan(reinterpret_cast<const uint8_t*>(&offset), sizeof(offset)));
+        auto bytes = ToLittleEndianBytes(static_cast<int32_t>(offset));
+        return Emit(opcode, io::ByteSpan(bytes.Data(), bytes.Size()));
     }
 }
 
@@ -184,22 +235,23 @@ ScriptBuilder& ScriptBuilder::EmitPush(int64_t value)
 
     if (value >= INT8_MIN && value <= INT8_MAX)
     {
-        int8_t val = static_cast<int8_t>(value);
-        return Emit(OpCode::PUSHINT8, io::ByteSpan(reinterpret_cast<const uint8_t*>(&val), sizeof(val)));
+        auto bytes = ToLittleEndianBytes(static_cast<int8_t>(value));
+        return Emit(OpCode::PUSHINT8, io::ByteSpan(bytes.Data(), bytes.Size()));
     }
     else if (value >= INT16_MIN && value <= INT16_MAX)
     {
-        int16_t val = static_cast<int16_t>(value);
-        return Emit(OpCode::PUSHINT16, io::ByteSpan(reinterpret_cast<const uint8_t*>(&val), sizeof(val)));
+        auto bytes = ToLittleEndianBytes(static_cast<int16_t>(value));
+        return Emit(OpCode::PUSHINT16, io::ByteSpan(bytes.Data(), bytes.Size()));
     }
     else if (value >= INT32_MIN && value <= INT32_MAX)
     {
-        int32_t val = static_cast<int32_t>(value);
-        return Emit(OpCode::PUSHINT32, io::ByteSpan(reinterpret_cast<const uint8_t*>(&val), sizeof(val)));
+        auto bytes = ToLittleEndianBytes(static_cast<int32_t>(value));
+        return Emit(OpCode::PUSHINT32, io::ByteSpan(bytes.Data(), bytes.Size()));
     }
     else
     {
-        return Emit(OpCode::PUSHINT64, io::ByteSpan(reinterpret_cast<const uint8_t*>(&value), sizeof(value)));
+        auto bytes = ToLittleEndianBytes(static_cast<int64_t>(value));
+        return Emit(OpCode::PUSHINT64, io::ByteSpan(bytes.Data(), bytes.Size()));
     }
 }
 

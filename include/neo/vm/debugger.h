@@ -11,9 +11,8 @@
 #include <neo/vm/execution_engine.h>
 
 #include <cstdint>
-#include <string>
-#include <unordered_map>
 #include <unordered_set>
+#include <unordered_map>
 
 namespace neo::vm
 {
@@ -76,11 +75,10 @@ class Debugger
    private:
     ExecutionEngine& engine_;
     using BreakpointSet = std::unordered_set<uint32_t>;
-    std::unordered_map<std::string, BreakpointSet> breakpoints_;
+    std::unordered_map<const Script*, BreakpointSet> breakpoints_;
     int initialContextCount_ = 0;
 
     void ExecuteAndCheckBreakPoints();
     bool ShouldBreakOnCurrentInstruction() const;
-    static std::string MakeScriptKey(const Script& script);
 };
 }  // namespace neo::vm
