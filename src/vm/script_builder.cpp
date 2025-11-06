@@ -7,6 +7,7 @@
  */
 
 #include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/extensions/biginteger_extensions.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
@@ -26,6 +27,8 @@ namespace neo::vm
 {
 namespace
 {
+using BigInteger = extensions::BigIntegerExtensions::BigInteger;
+
 template <typename T>
 internal::ByteVector ToLittleEndianBytes(T value)
 {
@@ -58,6 +61,58 @@ internal::ByteVector ToLittleEndianWithPadding(int32_t value, size_t size)
     }
 
     return bytes;
+}
+
+std::vector<uint8_t> TrimTwoComplement(std::vector<uint8_t> bytes, bool negative)
+{
+    if (bytes.empty()) return bytes;
+
+    if (negative)
+    {
+        while (bytes.size() > 1 && bytes.back() == 0xFF && (bytes[bytes.size() - 2] & 0x80) == 0x80)
+        {
+            bytes.pop_back();
+        }
+    }
+    else
+    {
+        while (bytes.size() > 1 && bytes.back() == 0x00 && (bytes[bytes.size() - 2] & 0x80) == 0)
+        {
+            bytes.pop_back();
+        }
+    }
+    return bytes;
+}
+
+std::vector<uint8_t> ToTwoComplementBytes(const BigInteger& value)
+{
+    auto magnitude = value.Abs().ToByteArray();
+    if (magnitude.empty()) magnitude.push_back(0);
+
+    if (!value.isNegative)
+    {
+        if ((magnitude.back() & 0x80) != 0) magnitude.push_back(0x00);
+        return TrimTwoComplement(std::move(magnitude), false);
+    }
+
+    std::vector<uint8_t> result(magnitude.size());
+    uint16_t carry = 1;
+    for (size_t i = 0; i < magnitude.size(); ++i)
+    {
+        uint8_t inverted = static_cast<uint8_t>(~magnitude[i]);
+        uint16_t sum = static_cast<uint16_t>(inverted) + carry;
+        result[i] = static_cast<uint8_t>(sum & 0xFF);
+        carry = sum >> 8;
+    }
+    while (carry != 0)
+    {
+        result.push_back(static_cast<uint8_t>(carry & 0xFF));
+        carry >>= 8;
+    }
+
+    if ((result.back() & 0x80) == 0) result.push_back(0xFF);
+
+    return TrimTwoComplement(std::move(result), true);
 }
 
 int GetOperandSize(OpCode opcode)
@@ -263,6 +318,43 @@ ScriptBuilder& ScriptBuilder::EmitPush(const cryptography::ecc::ECPoint& point)
     return EmitPush(encoded.AsSpan());
 }
 
+ScriptBuilder& ScriptBuilder::EmitPush(const extensions::BigIntegerExtensions::BigInteger& value)
+{
+    bool handledSmall = false;
+    int64_t smallValue = 0;
+    try
+    {
+        smallValue = value.ToInt64();
+        handledSmall = true;
+    }
+    catch (const std::overflow_error&)
+    {
+        handledSmall = false;
+    }
+
+    if (handledSmall && smallValue >= -1 && smallValue <= 16)
+    {
+        return EmitPush(smallValue);
+    }
+
+    auto bytes = ToTwoComplementBytes(value);
+    const bool negative = value.isNegative;
+    auto emitWithPadding = [&](OpCode opcode, size_t targetSize) -> ScriptBuilder& {
+        if (bytes.size() < targetSize) bytes.resize(targetSize, negative ? 0xFF : 0x00);
+        return Emit(opcode, io::ByteSpan(bytes.data(), targetSize));
+    };
+
+    const size_t length = bytes.size();
+    if (length <= 1) return emitWithPadding(OpCode::PUSHINT8, 1);
+    if (length <= 2) return emitWithPadding(OpCode::PUSHINT16, 2);
+    if (length <= 4) return emitWithPadding(OpCode::PUSHINT32, 4);
+    if (length <= 8) return emitWithPadding(OpCode::PUSHINT64, 8);
+    if (length <= 16) return emitWithPadding(OpCode::PUSHINT128, 16);
+    if (length <= 32) return emitWithPadding(OpCode::PUSHINT256, 32);
+
+    throw std::out_of_range("BigInteger is too large to emit");
+}
+
 ScriptBuilder& ScriptBuilder::EmitPush(const io::ByteSpan& data)
 {
     if (data.size() < 0x100)
@@ -304,7 +396,8 @@ ScriptBuilder& ScriptBuilder::EmitRaw(const io::ByteSpan& script)
 
 ScriptBuilder& ScriptBuilder::EmitSysCall(uint32_t api)
 {
-    return Emit(OpCode::SYSCALL, io::ByteSpan(reinterpret_cast<const uint8_t*>(&api), sizeof(api)));
+    auto bytes = ToLittleEndianBytes(api);
+    return Emit(OpCode::SYSCALL, io::ByteSpan(bytes.Data(), bytes.Size()));
 }
 
 ScriptBuilder& ScriptBuilder::EmitSysCall(const std::string& api)

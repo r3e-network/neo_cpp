@@ -9,6 +9,7 @@
 #pragma once
 
 #include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/extensions/biginteger_extensions.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
@@ -157,6 +158,7 @@ class ScriptBuilder
      * @return A reference to this instance after the emit operation has completed.
      */
     ScriptBuilder& EmitPush(const cryptography::ecc::ECPoint& point);
+    ScriptBuilder& EmitPush(const extensions::BigIntegerExtensions::BigInteger& value);
 
     /**
      * @brief Emits a push instruction with the specified number (alias for EmitPush).
