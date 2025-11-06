@@ -12,8 +12,10 @@
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/contract.h>
 #include <neo/vm/script.h>
+#include <neo/vm/script_builder.h>
 
 #include <sstream>
+#include <limits>
 
 namespace neo::smartcontract
 {
@@ -138,7 +140,7 @@ io::UInt160 Contract::GetScriptHash() const { return cryptography::Hash::Hash160
 void Contract::Serialize(io::BinaryWriter& writer) const
 {
     writer.WriteVarBytes(script_.AsSpan());
-    writer.WriteVarInt(parameterList_.size());
+    writer.WriteVarInt(static_cast<uint64_t>(parameterList_.size()));
     for (const auto& parameter : parameterList_)
     {
         writer.Write(static_cast<uint8_t>(parameter));
@@ -149,7 +151,8 @@ void Contract::Deserialize(io::BinaryReader& reader)
 {
     script_ = reader.ReadVarBytes();
     int64_t count = reader.ReadVarInt();
-    if (count < 0 || count > std::numeric_limits<size_t>::max()) throw std::out_of_range("Invalid parameter count");
+    if (count < 0 || static_cast<uint64_t>(count) > std::numeric_limits<size_t>::max())
+        throw std::out_of_range("Invalid parameter count");
 
     parameterList_.clear();
     parameterList_.reserve(static_cast<size_t>(count));
@@ -162,80 +165,33 @@ void Contract::Deserialize(io::BinaryReader& reader)
 
 Contract Contract::CreateSignatureContract(const cryptography::ecc::ECPoint& pubKey)
 {
-    using namespace vm;
-
-    // Create the verification script
-    std::vector<uint8_t> script;
-    script.push_back(static_cast<uint8_t>(OpCode::PUSHDATA1));
-    script.push_back(33);  // Length of the public key
-
+    vm::ScriptBuilder builder;
     auto pubKeyBytes = pubKey.ToArray();
-    script.insert(script.end(), pubKeyBytes.begin(), pubKeyBytes.end());
-
-    script.push_back(static_cast<uint8_t>(OpCode::SYSCALL));
-
-    // System.Crypto.CheckSig
-    uint32_t hash = 0x9147a939;  // Hash of "System.Crypto.CheckSig"
-    script.push_back(hash & 0xFF);
-    script.push_back((hash >> 8) & 0xFF);
-    script.push_back((hash >> 16) & 0xFF);
-    script.push_back((hash >> 24) & 0xFF);
-
-    return Contract(io::ByteVector(io::ByteSpan(script.data(), script.size())), {ContractParameterType::Signature});
+    builder.EmitPush(pubKeyBytes.AsSpan());
+    builder.EmitSysCall("System.Crypto.CheckSig");
+    auto script = builder.ToArray();
+    return Contract(script, {ContractParameterType::Signature});
 }
 
 Contract Contract::CreateMultiSigContract(int m, const std::vector<cryptography::ecc::ECPoint>& pubKeys)
 {
-    using namespace vm;
+    if (m <= 0 || static_cast<size_t>(m) > pubKeys.size() || pubKeys.size() > 1024)
+        throw std::invalid_argument("Invalid parameters");
 
-    if (m <= 0 || m > pubKeys.size() || pubKeys.size() > 1024) throw std::invalid_argument("Invalid parameters");
+    vm::ScriptBuilder builder;
+    builder.EmitPush(static_cast<int64_t>(m));
+    std::vector<ContractParameterType> parameterList(static_cast<size_t>(m), ContractParameterType::Signature);
 
-    // Create the verification script
-    std::vector<uint8_t> script;
-
-    // Push m
-    if (m >= 1 && m <= core::ProtocolConstants::MaxTransactionWitnesses)
-    {
-        script.push_back(static_cast<uint8_t>(OpCode::PUSH1) + (m - 1));
-    }
-    else
-    {
-        script.push_back(static_cast<uint8_t>(OpCode::PUSHINT8));
-        script.push_back(static_cast<uint8_t>(m));
-    }
-
-    // Push public keys
     for (const auto& pubKey : pubKeys)
     {
-        script.push_back(static_cast<uint8_t>(OpCode::PUSHDATA1));
-        script.push_back(33);  // Length of the public key
-
         auto pubKeyBytes = pubKey.ToArray();
-        script.insert(script.end(), pubKeyBytes.begin(), pubKeyBytes.end());
+        builder.EmitPush(pubKeyBytes.AsSpan());
     }
 
-    // Push n
-    if (pubKeys.size() >= 1 && pubKeys.size() <= core::ProtocolConstants::MaxTransactionWitnesses)
-    {
-        script.push_back(static_cast<uint8_t>(OpCode::PUSH1) + (pubKeys.size() - 1));
-    }
-    else
-    {
-        script.push_back(static_cast<uint8_t>(OpCode::PUSHINT8));
-        script.push_back(static_cast<uint8_t>(pubKeys.size()));
-    }
-
-    script.push_back(static_cast<uint8_t>(OpCode::SYSCALL));
-
-    // System.Crypto.CheckMultiSig
-    uint32_t hash = 0xb32b5c07;  // Hash of "System.Crypto.CheckMultiSig"
-    script.push_back(hash & 0xFF);
-    script.push_back((hash >> 8) & 0xFF);
-    script.push_back((hash >> 16) & 0xFF);
-    script.push_back((hash >> 24) & 0xFF);
-
-    std::vector<ContractParameterType> parameterList(m, ContractParameterType::Signature);
-    return Contract(io::ByteVector(io::ByteSpan(script.data(), script.size())), parameterList);
+    builder.EmitPush(static_cast<int64_t>(pubKeys.size()));
+    builder.EmitSysCall("System.Crypto.CheckMultisig");
+    auto script = builder.ToArray();
+    return Contract(script, parameterList);
 }
 
 }  // namespace neo::smartcontract

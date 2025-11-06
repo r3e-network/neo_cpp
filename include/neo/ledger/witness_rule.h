@@ -255,6 +255,7 @@ class BooleanCondition : public WitnessCondition
 
     Type GetType() const override { return Type::Boolean; }
     bool Match(const smartcontract::ApplicationEngine& engine) const override;
+    bool GetValue() const { return value_; }
 
    protected:
     void SerializeWithoutType(io::BinaryWriter& writer) const override;
@@ -277,6 +278,7 @@ class NotCondition : public WitnessCondition
 
     Type GetType() const override { return Type::Not; }
     bool Match(const smartcontract::ApplicationEngine& engine) const override;
+    std::shared_ptr<WitnessCondition> GetCondition() const { return condition_; }
 
    protected:
     void SerializeWithoutType(io::BinaryWriter& writer) const override;

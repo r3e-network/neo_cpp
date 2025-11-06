@@ -268,6 +268,13 @@ class SyscallHandler
                             smartcontract::InteropService::iterator_next(appEngine);
                         });
 
+        RegisterSyscall(CalculateHash("System.Iterator.Key"),
+                        [](ExecutionEngine& engine)
+                        {
+                            auto& appEngine = static_cast<smartcontract::ApplicationEngine&>(engine);
+                            smartcontract::InteropService::iterator_key(appEngine);
+                        });
+
         RegisterSyscall(CalculateHash("System.Iterator.Value"),
                         [](ExecutionEngine& engine)
                         {

@@ -7,6 +7,7 @@
  */
 
 #include <neo/smartcontract/contract.h>
+#include <neo/smartcontract/interop_service.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script_builder.h>
 #include <neo/wallets/verification_contract.h>
@@ -213,7 +214,7 @@ VerificationContract::VerificationContract(const cryptography::ecc::ECPoint& pub
     // Create a signature contract using proper SYSCALL format
     vm::ScriptBuilder sb;
     sb.EmitPushData(publicKey.ToBytes(true));
-    sb.EmitSysCall(0x41627d5b);  // System.Crypto.CheckSig hash
+    sb.EmitSysCall("System.Crypto.CheckSig");
 
     auto script = sb.ToArray();
     contract_.SetScript(script);
@@ -233,7 +234,7 @@ VerificationContract::VerificationContract(const std::vector<cryptography::ecc::
     }
 
     sb.EmitPushNumber(publicKeys.size());
-    sb.EmitSysCall(0x0973c0b6);  // System.Crypto.CheckMultisig hash
+    sb.EmitSysCall("System.Crypto.CheckMultisig");
 
     auto script = sb.ToArray();
     contract_.SetScript(script);
@@ -291,7 +292,12 @@ bool VerificationContract::IsSignatureContract() const
         return false;
     }
 
-    // Check if this is the CheckSig syscall (hash would be checked here)
+    const uint32_t expectedHash = smartcontract::calculate_interop_hash("System.Crypto.CheckSig");
+    for (int i = 0; i < 4; ++i)
+    {
+        if (script[36 + i] != static_cast<uint8_t>((expectedHash >> (i * 8)) & 0xFF)) return false;
+    }
+
     return true;
 }
 
@@ -308,6 +314,12 @@ bool VerificationContract::IsMultiSigContract() const
     if (script[script.Size() - 5] != static_cast<uint8_t>(vm::OpCode::SYSCALL))
     {
         return false;
+    }
+
+    const uint32_t expectedHash = smartcontract::calculate_interop_hash("System.Crypto.CheckMultisig");
+    for (int i = 0; i < 4; ++i)
+    {
+        if (script[script.Size() - 4 + i] != static_cast<uint8_t>((expectedHash >> (i * 8)) & 0xFF)) return false;
     }
 
     // Complete validation of multi-signature contract format

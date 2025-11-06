@@ -91,7 +91,7 @@ TEST_F(WalletSecurityTest, NEP2Encryption) {
     EXPECT_EQ(nep2.length(), 58);
 
     // Firmware test vector round-trip (value from C# test suite)
-    const std::string knownNep2 = "6PYLHmDf6AjF4AsVtosmxHuPYeuyJL3SLuw7J1U8i7HxKAnYNsp61HYRfF";
+    const std::string knownNep2 = "6PYKsHXhWUNUrWAYmTfL692qqmmrihFQVTQEXuDKpxss86FxxgurkvAwZN";
     const std::string knownPassword = "test123";
     auto privateKey = neo::cryptography::ecc::Secp256r1::FromNEP2(knownNep2, knownPassword);
     ASSERT_EQ(privateKey.Size(), 32u);

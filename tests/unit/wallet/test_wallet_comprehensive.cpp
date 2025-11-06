@@ -10,6 +10,7 @@
 #include <neo/cryptography/helper.h>
 #include <neo/wallets/nep6/nep6_wallet.h>
 #include <neo/wallets/helper.h>
+#include <neo/smartcontract/storage_key.h>
 #include <memory>
 #include <vector>
 #include <fstream>
@@ -70,7 +71,7 @@ TEST_F(WalletComprehensiveTest, ImportWIF) {
 }
 
 TEST_F(WalletComprehensiveTest, ImportNEP2) {
-    std::string nep2 = "6PYLHmDf6AjF4AsVtosmxHuPYeuyJL3SLuw7J1U8i7HxKAnYNsp61HYRfF";
+    std::string nep2 = "6PYKsHXhWUNUrWAYmTfL692qqmmrihFQVTQEXuDKpxss86FxxgurkvAwZN";
     std::string password = "test123";
     
     auto account = wallet->Import(nep2, password);

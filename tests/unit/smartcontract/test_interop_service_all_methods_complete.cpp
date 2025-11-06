@@ -3,12 +3,15 @@
 #include "neo/ledger/transaction.h"
 #include "neo/network/p2p/payloads/transaction.h"
 #include "neo/smartcontract/application_engine.h"
+#include "neo/smartcontract/contract.h"
 #include "neo/smartcontract/contract_state.h"
 #include "neo/smartcontract/interop_service.h"
 #include "neo/smartcontract/native/contract_management.h"
 #include "neo/smartcontract/native/gas_token.h"
 #include "neo/smartcontract/native/ledger_contract.h"
 #include "neo/smartcontract/native/neo_token.h"
+#include "neo/persistence/storage_item.h"
+#include "neo/persistence/storage_key.h"
 #include "neo/vm/compound_items.h"
 #include "neo/vm/opcode.h"
 #include "neo/vm/primitive_items.h"
@@ -27,7 +30,9 @@
 #include "neo/io/uint256.h"
 #include "neo/persistence/data_cache.h"
 #include "neo/wallets/key_pair.h"
+#include <algorithm>
 #include <array>
+#include <iomanip>
 #include <memory>
 #include <string>
 #include <vector>
@@ -557,7 +562,245 @@ TEST_F(InteropServiceAllMethodsTest, TestStorage_Get)
     context->IsReadOnly = false;
 
     auto result = engine->Get(context, std::vector<uint8_t>{0x01});
-    EXPECT_EQ(storage_item->Value, result->Value);
+   EXPECT_EQ(storage_item->Value, result->Value);
+}
+
+TEST_F(InteropServiceAllMethodsTest, TestContract_CreateStandardAccount_SysCall)
+{
+    auto engine = GetEngine(false, false, false);
+    auto keyPair = Secp256r1::GenerateKeyPair();
+
+    // Build script that iterates Storage.Find and retrieves key/value
+    vm::ScriptBuilder script;
+    script.EmitPush(keyPair.PublicKey());
+    script.EmitSysCall("System.Contract.CreateStandardAccount");
+    script.Emit(OpCode::RET);
+
+    engine->LoadScript(script.ToArray());
+    EXPECT_EQ(VMState::HALT, engine->Execute());
+
+    auto result = engine->ResultStack().Pop();
+    ASSERT_NE(nullptr, result);
+    auto hashBytes = result->GetByteArray();
+    ASSERT_EQ(hashBytes.Size(), io::UInt160::Size);
+
+    io::UInt160 actual(hashBytes.AsSpan());
+    auto expected = Contract::CreateSignatureContract(keyPair.PublicKey()).GetScriptHash();
+    EXPECT_EQ(actual, expected);
+}
+
+TEST_F(InteropServiceAllMethodsTest, TestContract_CreateStandardAccount_InvalidKey)
+{
+    auto engine = GetEngine(false, false, false);
+
+    vm::ScriptBuilder script;
+    script.EmitPush(std::vector<uint8_t>{0x01, 0x02});
+    script.EmitSysCall("System.Contract.CreateStandardAccount");
+    script.Emit(OpCode::RET);
+
+    engine->LoadScript(script.ToArray());
+    EXPECT_EQ(VMState::HALT, engine->Execute());
+
+    auto result = engine->ResultStack().Pop();
+    ASSERT_NE(nullptr, result);
+    EXPECT_TRUE(result->IsNull());
+}
+
+TEST_F(InteropServiceAllMethodsTest, TestContract_CreateMultisigAccount_SysCall)
+{
+    auto engine = GetEngine(false, false, false);
+
+    auto keyPair1 = Secp256r1::GenerateKeyPair();
+    auto keyPair2 = Secp256r1::GenerateKeyPair();
+    auto keyPair3 = Secp256r1::GenerateKeyPair();
+    std::vector<ECPoint> pubKeys = {keyPair1.PublicKey(), keyPair2.PublicKey(), keyPair3.PublicKey()};
+
+    vm::ScriptBuilder script;
+    for (const auto& key : pubKeys)
+    {
+        script.EmitPush(key);
+    }
+    script.EmitPushNumber(static_cast<int64_t>(pubKeys.size()));
+    script.Emit(OpCode::PACK);
+    script.EmitPushNumber(2);
+    script.EmitSysCall("System.Contract.CreateMultisigAccount");
+    script.Emit(OpCode::RET);
+
+    engine->LoadScript(script.ToArray());
+    EXPECT_EQ(VMState::HALT, engine->Execute());
+
+    auto result = engine->ResultStack().Pop();
+    ASSERT_NE(nullptr, result);
+    auto hashBytes = result->GetByteArray();
+    ASSERT_EQ(hashBytes.Size(), io::UInt160::Size);
+
+    std::vector<std::vector<uint8_t>> sortedBuffers;
+    sortedBuffers.reserve(pubKeys.size());
+    for (const auto& key : pubKeys)
+    {
+        auto buffer = key.ToArray();
+        sortedBuffers.emplace_back(buffer.begin(), buffer.end());
+    }
+    std::sort(sortedBuffers.begin(), sortedBuffers.end(),
+              [](const auto& lhs, const auto& rhs) { return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()); });
+
+    std::vector<ECPoint> sortedKeys;
+    sortedKeys.reserve(sortedBuffers.size());
+    for (const auto& buffer : sortedBuffers)
+    {
+        sortedKeys.emplace_back(ECPoint::FromBytes(io::ByteSpan(buffer.data(), buffer.size()), "secp256r1"));
+    }
+
+    io::UInt160 actual(hashBytes.AsSpan());
+    auto expected = Contract::CreateMultiSigContract(2, sortedKeys).GetScriptHash();
+    EXPECT_EQ(actual, expected);
+}
+
+TEST_F(InteropServiceAllMethodsTest, TestContract_CreateMultisigAccount_InvalidParameters)
+{
+    auto engine = GetEngine(false, false, false);
+    auto keyPair1 = Secp256r1::GenerateKeyPair();
+    auto keyPair2 = Secp256r1::GenerateKeyPair();
+    std::vector<ECPoint> pubKeys = {keyPair1.PublicKey(), keyPair2.PublicKey()};
+
+    vm::ScriptBuilder script;
+    for (const auto& key : pubKeys)
+    {
+        script.EmitPush(key);
+    }
+    script.EmitPushNumber(static_cast<int64_t>(pubKeys.size()));
+    script.Emit(OpCode::PACK);
+    script.EmitPushNumber(3);  // m > n should fail
+    script.EmitSysCall("System.Contract.CreateMultisigAccount");
+    script.Emit(OpCode::RET);
+
+    engine->LoadScript(script.ToArray());
+    EXPECT_EQ(VMState::HALT, engine->Execute());
+
+    auto result = engine->ResultStack().Pop();
+    ASSERT_NE(nullptr, result);
+    EXPECT_TRUE(result->IsNull());
+}
+
+TEST_F(InteropServiceAllMethodsTest, TestIterator_KeyAndValue)
+{
+    auto snapshot_cache = snapshot_cache_->CloneCache();
+    vm::ScriptBuilder script;
+    std::vector<uint8_t> prefix = {0xAA};
+    std::vector<uint8_t> key = {0xAA, 0xBB};
+    std::vector<uint8_t> value = {0x10, 0x20, 0x30};
+
+    script.EmitSysCall("System.Storage.GetContext");
+    script.EmitPush(prefix);
+    script.EmitSysCall("System.Storage.Find");
+    script.Emit(OpCode::DUP);
+    script.EmitSysCall("System.Iterator.Next");
+    script.Emit(OpCode::DROP);
+    script.Emit(OpCode::DUP);
+    script.EmitSysCall("System.Iterator.Key");
+    script.Emit(OpCode::SWAP);
+    script.Emit(OpCode::DUP);
+    script.EmitSysCall("System.Iterator.Value");
+    script.Emit(OpCode::SWAP);
+    script.Emit(OpCode::DROP);
+    script.Emit(OpCode::RET);
+
+    auto contract = CreateTestContract(script.ToArray());
+    contract->Id = 1;
+    snapshot_cache->AddContract(contract->Hash, contract);
+
+    neo::persistence::StorageKey storageKey(contract->Hash, io::ByteVector(key));
+    neo::persistence::StorageItem storageItem(io::ByteVector(value));
+    snapshot_cache->Add(storageKey, storageItem);
+
+    auto engine = ApplicationEngine::Create(TriggerType::Application, nullptr, snapshot_cache);
+    engine->LoadScript(script.ToArray());
+    EXPECT_EQ(VMState::HALT, engine->Execute());
+
+    ASSERT_EQ(engine->ResultStack().Count(), 2);
+    auto resultValue = engine->ResultStack().Pop();
+    auto resultKey = engine->ResultStack().Pop();
+
+    ASSERT_NE(nullptr, resultKey);
+    ASSERT_NE(nullptr, resultValue);
+
+    auto keyBytes = resultKey->GetByteArray();
+    auto valueBytes = resultValue->GetByteArray();
+    EXPECT_EQ(std::vector<uint8_t>(keyBytes.begin(), keyBytes.end()), key);
+    EXPECT_EQ(std::vector<uint8_t>(valueBytes.begin(), valueBytes.end()), value);
+}
+
+TEST_F(InteropServiceAllMethodsTest, TestRuntime_GetCurrentSigners_WithWitnessRules)
+{
+    auto snapshot = snapshot_cache_->CloneCache();
+
+    auto tx = std::make_shared<Transaction>();
+    tx->Script = std::vector<uint8_t>{0x01};
+
+    auto account = UInt160::Parse("0x11223344556677889900aabbccddeeff00112233");
+    auto allowedContract = UInt160::Parse("0x00112233445566778899aabbccddeeff00112233");
+    auto groupKeyPair = Secp256r1::GenerateKeyPair();
+
+    Signer signer;
+    signer.SetAccount(account);
+    signer.SetScopes(WitnessScope::CalledByEntry | WitnessScope::CustomContracts | WitnessScope::CustomGroups |
+                     WitnessScope::WitnessRules);
+    signer.SetAllowedContracts({allowedContract});
+    signer.SetAllowedGroups({groupKeyPair.PublicKey()});
+
+    WitnessRule rule(WitnessRuleAction::Allow, std::make_shared<BooleanCondition>(true));
+    signer.SetRules({rule});
+
+    tx->SetSigners({signer});
+
+    vm::ScriptBuilder script;
+    script.EmitSysCall(ApplicationEngine::System_Runtime_CurrentSigners.Hash);
+    script.Emit(OpCode::RET);
+
+    auto engine = ApplicationEngine::Create(TriggerType::Application, tx, snapshot, nullptr, GetTestProtocolSettings());
+    engine->LoadScript(script.ToArray());
+    EXPECT_EQ(VMState::HALT, engine->Execute());
+
+    auto result = engine->ResultStack().Pop();
+    auto signersArray = std::dynamic_pointer_cast<Array>(result);
+    ASSERT_NE(nullptr, signersArray);
+    ASSERT_EQ(1, signersArray->Count());
+
+    auto signerItem = std::dynamic_pointer_cast<Array>((*signersArray)[0]);
+    ASSERT_NE(nullptr, signerItem);
+    ASSERT_EQ(5, signerItem->Count());
+
+    auto accountBytes = signerItem->Get(0)->GetByteArray();
+    EXPECT_EQ(account.ToArray(), accountBytes);
+
+    auto scopesValue = signerItem->Get(1)->GetInteger();
+    EXPECT_EQ(static_cast<int64_t>(signer.GetScopes()), scopesValue);
+
+    auto contractsArray = std::dynamic_pointer_cast<Array>(signerItem->Get(2));
+    ASSERT_NE(nullptr, contractsArray);
+    ASSERT_EQ(1, contractsArray->Count());
+    EXPECT_EQ(allowedContract.ToArray(), contractsArray->Get(0)->GetByteArray());
+
+    auto groupsArray = std::dynamic_pointer_cast<Array>(signerItem->Get(3));
+    ASSERT_NE(nullptr, groupsArray);
+    ASSERT_EQ(1, groupsArray->Count());
+    auto groupBytes = groupsArray->Get(0)->GetByteArray();
+    EXPECT_EQ(groupKeyPair.PublicKey().ToArray(), groupBytes);
+
+    auto rulesArray = std::dynamic_pointer_cast<Array>(signerItem->Get(4));
+    ASSERT_NE(nullptr, rulesArray);
+    ASSERT_EQ(1, rulesArray->Count());
+
+    auto ruleArray = std::dynamic_pointer_cast<Array>(rulesArray->Get(0));
+    ASSERT_NE(nullptr, ruleArray);
+    ASSERT_EQ(2, ruleArray->Count());
+    EXPECT_EQ(static_cast<int64_t>(WitnessRuleAction::Allow), ruleArray->Get(0)->GetInteger());
+
+    auto conditionArray = std::dynamic_pointer_cast<Array>(ruleArray->Get(1));
+    ASSERT_NE(nullptr, conditionArray);
+    ASSERT_EQ(2, conditionArray->Count());
+    EXPECT_EQ(static_cast<int64_t>(WitnessCondition::Type::Boolean), conditionArray->Get(0)->GetInteger());
+    EXPECT_TRUE(conditionArray->Get(1)->GetBoolean());
 }
 
 // Additional comprehensive tests to complete coverage

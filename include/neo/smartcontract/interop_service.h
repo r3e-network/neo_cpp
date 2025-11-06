@@ -23,6 +23,13 @@ namespace smartcontract
 class ApplicationEngine;
 
 /**
+ * @brief Calculates the interop hash (first 4 bytes of SHA256) for a given syscall name.
+ * @param name The syscall name.
+ * @return The 32-bit interop hash.
+ */
+uint32_t calculate_interop_hash(const std::string& name);
+
+/**
  * @brief Provides interoperable services for the Neo virtual machine.
  *
  * The InteropService class manages all system calls and interoperable services
@@ -102,6 +109,7 @@ class InteropService
 
     // System.Iterator services
     static void iterator_next(ApplicationEngine& engine);
+    static void iterator_key(ApplicationEngine& engine);
     static void iterator_value(ApplicationEngine& engine);
 
    private:
@@ -119,57 +127,6 @@ class InteropService
      */
     void register_service_internal(const InteropDescriptor& descriptor);
 };
-
-// Global interop descriptors (matching C# static readonly fields)
-namespace interop_descriptors
-{
-// System.Runtime
-extern const InteropDescriptor system_runtime_platform;
-extern const InteropDescriptor system_runtime_get_network;
-extern const InteropDescriptor system_runtime_get_address_version;
-extern const InteropDescriptor system_runtime_get_trigger;
-extern const InteropDescriptor system_runtime_get_time;
-extern const InteropDescriptor system_runtime_get_script_container;
-extern const InteropDescriptor system_runtime_get_executing_script_hash;
-extern const InteropDescriptor system_runtime_get_calling_script_hash;
-extern const InteropDescriptor system_runtime_get_entry_script_hash;
-extern const InteropDescriptor system_runtime_load_script;
-extern const InteropDescriptor system_runtime_check_witness;
-extern const InteropDescriptor system_runtime_get_invocation_counter;
-extern const InteropDescriptor system_runtime_get_random;
-extern const InteropDescriptor system_runtime_log;
-extern const InteropDescriptor system_runtime_notify;
-extern const InteropDescriptor system_runtime_get_notifications;
-extern const InteropDescriptor system_runtime_gas_left;
-extern const InteropDescriptor system_runtime_burn_gas;
-extern const InteropDescriptor system_runtime_current_signers;
-
-// System.Crypto
-extern const InteropDescriptor system_crypto_check_sig;
-extern const InteropDescriptor system_crypto_check_multisig;
-
-// System.Contract
-extern const InteropDescriptor system_contract_call;
-extern const InteropDescriptor system_contract_call_native;
-extern const InteropDescriptor system_contract_get_call_flags;
-extern const InteropDescriptor system_contract_create_standard_account;
-extern const InteropDescriptor system_contract_create_multisig_account;
-extern const InteropDescriptor system_contract_native_on_persist;
-extern const InteropDescriptor system_contract_native_post_persist;
-
-// System.Storage
-extern const InteropDescriptor system_storage_get_context;
-extern const InteropDescriptor system_storage_get_readonly_context;
-extern const InteropDescriptor system_storage_as_readonly;
-extern const InteropDescriptor system_storage_get;
-extern const InteropDescriptor system_storage_find;
-extern const InteropDescriptor system_storage_put;
-extern const InteropDescriptor system_storage_delete;
-
-// System.Iterator
-extern const InteropDescriptor system_iterator_next;
-extern const InteropDescriptor system_iterator_value;
-}  // namespace interop_descriptors
 
 }  // namespace smartcontract
 }  // namespace neo

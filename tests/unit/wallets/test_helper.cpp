@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <neo/cryptography/ecc/ec_point.h>
+#include <neo/smartcontract/contract.h>
 #include <neo/wallets/helper.h>
 
 namespace neo::wallets::tests
@@ -40,6 +41,26 @@ TEST_F(HelperTest, TestIsValidAddress)
     EXPECT_FALSE(Helper::IsValidAddress(""));
     EXPECT_FALSE(Helper::IsValidAddress("invalid"));
     EXPECT_FALSE(Helper::IsValidAddress("1234567890"));
+}
+
+TEST_F(HelperTest, TestToScriptHashVersionMismatch)
+{
+    auto address = Helper::ToAddress(test_script_hash, 0x35);
+    EXPECT_THROW(Helper::ToScriptHash(address, 0x36), std::invalid_argument);
+    EXPECT_FALSE(Helper::IsValidAddress(address, 0x36));
+}
+
+TEST_F(HelperTest, TestCreateSignatureRedeemScriptParity)
+{
+    auto public_key_point = Helper::GetPublicKey(test_private_key);
+    auto public_key_bytes_vector = std::vector<uint8_t>(public_key_point.ToArray().begin(),
+                                                        public_key_point.ToArray().end());
+
+    auto helper_script = Helper::CreateSignatureRedeemScript(public_key_bytes_vector);
+    auto contract = smartcontract::Contract::CreateSignatureContract(public_key_point);
+    auto contract_script = contract.GetScript();
+
+    EXPECT_EQ(helper_script, contract_script);
 }
 
 TEST_F(HelperTest, TestCreateSignatureScript)

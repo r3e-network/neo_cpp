@@ -6,11 +6,16 @@
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/scrypt.h>
 #include <neo/io/byte_vector.h>
+#include <neo/core/protocol_constants.h>
 #include <neo/vm/opcode.h>
+#include <neo/vm/script_builder.h>
 
 #include <array>
 #include <cstring>
 #include <stdexcept>
+#include <vector>
+#include <sstream>
+#include <iomanip>
 
 #include <openssl/bn.h>
 #include <openssl/ec.h>
@@ -79,27 +84,15 @@ void aes256_ecb_decrypt(const uint8_t* key, const uint8_t* input, uint8_t* outpu
 
 io::ByteVector CreateSignatureVerificationScript(const io::ByteVector& publicKey)
 {
-    using neo::vm::OpCode;
-
     if (publicKey.IsEmpty())
     {
         throw std::invalid_argument("Public key cannot be empty");
     }
 
-    std::vector<uint8_t> script;
-    script.reserve(2 + publicKey.Size() + 5);
-    script.push_back(static_cast<uint8_t>(OpCode::PUSHDATA1));
-    script.push_back(static_cast<uint8_t>(publicKey.Size()));
-    script.insert(script.end(), publicKey.Data(), publicKey.Data() + publicKey.Size());
-    script.push_back(static_cast<uint8_t>(OpCode::SYSCALL));
-
-    constexpr uint32_t kCheckSigSyscall = 0x9147a939;  // Hash of "System.Crypto.CheckSig"
-    script.push_back(static_cast<uint8_t>(kCheckSigSyscall & 0xFF));
-    script.push_back(static_cast<uint8_t>((kCheckSigSyscall >> 8) & 0xFF));
-    script.push_back(static_cast<uint8_t>((kCheckSigSyscall >> 16) & 0xFF));
-    script.push_back(static_cast<uint8_t>((kCheckSigSyscall >> 24) & 0xFF));
-
-    return io::ByteVector(script);
+    vm::ScriptBuilder sb;
+    sb.EmitPush(publicKey.AsSpan());
+    sb.EmitSysCall("System.Crypto.CheckSig");
+    return sb.ToArray();
 }
 }  // namespace
 
@@ -319,9 +312,12 @@ std::string Secp256r1::ToNEP2(const io::ByteVector& privateKey, const std::strin
     auto publicKey = ComputePublicKey(privateKey);
     auto script = CreateSignatureVerificationScript(publicKey);
     auto scriptHash = Hash::Hash160(script.AsSpan());
-    auto doubleHash = Hash::Sha256(Hash::Sha256(scriptHash.AsSpan()).AsSpan());
+    auto address = scriptHash.ToAddress(static_cast<uint8_t>(core::ProtocolConstants::AddressVersion));
+    std::vector<uint8_t> addressBytes(address.begin(), address.end());
+    auto hash1 = Hash::Sha256(io::ByteSpan(addressBytes.data(), addressBytes.size()));
+    auto hash2 = Hash::Sha256(hash1.AsSpan());
 
-    std::vector<uint8_t> salt(doubleHash.Data(), doubleHash.Data() + 4);
+    std::vector<uint8_t> salt(hash2.Data(), hash2.Data() + 4);
     std::vector<uint8_t> pass(passphrase.begin(), passphrase.end());
     auto derived = cryptography::Scrypt::DeriveKey(pass, salt, static_cast<uint32_t>(scryptN), static_cast<uint32_t>(scryptR),
                                                    static_cast<uint32_t>(scryptP), 64);
@@ -376,9 +372,24 @@ io::ByteVector Secp256r1::FromNEP2(const std::string& nep2, const std::string& p
     auto publicKey = ComputePublicKey(privateKey);
     auto script = CreateSignatureVerificationScript(publicKey);
     auto scriptHash = Hash::Hash160(script.AsSpan());
-    auto doubleHash = Hash::Sha256(Hash::Sha256(scriptHash.AsSpan()).AsSpan());
 
-    check(std::memcmp(salt.data(), doubleHash.Data(), 4) == 0, "Invalid passphrase");
+    auto address = scriptHash.ToAddress(static_cast<uint8_t>(core::ProtocolConstants::AddressVersion));
+    std::vector<uint8_t> addressBytes(address.begin(), address.end());
+    auto hash1 = Hash::Sha256(io::ByteSpan(addressBytes.data(), addressBytes.size()));
+    auto hash2 = Hash::Sha256(hash1.AsSpan());
+
+    if (std::memcmp(salt.data(), hash2.Data(), 4) != 0)
+    {
+        auto hashBytes = hash2.ToArray();
+        std::ostringstream oss;
+        oss << "Invalid passphrase (expected salt=";
+        oss << std::hex << std::setfill('0');
+        for (auto byte : salt) oss << std::setw(2) << static_cast<int>(byte);
+        oss << ", computed=";
+        for (int i = 0; i < 4; ++i) oss << std::setw(2) << static_cast<int>(hashBytes[i]);
+        oss << ")";
+        throw std::runtime_error(oss.str());
+    }
     return privateKey;
 }
 

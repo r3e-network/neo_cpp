@@ -10,6 +10,7 @@
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/ecc/ecc_curve.h>
 #include <neo/cryptography/hash.h>
+#include <neo/vm/script_builder.h>
 #include <openssl/bio.h>
 #include <openssl/buffer.h>
 #include <openssl/ec.h>
@@ -254,23 +255,11 @@ io::ByteVector Crypto::Base64Decode(const std::string& base64)
 
 io::ByteVector Crypto::CreateSignatureRedeemScript(const ecc::ECPoint& publicKey)
 {
-    // Neo signature redeem script format:
-    // PUSHDATA1 0x21 <33-byte compressed public key> CHECKSIG
-    io::ByteVector script;
-    script.Reserve(35);  // 1 + 1 + 33 bytes for public key + 1 for CHECKSIG
-
-    // PUSHDATA1 (0x0C) followed by length (0x21 = 33 bytes)
-    script.Push(0x0C);
-    script.Push(0x21);
-
-    // Add the compressed public key (33 bytes)
+    vm::ScriptBuilder builder;
     auto pubKeyBytes = publicKey.ToArray();
-    script.Append(pubKeyBytes.AsSpan());
-
-    // CHECKSIG opcode (0x41)
-    script.Push(0x41);
-
-    return script;
+    builder.EmitPush(pubKeyBytes.AsSpan());
+    builder.EmitSysCall("System.Crypto.CheckSig");
+    return builder.ToArray();
 }
 
 bool Crypto::VerifySignature(const io::ByteSpan& message, const io::ByteSpan& signature, const ecc::ECPoint& publicKey)

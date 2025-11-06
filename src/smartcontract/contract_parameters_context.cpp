@@ -13,12 +13,14 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/smartcontract/contract_parameters_context.h>
+#include <neo/smartcontract/interop_service.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script.h>
 #include <neo/vm/script_builder.h>
 
 #include <algorithm>
+#include <limits>
 #include <sstream>
 
 namespace neo::smartcontract
@@ -270,11 +272,65 @@ bool ContractParametersContext::AddSignature(const Contract& contract, const cry
     // Check if this is a multi-sig contract
     int m, n;
     std::vector<cryptography::ecc::ECPoint> publicKeys;
-    if (!IsMultiSigContract(contract.GetScript(), m, n, publicKeys)) return false;
+    if (IsMultiSigContract(contract.GetScript(), m, n, publicKeys))
+    {
+        auto pubKeyIt = std::find(publicKeys.begin(), publicKeys.end(), pubkey);
+        if (pubKeyIt == publicKeys.end()) return false;
 
-    // Check if the public key is in the contract
-    auto it = std::find(publicKeys.begin(), publicKeys.end(), pubkey);
-    if (it == publicKeys.end()) return false;
+        auto itemIt = contextItems.find(scriptHash);
+        if (itemIt == contextItems.end())
+        {
+            auto item = CreateItem(contract);
+            if (!item) return false;
+            itemIt = contextItems.find(scriptHash);
+        }
+
+        auto& signatures = itemIt->second->signatures;
+        if (!signatures.emplace(pubkey, signature).second) return false;
+
+        if (static_cast<int>(signatures.size()) == m)
+        {
+            std::vector<std::pair<int, io::ByteVector>> ordered;
+            ordered.reserve(signatures.size());
+            for (const auto& entry : signatures)
+            {
+                auto indexIt = std::find(publicKeys.begin(), publicKeys.end(), entry.first);
+                if (indexIt == publicKeys.end()) continue;
+                int idx = static_cast<int>(std::distance(publicKeys.begin(), indexIt));
+                ordered.emplace_back(idx, entry.second);
+            }
+            std::sort(ordered.begin(), ordered.end(), [](const auto& lhs, const auto& rhs) {
+                return lhs.first > rhs.first;
+            });
+
+            size_t limit = std::min(ordered.size(), itemIt->second->parameters.size());
+            for (size_t i = 0; i < limit; ++i)
+            {
+                if (!Add(contract, static_cast<int>(i), ordered[i].second))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    int signatureIndex = -1;
+    const auto& parameterList = contract.GetParameterList();
+    for (size_t i = 0; i < parameterList.size(); ++i)
+    {
+        if (parameterList[i] == ContractParameterType::Signature)
+        {
+            if (signatureIndex >= 0)
+            {
+                throw std::runtime_error("Multiple signature parameters are not supported");
+            }
+            signatureIndex = static_cast<int>(i);
+        }
+    }
+
+    if (signatureIndex < 0) return false;
 
     auto itemIt = contextItems.find(scriptHash);
     if (itemIt == contextItems.end())
@@ -284,15 +340,10 @@ bool ContractParametersContext::AddSignature(const Contract& contract, const cry
         itemIt = contextItems.find(scriptHash);
     }
 
-    itemIt->second->signatures[pubkey] = signature;
+    auto& signatures = itemIt->second->signatures;
+    if (!signatures.emplace(pubkey, signature).second) return false;
 
-    // If we have enough signatures, create the multi-sig witness
-    if (static_cast<int>(itemIt->second->signatures.size()) >= m)
-    {
-        auto witness = CreateMultiSigWitness(contract);
-        // Witness parameters are set when verifiable is signed
-    }
-
+    itemIt->second->parameters[signatureIndex].SetValue(signature);
     return true;
 }
 
@@ -416,70 +467,126 @@ ContractParametersContext::ContextItem* ContractParametersContext::CreateItem(co
 bool ContractParametersContext::IsMultiSigContract(const io::ByteVector& script, int& m, int& n,
                                                    std::vector<cryptography::ecc::ECPoint>& publicKeys) const
 {
-    // Basic multi-sig contract detection
-    if (script.Size() < 40) return false;
+    if (script.Size() < 5) return false;
 
-    size_t i = 0;
-
-    // Read m
-    if (script[i] >= static_cast<uint8_t>(vm::OpCode::PUSH1) && script[i] <= static_cast<uint8_t>(vm::OpCode::PUSH16))
-    {
-        m = script[i] - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
-        i++;
-    }
-    else
-    {
-        return false;
-    }
-
-    // Read public keys
-    publicKeys.clear();
-    while (i < script.Size() - 35)
-    {
-        if (script[i] == 33)  // Public key length
+    auto readInteger = [&](size_t& offset, int64_t& value) -> bool {
+        if (offset >= script.Size()) return false;
+        uint8_t opcode = script[offset++];
+        auto op = static_cast<vm::OpCode>(opcode);
+        switch (op)
         {
-            i++;
-            if (i + 33 > script.Size()) return false;
+            case vm::OpCode::PUSH0:
+                value = 0;
+                return true;
+            default:
+                break;
+        }
 
-            try
+        if (opcode >= static_cast<uint8_t>(vm::OpCode::PUSH1) && opcode <= static_cast<uint8_t>(vm::OpCode::PUSH16))
+        {
+            value = static_cast<int64_t>(opcode - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1);
+            return true;
+        }
+
+        auto readSigned = [&](size_t byteCount, int64_t& result) -> bool {
+            if (offset + byteCount > script.Size()) return false;
+            if (byteCount == 1)
             {
-                auto pubkey = cryptography::ecc::ECPoint::FromBytes(io::ByteSpan(script.Data() + i, 33));
-                publicKeys.push_back(pubkey);
-                i += 33;
+                result = static_cast<int8_t>(script[offset]);
             }
-            catch (const std::exception& e)
+            else if (byteCount == 2)
             {
-                // Log public key parsing error
+                uint16_t raw = static_cast<uint16_t>(script[offset]) |
+                               (static_cast<uint16_t>(script[offset + 1]) << 8);
+                result = static_cast<int16_t>(raw);
+            }
+            else if (byteCount == 4)
+            {
+                uint32_t raw = static_cast<uint32_t>(script[offset]) |
+                               (static_cast<uint32_t>(script[offset + 1]) << 8) |
+                               (static_cast<uint32_t>(script[offset + 2]) << 16) |
+                               (static_cast<uint32_t>(script[offset + 3]) << 24);
+                result = static_cast<int32_t>(raw);
+            }
+            else if (byteCount == 8)
+            {
+                uint64_t raw = 0;
+                for (size_t i = 0; i < byteCount; ++i)
+                {
+                    raw |= static_cast<uint64_t>(script[offset + i]) << (8 * i);
+                }
+                result = static_cast<int64_t>(raw);
+            }
+            else
+            {
                 return false;
             }
-        }
-        else
+            offset += byteCount;
+            return true;
+        };
+
+        switch (op)
         {
-            break;
+            case vm::OpCode::PUSHINT8:
+                return readSigned(1, value);
+            case vm::OpCode::PUSHINT16:
+                return readSigned(2, value);
+            case vm::OpCode::PUSHINT32:
+                return readSigned(4, value);
+            case vm::OpCode::PUSHINT64:
+                return readSigned(8, value);
+            default:
+                return false;
         }
-    }
+    };
 
-    n = static_cast<int>(publicKeys.size());
-    if (n == 0 || m > n) return false;
+    size_t offset = 0;
+    int64_t mValue = 0;
+    if (!readInteger(offset, mValue) || mValue <= 0) return false;
+    if (mValue > std::numeric_limits<int>::max()) return false;
+    m = static_cast<int>(mValue);
 
-    // Check for PUSH<n> and CHECKMULTISIG at the end
-    if (i >= script.Size() - 2) return false;
-
-    if (script[i] >= static_cast<uint8_t>(vm::OpCode::PUSH1) && script[i] <= static_cast<uint8_t>(vm::OpCode::PUSH16))
+    publicKeys.clear();
+    while (offset < script.Size())
     {
-        int n2 = script[i] - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
-        if (n2 != n) return false;
-        i++;
+        if (offset + 2 >= script.Size()) break;
+        if (script[offset] != static_cast<uint8_t>(vm::OpCode::PUSHDATA1)) break;
+        uint8_t length = script[offset + 1];
+        if (length != 33) return false;
+        offset += 2;
+        if (offset + length > script.Size()) return false;
+        try
+        {
+            auto pubkey = cryptography::ecc::ECPoint::FromBytes(io::ByteSpan(script.Data() + offset, length));
+            publicKeys.push_back(pubkey);
+        }
+        catch (const std::exception&)
+        {
+            return false;
+        }
+        offset += length;
     }
-    else
+
+    if (publicKeys.empty()) return false;
+
+    int64_t nValue = 0;
+    if (!readInteger(offset, nValue) || nValue <= 0) return false;
+    if (nValue > std::numeric_limits<int>::max()) return false;
+    n = static_cast<int>(nValue);
+    if (n != static_cast<int>(publicKeys.size()) || m > n) return false;
+
+    if (script.Size() < offset + 5) return false;
+    if (script[offset] != static_cast<uint8_t>(vm::OpCode::SYSCALL)) return false;
+    ++offset;
+
+    uint32_t expected = calculate_interop_hash("System.Crypto.CheckMultisig");
+    for (int i = 0; i < 4; ++i)
     {
-        return false;
+        if (script[offset + i] != static_cast<uint8_t>((expected >> (8 * i)) & 0xFF)) return false;
     }
+    offset += 4;
 
-    // Check for CHECKMULTISIG opcode (0xAE)
-    if (i != script.Size() - 1 || script[i] != 0xAE) return false;
-
-    return true;
+    return offset == script.Size();
 }
 
 std::shared_ptr<ledger::Witness> ContractParametersContext::CreateMultiSigWitness(const Contract& contract) const
