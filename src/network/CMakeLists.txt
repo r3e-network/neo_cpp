@@ -28,6 +28,7 @@ add_library(neo_network OBJECT
     p2p/task_manager.cpp # Task manager for P2P network tasks
     # p2p/transaction_router.cpp # Disabled - needs major refactoring
     p2p/channels_config.cpp
+    p2p/network_synchronizer.cpp
     p2p/payloads/extensible_payload.cpp
     p2p/payloads/merkle_block_payload.cpp
     p2p/payloads/oracle_response.cpp

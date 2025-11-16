@@ -19,6 +19,7 @@
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/block_payload.h>
 #include <neo/network/p2p/payloads/extensible_payload.h>
+#include <neo/network/p2p/node_capability.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
 #include <neo/network/p2p/payloads/filter_clear_payload.h>
 #include <neo/network/p2p/payloads/filter_load_payload.h>
@@ -39,6 +40,7 @@
 #include <neo/network/p2p/tcp_connection.h>
 
 #include <atomic>
+#include <chrono>
 #include <boost/asio.hpp>
 #include <cstdint>
 #include <functional>
@@ -98,6 +100,16 @@ class LocalNode
     void SetCapabilities(const std::vector<NodeCapability>& capabilities);
 
     /**
+     * @brief Gets whether compression is enabled for outbound messages.
+     */
+    bool IsCompressionEnabled() const { return compressionEnabled_; }
+
+    /**
+     * @brief Enables or disables outbound compression support.
+     */
+    void SetCompressionEnabled(bool enabled);
+
+    /**
      * @brief Gets the last block index of the local node.
      * @return The last block index.
      */
@@ -151,6 +163,9 @@ class LocalNode
      */
     std::shared_ptr<payloads::VersionPayload> CreateVersionPayload() const;
 
+    void SetNetworkMagic(uint32_t magic);
+    uint32_t GetNetworkMagic() const;
+
     /**
      * @brief Starts the local node.
      * @param port The port to listen on.
@@ -164,7 +179,7 @@ class LocalNode
      * @param config The channels configuration.
      * @return True if the local node was started successfully, false otherwise.
      */
-    bool Start(const ChannelsConfig& config);
+   bool Start(const ChannelsConfig& config);
 
     /**
      * @brief Stops the local node.
@@ -601,26 +616,33 @@ class LocalNode
     void SetConsensusService(std::shared_ptr<consensus::ConsensusService> service) { consensusService_ = service; }
 
    private:
-    LocalNode();
+   LocalNode();
+    bool StartWithEndpoint(const boost::asio::ip::tcp::endpoint& endpoint, size_t maxConnections);
+    void UpdateCompressionCapability();
 
     std::string userAgent_;
     std::vector<NodeCapability> capabilities_;
     uint32_t lastBlockIndex_;
     uint32_t nonce_;
+    uint32_t networkMagic_{0x334F454E};  // Default to Neo N3 MainNet magic
 
     boost::asio::io_context ioContext_;
     std::unique_ptr<boost::asio::executor_work_guard<boost::asio::io_context::executor_type>> work_;
     std::unique_ptr<boost::asio::ip::tcp::acceptor> acceptor_;
     std::thread ioThread_;
 
-    std::unordered_map<std::string, std::unique_ptr<RemoteNode>> connectedNodes_;
-    mutable std::mutex connectedNodesMutex_;
-    size_t maxConnections_;
+   std::unordered_map<std::string, std::unique_ptr<RemoteNode>> connectedNodes_;
+   mutable std::mutex connectedNodesMutex_;
+   size_t maxConnections_;
+    uint32_t minDesiredConnections_{10};
+    uint32_t maxConnectionsPerAddress_{3};
     uint16_t listeningPort_{0};
 
     std::shared_ptr<consensus::ConsensusService> consensusService_;
     std::shared_ptr<class StateService> stateService_;
     std::atomic<bool> running_;
+    bool compressionEnabled_{true};
+    std::chrono::milliseconds dialTimeout_{std::chrono::milliseconds(5000)};
 
     PeerList peerList_;
     std::string peerListPath_;
@@ -651,6 +673,8 @@ class LocalNode
     void HandleConnect(const std::error_code& error, boost::asio::ip::tcp::socket socket, const IPEndPoint& endpoint);
     void AddConnectedNode(std::unique_ptr<RemoteNode> remoteNode);
     void RemoveConnectedNode(const std::string& key);
+    size_t CountConnectionsForAddress(const std::string& address) const;
+    bool IsAddressConnectionAllowed(const std::string& address) const;
 
     // Additional member variables for production support
     std::shared_ptr<ledger::Blockchain> blockchain_;

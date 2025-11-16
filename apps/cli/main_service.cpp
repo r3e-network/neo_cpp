@@ -5,17 +5,95 @@
 #include <fstream>
 #include <iostream>
 #include <neo/io/json.h>
+#include <neo/network/ip_address.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/network_synchronizer.h>
 #include <neo/network/p2p/remote_node.h>
 #include <neo/node/neo_system.h>
+#include <neo/rpc/rpc_methods.h>
 #include <neo/rpc/rpc_server.h>
+#include <neo/rpc/rpc_session_manager.h>
 #include <neo/settings.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/wallets/wallet.h>
 #include <neo/wallets/wallet_factory.h>
+#include <filesystem>
 #include <sstream>
 #include <thread>
+
+namespace
+{
+neo::network::IPEndPoint CreateBindEndpoint(const neo::P2PSettings& p2p)
+{
+    neo::network::IPAddress address = neo::network::IPAddress::Any();
+    if (!p2p.BindAddress.empty())
+    {
+        neo::network::IPAddress parsed;
+        if (neo::network::IPAddress::TryParse(p2p.BindAddress, parsed))
+        {
+            address = parsed;
+        }
+    }
+    return neo::network::IPEndPoint(address, static_cast<uint16_t>(p2p.Port));
+}
+
+std::vector<neo::network::IPEndPoint> BuildSeedEndpoints(const std::vector<std::string>& seeds, uint16_t defaultPort)
+{
+    std::vector<neo::network::IPEndPoint> endpoints;
+    endpoints.reserve(seeds.size());
+    for (const auto& seed : seeds)
+    {
+        neo::network::IPEndPoint endpoint;
+        if (neo::network::IPEndPoint::TryParse(seed, endpoint))
+        {
+            endpoints.push_back(endpoint);
+        }
+        else if (!seed.empty())
+        {
+            endpoints.emplace_back(seed, defaultPort);
+        }
+    }
+    return endpoints;
+}
+
+std::string ResolvePeerListPath(const std::string& dataPath)
+{
+    namespace fs = std::filesystem;
+    fs::path base = dataPath.empty() ? fs::path("./data") : fs::path(dataPath);
+    std::error_code ec;
+    if (fs::is_regular_file(base, ec))
+    {
+        base = base.parent_path();
+    }
+    if (base.empty())
+    {
+        base = fs::current_path();
+    }
+    fs::path peersFile = base / "peers.dat";
+    if (auto parent = peersFile.parent_path(); !parent.empty())
+    {
+        fs::create_directories(parent, ec);
+    }
+    return peersFile.string();
+}
+
+std::string ResolveNetworkConfigPath(const std::string& network)
+{
+    std::string normalized = network;
+    std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+
+    if (normalized == "mainnet") return "config/mainnet.config.json";
+    if (normalized == "testnet") return "config/testnet.config.json";
+    if (normalized == "privnet" || normalized == "private" || normalized == "private-net")
+        return "config/privnet.json";
+
+    throw std::invalid_argument("Unknown network preset: " + network);
+}
+}  // namespace
 
 namespace neo::cli
 {
@@ -54,11 +132,28 @@ void MainService::Start(const CommandLineOptions& options)
 
     try
     {
+        // Resolve configuration path if a network preset was provided
+        std::string configPath = options.Config;
+        if (configPath.empty() && !options.Network.empty())
+        {
+            try
+            {
+                configPath = ResolveNetworkConfigPath(options.Network);
+                ConsoleHelper::Info("Selected network preset '" + options.Network + "' -> " + configPath);
+            }
+            catch (const std::exception& e)
+            {
+                ConsoleHelper::Error(e.what());
+                throw;
+            }
+        }
+
         // Load settings
         Settings settings;
-        if (!options.Config.empty())
+        if (!configPath.empty())
         {
-            settings = Settings::Load(options.Config);
+            ConsoleHelper::Info("Loading configuration from " + configPath);
+            settings = Settings::Load(configPath);
         }
         else
         {
@@ -71,10 +166,39 @@ void MainService::Start(const CommandLineOptions& options)
         if (!options.DbPath.empty())
             settings.Storage.Path = options.DbPath;
 
+        // Apply RPC limits before networking/RPC server initialization
+        rpc::RPCMethods::SetMaxFindResultItems(static_cast<size_t>(std::max(1, settings.RPC.MaxFindResultItems)));
+
+        // Configure peer list path before networking starts
+        const auto peerListPath = ResolvePeerListPath(settings.Application.DataPath);
+        network::p2p::LocalNode::GetInstance().SetPeerListPath(peerListPath);
+        ConsoleHelper::Info("Peer list path: " + peerListPath);
+
         // Store is created internally by NeoSystem
 
         // Create Neo system
         neoSystem_ = std::make_shared<node::NeoSystem>(settings.Protocol, settings.Storage.Engine, settings.Storage.Path);
+
+        network::p2p::ChannelsConfig channelsConfig;
+        channelsConfig.SetTcp(CreateBindEndpoint(settings.P2P));
+        channelsConfig.SetMinDesiredConnections(static_cast<uint32_t>(settings.P2P.MinDesiredConnections));
+        channelsConfig.SetMaxConnections(static_cast<uint32_t>(settings.P2P.MaxConnections));
+        channelsConfig.SetMaxConnectionsPerAddress(static_cast<uint32_t>(settings.P2P.MaxConnectionsPerAddress));
+        channelsConfig.SetEnableCompression(settings.P2P.EnableCompression);
+        channelsConfig.SetDialTimeoutMs(static_cast<uint32_t>(settings.P2P.DialTimeoutMs));
+
+        auto seedEndpoints = BuildSeedEndpoints(settings.P2P.Seeds, static_cast<uint16_t>(settings.P2P.Port));
+        if (seedEndpoints.empty() && settings.Protocol)
+        {
+            seedEndpoints = BuildSeedEndpoints(settings.Protocol->GetSeedList(),
+                                               static_cast<uint16_t>(settings.P2P.Port));
+        }
+        if (!seedEndpoints.empty())
+        {
+            channelsConfig.SetSeedList(seedEndpoints);
+        }
+
+        neoSystem_->SetNetworkConfig(channelsConfig);
 
         // Start Neo system
         neoSystem_->Start();
@@ -86,13 +210,48 @@ void MainService::Start(const CommandLineOptions& options)
         // Start RPC server if enabled
         if (settings.RPC.Enabled)
         {
-            // RpcServer constructor expects different parameters
             rpc::RpcConfig rpcConfig;
-            rpcConfig.port = settings.RPC.Port;
-            rpcConfig.bind_address = "0.0.0.0";
-            rpcServer_ = std::make_shared<rpc::RpcServer>(rpcConfig);
+            rpcConfig.port = static_cast<uint16_t>(settings.RPC.Port);
+            rpcConfig.bind_address = settings.RPC.BindAddress.empty() ? std::string("0.0.0.0")
+                                                                      : settings.RPC.BindAddress;
+            rpcConfig.enable_cors = settings.RPC.EnableCors;
+            if (!settings.RPC.AllowedOrigins.empty())
+            {
+                rpcConfig.allowed_origins = settings.RPC.AllowedOrigins;
+            }
+            rpcConfig.max_concurrent_requests = static_cast<uint32_t>(std::max(1, settings.RPC.MaxConnections));
+            rpcConfig.request_timeout_seconds =
+                static_cast<uint32_t>(std::max(1, settings.RPC.RequestTimeoutMs / 1000));
+            rpcConfig.max_request_size = static_cast<uint32_t>(settings.RPC.MaxRequestBodyBytes);
+            rpcConfig.enable_rate_limiting = settings.RPC.EnableRateLimit;
+            rpcConfig.max_requests_per_second =
+                static_cast<uint32_t>(std::max(0, settings.RPC.MaxRequestsPerSecond));
+            rpcConfig.rate_limit_window_seconds =
+                static_cast<uint32_t>(std::max(1, settings.RPC.RateLimitWindowSeconds));
+            rpcConfig.enable_sessions = settings.RPC.SessionEnabled;
+            rpcConfig.session_timeout_minutes =
+                static_cast<uint32_t>(std::max(1, settings.RPC.SessionExpirationMinutes));
+            rpcConfig.max_iterator_items =
+                static_cast<uint32_t>(std::max(1, settings.RPC.MaxIteratorResultItems));
+            rpcConfig.enable_audit_trail = settings.RPC.EnableAuditTrail;
+            rpcConfig.enable_security_logging = settings.RPC.EnableSecurityLogging;
+            rpcConfig.enable_ssl = settings.RPC.EnableSsl;
+            rpcConfig.ssl_cert_path = settings.RPC.SslCert;
+            rpcConfig.ssl_key_path = settings.RPC.SslKey;
+            rpcConfig.trusted_authorities = settings.RPC.TrustedAuthorities;
+            rpcConfig.ssl_ciphers = settings.RPC.SslCiphers;
+            rpcConfig.min_tls_version = settings.RPC.MinTlsVersion;
+            if (!settings.RPC.Username.empty())
+            {
+                rpcConfig.enable_authentication = true;
+                rpcConfig.username = settings.RPC.Username;
+                rpcConfig.password = settings.RPC.Password;
+            }
+
+            rpcServer_ = std::make_shared<rpc::RpcServer>(rpcConfig, neoSystem_);
             rpcServer_->Start();
-            ConsoleHelper::Info("RPC server started on port " + std::to_string(settings.RPC.Port));
+            ConsoleHelper::Info("RPC server started on " + rpcConfig.bind_address + ":" +
+                                std::to_string(settings.RPC.Port));
         }
 
         // Open wallet if specified
@@ -101,10 +260,7 @@ void MainService::Start(const CommandLineOptions& options)
             OnOpenWallet(options.Wallet, options.Password);
         }
 
-        // Show synchronization status
-        // auto synchronizer = neoSystem_->GetNetworkSynchronizer(); // Method unavailable in this build
-        network::p2p::NetworkSynchronizer* synchronizer = nullptr;
-        if (synchronizer)
+        if (auto synchronizer = neoSystem_->GetNetworkSynchronizer())
         {
             synchronizer->SetStateChangedCallback(
                 [this](network::p2p::SynchronizationState state)
@@ -268,6 +424,11 @@ void MainService::OnStartWithCommandLine(const std::vector<std::string>& args)
         {
             if (i + 1 < args.size())
                 options.DbPath = args[++i];
+        }
+        else if (args[i] == "--network")
+        {
+            if (i + 1 < args.size())
+                options.Network = args[++i];
         }
         else if (args[i] == "--noverify")
         {
@@ -766,8 +927,7 @@ void MainService::OnShowState()
         auto blockchain = neoSystem_->GetBlockchain();
         auto localNode = neoSystem_->GetLocalNode();
         auto memPool = neoSystem_->GetMemPool();
-        // auto synchronizer = neoSystem_->GetNetworkSynchronizer(); // Method unavailable in this build
-        network::p2p::NetworkSynchronizer* synchronizer = nullptr;
+        auto synchronizer = neoSystem_->GetNetworkSynchronizer();
 
         ConsoleHelper::Info("Node State:");
         ConsoleHelper::Info("  Block Height: " + std::to_string(blockchain->GetHeight()));

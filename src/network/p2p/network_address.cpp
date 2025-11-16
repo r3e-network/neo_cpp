@@ -43,8 +43,7 @@ IPEndPoint NetworkAddressWithTime::GetEndPoint() const
 
     if (it != capabilities_.end())
     {
-        const auto& serverCapability = static_cast<const ServerCapability&>(*it);
-        return IPEndPoint(address_, serverCapability.GetPort());
+        return IPEndPoint(address_, it->GetPort());
     }
 
     return IPEndPoint(address_, 0);
@@ -99,25 +98,7 @@ void NetworkAddressWithTime::Serialize(io::BinaryWriter& writer) const
 
     for (const auto& capability : capabilities_)
     {
-        switch (capability.GetType())
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                const auto& serverCapability = static_cast<const ServerCapability&>(capability);
-                serverCapability.Serialize(writer);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                const auto& fullNodeCapability = static_cast<const FullNodeCapability&>(capability);
-                fullNodeCapability.Serialize(writer);
-                break;
-            }
-            default:
-                capability.Serialize(writer);
-                break;
-        }
+        capability.Serialize(writer);
     }
 }
 
@@ -137,42 +118,9 @@ void NetworkAddressWithTime::Deserialize(io::BinaryReader& reader)
 
     for (uint64_t i = 0; i < count; i++)
     {
-        // Peek at the type
-        uint8_t type = reader.PeekUInt8();
-
-        switch (static_cast<NodeCapabilityType>(type))
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                ServerCapability capability;
-                capability.Deserialize(reader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                FullNodeCapability capability;
-                capability.Deserialize(reader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            case NodeCapabilityType::DisableCompression:
-            {
-                NodeCapability capability;
-                capability.Deserialize(reader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            default:
-            {
-                // Handle unknown capability types
-                UnknownCapability capability(type);
-                // Type byte already consumed above
-                capabilities_.push_back(capability);
-                break;
-            }
-        }
+        NodeCapability capability;
+        capability.Deserialize(reader);
+        capabilities_.push_back(capability);
     }
 }
 
@@ -187,27 +135,7 @@ void NetworkAddressWithTime::SerializeJson(io::JsonWriter& writer) const
     {
         nlohmann::json capabilityJson = nlohmann::json::object();
         io::JsonWriter capabilityWriter(capabilityJson);
-
-        switch (capability.GetType())
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                const auto& serverCapability = static_cast<const ServerCapability&>(capability);
-                serverCapability.SerializeJson(capabilityWriter);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                const auto& fullNodeCapability = static_cast<const FullNodeCapability&>(capability);
-                fullNodeCapability.SerializeJson(capabilityWriter);
-                break;
-            }
-            default:
-                capability.SerializeJson(capabilityWriter);
-                break;
-        }
-
+        capability.SerializeJson(capabilityWriter);
         capabilitiesArray.push_back(capabilityJson);
     }
 
@@ -226,33 +154,9 @@ void NetworkAddressWithTime::DeserializeJson(const io::JsonReader& reader)
     for (const auto& capabilityJson : capabilitiesArray)
     {
         io::JsonReader capabilityReader(capabilityJson);
-        uint8_t type = capabilityReader.ReadUInt8("type");
-
-        switch (static_cast<NodeCapabilityType>(type))
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                ServerCapability capability;
-                capability.DeserializeJson(capabilityReader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                FullNodeCapability capability;
-                capability.DeserializeJson(capabilityReader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            default:
-            {
-                NodeCapability capability;
-                capability.DeserializeJson(capabilityReader);
-                capabilities_.push_back(capability);
-                break;
-            }
-        }
+        NodeCapability capability;
+        capability.DeserializeJson(capabilityReader);
+        capabilities_.push_back(capability);
     }
 }
 }  // namespace neo::network::p2p

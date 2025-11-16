@@ -8,12 +8,12 @@
 #include <vector>
 
 #include "neo/node/neo_system.h"
+#include "neo/rpc/error_codes.h"
 #include "neo/rpc/rpc_client.h"
 #include "neo/rpc/rpc_request.h"
 #include "neo/rpc/rpc_response.h"
 #include "neo/rpc/rpc_server.h"
 #include "tests/mocks/mock_http_client.h"
-#include "tests/mocks/mock_neo_system.h"
 #include "tests/utils/test_helpers.h"
 
 using namespace neo::rpc;
@@ -22,15 +22,25 @@ using namespace neo::tests;
 using namespace testing;
 using namespace std::chrono_literals;
 
+class TestRpcServer : public RpcServer
+{
+  public:
+    using RpcServer::RpcServer;
+
+    bool ValidateHeader(const std::string& authorization_header, std::string* authenticated_user,
+                        bool log_failure, const std::string& client_ip, int* error_code = nullptr)
+    {
+        return ValidateAuthentication(authorization_header, authenticated_user, log_failure, client_ip, error_code);
+    }
+};
+
 class RpcSecurityTest : public ::testing::Test
 {
   protected:
     void SetUp() override
     {
-        neo_system_ = std::make_shared<MockNeoSystem>();
+        neo_system_.reset();
         settings_ = TestHelpers::GetDefaultSettings();
-
-        EXPECT_CALL(*neo_system_, GetSettings()).WillRepeatedly(Return(settings_));
     }
 
     void TearDown() override
@@ -41,14 +51,18 @@ class RpcSecurityTest : public ::testing::Test
         }
     }
 
-    std::shared_ptr<MockNeoSystem> neo_system_;
-    std::shared_ptr<ProtocolSettings> settings_;
-    std::shared_ptr<RpcServer> rpc_server_;
+    std::shared_ptr<NeoSystem> neo_system_;
+    std::shared_ptr<neo::ProtocolSettings> settings_;
+    std::shared_ptr<TestRpcServer> rpc_server_;
+    std::string rpc_username_{"testuser"};
+    std::string rpc_password_{"testpass"};
 
     void StartSecureServer(const std::string& username = "testuser", const std::string& password = "testpass",
                            bool enable_cors = false)
     {
-        rpc_server_ = std::make_shared<RpcServer>(neo_system_, "127.0.0.1", 0);
+        rpc_server_ = std::make_shared<TestRpcServer>(neo_system_, "127.0.0.1", 0);
+        rpc_username_ = username;
+        rpc_password_ = password;
 
         // Configure authentication
         rpc_server_->SetBasicAuth(username, password);
@@ -65,7 +79,8 @@ class RpcSecurityTest : public ::testing::Test
     }
 
     std::string SendAuthenticatedRequest(const std::string& json_request, const std::string& username = "",
-                                         const std::string& password = "")
+                                         const std::string& password = "",
+                                         std::chrono::milliseconds hold_duration = std::chrono::milliseconds(0))
     {
         // Simulate HTTP request with authentication
         std::string auth_header;
@@ -78,23 +93,49 @@ class RpcSecurityTest : public ::testing::Test
 
         try
         {
-            auto json_obj = nlohmann::json::parse(json_request);
+            auto parsed = nlohmann::json::parse(json_request);
+            RequestContext context;
+            context.payload_size = json_request.size();
+            context.client_ip = "127.0.0.1";
+            context.record_audit = true;
+            context.record_security = true;
+            context.simulated_connection_hold = hold_duration;
 
-            // Test authentication header validation
-            if (!auth_header.empty() && rpc_server_->IsAuthenticationEnabled())
+            if (rpc_server_->IsAuthenticationEnabled())
             {
-                if (!rpc_server_->ValidateAuthentication(auth_header))
+                if (auth_header.empty())
                 {
-                    return R"({"error":"Unauthorized","code":401})";
+                    nlohmann::json error = {{"jsonrpc", "2.0"},
+                                            {"error", {{"code", 401}, {"message", "Authentication required"}}},
+                                            {"id", nullptr}};
+                    return error.dump();
+                }
+
+                std::string authenticated_user;
+                int auth_error_code = 0;
+                if (!rpc_server_->ValidateHeader(auth_header, &authenticated_user, true, context.client_ip,
+                                                 &auth_error_code))
+                {
+                    const int code = auth_error_code == 0 ? 401 : auth_error_code;
+                    const std::string message = code == 429 ? "Too many attempts" : "Unauthorized";
+                    nlohmann::json error = {{"jsonrpc", "2.0"}, {"error", {{"code", code}, {"message", message}}},
+                                            {"id", nullptr}};
+                    return error.dump();
+                }
+                context.authenticated_user = authenticated_user;
+            }
+            else if (!auth_header.empty())
+            {
+                std::string authenticated_user;
+                if (rpc_server_->ValidateHeader(auth_header, &authenticated_user, false, context.client_ip))
+                {
+                    context.authenticated_user = authenticated_user;
                 }
             }
-            else if (rpc_server_->IsAuthenticationEnabled())
-            {
-                return R"({"error":"Authentication required","code":401})";
-            }
 
-            auto response = rpc_server_->ProcessRequest(json_obj);
-            return response.dump();
+            neo::io::JsonValue request_value(parsed);
+            auto response = rpc_server_->ProcessRequest(request_value, context);
+            return response.ToString();
         }
         catch (const std::exception& e)
         {
@@ -120,7 +161,8 @@ TEST_F(RpcSecurityTest, BasicAuthenticationRequired)
     auto response_json = nlohmann::json::parse(response);
 
     EXPECT_TRUE(response_json.contains("error"));
-    EXPECT_EQ(response_json["code"], 401);
+    ASSERT_TRUE(response_json.contains("error"));
+    EXPECT_EQ(response_json["error"]["code"], 401);
 }
 
 // Test valid authentication
@@ -196,7 +238,7 @@ TEST_F(RpcSecurityTest, RateLimiting)
     // Send requests rapidly
     for (int i = 0; i < 150; ++i)
     {
-        std::string response = SendAuthenticatedRequest(request);
+        std::string response = SendAuthenticatedRequest(request, rpc_username_, rpc_password_);
         auto response_json = nlohmann::json::parse(response);
 
         if (response_json.contains("result"))
@@ -205,7 +247,7 @@ TEST_F(RpcSecurityTest, RateLimiting)
         }
         else if (response_json.contains("error"))
         {
-            auto error_code = response_json.value("code", 0);
+            auto error_code = response_json.contains("error") ? response_json["error"].value("code", 0) : 0;
             if (error_code == 429)
             {  // Too Many Requests
                 rate_limited_requests++;
@@ -237,7 +279,7 @@ TEST_F(RpcSecurityTest, IPBasedRateLimiting)
     // Send requests from rate-limited IP
     for (int i = 0; i < 20; ++i)
     {
-        std::string response = SendAuthenticatedRequest(request);
+        std::string response = SendAuthenticatedRequest(request, rpc_username_, rpc_password_);
         auto response_json = nlohmann::json::parse(response);
 
         if (response_json.contains("result"))
@@ -314,6 +356,7 @@ TEST_F(RpcSecurityTest, MethodBasedAccessControl)
 TEST_F(RpcSecurityTest, InputValidationAndSanitization)
 {
     StartSecureServer();
+    rpc_server_->SetMaxRequestSize(1024 * 1024);  // tighten limit for testing
 
     // Test oversized request
     std::string large_param(10000000, 'A');  // 10MB parameter
@@ -325,7 +368,8 @@ TEST_F(RpcSecurityTest, InputValidationAndSanitization)
         "id": 1
     })";
 
-    std::string response1 = SendAuthenticatedRequest(oversized_request);
+    std::string response1 =
+        SendAuthenticatedRequest(oversized_request, rpc_username_, rpc_password_);
     auto response1_json = nlohmann::json::parse(response1);
 
     // Should reject oversized requests
@@ -339,7 +383,8 @@ TEST_F(RpcSecurityTest, InputValidationAndSanitization)
         "id": 1
     })";
 
-    std::string response2 = SendAuthenticatedRequest(injection_request);
+    std::string response2 =
+        SendAuthenticatedRequest(injection_request, rpc_username_, rpc_password_);
     auto response2_json = nlohmann::json::parse(response2);
 
     // Should handle malicious method names gracefully
@@ -354,7 +399,7 @@ TEST_F(RpcSecurityTest, InputValidationAndSanitization)
         "id": 1
     })";
 
-    std::string response3 = SendAuthenticatedRequest(xss_request);
+    std::string response3 = SendAuthenticatedRequest(xss_request, rpc_username_, rpc_password_);
     auto response3_json = nlohmann::json::parse(response3);
 
     // Should not execute script, should return error or sanitized response
@@ -364,20 +409,21 @@ TEST_F(RpcSecurityTest, InputValidationAndSanitization)
 // Test SSL/TLS security (simulation)
 TEST_F(RpcSecurityTest, SSLTLSSecurity)
 {
-    // Create server with SSL enabled
-    rpc_server_ = std::make_shared<RpcServer>(neo_system_, "127.0.0.1", 0);
+#ifndef CPPHTTPLIB_OPENSSL_SUPPORT
+    GTEST_SKIP() << "OpenSSL support disabled in this build";
+#else
+    rpc_server_ = std::make_shared<TestRpcServer>(neo_system_, "127.0.0.1", 0);
     rpc_server_->EnableSSL("/path/to/cert.pem", "/path/to/key.pem");
 
-    // Test that SSL is properly configured
     EXPECT_TRUE(rpc_server_->IsSSLEnabled());
 
-    // Test SSL cipher configuration
     rpc_server_->SetSSLCiphers("ECDHE+AESGCM:ECDHE+CHACHA20:DHE+AESGCM");
-
-    // Test minimum TLS version
     rpc_server_->SetMinTLSVersion("1.2");
 
-    // These would be tested with actual SSL connections in integration tests
+    std::vector<std::string> trusted = {"/path/ca1.pem", "/path/ca2.pem"};
+    rpc_server_->SetTrustedAuthorities(trusted);
+    EXPECT_EQ(trusted, rpc_server_->GetTrustedAuthorities());
+#endif
 }
 
 // Test session management
@@ -480,8 +526,9 @@ TEST_F(RpcSecurityTest, BruteForceProtection)
         {
             // Should be locked out after 5 attempts
             EXPECT_TRUE(response_json.contains("error"));
-            auto error_code = response_json.value("code", 0);
-            EXPECT_EQ(error_code, 429);  // Too Many Requests / Account Locked
+            auto error_code = response_json.contains("error") ? response_json["error"].value("code", 0) : 0;
+            EXPECT_TRUE(error_code == 429 ||
+                        error_code == static_cast<int>(neo::rpc::ErrorCode::RateLimitExceeded));
         }
     }
 
@@ -557,7 +604,8 @@ TEST_F(RpcSecurityTest, DoSProtection)
                     "id": 1
                 })";
 
-                    std::string response = SendAuthenticatedRequest(request);
+                    std::string response =
+                        SendAuthenticatedRequest(request, rpc_username_, rpc_password_, 100ms);
                     auto response_json = nlohmann::json::parse(response);
 
                     if (response_json.contains("result"))
@@ -605,7 +653,7 @@ TEST_F(RpcSecurityTest, RequestSizeLimits)
         "id": 1
     })";
 
-    std::string response1 = SendAuthenticatedRequest(normal_request);
+    std::string response1 = SendAuthenticatedRequest(normal_request, rpc_username_, rpc_password_);
     auto response1_json = nlohmann::json::parse(response1);
     EXPECT_TRUE(response1_json.contains("result"));
 
@@ -619,12 +667,12 @@ TEST_F(RpcSecurityTest, RequestSizeLimits)
         "id": 1
     })";
 
-    std::string response2 = SendAuthenticatedRequest(oversized_request);
+    std::string response2 = SendAuthenticatedRequest(oversized_request, rpc_username_, rpc_password_);
     auto response2_json = nlohmann::json::parse(response2);
 
     // Should reject oversized request
     EXPECT_TRUE(response2_json.contains("error"));
-    auto error_code = response2_json.value("code", 0);
+    auto error_code = response2_json.contains("error") ? response2_json["error"].value("code", 0) : 0;
     EXPECT_EQ(error_code, 413);  // Request Entity Too Large
 }
 

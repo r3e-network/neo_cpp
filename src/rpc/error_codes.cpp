@@ -99,6 +99,7 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_messages_ = {
     
     // Security errors
     {ErrorCode::AccessDenied, "Access denied"},
+    {ErrorCode::SessionsDisabled, "State iterator sessions disabled"},
     {ErrorCode::AuthenticationFailed, "Authentication failed"},
     {ErrorCode::AuthorizationFailed, "Authorization failed"},
     {ErrorCode::RateLimitExceeded, "Rate limit exceeded"},
@@ -215,6 +216,7 @@ const std::unordered_map<ErrorCode, std::string> ErrorCodes::error_categories_ =
     
     // Security category
     {ErrorCode::AccessDenied, "Security"},
+    {ErrorCode::SessionsDisabled, "Security"},
     {ErrorCode::AuthenticationFailed, "Security"},
     {ErrorCode::AuthorizationFailed, "Security"},
     {ErrorCode::RateLimitExceeded, "Security"},

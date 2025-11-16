@@ -9,6 +9,7 @@
 #pragma once
 
 #include <neo/common/safe_math.h>
+#include <neo/io/byte_vector.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
@@ -247,6 +248,8 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
     // Specific Neo3 serialization methods
     void SerializeUnsigned(io::BinaryWriter& writer) const;
     void DeserializeUnsigned(io::BinaryReader& reader);
+    io::ByteVector GetSignData(uint32_t networkMagic) const;
+    io::ByteVector GetSignData() const;
 
     // IJsonSerializable interface
     void SerializeJson(io::JsonWriter& writer) const override;

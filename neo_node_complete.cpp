@@ -1,274 +1,242 @@
 /**
  * @file neo_node_complete.cpp
- * @brief Complete working Neo N3 node implementation 
- * @author Neo C++ Team
- * @date 2025
- * @copyright MIT License
+ * @brief Console harness for the production Neo C++ node.
  */
 
+#include <neo/consensus/consensus_service.h>
+#include <neo/node/neo_node.h>
+
+#include <atomic>
+#include <chrono>
+#include <csignal>
+#include <exception>
 #include <iostream>
 #include <memory>
-#include <thread>
-#include <chrono>
-#include <signal.h>
+#include <stdexcept>
 #include <string>
-#include <fstream>
+#include <thread>
+#include <algorithm>
 
-// Core Neo includes - using only what we know works
-#include <neo/io/byte_vector.h>
-#include <neo/io/uint256.h>
-#include <neo/io/uint160.h>
-#include <neo/core/exceptions.h>
-
-// Global flag for shutdown
-volatile bool g_running = true;
+namespace
+{
+std::atomic<bool> g_shutdownRequested{false};
+std::shared_ptr<neo::node::NeoNode> g_node;
+std::chrono::seconds g_statusInterval{std::chrono::seconds(30)};
 
 void SignalHandler(int signal)
 {
+    g_shutdownRequested.store(true);
     std::cout << "\nReceived signal " << signal << ", shutting down..." << std::endl;
-    g_running = false;
 }
 
-/**
- * @brief Complete Neo N3 C++ Full Node
- * 
- * This implementation provides full Neo N3 compatibility including:
- * - Blockchain processing
- * - Transaction validation  
- * - Consensus participation
- * - JSON-RPC API
- * - P2P networking
- * - Smart contract execution
- * - Native contract support
- */
-class NeoFullNode
+void PrintBanner()
 {
-private:
-    // Core components
-    bool initialized_;
-    uint32_t block_height_;
-    std::chrono::steady_clock::time_point start_time_;
-    
-    // Network configuration
-    struct NetworkConfig {
-        uint32_t magic_number = 0x4E454F33; // "NEO3"
-        uint16_t port = 10333;
-        uint16_t rpc_port = 10332;
-        std::string network_name = "MainNet";
-    } network_config_;
-    
-    // Node statistics
-    struct NodeStats {
-        uint64_t blocks_processed = 0;
-        uint64_t transactions_processed = 0;
-        uint64_t consensus_messages = 0;
-        uint64_t rpc_requests = 0;
-        uint32_t connected_peers = 0;
-    } stats_;
+    std::cout << "============================================\n";
+    std::cout << "        Neo N3 C++ Full Node Console        \n";
+    std::cout << "============================================\n";
+    std::cout << "Build: " << __DATE__ << " " << __TIME__ << "\n";
+    std::cout << "Parity target: Neo C# Node 3.7.x\n";
+    std::cout << "============================================\n\n";
+}
 
-public:
-    NeoFullNode() : initialized_(false), block_height_(0) {
-        start_time_ = std::chrono::steady_clock::now();
+std::string ResolveNetworkPreset(const std::string& preset)
+{
+    std::string normalized = preset;
+    std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+
+    if (normalized == "testnet") return "config/testnet.config.json";
+    if (normalized == "mainnet") return "config/mainnet.config.json";
+    if (normalized == "privnet" || normalized == "private" || normalized == "private-net") return "config/privnet.json";
+
+    throw std::invalid_argument("Unknown network preset: " + preset);
+}
+
+void PrintUsage(const char* exe)
+{
+    std::cout << "Usage: " << exe << " [options]\n";
+    std::cout << "Options:\n";
+    std::cout << "  --config <path>          Configuration file path (default: config.json)\n";
+    std::cout << "  --network <name>         Network preset (mainnet|testnet|privnet)\n";
+    std::cout << "  --datadir <path>         Blockchain data directory (default: ./data)\n";
+    std::cout << "  --status-interval <sec>  Seconds between status reports (default: 30)\n";
+    std::cout << "  -h, --help               Show this help message\n";
+}
+
+void PrintConfiguration(const std::string& config, const std::string& dataDir)
+{
+    std::cout << "Configuration:\n";
+    std::cout << "  Config file : " << config << "\n";
+    std::cout << "  Data path   : " << dataDir << "\n";
+    std::cout << "  Status freq : every " << g_statusInterval.count() << "s\n\n";
+}
+
+void PrintCompatibilitySummary(const std::shared_ptr<neo::node::NeoNode>& node)
+{
+    std::cout << "Runtime services mapped to C# components:\n";
+    std::cout << "  - Ledger engine     : neo::ledger::Blockchain\n";
+    std::cout << "  - Transaction pool  : neo::ledger::MemoryPool\n";
+    std::cout << "  - Networking stack  : neo::network::p2p::LocalNode + BlockSyncManager\n";
+    std::cout << "  - RPC surface       : neo::rpc::RpcServer (JSON-RPC 2.0)\n";
+    std::cout << "  - VM / contracts    : neo::vm + neo::smartcontract::native\n";
+    const auto consensus = node->GetConsensusService();
+    std::cout << "  - dBFT consensus    : " << (consensus ? "available" : "disabled");
+    if (consensus)
+    {
+        std::cout << " (validators=" << consensus->GetValidators().size()
+                  << ", autostart=" << (node->IsConsensusAutoStartEnabled() ? "true" : "false") << ")";
     }
-    
-    ~NeoFullNode() {
-        Shutdown();
+    std::cout << "\n\n";
+}
+
+void PrintNodeStatus(const std::shared_ptr<neo::node::NeoNode>& node,
+                     const std::chrono::steady_clock::time_point& startTime)
+{
+    const auto now = std::chrono::steady_clock::now();
+    const auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - startTime);
+    std::cout << "[Status] Uptime=" << uptime.count() << "s"
+              << " | Height=" << node->GetBlockHeight()
+              << " | Peers=" << node->GetConnectedPeersCount()
+              << " | Mempool=" << node->GetMemoryPoolCount() << '\n';
+
+    const auto consensus = node->GetConsensusService();
+    if (consensus)
+    {
+        std::cout << "         Consensus: " << (consensus->IsRunning() ? "running" : "idle")
+                  << " | BlockIndex=" << consensus->GetBlockIndex()
+                  << " | View=" << consensus->GetViewNumber()
+                  << " | Validators=" << consensus->GetValidators().size() << '\n';
     }
-    
-    bool Initialize() {
-        try {
-            std::cout << "Initializing Neo N3 Full Node..." << std::endl;
-            
-            // Initialize core components
-            std::cout << "✅ Core types and memory management" << std::endl;
-            
-            // Test type system
-            neo::io::UInt256 genesis_hash;
-            neo::io::UInt160 script_hash;
-            neo::io::ByteVector data = {0x01, 0x02, 0x03, 0x04};
-            
-            std::cout << "✅ Type system (UInt256, UInt160, ByteVector)" << std::endl;
-            
-            // Initialize storage
-            std::cout << "✅ Storage backend (Memory + RocksDB support)" << std::endl;
-            
-            // Initialize blockchain
-            block_height_ = 0;
-            std::cout << "✅ Blockchain engine (Block height: " << block_height_ << ")" << std::endl;
-            
-            // Initialize VM
-            std::cout << "✅ Virtual Machine (24 instruction categories)" << std::endl;
-            
-            // Initialize native contracts
-            std::cout << "✅ Native contracts (NEO, GAS, Policy, Oracle, NameService)" << std::endl;
-            
-            // Initialize RPC server
-            std::cout << "✅ JSON-RPC 2.0 server (port " << network_config_.rpc_port << ")" << std::endl;
-            
-            // Initialize P2P network
-            std::cout << "✅ P2P network stack (port " << network_config_.port << ")" << std::endl;
-            
-            // Initialize consensus
-            std::cout << "✅ dBFT consensus service" << std::endl;
-            
-            initialized_ = true;
-            return true;
-            
-        } catch (const neo::core::NeoException& e) {
-            std::cout << "❌ Neo initialization failed: " << e.what() << std::endl;
-            return false;
-        } catch (const std::exception& e) {
-            std::cout << "❌ Initialization failed: " << e.what() << std::endl;
-            return false;
-        }
+    else
+    {
+        std::cout << "         Consensus: disabled\n";
     }
-    
-    void Run() {
-        if (!initialized_) {
-            std::cout << "❌ Node not initialized" << std::endl;
-            return;
-        }
-        
-        std::cout << "\n🚀 Neo C++ Full Node started!" << std::endl;
-        std::cout << "Network: " << network_config_.network_name << std::endl;
-        std::cout << "Magic: 0x" << std::hex << network_config_.magic_number << std::dec << std::endl;
-        std::cout << "P2P Port: " << network_config_.port << std::endl;
-        std::cout << "RPC Port: " << network_config_.rpc_port << std::endl;
-        std::cout << "\nFeatures available:" << std::endl;
-        std::cout << "  🔗 Blockchain synchronization" << std::endl;
-        std::cout << "  📝 Transaction processing" << std::endl;
-        std::cout << "  🤝 Consensus participation (dBFT)" << std::endl;
-        std::cout << "  🌐 JSON-RPC API server" << std::endl;
-        std::cout << "  📡 P2P network communication" << std::endl;
-        std::cout << "  ⚙️  Smart contract execution" << std::endl;
-        std::cout << "  💎 Native contract support (NEO/GAS)" << std::endl;
-        std::cout << "  💾 Persistent storage" << std::endl;
-        std::cout << "\nPress Ctrl+C to stop\n" << std::endl;
-        
-        // Main event loop
-        auto last_status = std::chrono::steady_clock::now();
-        
-        while (g_running) {
-            // Simulate node operations
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            
-            // Simulate periodic blockchain activity
-            SimulateBlockchainActivity();
-            
-            // Show status every 30 seconds
-            auto now = std::chrono::steady_clock::now();
-            if (std::chrono::duration_cast<std::chrono::seconds>(now - last_status).count() >= 30) {
-                ShowStatus();
-                last_status = now;
-            }
-        }
-        
-        std::cout << "\n🔄 Shutting down Neo node..." << std::endl;
-    }
-    
-    void Shutdown() {
-        if (!initialized_) return;
-        
-        std::cout << "Stopping consensus service..." << std::endl;
-        std::cout << "Stopping RPC server..." << std::endl;
-        std::cout << "Stopping P2P network..." << std::endl;
-        std::cout << "Flushing storage..." << std::endl;
-        std::cout << "Cleaning up resources..." << std::endl;
-        
-        initialized_ = false;
-        std::cout << "✅ Neo node shutdown complete" << std::endl;
-    }
-    
-private:
-    void SimulateBlockchainActivity() {
-        // Simulate occasional blockchain activity
-        static int counter = 0;
-        counter++;
-        
-        if (counter % 150 == 0) { // Every 15 seconds
-            stats_.blocks_processed++;
-            block_height_++;
-            stats_.transactions_processed += (rand() % 10) + 1;
-        }
-        
-        if (counter % 50 == 0) { // Every 5 seconds  
-            stats_.consensus_messages++;
-        }
-        
-        if (counter % 30 == 0) { // Every 3 seconds
-            stats_.rpc_requests++;
-        }
-    }
-    
-    void ShowStatus() {
-        auto uptime = std::chrono::duration_cast<std::chrono::seconds>(
-            std::chrono::steady_clock::now() - start_time_);
-            
-        std::cout << "📊 Node Status:" << std::endl;
-        std::cout << "   Uptime: " << uptime.count() << "s" << std::endl;
-        std::cout << "   Block Height: " << block_height_ << std::endl;
-        std::cout << "   Blocks Processed: " << stats_.blocks_processed << std::endl;
-        std::cout << "   Transactions: " << stats_.transactions_processed << std::endl;
-        std::cout << "   Consensus Messages: " << stats_.consensus_messages << std::endl;
-        std::cout << "   RPC Requests: " << stats_.rpc_requests << std::endl;
-        std::cout << "   Connected Peers: " << stats_.connected_peers << std::endl;
-        std::cout << "   Memory: OK, Storage: OK" << std::endl;
-        std::cout << "" << std::endl;
-    }
-};
+}
+}  // namespace
 
 int main(int argc, char* argv[])
 {
-    // Setup signal handling
-    signal(SIGINT, SignalHandler);
-    signal(SIGTERM, SignalHandler);
-    
-    std::cout << "============================================" << std::endl;
-    std::cout << "    Neo N3 C++ Full Node Implementation    " << std::endl;
-    std::cout << "============================================" << std::endl;
-    std::cout << "Version: 3.7.0-cpp" << std::endl;
-    std::cout << "Compatible with: Neo C# Node 3.7.0" << std::endl;
-    std::cout << "Build: " << __DATE__ << " " << __TIME__ << std::endl;
-    std::cout << "============================================" << std::endl;
-    std::cout << "" << std::endl;
-    
-    // Configuration info
-    std::cout << "🔧 Configuration:" << std::endl;
-    std::cout << "   Protocol: Neo N3" << std::endl;
-    std::cout << "   Consensus: dBFT 2.0" << std::endl;
-    std::cout << "   VM: Neo Virtual Machine" << std::endl;
-    std::cout << "   Storage: Memory + RocksDB + LevelDB" << std::endl;
-    std::cout << "   API: JSON-RPC 2.0" << std::endl;
-    std::cout << "" << std::endl;
-    
-    // Compatibility verification
-    std::cout << "🔍 C# Compatibility Check:" << std::endl;
-    std::cout << "   ✅ Core types (UInt160, UInt256, ByteVector)" << std::endl;
-    std::cout << "   ✅ Exception handling framework" << std::endl;
-    std::cout << "   ✅ JSON-RPC API specification" << std::endl;
-    std::cout << "   ✅ Storage interface (IStore, IStoreProvider)" << std::endl;
-    std::cout << "   ✅ VM instruction set (complete)" << std::endl;
-    std::cout << "   ✅ Native contracts (NEO, GAS, Policy)" << std::endl;
-    std::cout << "   ✅ Consensus protocol (dBFT)" << std::endl;
-    std::cout << "   ✅ P2P message format" << std::endl;
-    std::cout << "" << std::endl;
-    
-    try {
-        // Create and run the node
-        auto node = std::make_unique<NeoFullNode>();
-        
-        if (!node->Initialize()) {
-            std::cout << "❌ Failed to initialize Neo node" << std::endl;
+    PrintBanner();
+
+    std::string configPath = "config.json";
+    std::string dataPath = "./data";
+    std::string networkPreset;
+    bool showHelp = false;
+
+    for (int i = 1; i < argc; ++i)
+    {
+        const std::string arg = argv[i];
+        if (arg == "--config" && i + 1 < argc)
+        {
+            configPath = argv[++i];
+        }
+        else if (arg == "--datadir" && i + 1 < argc)
+        {
+            dataPath = argv[++i];
+        }
+        else if (arg == "--status-interval" && i + 1 < argc)
+        {
+            try
+            {
+                const auto value = std::stoul(argv[++i]);
+                if (value == 0)
+                {
+                    throw std::invalid_argument("status interval must be > 0");
+                }
+                g_statusInterval = std::chrono::seconds(value);
+            }
+            catch (const std::exception& ex)
+            {
+                std::cerr << "Invalid --status-interval value: " << ex.what() << '\n';
+                return 1;
+            }
+        }
+        else if (arg == "--help" || arg == "-h")
+        {
+            showHelp = true;
+        }
+        else if (arg == "--network" && i + 1 < argc)
+        {
+            networkPreset = argv[++i];
+        }
+        else
+        {
+            std::cerr << "Unknown option: " << arg << '\n';
+            showHelp = true;
+        }
+    }
+
+    if (showHelp)
+    {
+        PrintUsage(argv[0]);
+        return 0;
+    }
+
+    if (!networkPreset.empty())
+    {
+        try
+        {
+            configPath = ResolveNetworkPreset(networkPreset);
+            std::cout << "Using network preset '" << networkPreset << "' -> " << configPath << "\n";
+        }
+        catch (const std::exception& ex)
+        {
+            std::cerr << ex.what() << '\n';
             return 1;
         }
-        
-        // Run the node
-        node->Run();
-        
+    }
+
+    PrintConfiguration(configPath, dataPath);
+
+    std::signal(SIGINT, SignalHandler);
+    std::signal(SIGTERM, SignalHandler);
+
+    try
+    {
+        g_node = std::make_shared<neo::node::NeoNode>(configPath, dataPath);
+        if (!g_node->Initialize())
+        {
+            std::cerr << "Failed to initialise Neo node\n";
+            return 1;
+        }
+
+        if (!g_node->Start())
+        {
+            std::cerr << "Failed to start Neo node\n";
+            return 1;
+        }
+
+        const auto startTime = std::chrono::steady_clock::now();
+        PrintCompatibilitySummary(g_node);
+        std::cout << "Node started. Press Ctrl+C to stop.\n";
+
+        while (!g_shutdownRequested.load() && g_node->IsRunning())
+        {
+            PrintNodeStatus(g_node, startTime);
+
+            auto slept = std::chrono::seconds(0);
+            while (slept < g_statusInterval && !g_shutdownRequested.load() && g_node->IsRunning())
+            {
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                slept += std::chrono::seconds(1);
+            }
+        }
+
+        std::cout << "Stopping Neo node...\n";
+        g_node->Stop();
+        g_node.reset();
+
+        std::cout << "Neo node stopped cleanly.\n";
         return 0;
-        
-    } catch (const std::exception& e) {
-        std::cout << "❌ Node runtime error: " << e.what() << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Fatal error: " << e.what() << '\n';
+        if (g_node)
+        {
+            g_node->Stop();
+            g_node.reset();
+        }
         return 1;
     }
 }

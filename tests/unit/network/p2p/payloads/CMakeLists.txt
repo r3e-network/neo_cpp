@@ -1,13 +1,15 @@
 # Create the payloads unit tests
 add_executable(test_payloads
     test_transaction_attributes_json.cpp
+    test_addrpayload.cpp
+    test_networkaddresswithtime.cpp
 )
 
 # Include directories
 target_include_directories(test_payloads
     PRIVATE
-        /include
-        
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
 # Link dependencies

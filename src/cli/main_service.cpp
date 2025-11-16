@@ -16,6 +16,7 @@
 #include <neo/network/p2p/channels_config.h>
 #include <neo/protocol_settings.h>
 #include <neo/settings.h>
+#include <neo/rpc/rpc_methods.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/gas_token.h>
@@ -127,6 +128,8 @@ void MainService::Start(const CommandLineOptions& options)
         appSettings = Settings::Load(options.ConfigPath);
     }
 
+    rpc::RPCMethods::SetMaxFindResultItems(static_cast<size_t>(std::max(1, appSettings.RPC.MaxFindResultItems)));
+
     ProtocolSettings protocolSettings = appSettings.Protocol ? *appSettings.Protocol : ProtocolSettings{};
 
     // Allow command-line overrides
@@ -141,6 +144,8 @@ void MainService::Start(const CommandLineOptions& options)
     channelsConfig.SetMinDesiredConnections(static_cast<uint32_t>(appSettings.P2P.MinDesiredConnections));
     channelsConfig.SetMaxConnections(static_cast<uint32_t>(appSettings.P2P.MaxConnections));
     channelsConfig.SetMaxConnectionsPerAddress(static_cast<uint32_t>(appSettings.P2P.MaxConnectionsPerAddress));
+    channelsConfig.SetDialTimeoutMs(static_cast<uint32_t>(appSettings.P2P.DialTimeoutMs));
+    channelsConfig.SetEnableCompression(appSettings.P2P.EnableCompression);
 
     std::vector<std::string> seedStrings = appSettings.P2P.Seeds.empty() ? protocolSettings.GetSeedList()
                                                                          : appSettings.P2P.Seeds;
@@ -163,14 +168,47 @@ void MainService::Start(const CommandLineOptions& options)
 
     // Native contracts are initialized internally by NeoSystem
 
-    // Start RPC server if enabled with configuration
-    // RPC configuration loaded from settings or defaults
-    rpc::RpcConfig rpcConfig;
-    rpcConfig.port = protocolSettings.GetRpcPort().value_or(10332);  // Default RPC port
-    rpcConfig.max_concurrent_requests = 40;
+    if (appSettings.RPC.Enabled)
+    {
+        rpc::RpcConfig rpcConfig;
+        rpcConfig.port = static_cast<uint16_t>(appSettings.RPC.Port);
+        rpcConfig.bind_address =
+            appSettings.RPC.BindAddress.empty() ? std::string("0.0.0.0") : appSettings.RPC.BindAddress;
+        rpcConfig.enable_cors = appSettings.RPC.EnableCors;
+        if (!appSettings.RPC.AllowedOrigins.empty())
+        {
+            rpcConfig.allowed_origins = appSettings.RPC.AllowedOrigins;
+        }
+        rpcConfig.max_concurrent_requests = static_cast<uint32_t>(std::max(1, appSettings.RPC.MaxConnections));
+        rpcConfig.request_timeout_seconds =
+            static_cast<uint32_t>(std::max(1, appSettings.RPC.RequestTimeoutMs / 1000));
+        rpcConfig.max_request_size = static_cast<uint32_t>(appSettings.RPC.MaxRequestBodyBytes);
+        rpcConfig.enable_rate_limiting = appSettings.RPC.EnableRateLimit;
+        rpcConfig.max_requests_per_second = static_cast<uint32_t>(std::max(0, appSettings.RPC.MaxRequestsPerSecond));
+        rpcConfig.rate_limit_window_seconds =
+            static_cast<uint32_t>(std::max(1, appSettings.RPC.RateLimitWindowSeconds));
+        rpcConfig.enable_sessions = appSettings.RPC.SessionEnabled;
+        rpcConfig.session_timeout_minutes =
+            static_cast<uint32_t>(std::max(1, appSettings.RPC.SessionExpirationMinutes));
+        rpcConfig.max_iterator_items = static_cast<uint32_t>(std::max(1, appSettings.RPC.MaxIteratorResultItems));
+        rpcConfig.enable_audit_trail = appSettings.RPC.EnableAuditTrail;
+        rpcConfig.enable_security_logging = appSettings.RPC.EnableSecurityLogging;
+        rpcConfig.enable_ssl = appSettings.RPC.EnableSsl;
+        rpcConfig.ssl_cert_path = appSettings.RPC.SslCert;
+        rpcConfig.ssl_key_path = appSettings.RPC.SslKey;
+        rpcConfig.trusted_authorities = appSettings.RPC.TrustedAuthorities;
+        rpcConfig.ssl_ciphers = appSettings.RPC.SslCiphers;
+        rpcConfig.min_tls_version = appSettings.RPC.MinTlsVersion;
+        if (!appSettings.RPC.Username.empty())
+        {
+            rpcConfig.enable_authentication = true;
+            rpcConfig.username = appSettings.RPC.Username;
+            rpcConfig.password = appSettings.RPC.Password;
+        }
 
-    rpcServer_ = std::make_shared<rpc::RpcServer>(rpcConfig);
-    rpcServer_->Start();
+        rpcServer_ = std::make_shared<rpc::RpcServer>(rpcConfig, neoSystem_);
+        rpcServer_->Start();
+    }
 
     // Start Neo system
     neoSystem_->Start();

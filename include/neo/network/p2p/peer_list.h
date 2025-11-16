@@ -18,6 +18,7 @@
 #include <neo/network/p2p/peer.h>
 
 #include <cstdint>
+#include <functional>
 #include <mutex>
 #include <unordered_map>
 #include <vector>
@@ -92,6 +93,17 @@ class PeerList : public io::ISerializable, public io::IJsonSerializable
      * @return True if the peer was updated, false if it doesn't exist.
      */
     bool UpdatePeer(const Peer& peer);
+
+    /**
+     * @brief Adds a peer if missing, otherwise replaces the existing record.
+     */
+    void AddOrUpdatePeer(const Peer& peer);
+
+    /**
+     * @brief Applies a modifier function to an existing peer.
+     * @return true if the peer existed and was modified.
+     */
+    bool ModifyPeer(const IPEndPoint& endpoint, const std::function<void(Peer&)>& modifier);
 
     /**
      * @brief Removes a peer.

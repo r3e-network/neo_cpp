@@ -17,6 +17,7 @@
 #include <neo/network/p2p_server.h>
 #include <neo/node/neo_system.h>
 #include <neo/protocol_settings.h>
+#include <neo/logging/logger.h>
 #include <neo/rpc/error_codes.h>
 #include <neo/rpc/rpc_session_manager.h>
 #include <neo/smartcontract/manifest/contract_manifest.h>
@@ -25,12 +26,14 @@
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/plugins/application_logs_plugin.h>
+#include <neo/smartcontract/transaction_verifier.h>
 #include <neo/smartcontract/trigger_type.h>
 #include <neo/vm/vm_state.h>
 #include <neo/wallets/helper.h>
 #include <neo/plugins/plugin_manager.h>
 
 #include <algorithm>
+#include <atomic>
 #include <cctype>
 #include <iomanip>
 #include <iterator>
@@ -51,7 +54,7 @@ using neo::ProtocolSettings;
 using neo::Hardfork;
 using neo::HardforkToString;
 
-constexpr size_t kFindStoragePageSize = 100;
+std::atomic<size_t> g_max_find_storage_items{100};
 
 template <typename UIntType>
 std::string ToPrefixedHex(const UIntType& value)
@@ -232,10 +235,11 @@ ErrorCode MapValidationResult(ValidationResult result)
     switch (result)
     {
         case ValidationResult::Valid:
-            return ErrorCode::InternalError;
+            return ErrorCode::InternalError;  // Should never be mapped
         case ValidationResult::InvalidFormat:
-        case ValidationResult::Unknown:
             return ErrorCode::RpcVerificationFailed;
+        case ValidationResult::Unknown:
+            return ErrorCode::InvalidRequest;
         case ValidationResult::InvalidSize:
             return ErrorCode::RpcInvalidInventorySize;
         case ValidationResult::InvalidAttribute:
@@ -708,6 +712,19 @@ network::p2p::payloads::Neo3Transaction DeserializeNeo3Transaction(const std::st
 }
 
 }  // namespace
+
+void RPCMethods::SetMaxFindResultItems(size_t maxItems)
+{
+    constexpr size_t kMin = 1;
+    constexpr size_t kMax = 1000;
+    const size_t clamped = std::min(kMax, std::max(maxItems, kMin));
+    g_max_find_storage_items.store(clamped);
+}
+
+size_t RPCMethods::GetMaxFindResultItems()
+{
+    return g_max_find_storage_items.load();
+}
 
 nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
@@ -1199,7 +1216,21 @@ nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> n
 
     auto tx = DeserializeNeo3Transaction(params[0].get<std::string>());
 
-    if (blockchain->ContainsTransaction(tx.GetHash()) || memoryPool->Contains(tx.GetHash()))
+    bool existsInLedger = false;
+    if (neoSystem)
+    {
+        auto snapshot = neoSystem->GetSnapshot();
+        if (snapshot)
+        {
+            auto ledgerContract = smartcontract::native::LedgerContract::GetInstance();
+            if (ledgerContract && ledgerContract->GetTransaction(snapshot, tx.GetHash()))
+            {
+                existsInLedger = true;
+            }
+        }
+    }
+
+    if (existsInLedger || blockchain->ContainsTransaction(tx.GetHash()) || memoryPool->Contains(tx.GetHash()))
     {
         throw RpcException(ErrorCode::TransactionAlreadyExists, "Transaction rejected: AlreadyExists");
     }
@@ -1214,6 +1245,35 @@ nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> n
     {
         throw RpcException(MapValidationResult(validation),
                            "Transaction rejected: " + ValidationResultToString(validation));
+    }
+
+    if (neoSystem)
+    {
+        auto snapshot = neoSystem->GetSnapshot();
+        auto settings = neoSystem->GetProtocolSettings();
+        smartcontract::VerificationContext feeContext(snapshot, nullptr,
+                                                      smartcontract::ApplicationEngine::TestModeGas,
+                                                      false, false, settings);
+        try
+        {
+            const int64_t requiredNetworkFee =
+                smartcontract::TransactionVerifier::Instance().CalculateNetworkFee(tx, feeContext);
+            if (tx.GetNetworkFee() < requiredNetworkFee)
+            {
+                throw RpcException(ErrorCode::RpcInsufficientFunds,
+                                   "Transaction rejected: Insufficient network fee");
+            }
+        }
+        catch (const RpcException&)
+        {
+            throw;
+        }
+        catch (const std::exception& ex)
+        {
+            neo::logging::Logger::GetDefault().Error("Failed to compute network fee: {}", ex.what());
+            throw RpcException(ErrorCode::InternalError,
+                               std::string("Failed to compute network fee: ") + ex.what());
+        }
     }
 
     if (!memoryPool->TryAdd(tx))
@@ -1739,9 +1799,10 @@ nlohmann::json RPCMethods::FindStorage(std::shared_ptr<node::NeoSystem> neoSyste
 
     nlohmann::json items = nlohmann::json::array();
 
+    const size_t pageSize = std::max<size_t>(1, g_max_find_storage_items.load());
     size_t begin = static_cast<size_t>(std::min<int64_t>(start, static_cast<int64_t>(entries.size())));
     size_t count = 0;
-    for (size_t index = begin; index < entries.size() && count < kFindStoragePageSize; ++index, ++count)
+    for (size_t index = begin; index < entries.size() && count < pageSize; ++index, ++count)
     {
         const auto& entry = entries[index];
         const auto& key = entry.first.GetKey();
@@ -1923,8 +1984,28 @@ nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSyste
                            std::string("Invalid block serialization: ") + ex.what());
     }
 
+    const auto& blockWitness = block->GetWitness();
+    if (blockWitness.GetInvocationScript().Size() == 0 || blockWitness.GetVerificationScript().Size() == 0)
+    {
+        throw RpcException(ErrorCode::RpcVerificationFailed, "Block rejected: InvalidWitness");
+    }
+
     const auto blockHash = block->GetHash();
-    if (blockchain->ContainsBlock(blockHash))
+    bool blockExists = false;
+    if (neoSystem)
+    {
+        auto snapshot = neoSystem->GetSnapshot();
+        if (snapshot)
+        {
+            auto ledgerContract = smartcontract::native::LedgerContract::GetInstance();
+            if (ledgerContract && ledgerContract->GetBlock(snapshot, blockHash))
+            {
+                blockExists = true;
+            }
+        }
+    }
+
+    if (blockExists || blockchain->ContainsBlock(blockHash))
     {
         throw RpcException(ErrorCode::RpcAlreadyExists, "Block rejected: AlreadyExists");
     }
@@ -1950,12 +2031,6 @@ nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSyste
         {
             throw RpcException(ErrorCode::RpcVerificationFailed, "Block rejected: InvalidPreviousHash");
         }
-    }
-
-    const auto& witness = block->GetWitness();
-    if (witness.GetInvocationScript().IsEmpty() || witness.GetVerificationScript().IsEmpty())
-    {
-        throw RpcException(ErrorCode::RpcVerificationFailed, "Block rejected: InvalidWitness");
     }
 
     auto verifyResult = blockchain->OnNewBlock(block);
@@ -2079,6 +2154,11 @@ nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neo
     }
 
     auto& manager = RpcSessionManager::Instance();
+    const auto maxAllowed = manager.GetMaxIteratorItems();
+    if (maxAllowed > 0 && count > maxAllowed)
+    {
+        throw RpcException(ErrorCode::InvalidParams, "Invalid iterator items count");
+    }
     auto result = manager.Traverse(sessionId, iteratorId, count);
     if (!result.found)
     {
@@ -2089,6 +2169,19 @@ nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neo
     response["values"] = result.items;
     response["truncated"] = result.hasMore;
     return response;
+}
+
+nlohmann::json RPCMethods::CreateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)neoSystem;
+    if (!params.empty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "createsession does not accept parameters");
+    }
+
+    auto& manager = RpcSessionManager::Instance();
+    auto sessionId = manager.CreateSession();
+    return sessionId;
 }
 
 nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)

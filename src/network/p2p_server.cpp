@@ -8,6 +8,7 @@
 
 #include <neo/common/logging.h>
 #include <neo/cryptography/crypto.h>
+#include <neo/network/p2p/node_capability.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/get_addr_payload.h>
 #include <neo/network/p2p/payloads/inv_payload.h>
@@ -560,12 +561,16 @@ void P2PServer::HandleMessageReceived(std::shared_ptr<P2PPeer> peer, const p2p::
 
             for (const auto& peer : selectedPeers)
             {
-                p2p::payloads::NetworkAddressWithTime addr;
-                // Note: Get actual endpoint from peer connection
-                addr.SetAddress(network::IPAddress("127.0.0.1").ToString());
-                addr.SetPort(10333);
-                addr.SetTimestamp(static_cast<uint32_t>(std::time(nullptr)));
-                addr.SetServices(peer->GetServices());
+                auto connection = peer->GetConnection();
+                if (!connection) continue;
+                auto endpoint = connection->GetRemoteEndpoint();
+                std::vector<p2p::NodeCapability> caps;
+                p2p::NodeCapability tcpCapability(p2p::NodeCapabilityType::TcpServer);
+                tcpCapability.SetPort(endpoint.GetPort());
+                caps.push_back(tcpCapability);
+
+                p2p::payloads::NetworkAddressWithTime addr(static_cast<uint32_t>(std::time(nullptr)),
+                                                           endpoint.GetAddress(), caps);
                 addresses.push_back(addr);
             }
 

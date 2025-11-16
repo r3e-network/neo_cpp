@@ -52,10 +52,10 @@ TEST_F(RpcResponseTest, TestErrorResponse)
     response.SetError(error);
     response.SetId(1);
 
-    EXPECT_EQ(-32601, response.GetError()["code"]);
-    EXPECT_EQ("Method not found", response.GetError()["message"]);
-    EXPECT_EQ("Additional error data", response.GetError()["data"]);
-    EXPECT_EQ(1, response.GetId());
+    EXPECT_EQ(-32601, response.GetError()["code"].get<int>());
+    EXPECT_EQ("Method not found", response.GetError()["message"].get<std::string>());
+    EXPECT_EQ("Additional error data", response.GetError()["data"].get<std::string>());
+    EXPECT_EQ(1, response.GetId().get<int>());
 }
 
 TEST_F(RpcResponseTest, TestToJson)
@@ -91,9 +91,9 @@ TEST_F(RpcResponseTest, TestToJsonWithError)
 
     EXPECT_EQ("2.0", json["jsonrpc"]);
     EXPECT_TRUE(!json.contains("result") || json["result"].is_null());
-    EXPECT_EQ(-32602, json["error"]["code"]);
-    EXPECT_EQ("Invalid params", json["error"]["message"]);
-    EXPECT_EQ("error_test", json["id"]);
+    EXPECT_EQ(-32602, json["error"]["code"].get<int>());
+    EXPECT_EQ("Invalid params", json["error"]["message"].get<std::string>());
+    EXPECT_EQ("error_test", json["id"].get<std::string>());
 }
 
 TEST_F(RpcResponseTest, TestFromJson)
@@ -103,8 +103,8 @@ TEST_F(RpcResponseTest, TestFromJson)
     RpcResponse response = RpcResponse::FromJson(json);
 
     EXPECT_EQ("2.0", response.GetJsonRpc());
-    EXPECT_EQ(54321, response.GetResult()["block_count"]);
-    EXPECT_EQ(123, response.GetId());
+    EXPECT_EQ(54321, response.GetResult()["block_count"].get<int>());
+    EXPECT_EQ(123, response.GetId().get<int>());
     EXPECT_TRUE(response.GetError().is_null());
 }
 
@@ -118,9 +118,9 @@ TEST_F(RpcResponseTest, TestFromJsonWithError)
 
     EXPECT_EQ("2.0", response.GetJsonRpc());
     EXPECT_TRUE(response.GetResult().is_null());
-    EXPECT_EQ(-32700, response.GetError()["code"]);
-    EXPECT_EQ("Parse error", response.GetError()["message"]);
-    EXPECT_EQ("Invalid JSON", response.GetError()["data"]);
+    EXPECT_EQ(-32700, response.GetError()["code"].get<int>());
+    EXPECT_EQ("Parse error", response.GetError()["message"].get<std::string>());
+    EXPECT_EQ("Invalid JSON", response.GetError()["data"].get<std::string>());
     EXPECT_TRUE(response.GetId().is_null());
 }
 
@@ -160,9 +160,10 @@ TEST_F(RpcResponseTest, TestErrorRoundTrip)
 
     EXPECT_EQ(original.GetJsonRpc(), deserialized.GetJsonRpc());
     EXPECT_TRUE(deserialized.GetResult().is_null());
-    EXPECT_EQ(original.GetError()["code"], deserialized.GetError()["code"]);
-    EXPECT_EQ(original.GetError()["message"], deserialized.GetError()["message"]);
-    EXPECT_EQ(original.GetError()["data"], deserialized.GetError()["data"]);
+    EXPECT_EQ(original.GetError()["code"].get<int>(), deserialized.GetError()["code"].get<int>());
+    EXPECT_EQ(original.GetError()["message"].get<std::string>(),
+              deserialized.GetError()["message"].get<std::string>());
+    EXPECT_EQ(original.GetError()["data"].get<std::string>(), deserialized.GetError()["data"].get<std::string>());
     EXPECT_EQ(original.GetId(), deserialized.GetId());
 }
 
@@ -178,7 +179,7 @@ TEST_F(RpcResponseTest, TestCommonSuccessResponses)
 
     auto json1 = version_response.ToJson();
     auto deserialized1 = RpcResponse::FromJson(json1);
-    EXPECT_EQ(10333, deserialized1.GetResult()["tcpport"]);
+    EXPECT_EQ(10333, deserialized1.GetResult()["tcpport"].get<int>());
 
     // getblockcount response
     RpcResponse blockcount_response;
@@ -187,7 +188,7 @@ TEST_F(RpcResponseTest, TestCommonSuccessResponses)
 
     auto json2 = blockcount_response.ToJson();
     auto deserialized2 = RpcResponse::FromJson(json2);
-    EXPECT_EQ(12345, deserialized2.GetResult());
+    EXPECT_EQ(12345, deserialized2.GetResult().get<int>());
 
     // getbestblockhash response
     RpcResponse hash_response;
@@ -196,7 +197,8 @@ TEST_F(RpcResponseTest, TestCommonSuccessResponses)
 
     auto json3 = hash_response.ToJson();
     auto deserialized3 = RpcResponse::FromJson(json3);
-    EXPECT_EQ("0x1234567890abcdef1234567890abcdef12345678", deserialized3.GetResult());
+    EXPECT_EQ("0x1234567890abcdef1234567890abcdef12345678",
+              deserialized3.GetResult().get<std::string>());
 }
 
 TEST_F(RpcResponseTest, TestCommonErrorResponses)
@@ -230,7 +232,7 @@ TEST_F(RpcResponseTest, TestCommonErrorResponses)
 
         EXPECT_EQ(error_tests[i].code, deserialized.GetError()["code"].get<int>());
         EXPECT_EQ(error_tests[i].message, deserialized.GetError()["message"].get<std::string>());
-        EXPECT_EQ(static_cast<int>(i), deserialized.GetId());
+        EXPECT_EQ(static_cast<int>(i), deserialized.GetId().get<int>());
     }
 }
 
@@ -267,7 +269,7 @@ TEST_F(RpcResponseTest, TestComplexResultTypes)
     auto deserialized = RpcResponse::FromJson(json);
 
     EXPECT_EQ(complex_result, deserialized.GetResult());
-    EXPECT_EQ("complex_test", deserialized.GetId());
+    EXPECT_EQ("complex_test", deserialized.GetId().get<std::string>());
 }
 
 TEST_F(RpcResponseTest, TestPartialJson)
@@ -280,7 +282,7 @@ TEST_F(RpcResponseTest, TestPartialJson)
     EXPECT_EQ("2.0", response.GetJsonRpc());
     EXPECT_TRUE(response.GetResult().is_null());
     EXPECT_TRUE(response.GetError().is_null());
-    EXPECT_EQ(1, response.GetId());
+    EXPECT_EQ(1, response.GetId().get<int>());
 }
 
 TEST_F(RpcResponseTest, TestLargeResponse)
@@ -300,8 +302,8 @@ TEST_F(RpcResponseTest, TestLargeResponse)
     auto deserialized = RpcResponse::FromJson(json);
 
     EXPECT_EQ(1000, deserialized.GetResult().size());
-    EXPECT_EQ("large_test", deserialized.GetId());
-    EXPECT_EQ(999, deserialized.GetResult()[999]["id"]);
+    EXPECT_EQ("large_test", deserialized.GetId().get<std::string>());
+    EXPECT_EQ(999, deserialized.GetResult()[999]["id"].get<int>());
 }
 
 TEST_F(RpcResponseTest, TestCreateSuccessResponse)
@@ -313,7 +315,7 @@ TEST_F(RpcResponseTest, TestCreateSuccessResponse)
     EXPECT_EQ("2.0", response.GetJsonRpc());
     EXPECT_EQ(result, response.GetResult());
     EXPECT_TRUE(response.GetError().is_null());
-    EXPECT_EQ(123, response.GetId());
+    EXPECT_EQ(123, response.GetId().get<int>());
 }
 
 TEST_F(RpcResponseTest, TestCreateErrorResponse)
@@ -323,9 +325,9 @@ TEST_F(RpcResponseTest, TestCreateErrorResponse)
 
     EXPECT_EQ("2.0", response.GetJsonRpc());
     EXPECT_TRUE(response.GetResult().is_null());
-    EXPECT_EQ(-32600, response.GetError()["code"]);
-    EXPECT_EQ("Invalid Request", response.GetError()["message"]);
-    EXPECT_EQ("Missing required field", response.GetError()["data"]);
-    EXPECT_EQ("test_id", response.GetId());
+    EXPECT_EQ(-32600, response.GetError()["code"].get<int>());
+    EXPECT_EQ("Invalid Request", response.GetError()["message"].get<std::string>());
+    EXPECT_EQ("Missing required field", response.GetError()["data"].get<std::string>());
+    EXPECT_EQ("test_id", response.GetId().get<std::string>());
 }
 }  // namespace neo::rpc::tests

@@ -60,9 +60,9 @@ TEST(P2PPayloadsTest, VersionPayload_Serialize_Deserialize)
     EXPECT_TRUE(deserializedPayload.GetAllowCompression());
     EXPECT_EQ(deserializedPayload.GetCapabilities().size(), 2);
     EXPECT_EQ(deserializedPayload.GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetCapabilities()[0]).GetPort(), 10333);
+    EXPECT_EQ(deserializedPayload.GetCapabilities()[0].GetPort(), 10333);
     EXPECT_EQ(deserializedPayload.GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetCapabilities()[1]).GetStartHeight(), 12345);
+    EXPECT_EQ(deserializedPayload.GetCapabilities()[1].GetStartHeight(), 12345);
 }
 
 TEST(P2PPayloadsTest, VersionPayload_DisableCompression)
@@ -92,6 +92,8 @@ TEST(P2PPayloadsTest, VersionPayload_DisableCompression)
 
     // Check that AllowCompression is still false
     EXPECT_FALSE(deserializedPayload.GetAllowCompression());
+    ASSERT_EQ(deserializedPayload.GetCapabilities().size(), 3);
+    EXPECT_EQ(deserializedPayload.GetCapabilities()[2].GetType(), NodeCapabilityType::DisableCompression);
 }
 
 TEST(P2PPayloadsTest, VersionPayload_SerializeJson_DeserializeJson)
@@ -132,9 +134,9 @@ TEST(P2PPayloadsTest, VersionPayload_SerializeJson_DeserializeJson)
     EXPECT_TRUE(deserializedPayload.GetAllowCompression());
     EXPECT_EQ(deserializedPayload.GetCapabilities().size(), 2);
     EXPECT_EQ(deserializedPayload.GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetCapabilities()[0]).GetPort(), 10333);
+    EXPECT_EQ(deserializedPayload.GetCapabilities()[0].GetPort(), 10333);
     EXPECT_EQ(deserializedPayload.GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetCapabilities()[1]).GetStartHeight(), 12345);
+    EXPECT_EQ(deserializedPayload.GetCapabilities()[1].GetStartHeight(), 12345);
 }
 
 TEST(P2PPayloadsTest, PingPayload_Serialize_Deserialize)
@@ -253,19 +255,17 @@ TEST(P2PPayloadsTest, AddrPayload_Serialize_Deserialize)
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities().size(), 1);
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
     EXPECT_EQ(
-        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(),
+        deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetPort(),
         10333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetTimestamp(), 987654321);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetAddress().ToString(), "192.168.1.1");
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities().size(), 2);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
     EXPECT_EQ(
-        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(),
+        deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetPort(),
         20333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1])
-                  .GetStartHeight(),
-              12345);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetStartHeight(), 12345);
 }
 
 TEST(P2PPayloadsTest, AddrPayload_SerializeJson_DeserializeJson)
@@ -313,19 +313,17 @@ TEST(P2PPayloadsTest, AddrPayload_SerializeJson_DeserializeJson)
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities().size(), 1);
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
     EXPECT_EQ(
-        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(),
+        deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetPort(),
         10333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetTimestamp(), 987654321);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetAddress().ToString(), "192.168.1.1");
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities().size(), 2);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
     EXPECT_EQ(
-        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(),
+        deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetPort(),
         20333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1])
-                  .GetStartHeight(),
-              12345);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetStartHeight(), 12345);
 }
 
 TEST(P2PPayloadsTest, InvPayload_Serialize_Deserialize)

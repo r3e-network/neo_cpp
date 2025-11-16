@@ -15,6 +15,7 @@
 #include <neo/logging/logger.h>
 #include <neo/metrics/metrics.h>
 #include <neo/persistence/data_cache.h>
+#include <neo/protocol_settings.h>
 #include <neo/smartcontract/application_engine.h>
 
 #include <memory>
@@ -93,6 +94,7 @@ struct VerificationContext
      * @brief The snapshot.
      */
     std::shared_ptr<persistence::DataCache> snapshot;
+    std::shared_ptr<ProtocolSettings> protocolSettings;
 
     /**
      * @brief The persisting block.
@@ -124,8 +126,10 @@ struct VerificationContext
      */
     VerificationContext(std::shared_ptr<persistence::DataCache> snapshot,
                         const ledger::Block* persistingBlock = nullptr, int64_t maxGas = ApplicationEngine::TestModeGas,
-                        bool skipSignatureVerification = false, bool skipWitnessVerification = false)
+                        bool skipSignatureVerification = false, bool skipWitnessVerification = false,
+                        std::shared_ptr<ProtocolSettings> protocolSettings = nullptr)
         : snapshot(snapshot),
+          protocolSettings(std::move(protocolSettings)),
           persistingBlock(persistingBlock),
           maxGas(maxGas),
           skipSignatureVerification(skipSignatureVerification),

@@ -15,6 +15,7 @@
 #include <neo/persistence/data_cache.h>
 #include <neo/persistence/store_cache.h>
 #include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/network_synchronizer.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/native_contract.h>
@@ -115,6 +116,11 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      * @return Shared pointer to the local node
      */
     std::shared_ptr<network::p2p::LocalNode> GetLocalNode() const;
+
+    /**
+     * @brief Gets the network synchronizer component.
+     */
+    std::shared_ptr<network::p2p::NetworkSynchronizer> GetNetworkSynchronizer() const { return networkSynchronizer_; }
 
     /**
      * @brief Gets the protocol settings.
@@ -233,6 +239,7 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
     std::shared_ptr<Blockchain> blockchain_;
     std::shared_ptr<MemoryPool> memory_pool_;
     std::shared_ptr<network::p2p::LocalNode> local_node_;
+    std::shared_ptr<network::p2p::NetworkSynchronizer> networkSynchronizer_;
     mutable std::shared_ptr<smartcontract::native::LedgerContract> ledger_contract_;
     bool is_running_;
     bool is_disposed_;

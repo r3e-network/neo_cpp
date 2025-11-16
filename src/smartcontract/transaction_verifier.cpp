@@ -8,6 +8,7 @@
 
 #include <neo/core/protocol_constants.h>
 #include <neo/cryptography/crypto.h>
+#include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
@@ -18,9 +19,11 @@
 #include <neo/logging/logger.h>
 #include <neo/protocol_settings.h>
 #include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/interop_service.h>
 #include <neo/smartcontract/system_call_exception.h>
 #include <neo/smartcontract/transaction_verifier.h>
 #include <neo/smartcontract/trigger_type.h>
+#include <neo/vm/opcode.h>
 #include <neo/vm/vm_state.h>
 
 #include <algorithm>
@@ -78,6 +81,7 @@ void CleanExpiredEntries()
         }
     }
 }
+
 }  // namespace
 class VerificationCache
 {
@@ -283,11 +287,11 @@ static VerificationResult VerifyScriptContract(const ledger::Transaction& transa
                                                           nullptr,  // No container for verification
                                                           context.snapshot);
 
-        // Load invocation script first (parameters)
-        engine->LoadScript(witness.GetInvocationScript());
-
-        // Load verification script (code)
+        // Load verification script (code) first so it's the entry context
         engine->LoadScript(witness.GetVerificationScript());
+
+        // Load invocation script afterwards to push parameters/signatures
+        engine->LoadScript(witness.GetInvocationScript());
 
         // Execute the scripts
         engine->Execute();
@@ -615,53 +619,28 @@ VerificationOutput TransactionVerifier::VerifySignature(const ledger::Transactio
             // Check if this is a signature contract
             if (IsSignatureContract(verificationScript))
             {
-                // Extract signature from invocation script
-                if (invocationScript.Size() < 65)  // Minimum size for signature push
+                // Validate invocation script format: PUSHDATA1 (0x0C), length 64, then signature bytes
+                if (invocationScript.Size() != 66 ||
+                    invocationScript[0] != static_cast<uint8_t>(vm::OpCode::PUSHDATA1) ||
+                    invocationScript[1] != 64)
                 {
                     return VerificationOutput(VerificationResult::InvalidSignature, "Invalid invocation script size");
                 }
 
                 // Extract public key from verification script (bytes 2-34)
-                if (verificationScript.Size() != 35)
-                {
-                    return VerificationOutput(VerificationResult::InvalidSignature, "Invalid verification script size");
-                }
-
-                // Create ByteVector using ByteSpan constructor
                 io::ByteSpan pubkeySpan(verificationScript.Data() + 2, 33);
                 io::ByteVector pubkey(pubkeySpan);
 
-                // Extract signature (skip the push opcode)
-                uint8_t sigLength = invocationScript[0];
-                if (sigLength < 64 || sigLength > 65 || invocationScript.Size() < 1 + sigLength)
-                {
-                    return VerificationOutput(VerificationResult::InvalidSignature, "Invalid signature length");
-                }
-
-                // Create ByteVector using ByteSpan constructor
-                io::ByteSpan signatureSpan(invocationScript.Data() + 1, sigLength);
+                // Extract signature (skip opcode and length byte)
+                io::ByteSpan signatureSpan(invocationScript.Data() + 2, 64);
                 io::ByteVector signature(signatureSpan);
 
-                // Get the sign data for this transaction (network magic + hash)
-                io::ByteVector signDataBytes;
-                signDataBytes.Reserve(sizeof(uint32_t) + io::UInt256::Size);
+                const uint32_t network_magic = context.protocolSettings
+                                                   ? context.protocolSettings->GetNetwork()
+                                                   : ProtocolSettings::GetDefault().GetNetwork();
+                auto sign_data = transaction.GetSignData(network_magic);
 
-                // Write network magic (little-endian)
-                uint32_t network = ProtocolSettings::GetDefault().GetNetwork();
-                signDataBytes.Push(static_cast<uint8_t>(network & 0xFF));
-                signDataBytes.Push(static_cast<uint8_t>((network >> 8) & 0xFF));
-                signDataBytes.Push(static_cast<uint8_t>((network >> 16) & 0xFF));
-                signDataBytes.Push(static_cast<uint8_t>((network >> 24) & 0xFF));
-
-                // Append transaction hash
-                auto txHash = transaction.GetHash();
-                signDataBytes.Append(io::ByteSpan(txHash.Data(), io::UInt256::Size));
-
-                // Create ECPoint from public key bytes
-                auto ecPoint = cryptography::ecc::ECPoint::FromBytes(pubkey.AsSpan());
-
-                // Verify the signature using the cryptography module
-                if (!cryptography::Crypto::VerifySignature(signDataBytes.AsSpan(), signature.AsSpan(), ecPoint))
+                if (!cryptography::ecc::Secp256r1::Verify(sign_data, signature, pubkey))
                 {
                     return VerificationOutput(VerificationResult::InvalidSignature, "Signature verification failed");
                 }
@@ -708,8 +687,52 @@ VerificationOutput TransactionVerifier::VerifyWitness(const ledger::Transaction&
         const auto& witnesses = transaction.GetWitnesses();
         int64_t totalGasConsumed = 0;
 
+        auto hashes = transaction.GetScriptHashesForVerifying();
+        std::cerr << "VerifyWitness: hashes=" << hashes.size() << " witnesses=" << witnesses.size() << std::endl;
+
+        // Fast path for standard signature contracts (already validated in VerifyTransactionSignature)
+        if (hashes.size() == witnesses.size())
+        {
+            bool all_standard = true;
+            for (size_t i = 0; i < witnesses.size(); ++i)
+            {
+                const auto& witness = witnesses[i];
+                const auto& verification_script = witness.GetVerificationScript();
+
+                bool is_signature = IsSignatureContract(verification_script);
+                bool hash_match = hashes[i] == witness.GetScriptHash();
+                std::cerr << "Witness[" << i << "] isSig=" << is_signature << " hashMatch=" << hash_match
+                          << " invSize=" << witness.GetInvocationScript().Size()
+                          << " verSize=" << verification_script.Size()
+                          << " signerHash=" << hashes[i].ToString()
+                          << " witnessHash=" << witness.GetScriptHash().ToString() << std::endl;
+                if (!(is_signature && hash_match)) { all_standard = false; break; }
+            }
+
+            if (all_standard)
+            {
+                return VerificationOutput(VerificationResult::Succeed, "", totalGasConsumed);
+            }
+        }
+
         for (const auto& witness : witnesses)
         {
+            const auto& verificationScript = witness.GetVerificationScript();
+            std::cerr << "Witness verify: vsz=" << verificationScript.Size()
+                      << " isSig=" << IsSignatureContract(verificationScript)
+                      << " isMulti=" << IsMultiSignatureContract(verificationScript)
+                      << " hashMatch=" << (hashes.size() == witnesses.size() &&
+                                           &witness != nullptr &&
+                                           (&witness - &witnesses[0] < hashes.size())
+                                               ? (hashes[&witness - &witnesses[0]] == witness.GetScriptHash())
+                                               : false)
+                      << " invSize=" << witness.GetInvocationScript().Size() << std::endl;
+            if (IsSignatureContract(verificationScript) || IsMultiSignatureContract(verificationScript))
+            {
+                // Standard contracts already validated in signature stage
+                continue;
+            }
+
             // Create application engine for each witness verification
             auto engine = ApplicationEngine::Create(TriggerType::Verification, &transaction, context.snapshot,
                                                     context.persistingBlock, context.maxGas);
@@ -721,7 +744,6 @@ VerificationOutput TransactionVerifier::VerifyWitness(const ledger::Transaction&
             }
 
             // Load the verification script first
-            auto verificationScript = witness.GetVerificationScript();
             if (verificationScript.Size() == 0)
             {
                 return VerificationOutput(VerificationResult::Invalid, "Empty verification script");
@@ -1008,23 +1030,63 @@ int64_t TransactionVerifier::CalculateWitnessVerificationFee(const ledger::Trans
     return totalWitnessFee;
 }
 
-bool TransactionVerifier::IsSignatureContract(const io::ByteVector& script)
+namespace
 {
-    // Check if script is a signature contract (PUSH pubkey + CHECKSIG)
-    // Signature contract format: PUSH(33 bytes pubkey) + CHECKSIG
-    // Use proper opcode constants instead of literal values
-    if (script.Size() != 35)
+bool TryReadPush(const io::ByteVector& script, io::ByteVector& data, size_t& bytes_consumed)
+{
+    if (script.IsEmpty()) return false;
+
+    size_t offset = 0;
+    const uint8_t opcode = script[offset++];
+    size_t length = 0;
+
+    if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHDATA1))
+    {
+        if (script.Size() < offset + 1) return false;
+        length = script[offset++];
+    }
+    else if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHDATA2))
+    {
+        if (script.Size() < offset + 2) return false;
+        length = static_cast<size_t>(script[offset]) | (static_cast<size_t>(script[offset + 1]) << 8);
+        offset += 2;
+    }
+    else if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHDATA4))
+    {
+        if (script.Size() < offset + 4) return false;
+        length = static_cast<size_t>(script[offset]) |
+                 (static_cast<size_t>(script[offset + 1]) << 8) |
+                 (static_cast<size_t>(script[offset + 2]) << 16) |
+                 (static_cast<size_t>(script[offset + 3]) << 24);
+        offset += 4;
+    }
+    else if (opcode >= 0x01 && opcode <= 0x4B)
+    {
+        length = opcode;
+    }
+    else
     {
         return false;
     }
 
-    // Check for PUSH33 opcode (pushes 33 bytes)
-    const uint8_t PUSH33 = 0x21;
-    // Check for CHECKSIG opcode
-    const uint8_t CHECKSIG = 0x41;
+    if (script.Size() < offset + length) return false;
+    data = io::ByteVector(script.Data() + offset, length);
+    bytes_consumed = offset + length;
+    return true;
+}
+}  // namespace
 
-    // Verify script format: PUSH33 + 33 bytes + CHECKSIG
-    return script[0] == PUSH33 && script[34] == CHECKSIG;
+bool TransactionVerifier::IsSignatureContract(const io::ByteVector& script)
+{
+    // Match the exact layout used by Neo N3 signature contracts:
+    // PUSHDATA1 (0x0C) + 33-byte pubkey + SYSCALL (0x41) + 4-byte syscall id.
+    if (script.Size() < 35) return false;
+    if (script[0] != static_cast<uint8_t>(vm::OpCode::PUSHDATA1)) return false;
+    if (script[1] != cryptography::ecc::Secp256r1::PUBLIC_KEY_SIZE) return false;
+    // SYSCALL should be the byte immediately before the 4-byte syscall id at the end
+    size_t syscall_pos = script.Size() - 5;
+    if (script[syscall_pos] != static_cast<uint8_t>(vm::OpCode::SYSCALL)) return false;
+    return true;
 }
 
 bool TransactionVerifier::IsMultiSignatureContract(const io::ByteVector& script)
@@ -1043,43 +1105,16 @@ VerificationResult TransactionVerifier::VerifyTransactionSignature(const ledger:
 {
     try
     {
-        // Get the sign data for this transaction (network magic + hash)
-        io::ByteVector signDataBytes;
-        signDataBytes.Reserve(sizeof(uint32_t) + io::UInt256::Size);
-
-        // Write network magic (little-endian)
-        uint32_t network = ProtocolSettings::GetDefault().GetNetwork();
-        signDataBytes.Push(static_cast<uint8_t>(network & 0xFF));
-        signDataBytes.Push(static_cast<uint8_t>((network >> 8) & 0xFF));
-        signDataBytes.Push(static_cast<uint8_t>((network >> 16) & 0xFF));
-        signDataBytes.Push(static_cast<uint8_t>((network >> 24) & 0xFF));
-
-        // Append transaction hash
-        auto txHash = transaction.GetHash();
-        signDataBytes.Append(io::ByteSpan(txHash.Data(), io::UInt256::Size));
+        const uint32_t network_magic =
+            context.protocolSettings ? context.protocolSettings->GetNetwork() : ProtocolSettings::GetDefault().GetNetwork();
+        const auto sign_data = transaction.GetSignData(network_magic);
 
         // Verify signatures for each witness
         const auto& witnesses = transaction.GetWitnesses();
         for (const auto& witness : witnesses)
         {
-            // Extract signature from invocation script
-            auto invocationScript = witness.GetInvocationScript();
-            if (invocationScript.Size() < 65)  // Minimum size for a signature
-            {
-                return VerificationResult::InvalidSignature;
-            }
-
-            // Get verification script and extract public key
-            auto verificationScript = witness.GetVerificationScript();
-            if (verificationScript.Size() < 35)  // Minimum size for signature contract
-            {
-                return VerificationResult::InvalidSignature;
-            }
-
-            // Complete signature verification implementation
             try
             {
-                // Get the script from the witness
                 const auto& verification_script = witness.GetVerificationScript();
                 if (verification_script.empty())
                 {
@@ -1087,44 +1122,66 @@ VerificationResult TransactionVerifier::VerifyTransactionSignature(const ledger:
                     return VerificationResult::InvalidSignature;
                 }
 
-                // Create application engine to execute verification script
+                if (IsSignatureContract(verification_script))
+                {
+                    const auto& invocation_script = witness.GetInvocationScript();
+                    if (invocation_script.Size() != 66 ||
+                        invocation_script[0] != static_cast<uint8_t>(vm::OpCode::PUSHDATA1) ||
+                        invocation_script[1] != 64)
+                    {
+                        return VerificationResult::InvalidSignature;
+                    }
+
+                    io::ByteSpan pubkey_span(verification_script.Data() + 2, 33);
+                    io::ByteVector pubkey(pubkey_span);
+
+                    io::ByteSpan signature_span(invocation_script.Data() + 2, 64);
+                    io::ByteVector signature(signature_span);
+
+                    if (!cryptography::ecc::Secp256r1::Verify(sign_data, signature, pubkey))
+                    {
+                        return VerificationResult::InvalidSignature;
+                    }
+                    continue;
+                }
+
                 ApplicationEngine verification_engine(TriggerType::Verification, &transaction, context.snapshot);
 
-                // Load verification script into engine
+                static bool logged_script = false;
+                if (!logged_script)
+                {
+                    logged_script = true;
+                    LOG_INFO("Verification script ({} bytes): {}", verification_script.Size(),
+                             verification_script.ToHexString());
+                    LOG_INFO("Invocation script ({} bytes): {}", witness.GetInvocationScript().Size(),
+                             witness.GetInvocationScript().ToHexString());
+                }
+
                 verification_engine.LoadScript(verification_script);
 
-                // Push invocation script parameters onto stack
                 const auto& invocation_script = witness.GetInvocationScript();
                 if (!invocation_script.empty())
                 {
                     verification_engine.LoadScript(invocation_script);
                 }
 
-                // Execute verification script
                 auto execution_result = verification_engine.Execute();
-
-                // Check execution result
                 if (execution_result != VMState::Halt)
                 {
                     neo::logging::Logger::GetDefault().Error("Verification script execution failed");
                     return VerificationResult::InvalidSignature;
                 }
-
-                // Check if verification script returned true
                 if (verification_engine.GetResultStack().empty())
                 {
                     neo::logging::Logger::GetDefault().Error("Verification script returned no result");
                     return VerificationResult::InvalidSignature;
                 }
-
                 auto result_item = verification_engine.GetResultStack().back();
                 if (!result_item || !result_item->GetBoolean())
                 {
                     neo::logging::Logger::GetDefault().Debug("Signature verification failed - script returned false");
                     return VerificationResult::InvalidSignature;
                 }
-
-                neo::logging::Logger::GetDefault().Debug("Signature verification passed - script execution successful");
             }
             catch (const std::exception& e)
             {
@@ -1177,15 +1234,28 @@ VerificationResult TransactionVerifier::VerifyTransactionWitness(const ledger::T
                 auto script_hash = cryptography::Hash::Hash160(verification_script.AsSpan());
                 bool signature_valid = false;
 
+                // Signature contracts have already been checked in VerifyTransactionSignature; just ensure hash match.
+                if (IsSignatureContract(verification_script))
+                {
+                    if (script_hash != signer.GetAccount())
+                    {
+                        neo::logging::Logger::GetDefault().Error("Witness script hash mismatch for signer {}",
+                                                                 signer.GetAccount().ToString());
+                        return VerificationResult::InvalidSignature;
+                    }
+                    continue;
+                }
+
                 try
                 {
                     // Create application engine for witness verification
                     auto engine = ApplicationEngine::Create(TriggerType::Verification, &transaction, context.snapshot,
                                                             nullptr, 0);
 
-                    // Load scripts
-                    engine->LoadScript(witness.GetInvocationScript());
+                    // Load the verification script first so it becomes the entry context
                     engine->LoadScript(verification_script);
+                    // Then load invocation parameters
+                    engine->LoadScript(witness.GetInvocationScript());
 
                     // Execute and check result
                     auto state = engine->Execute();

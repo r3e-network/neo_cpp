@@ -1,8 +1,11 @@
 # Create the RPC unit tests
 add_executable(test_rpc
-    # test_rpc_request.cpp # Disabled due to missing implementations
-    # test_rpc_response.cpp # Disabled due to JSON comparison fix
-    # test_rpc_client.cpp # Disabled due to missing implementations
+    test_rpc_request.cpp
+    test_rpc_response.cpp
+    test_rpc_client.cpp
+    test_rpc_session_manager.cpp
+    test_rpc_server.cpp
+    test_rpc_security.cpp
     test_rpc_stub.cpp
     test_rpc_consensus_state.cpp
 )
@@ -10,8 +13,10 @@ add_executable(test_rpc
 # Include directories
 target_include_directories(test_rpc
     PRIVATE
+        ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/mocks
 )
 
 # Link dependencies
@@ -33,6 +38,7 @@ add_executable(test_rpc_methods
 
 target_include_directories(test_rpc_methods
     PRIVATE
+        ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/include
 )
 
@@ -58,6 +64,7 @@ target_sources(test_rpc_utility
 
 target_include_directories(test_rpc_utility
     PRIVATE
+        ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/include
 )
 

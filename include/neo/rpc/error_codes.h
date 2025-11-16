@@ -86,14 +86,14 @@ enum class ErrorCode : int32_t {
     InvalidMessage = -1304,
     ConsensusError = -1305,
     
-    // Wallet errors
-    WalletNotFound = -600,
-    WalletLocked = -601,
-    WalletUnlockFailed = -602,
-    InvalidPassword = -603,
-    InsufficientPrivileges = -604,
-    KeyNotFound = -605,
-    AddressNotInWallet = -606,
+    // Wallet errors (kept for compatibility but renumbered to avoid conflicts)
+    WalletNotFound = -650,
+    WalletLocked = -651,
+    WalletUnlockFailed = -652,
+    InvalidPassword = -653,
+    InsufficientPrivileges = -654,
+    KeyNotFound = -655,
+    AddressNotInWallet = -656,
     
     // Plugin errors
     PluginNotFound = -700,
@@ -107,7 +107,8 @@ enum class ErrorCode : int32_t {
     StorageKeyNotFound = -803,
     
     // Security errors
-    AccessDenied = -900,
+    AccessDenied = -600,
+    SessionsDisabled = -601,
     AuthenticationFailed = -901,
     AuthorizationFailed = -902,
     RateLimitExceeded = -903,

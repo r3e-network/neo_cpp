@@ -23,6 +23,7 @@ struct CommandLineOptions
     std::string Password;
     std::string DbEngine;
     std::string DbPath;
+    std::string Network;
     bool NoVerify = false;
     std::vector<std::string> Plugins;
     int Verbose = 0;

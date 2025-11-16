@@ -1,13 +1,10 @@
 /**
  * @file message_impl.cpp
- * @brief Network message handling
- * @author Neo C++ Team
- * @date 2025
- * @copyright MIT License
+ * @brief Neo N3 message serialization compatible with the C# node
  */
 
 #include <neo/core/logging.h>
-#include <neo/cryptography/hash.h>
+#include <neo/cryptography/lz4.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
@@ -15,40 +12,48 @@
 #include <neo/network/p2p/ipayload.h>
 #include <neo/network/p2p/message.h>
 #include <neo/network/payload_factory.h>
-#include <zlib.h>
 
 #include <array>
 #include <cstring>
 #include <sstream>
+#include <stdexcept>
 
 namespace neo::network::p2p
 {
-
-// Constant value
-static constexpr uint32_t MAINNET_MAGIC = 0x334F454E;  // "NEO3"
-static constexpr uint32_t TESTNET_MAGIC = 0x4E454F54;  // "TEON"
+namespace
+{
+size_t GetVarSize(size_t length)
+{
+    if (length < 0xFD)
+    {
+        return 1 + length;
+    }
+    if (length <= 0xFFFF)
+    {
+        return 3 + length;
+    }
+    if (length <= 0xFFFFFFFF)
+    {
+        return 5 + length;
+    }
+    return 9 + length;
+}
+}  // namespace
 
 Message::Message() : flags_(MessageFlags::None), command_(MessageCommand::Version), payload_(nullptr) {}
 
 Message::Message(MessageCommand command, std::shared_ptr<IPayload> payload)
     : flags_(MessageFlags::None), command_(command), payload_(payload)
 {
-    // Auto-compress if payload is large enough
-    if (payload && ShouldCompress(command))
-    {
-        io::ByteVector payloadData = payload->ToArray();
-        if (payloadData.Size() >= CompressionMinSize)
-        {
-            CompressPayload(payloadData);
-        }
-        else
-        {
-            payloadRaw_ = std::move(payloadData);
-        }
-    }
-    else if (payload)
+    if (payload)
     {
         payloadRaw_ = payload->ToArray();
+        payloadCompressed_ = payloadRaw_;
+
+        if (ShouldCompress(command) && payloadRaw_.Size() >= CompressionMinSize)
+        {
+            CompressPayload(payloadRaw_);
+        }
     }
 }
 
@@ -60,10 +65,8 @@ std::shared_ptr<IPayload> Message::GetPayload() const { return payload_; }
 
 uint32_t Message::GetSize() const
 {
-    // Header size: magic(4) + command(12) + length(4) + checksum(4) = 24
-    uint32_t headerSize = 24;
-    uint32_t payloadSize = IsCompressed() ? payloadCompressed_.Size() : payloadRaw_.Size();
-    return headerSize + payloadSize;
+    const auto& payloadData = IsCompressed() ? payloadCompressed_ : payloadRaw_;
+    return static_cast<uint32_t>(sizeof(uint8_t) + sizeof(uint8_t) + GetVarSize(payloadData.Size()));
 }
 
 bool Message::IsCompressed() const { return HasFlag(flags_, MessageFlags::Compressed); }
@@ -72,112 +75,25 @@ Message Message::Create(MessageCommand command, std::shared_ptr<IPayload> payloa
 
 void Message::Serialize(io::BinaryWriter& writer) const
 {
-    // Constant value
-    writer.Write(MAINNET_MAGIC);
-
-    // 2. Write command (12 bytes, null-padded)
-    std::string commandStr = GetCommandString(command_);
-    std::array<uint8_t, 12> commandBytes = {};
-    std::memcpy(commandBytes.data(), commandStr.c_str(), std::min(commandStr.length(), size_t(12)));
-
-    for (size_t i = 0; i < 12; ++i)
-    {
-        writer.Write(commandBytes[i]);
-    }
-
-    // 3. Determine payload data
-    io::ByteSpan payloadData;
-    if (IsCompressed())
-    {
-        payloadData = payloadCompressed_.AsSpan();
-    }
-    else
-    {
-        payloadData = payloadRaw_.AsSpan();
-    }
-
-    // 4. Write payload length
-    writer.Write(static_cast<uint32_t>(payloadData.Size()));
-
-    // 5. Write payload checksum
-    uint32_t checksum = CalculatePayloadChecksum(payloadData);
-    writer.Write(checksum);
-
-    // 6. Write payload data
-    if (payloadData.Size() > 0)
-    {
-        for (size_t i = 0; i < payloadData.Size(); ++i)
-        {
-            writer.Write(payloadData[i]);
-        }
-    }
+    writer.Write(static_cast<uint8_t>(flags_));
+    writer.Write(static_cast<uint8_t>(command_));
+    const auto& payloadData = IsCompressed() ? payloadCompressed_ : payloadRaw_;
+    writer.WriteVarBytes(payloadData.AsSpan());
 }
 
 void Message::Deserialize(io::BinaryReader& reader)
 {
-    // Constant value
-    uint32_t magic = reader.ReadUInt32();
-    if (magic != MAINNET_MAGIC && magic != TESTNET_MAGIC)
+    flags_ = static_cast<MessageFlags>(reader.ReadUInt8());
+    command_ = static_cast<MessageCommand>(reader.ReadUInt8());
+
+    auto payloadData = reader.ReadVarBytes(PayloadMaxSize);
+    payloadCompressed_ = io::ByteVector(payloadData);
+    payloadRaw_.Clear();
+    payload_.reset();
+
+    if (!payloadCompressed_.IsEmpty())
     {
-        throw std::runtime_error("Invalid network magic number");
-    }
-
-    // 2. Read command
-    std::array<uint8_t, 12> commandBytes;
-    for (size_t i = 0; i < 12; ++i)
-    {
-        commandBytes[i] = reader.ReadUInt8();
-    }
-
-    // Extract command string (null-terminated)
-    std::string commandStr;
-    for (uint8_t byte : commandBytes)
-    {
-        if (byte == 0) break;
-        commandStr += static_cast<char>(byte);
-    }
-    command_ = GetCommandFromString(commandStr);
-
-    // 3. Read payload length
-    uint32_t payloadLength = reader.ReadUInt32();
-    if (payloadLength > PayloadMaxSize)
-    {
-        throw std::runtime_error("Payload size exceeds maximum");
-    }
-
-    // 4. Read checksum
-    uint32_t expectedChecksum = reader.ReadUInt32();
-
-    // 5. Read payload data
-    if (payloadLength > 0)
-    {
-        io::ByteVector payloadData(payloadLength);
-        for (uint32_t i = 0; i < payloadLength; ++i)
-        {
-            payloadData[i] = reader.ReadUInt8();
-        }
-
-        // Verify checksum
-        uint32_t actualChecksum = CalculatePayloadChecksum(payloadData.AsSpan());
-        if (actualChecksum != expectedChecksum)
-        {
-            throw std::runtime_error("Payload checksum mismatch");
-        }
-
-        // Check if compressed
-        if (HasFlag(flags_, MessageFlags::Compressed))
-        {
-            payloadCompressed_ = std::move(payloadData);
-            DecompressPayload();
-        }
-        else
-        {
-            payloadRaw_ = std::move(payloadData);
-        }
-
-        // Deserialize payload object
-        io::BinaryReader payloadReader(payloadRaw_.AsSpan());
-        payload_ = PayloadFactory::DeserializePayload(command_, payloadReader);
+        DecompressPayload();
     }
 }
 
@@ -200,29 +116,19 @@ void Message::SerializeJson(io::JsonWriter& writer) const
 
 void Message::DeserializeJson(const io::JsonReader& /* reader */)
 {
-    // JSON deserialization requires payload type information
-    // Implementation deferred to derived message types
+    // JSON deserialization requires payload type information and is not used here.
 }
 
 io::ByteVector Message::ToArray(bool enableCompression) const
 {
-    // Create a copy of the message with compression if needed
-    Message msg = *this;
-
-    if (enableCompression && !IsCompressed() && ShouldCompress(command_))
+    if (enableCompression || !IsCompressed())
     {
-        if (payloadRaw_.Size() >= CompressionMinSize)
-        {
-            msg.CompressPayload(payloadRaw_);
-        }
+        const auto& payloadData = IsCompressed() ? payloadCompressed_ : payloadRaw_;
+        return SerializeWithPayload(flags_, payloadData.AsSpan());
     }
 
-    std::ostringstream stream;
-    io::BinaryWriter writer(stream);
-    msg.Serialize(writer);
-
-    std::string data = stream.str();
-    return io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+    const auto uncompressedFlags = ClearFlag(flags_, MessageFlags::Compressed);
+    return SerializeWithPayload(uncompressedFlags, payloadRaw_.AsSpan());
 }
 
 uint32_t Message::TryDeserialize(const io::ByteSpan& data, Message& message)
@@ -242,105 +148,74 @@ uint32_t Message::TryDeserialize(const io::ByteSpan& data, Message& message)
 
 void Message::CompressPayload(const io::ByteVector& uncompressed)
 {
-    // Use zlib compression
-    uLongf compressedSize = compressBound(uncompressed.Size());
-    payloadCompressed_.Resize(compressedSize);
+    payloadRaw_ = uncompressed;
+    payloadCompressed_ = uncompressed;
 
-    int result = compress2(payloadCompressed_.Data(), &compressedSize, uncompressed.Data(), uncompressed.Size(),
-                           Z_BEST_COMPRESSION);
-
-    if (result == Z_OK)
+    if (uncompressed.IsEmpty())
     {
-        payloadCompressed_.Resize(compressedSize);
+        flags_ = ClearFlag(flags_, MessageFlags::Compressed);
+        return;
+    }
 
-        // Only use compression if it actually reduces size
-        if (payloadCompressed_.Size() < uncompressed.Size() - CompressionThreshold)
+    try
+    {
+        auto compressed = cryptography::LZ4::Compress(uncompressed.AsSpan());
+        if (compressed.Size() + CompressionThreshold < uncompressed.Size())
         {
+            payloadCompressed_ = std::move(compressed);
             flags_ = SetFlag(flags_, MessageFlags::Compressed);
-            payloadRaw_ = uncompressed;
         }
         else
         {
-            // Compression didn't help, use uncompressed
-            payloadCompressed_.Clear();
-            payloadRaw_ = uncompressed;
+            flags_ = ClearFlag(flags_, MessageFlags::Compressed);
         }
     }
-    else
+    catch (const std::exception& ex)
     {
-        // Compression failed, use uncompressed
-        payloadCompressed_.Clear();
-        payloadRaw_ = uncompressed;
+        LOG_WARNING("Failed to LZ4-compress payload: {}", ex.what());
+        flags_ = ClearFlag(flags_, MessageFlags::Compressed);
+        payloadCompressed_ = uncompressed;
     }
 }
 
 void Message::DecompressPayload()
 {
-    if (!IsCompressed() || payloadCompressed_.IsEmpty())
+    if (payloadCompressed_.IsEmpty())
     {
+        payloadRaw_.Clear();
+        payload_.reset();
         return;
     }
 
-    // Start with a reasonable buffer size
-    uLongf uncompressedSize = payloadCompressed_.Size() * 4;
-    payloadRaw_.Resize(uncompressedSize);
-
-    int result =
-        uncompress(payloadRaw_.Data(), &uncompressedSize, payloadCompressed_.Data(), payloadCompressed_.Size());
-
-    if (result == Z_OK)
+    if (HasFlag(flags_, MessageFlags::Compressed))
     {
-        payloadRaw_.Resize(uncompressedSize);
-        flags_ = ClearFlag(flags_, MessageFlags::Compressed);
-    }
-    else if (result == Z_BUF_ERROR)
-    {
-        // Buffer too small, try with larger size
-        uncompressedSize = payloadCompressed_.Size() * 10;
-        payloadRaw_.Resize(uncompressedSize);
-
-        result =
-            uncompress(payloadRaw_.Data(), &uncompressedSize, payloadCompressed_.Data(), payloadCompressed_.Size());
-
-        if (result == Z_OK)
-        {
-            payloadRaw_.Resize(uncompressedSize);
-            flags_ = ClearFlag(flags_, MessageFlags::Compressed);
-        }
-        else
-        {
-            throw std::runtime_error("Failed to decompress payload");
-        }
+        auto decompressed = cryptography::LZ4::Decompress(payloadCompressed_.AsSpan(), PayloadMaxSize);
+        payloadRaw_ = std::move(decompressed);
     }
     else
     {
-        throw std::runtime_error("Failed to decompress payload");
+        payloadRaw_ = payloadCompressed_;
     }
+
+    io::BinaryReader payloadReader(payloadRaw_.AsSpan());
+    payload_ = PayloadFactory::DeserializePayload(command_, payloadReader);
 }
 
 bool Message::ShouldCompress(MessageCommand command)
 {
-    // Compress large payloads except for already compressed or small messages
     switch (command)
     {
-        case MessageCommand::Version:
-        case MessageCommand::Verack:
-        case MessageCommand::Ping:
-        case MessageCommand::Pong:
-        case MessageCommand::GetAddr:
-        case MessageCommand::Mempool:
-        case MessageCommand::FilterClear:
-            return false;  // These are small messages
-
         case MessageCommand::Block:
+        case MessageCommand::Extensible:
         case MessageCommand::Transaction:
         case MessageCommand::Headers:
         case MessageCommand::Addr:
-        case MessageCommand::Inv:
-            return true;  // These can be large
-
+        case MessageCommand::MerkleBlock:
+        case MessageCommand::FilterLoad:
+        case MessageCommand::FilterAdd:
+            return true;
         default:
-            return true;  // Compress by default for unknown messages
+            return false;
     }
 }
 
@@ -401,46 +276,50 @@ std::string Message::GetCommandString(MessageCommand command)
 
 MessageCommand Message::GetCommandFromString(const std::string& commandStr)
 {
-    if (commandStr == "version") return MessageCommand::Version;
-    if (commandStr == "verack") return MessageCommand::Verack;
-    if (commandStr == "addr") return MessageCommand::Addr;
-    if (commandStr == "getaddr") return MessageCommand::GetAddr;
-    if (commandStr == "ping") return MessageCommand::Ping;
-    if (commandStr == "pong") return MessageCommand::Pong;
-    if (commandStr == "inv") return MessageCommand::Inv;
-    if (commandStr == "getdata") return MessageCommand::GetData;
-    if (commandStr == "block") return MessageCommand::Block;
-    if (commandStr == "tx") return MessageCommand::Transaction;
-    if (commandStr == "getblocks") return MessageCommand::GetBlocks;
-    if (commandStr == "getheaders") return MessageCommand::GetHeaders;
-    if (commandStr == "headers") return MessageCommand::Headers;
-    if (commandStr == "getblockbyindex") return MessageCommand::GetBlockByIndex;
-    if (commandStr == "mempool") return MessageCommand::Mempool;
-    if (commandStr == "notfound") return MessageCommand::NotFound;
-    if (commandStr == "filterload") return MessageCommand::FilterLoad;
-    if (commandStr == "filteradd") return MessageCommand::FilterAdd;
-    if (commandStr == "filterclear") return MessageCommand::FilterClear;
-    if (commandStr == "merkleblock") return MessageCommand::MerkleBlock;
-    if (commandStr == "reject") return MessageCommand::Reject;
-    if (commandStr == "alert") return MessageCommand::Alert;
-    if (commandStr == "extensible") return MessageCommand::Extensible;
+    static const std::array<std::pair<const char*, MessageCommand>, 22> mapping = {{
+        {"version", MessageCommand::Version},
+        {"verack", MessageCommand::Verack},
+        {"addr", MessageCommand::Addr},
+        {"getaddr", MessageCommand::GetAddr},
+        {"ping", MessageCommand::Ping},
+        {"pong", MessageCommand::Pong},
+        {"inv", MessageCommand::Inv},
+        {"getdata", MessageCommand::GetData},
+        {"block", MessageCommand::Block},
+        {"tx", MessageCommand::Transaction},
+        {"getblocks", MessageCommand::GetBlocks},
+        {"getheaders", MessageCommand::GetHeaders},
+        {"headers", MessageCommand::Headers},
+        {"getblockbyindex", MessageCommand::GetBlockByIndex},
+        {"mempool", MessageCommand::Mempool},
+        {"notfound", MessageCommand::NotFound},
+        {"filterload", MessageCommand::FilterLoad},
+        {"filteradd", MessageCommand::FilterAdd},
+        {"filterclear", MessageCommand::FilterClear},
+        {"merkleblock", MessageCommand::MerkleBlock},
+        {"reject", MessageCommand::Reject},
+        {"extensible", MessageCommand::Extensible},
+    }};
 
-    LOG_WARNING("Unknown message command: {}", commandStr);
-    return MessageCommand::Version;  // Default fallback
-}
-
-uint32_t Message::CalculatePayloadChecksum(const io::ByteSpan& payload)
-{
-    if (payload.IsEmpty())
+    for (const auto& entry : mapping)
     {
-        return 0;
+        if (commandStr == entry.first)
+        {
+            return entry.second;
+        }
     }
-
-    // Neo uses double SHA256 and takes first 4 bytes
-    auto hash = cryptography::Hash::Hash256(payload);
-    uint32_t checksum = 0;
-    std::memcpy(&checksum, hash.Data(), 4);
-    return checksum;
+    throw std::invalid_argument("Unknown message command: " + commandStr);
 }
 
+io::ByteVector Message::SerializeWithPayload(MessageFlags flags, const io::ByteSpan& payload) const
+{
+    std::ostringstream stream;
+    io::BinaryWriter writer(stream);
+    writer.Write(static_cast<uint8_t>(flags));
+    writer.Write(static_cast<uint8_t>(command_));
+    writer.WriteVarBytes(payload);
+
+    const auto data = stream.str();
+    return io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size());
+}
 }  // namespace neo::network::p2p

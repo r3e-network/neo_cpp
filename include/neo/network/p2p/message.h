@@ -29,19 +29,11 @@ class IPayload;
 class Message : public io::ISerializable, public io::IJsonSerializable
 {
    public:
-    /**
-     * @brief Indicates the maximum size of the payload.
-     */
+    /// Maximum payload size supported by the wire format.
     static constexpr uint32_t PayloadMaxSize = 0x02000000;
-
-    /**
-     * @brief The minimum size for compression.
-     */
+    /// Payloads smaller than this will not be compressed.
     static constexpr uint32_t CompressionMinSize = 128;
-
-    /**
-     * @brief The compression threshold.
-     */
+    /// Compression must beat the original size by at least this many bytes.
     static constexpr uint32_t CompressionThreshold = 64;
 
     /**
@@ -145,6 +137,6 @@ class Message : public io::ISerializable, public io::IJsonSerializable
     static bool ShouldCompress(MessageCommand command);
     static std::string GetCommandString(MessageCommand command);
     static MessageCommand GetCommandFromString(const std::string& commandStr);
-    static uint32_t CalculatePayloadChecksum(const io::ByteSpan& payload);
+    io::ByteVector SerializeWithPayload(MessageFlags flags, const io::ByteSpan& payload) const;
 };
 }  // namespace neo::network::p2p

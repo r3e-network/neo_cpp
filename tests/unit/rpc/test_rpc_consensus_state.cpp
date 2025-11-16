@@ -9,6 +9,7 @@
 #include <neo/cryptography/hash.h>
 #include <neo/io/uint256.h>
 #include <neo/network/p2p/local_node.h>
+#include <neo/node/neo_system.h>
 #include <neo/rpc/rpc_methods.h>
 
 #include <optional>
@@ -21,7 +22,7 @@ TEST(RPCConsensusStateTest, ReturnsErrorWhenLocalNodeUnavailable)
     neo::network::p2p::LocalNode::GetInstance().SetConsensusService(nullptr);
 
     nlohmann::json params = nlohmann::json::array();
-    std::shared_ptr<neo::NeoSystem> system;
+    std::shared_ptr<neo::node::NeoSystem> system;
     auto result = neo::rpc::RPCMethods::GetConsensusState(system, params);
 
     ASSERT_TRUE(result.contains("running"));
@@ -81,7 +82,8 @@ TEST(RPCConsensusStateTest, ReturnsDetailedConsensusState)
     neo::rpc::RPCMethods::SetConsensusServiceOverrideForTesting(status, validatorHashes);
 
     nlohmann::json params = nlohmann::json::array();
-    auto result = neo::rpc::RPCMethods::GetConsensusState(nullptr, params);
+    std::shared_ptr<neo::node::NeoSystem> system;
+    auto result = neo::rpc::RPCMethods::GetConsensusState(system, params);
 
     ASSERT_TRUE(result.contains("running"));
     EXPECT_TRUE(result["running"].get<bool>());

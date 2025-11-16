@@ -34,7 +34,7 @@ bool LocalNode::Start(uint16_t port, size_t maxConnections)
         {
             if (capability.GetType() == NodeCapabilityType::TcpServer)
             {
-                static_cast<ServerCapability&>(capability).SetPort(port);
+                capability.SetPort(port);
                 break;
             }
         }
@@ -82,7 +82,7 @@ bool LocalNode::Start(const ChannelsConfig& config)
         {
             if (capability.GetType() == NodeCapabilityType::TcpServer)
             {
-                static_cast<ServerCapability&>(capability).SetPort(config.GetTcp().GetPort());
+                capability.SetPort(config.GetTcp().GetPort());
                 break;
             }
         }
@@ -174,18 +174,19 @@ bool LocalNode::Connect(const IPEndPoint& endpoint)
         // Add the peer to the peer list
         AddPeer(endpoint);
 
-        // Increment the connection attempts
-        auto peer = peerList_.GetPeer(endpoint);
-        if (peer)
+        bool shouldAbort = false;
+        peerList_.ModifyPeer(endpoint, [&shouldAbort](Peer& peer)
+                                           {
+                                               peer.IncrementConnectionAttempts();
+                                               if (peer.GetConnectionAttempts() > 10)
+                                               {
+                                                   peer.SetBad(true);
+                                                   shouldAbort = true;
+                                               }
+                                           });
+        if (shouldAbort)
         {
-            peer->IncrementConnectionAttempts();
-
-            // If the peer has too many connection attempts, mark it as bad
-            if (peer->GetConnectionAttempts() > 10)
-            {
-                peer->SetBad(true);
-                return false;
-            }
+            return false;
         }
 
         // Create a socket

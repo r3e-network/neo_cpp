@@ -52,12 +52,7 @@ uint32_t VersionPayload::GetStartHeight() const
     {
         if (capability.GetType() == NodeCapabilityType::FullNode)
         {
-            // Cast to FullNodeCapability to access start height
-            const auto* fullNodeCap = dynamic_cast<const FullNodeCapability*>(&capability);
-            if (fullNodeCap)
-            {
-                return fullNodeCap->GetStartHeight();
-            }
+            return capability.GetStartHeight();
         }
     }
     return 0;  // Return 0 if no FullNode capability found

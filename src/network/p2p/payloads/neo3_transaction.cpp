@@ -12,8 +12,10 @@
 #include <neo/io/binary_writer.h>
 #include <neo/io/memory_stream.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
+#include <neo/protocol_settings.h>
 
 #include <algorithm>
+#include <cstring>
 #include <set>
 #include <stdexcept>
 
@@ -250,14 +252,18 @@ void Neo3Transaction::Deserialize(io::BinaryReader& reader)
 {
     DeserializeUnsigned(reader);
     witnesses_.clear();
-    witnesses_.reserve(signers_.size());
-    for (size_t i = 0; i < signers_.size(); i++)
-    {
-        witnesses_.push_back(reader.ReadSerializable<ledger::Witness>());
-    }
-    if (witnesses_.size() != signers_.size())
+    auto witness_count = reader.ReadVarInt();
+    if (witness_count < 0) throw std::runtime_error("Invalid witness count");
+
+    if (static_cast<size_t>(witness_count) != signers_.size())
     {
         throw std::runtime_error("Witnesses count does not match signers count");
+    }
+
+    witnesses_.reserve(static_cast<size_t>(witness_count));
+    for (int64_t i = 0; i < witness_count; ++i)
+    {
+        witnesses_.push_back(reader.ReadSerializable<ledger::Witness>());
     }
 }
 
@@ -320,13 +326,28 @@ void Neo3Transaction::DeserializeUnsigned(io::BinaryReader& reader)
     }
 
     script_ = reader.ReadVarBytes(65536);  // ushort.MaxValue
-    if (script_.empty())
-    {
-        throw std::runtime_error("Script cannot be empty");
-    }
 
     InvalidateCache();
 }
+
+io::ByteVector Neo3Transaction::GetSignData(uint32_t networkMagic) const
+{
+    io::ByteVector buffer(sizeof(uint32_t) + io::UInt256::Size);
+    auto* data = buffer.Data();
+    data[0] = static_cast<uint8_t>(networkMagic & 0xFF);
+    data[1] = static_cast<uint8_t>((networkMagic >> 8) & 0xFF);
+    data[2] = static_cast<uint8_t>((networkMagic >> 16) & 0xFF);
+    data[3] = static_cast<uint8_t>((networkMagic >> 24) & 0xFF);
+    const auto hash = GetHash();
+    std::memcpy(data + sizeof(uint32_t), hash.Data(), io::UInt256::Size);
+    return buffer;
+}
+
+io::ByteVector Neo3Transaction::GetSignData() const
+{
+    return GetSignData(ProtocolSettings::GetDefault().GetNetwork());
+}
+
 
 void Neo3Transaction::SerializeJson(io::JsonWriter& writer) const
 {
@@ -719,23 +740,14 @@ int Neo3Transaction::GetWitnessSize(const ledger::Witness& witness) const
 
 std::vector<ledger::TransactionAttribute> Neo3Transaction::DeserializeAttributes(io::BinaryReader& reader, int maxCount)
 {
-    int count = static_cast<int>(reader.ReadVarInt(maxCount));
+    int count = static_cast<int>(reader.ReadVarInt());
     std::vector<ledger::TransactionAttribute> attributes;
     attributes.reserve(count);
 
-    std::set<ledger::TransactionAttribute::Usage> seenTypes;
     for (int i = 0; i < count; i++)
     {
         ledger::TransactionAttribute attr;
         attr.Deserialize(reader);
-
-        // Check for duplicate attribute types
-        if (seenTypes.count(attr.GetUsage()) > 0)
-        {
-            throw std::runtime_error("Duplicate attribute type");
-        }
-        seenTypes.insert(attr.GetUsage());
-
         attributes.push_back(std::move(attr));
     }
 

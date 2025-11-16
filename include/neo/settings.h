@@ -13,6 +13,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 namespace neo
 {
@@ -37,13 +38,28 @@ struct RpcSettings
     bool Enabled = false;                     // Enable RPC server
     int Port = 10332;                         // RPC server port
     std::string BindAddress = "127.0.0.1";    // Bind address
+    std::string Username;                     // Basic auth username
+    std::string Password;                     // Basic auth password
     bool EnableCors = false;                  // Enable CORS
     std::vector<std::string> AllowedOrigins;  // Allowed CORS origins
     int MaxConnections = 40;                  // Maximum concurrent connections
     bool EnableSsl = false;                   // Enable SSL/TLS
     std::string SslCert;                      // SSL certificate path
     std::string SslKey;                       // SSL private key path
+    std::vector<std::string> TrustedAuthorities;  // Client certificate authorities
+    std::string SslCiphers;                   // Optional cipher list
+    std::string MinTlsVersion = "1.2";        // Minimum TLS protocol
     int RequestTimeoutMs = 30000;             // Request timeout in milliseconds
+    int MaxIteratorResultItems = 100;         // Maximum iterator items per RPC page
+    bool EnableRateLimit = false;             // Enable global rate limiting
+    int MaxRequestsPerSecond = 100;           // Maximum requests per window
+    int RateLimitWindowSeconds = 1;           // Rate limit window size
+    int MaxRequestBodyBytes = 10 * 1024 * 1024;  // Max HTTP payload size
+    bool SessionEnabled = false;              // Enable RPC session tracking
+    int SessionExpirationMinutes = 60;        // Session expiration interval
+    bool EnableAuditTrail = false;            // Enable audit logging
+    bool EnableSecurityLogging = false;       // Enable security logging
+    int MaxFindResultItems = 100;             // Max iterator results for find RPCs
 };
 
 /**
@@ -58,6 +74,7 @@ struct P2PSettings
     int MaxConnectionsPerAddress = 3;     // Max connections per IP address
     int DialTimeoutMs = 5000;             // Connection timeout in milliseconds
     bool EnableUpnp = true;               // Enable UPnP port mapping
+    bool EnableCompression = true;        // Enable P2P compression
     std::vector<std::string> Seeds;       // Seed node endpoints (host:port)
 };
 

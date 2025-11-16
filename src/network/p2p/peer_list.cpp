@@ -167,6 +167,21 @@ bool PeerList::UpdatePeer(const Peer& peer)
     return true;
 }
 
+void PeerList::AddOrUpdatePeer(const Peer& peer)
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    peers_[GetKey(peer.GetEndPoint())] = peer;
+}
+
+bool PeerList::ModifyPeer(const IPEndPoint& endpoint, const std::function<void(Peer&)>& modifier)
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    auto it = peers_.find(GetKey(endpoint));
+    if (it == peers_.end()) return false;
+    modifier(it->second);
+    return true;
+}
+
 bool PeerList::RemovePeer(const IPEndPoint& endpoint)
 {
     std::lock_guard<std::mutex> lock(mutex_);

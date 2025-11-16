@@ -165,14 +165,15 @@ io::ByteVector Secp256r1::Sign(const io::ByteVector& data, const io::ByteVector&
     ECDSA_SIG* sig = ECDSA_do_sign(hash.Data(), static_cast<int>(hash.AsSpan().Size()), key);
     check(sig != nullptr, "Failed to produce signature");
 
-    unsigned char* der = nullptr;
-    int derLen = i2d_ECDSA_SIG(sig, &der);
-    check(derLen > 0, "Failed to encode signature");
+    const BIGNUM* r = nullptr;
+    const BIGNUM* s = nullptr;
+    ECDSA_SIG_get0(sig, &r, &s);
+    check(r != nullptr && s != nullptr, "Failed to extract r/s");
 
-    io::ByteVector signature(static_cast<size_t>(derLen));
-    std::memcpy(signature.Data(), der, static_cast<size_t>(derLen));
+    io::ByteVector signature(64);
+    check(BN_bn2binpad(r, signature.Data(), 32) == 32, "Failed to encode r");
+    check(BN_bn2binpad(s, signature.Data() + 32, 32) == 32, "Failed to encode s");
 
-    OPENSSL_free(der);
     ECDSA_SIG_free(sig);
     BN_free(priv);
     EC_KEY_free(key);
@@ -215,13 +216,43 @@ bool Secp256r1::Verify(const io::ByteVector& data, const io::ByteVector& signatu
         return false;
     }
 
-    const unsigned char* sigPtr = signature.Data();
-    ECDSA_SIG* sig = d2i_ECDSA_SIG(nullptr, &sigPtr, static_cast<long>(signature.Size()));
-    if (!sig)
+    ECDSA_SIG* sig = nullptr;
+
+    if (signature.Size() == 64)
     {
-        EC_POINT_free(point);
-        EC_KEY_free(key);
-        return false;
+        // Raw (r||s) format
+        BIGNUM* r = BN_bin2bn(signature.Data(), 32, nullptr);
+        BIGNUM* s = BN_bin2bn(signature.Data() + 32, 32, nullptr);
+        if (!r || !s)
+        {
+            BN_free(r);
+            BN_free(s);
+            EC_POINT_free(point);
+            EC_KEY_free(key);
+            return false;
+        }
+        sig = ECDSA_SIG_new();
+        if (!sig || ECDSA_SIG_set0(sig, r, s) != 1)
+        {
+            BN_free(r);
+            BN_free(s);
+            ECDSA_SIG_free(sig);
+            EC_POINT_free(point);
+            EC_KEY_free(key);
+            return false;
+        }
+    }
+    else
+    {
+        // Fall back to DER decoding
+        const unsigned char* sigPtr = signature.Data();
+        sig = d2i_ECDSA_SIG(nullptr, &sigPtr, static_cast<long>(signature.Size()));
+        if (!sig)
+        {
+            EC_POINT_free(point);
+            EC_KEY_free(key);
+            return false;
+        }
     }
 
     int result = ECDSA_do_verify(hash.Data(), static_cast<int>(hash.AsSpan().Size()), sig, key);

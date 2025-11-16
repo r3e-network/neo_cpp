@@ -14,6 +14,7 @@
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/channels_config.h>
 #include <neo/network/p2p/local_node.h>
+#include <neo/network/p2p/network_synchronizer.h>
 #include <neo/network/p2p_server.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/protocol_settings.h>
@@ -99,6 +100,11 @@ class NeoSystem
      * @return The local P2P node
      */
     std::shared_ptr<network::p2p::LocalNode> GetLocalNode() const;
+
+    /**
+     * @brief Gets the network synchronizer instance.
+     */
+    std::shared_ptr<network::p2p::NetworkSynchronizer> GetNetworkSynchronizer() const;
 
     /**
      * @brief Sets the P2P channels configuration that should be used when starting the ledger system.

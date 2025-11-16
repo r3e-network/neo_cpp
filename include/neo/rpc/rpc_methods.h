@@ -29,6 +29,16 @@ class RPCMethods
 {
    public:
     /**
+     * @brief Configures the maximum number of items returned by findstorage.
+     */
+    static void SetMaxFindResultItems(size_t maxItems);
+
+    /**
+     * @brief Gets the configured maximum number of items returned by findstorage.
+     */
+    static size_t GetMaxFindResultItems();
+
+    /**
      * @brief Gets the version.
      * @param neoSystem The Neo system.
      * @param params The parameters.
@@ -265,6 +275,7 @@ class RPCMethods
      * @return The result.
      */
     static nlohmann::json TraverseIterator(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+    static nlohmann::json CreateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
     /**
      * @brief Lists loaded plugins.

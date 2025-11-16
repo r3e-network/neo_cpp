@@ -219,6 +219,7 @@ class RemoteNode
     std::string userAgent_;
     std::vector<NodeCapability> capabilities_;
     uint32_t lastBlockIndex_;
+    bool remoteAllowsCompression_;
 
     void OnMessageReceived(const Message& message);
     void OnDisconnected();

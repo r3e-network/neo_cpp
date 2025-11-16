@@ -67,9 +67,11 @@ ValidationResult ValidateBasicFormat(const Transaction& transaction, const Proto
         return ValidationResult::InvalidWitness;
     }
 
-    if (signers.size() > maxAttributes)
+    const auto& attributes = transaction.GetAttributes();
+    if (attributes.size() > maxAttributes)
     {
-        LOG_WARNING("Transaction {} has too many signers ({})", transaction.GetHash().ToString(), signers.size());
+        LOG_WARNING("Transaction {} has too many attributes ({})", transaction.GetHash().ToString(),
+                    attributes.size());
         return ValidationResult::InvalidAttribute;
     }
 
@@ -202,7 +204,8 @@ ValidationResult ValidateTransaction(const Transaction& transaction, std::shared
     }
 
     smartcontract::VerificationContext context(snapshot, nullptr, smartcontract::ApplicationEngine::TestModeGas, false,
-                                               false);
+                                               false, protocolSettings);
+
     auto verification = smartcontract::TransactionVerifier::Instance().VerifyTransaction(transaction, context);
     if (verification.result != smartcontract::VerificationResult::Succeed)
     {

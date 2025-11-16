@@ -7,6 +7,9 @@ add_library(neo_rpc OBJECT
     error_codes.cpp
     rpc_methods_consensus_state.cpp
     rpc_session_manager.cpp
+    rpc_client.cpp
+    rpc_request.cpp
+    rpc_response.cpp
     # rpc_server_complete_production.cpp
     # metrics_endpoint.cpp
     # rpc_server_unified.cpp

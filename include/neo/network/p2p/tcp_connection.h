@@ -83,6 +83,7 @@ class TcpConnection : public Connection, public std::enable_shared_from_this<Tcp
     std::atomic<bool> connected_;
     std::mutex sendMutex_;
     io::ByteVector receiveBuffer_;
+    size_t bufferedBytes_{0};
 
     void DoReceive();
     void HandleReceive(const std::error_code& error, std::size_t bytesTransferred);

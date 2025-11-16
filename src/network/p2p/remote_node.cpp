@@ -30,16 +30,23 @@
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/remote_node.h>
 
+#include <algorithm>
 #include <cstdint>
 #include <functional>
 #include <memory>
+#include <random>
 #include <string>
 #include <vector>
 
 namespace neo::network::p2p
 {
 RemoteNode::RemoteNode(LocalNode* localNode, std::shared_ptr<Connection> connection)
-    : localNode_(localNode), connection_(connection), handshaked_(false), version_(0), lastBlockIndex_(0)
+    : localNode_(localNode),
+      connection_(connection),
+      handshaked_(false),
+      version_(0),
+      lastBlockIndex_(0),
+      remoteAllowsCompression_(false)
 {
     // Set up callbacks
     if (connection_)
@@ -82,7 +89,13 @@ bool RemoteNode::Send(const Message& message, bool enableCompression)
 {
     if (!IsConnected()) return false;
 
-    return connection_->Send(message, enableCompression);
+    bool allowCompression = enableCompression && remoteAllowsCompression_;
+    if (localNode_ && !localNode_->IsCompressionEnabled())
+    {
+        allowCompression = false;
+    }
+
+    return connection_->Send(message, allowCompression);
 }
 
 bool RemoteNode::SendVersion()
@@ -354,10 +367,35 @@ void RemoteNode::ProcessVersionMessage(const Message& message)
 
     LOG_INFO("Received Version message from peer");
 
+    // Validate network magic to ensure we're on the same network
+    if (localNode_ && payload->GetNetwork() != localNode_->GetNetworkMagic())
+    {
+        LOG_WARNING("Rejecting peer due to network magic mismatch (remote=" +
+                    std::to_string(payload->GetNetwork()) + ", local=" +
+                    std::to_string(localNode_->GetNetworkMagic()) + ")");
+        Disconnect();
+        return;
+    }
+
+    // Prevent self-connection by comparing nonces
+    if (localNode_ && payload->GetNonce() == localNode_->GetNonce())
+    {
+        LOG_WARNING("Rejecting peer " + GetRemoteEndPoint().ToString() +
+                    " due to identical nonce (self-connection detected)");
+        Disconnect();
+        return;
+    }
+
     // Store the version information
     version_ = payload->GetVersion();
     userAgent_ = payload->GetUserAgent();
     capabilities_ = payload->GetCapabilities();
+    lastBlockIndex_ = payload->GetStartHeight();
+    remoteAllowsCompression_ = payload->GetAllowCompression();
+    if (!remoteAllowsCompression_)
+    {
+        LOG_INFO("Remote peer {} does not support compression", GetRemoteEndPoint().ToString());
+    }
 
     // Send verack message
     LOG_DEBUG("Sending VerAck message");
@@ -635,45 +673,44 @@ void RemoteNode::ProcessGetAddrMessage(const Message& message)
 
     // GetAddr message has no payload, just respond with addr message
     // containing known peer addresses
-    if (localNode_)
+    if (!localNode_) return;
+
+    std::vector<payloads::NetworkAddressWithTime> addresses;
+    constexpr size_t maxAddressCount = payloads::AddrPayload::MaxCountToSend;
+
+    auto peerAddresses = localNode_->GetPeerList().GetPeers();
+    std::shuffle(peerAddresses.begin(), peerAddresses.end(), std::mt19937{std::random_device{}()});
+    auto selfEndpoint = GetRemoteEndPoint();
+
+    const auto now = static_cast<uint32_t>(
+        std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count());
+
+    for (const auto& peer : peerAddresses)
     {
-        auto& peerList = localNode_->GetPeerList();
-        std::vector<payloads::NetworkAddressWithTime> addresses;
+        if (addresses.size() >= maxAddressCount) break;
 
-        // Collect up to maxCount addresses from known connected peers
-        constexpr size_t maxAddressCount = payloads::AddrPayload::MaxCountToSend;
-        auto connectedPeers = peerList.GetConnectedPeers();
+        const auto& endpoint = peer.GetEndPoint();
+        if (endpoint == selfEndpoint) continue;
 
-        size_t addressCount = 0;
-        for (const auto& peer : connectedPeers)
+        auto caps = peer.GetCapabilities();
+        if (caps.empty())
         {
-            if (addressCount >= maxAddressCount) break;
-
-            // Create NetworkAddressWithTime from peer info
-            auto endpoint = peer.GetEndPoint();  // Peer has GetEndPoint method
-            auto capabilities = peer.GetCapabilities();
-
-            // Use current timestamp as the address timestamp
-            uint32_t timestamp = static_cast<uint32_t>(
-                std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch())
-                    .count());
-
-            // Convert capabilities to services bitmask
-            uint64_t services = 0;
-            for (const auto& cap : capabilities)
-            {
-                services |= static_cast<uint64_t>(cap.GetType());
-            }
-
-            addresses.emplace_back(timestamp, services, endpoint.GetAddress().ToString(), endpoint.GetPort());
-            addressCount++;
+            NodeCapability tcpCapability(NodeCapabilityType::TcpServer);
+            tcpCapability.SetPort(endpoint.GetPort());
+            caps.push_back(tcpCapability);
         }
 
-        if (!addresses.empty())
+        payloads::NetworkAddressWithTime addr(now, endpoint.GetAddress(), caps);
+        if (addr.GetPort() == 0 && endpoint.GetPort() != 0)
         {
-            auto addrPayload = std::make_shared<payloads::AddrPayload>(addresses);
-            Send(Message(MessageCommand::Addr, addrPayload));
+            addr.SetPort(endpoint.GetPort());
         }
+        addresses.push_back(addr);
+    }
+
+    if (!addresses.empty())
+    {
+        Send(Message(MessageCommand::Addr, std::make_shared<payloads::AddrPayload>(addresses)));
     }
 }
 

@@ -82,9 +82,24 @@ class RpcSessionManager
     bool SessionExists(const std::string& sessionId) const;
 
     /**
-     * @brief Test-only helper to adjust session timeout (does not persist across process runs).
+     * @brief Adjusts the session timeout duration.
      */
-    void SetSessionTimeoutForTests(std::chrono::steady_clock::duration duration);
+    void SetSessionTimeout(std::chrono::steady_clock::duration duration);
+
+    /**
+     * @brief Sets the maximum iterator items that can be returned in one traversal.
+     */
+    void SetMaxIteratorItems(size_t max_items);
+
+    /**
+     * @brief Gets the maximum iterator items allowed per traversal.
+     */
+    size_t GetMaxIteratorItems() const { return max_iterator_items_; }
+
+    /**
+     * @brief Test-only helper retained for compatibility.
+     */
+    void SetSessionTimeoutForTests(std::chrono::steady_clock::duration duration) { SetSessionTimeout(duration); }
 
    private:
     static constexpr auto kSessionTimeout = std::chrono::minutes(5);
@@ -112,5 +127,6 @@ class RpcSessionManager
     std::unordered_map<std::string, Session> sessions_;
     std::atomic<uint64_t> sessionCounter_{0};
     std::chrono::steady_clock::duration sessionTimeout_{kSessionTimeout};
+    size_t max_iterator_items_{100};
 };
 }  // namespace neo::rpc

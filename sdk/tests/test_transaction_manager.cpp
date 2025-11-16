@@ -35,12 +35,39 @@ protected:
         // Create some test accounts
         wallet->CreateAccount("Account1");
         wallet->CreateAccount("Account2");
+
+        txManager = std::make_unique<TransactionManager>(CreateMockRpcClient());
     }
     
     void TearDown() override {
         if (std::filesystem::exists(walletPath)) {
             std::filesystem::remove(walletPath);
         }
+    }
+
+    std::shared_ptr<rpc::RpcClient> CreateMockRpcClient() {
+        class MockRpcClient : public rpc::RpcClient {
+        public:
+            MockRpcClient() : rpc::RpcClient("http://localhost", nullptr) {}
+
+            nlohmann::json RpcSend(const std::string& method, const std::vector<nlohmann::json>& params) override {
+                (void)params;
+                if (method == "calculatenetworkfee") {
+                    return nlohmann::json{{"networkfee", 100000000}, {"systemfee", 100}};
+                }
+                if (method == "invokescript") {
+                    return nlohmann::json{{"state", "HALT"}, {"gasconsumed", 100}};
+                }
+                return nlohmann::json::object();
+            }
+
+            uint32_t GetBlockCount() override { return 1; }
+            std::string SendRawTransaction(const std::string& rawTx) override { return rawTx; }
+            uint32_t GetTransactionHeight(const std::string&) override { return 0; }
+            nlohmann::json GetApplicationLog(const std::string&) override { return nlohmann::json::object(); }
+        };
+
+        return std::make_shared<MockRpcClient>();
     }
     
     UInt160 GetTestScriptHash() {

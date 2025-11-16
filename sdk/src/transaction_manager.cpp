@@ -2,6 +2,9 @@
 
 #include <neo/sdk/transaction/transaction_manager.h>
 #include <neo/sdk/crypto/crypto.h>
+#include <neo/vm/script_builder.h>
+#include <neo/vm/opcode.h>
+#include <neo/io/byte_span.h>
 #include <openssl/sha.h>
 #include <random>
 #include <chrono>
@@ -22,6 +25,11 @@ namespace {
             ss << std::setw(2) << static_cast<int>(byte);
         }
         return ss.str();
+    }
+
+    std::vector<uint8_t> UInt160ToBytes(const core::UInt160& value) {
+        auto array = value.ToArray();
+        return std::vector<uint8_t>(array.begin(), array.end());
     }
 
     // Convert hex string to bytes
@@ -101,36 +109,26 @@ namespace {
     }
 
     // Address to script hash conversion
-    std::vector<uint8_t> AddressToScriptHash(const std::string& address) {
-        // Validate address format
-        if (address.empty() || (address[0] != 'N' && address[0] != 'A')) {
+    core::UInt160 AddressToScriptHash(const std::string& address) {
+        if (address.empty()) {
             throw std::invalid_argument("Invalid Neo address format");
         }
-        
-        // Base58 decode the address
+
         std::vector<uint8_t> decoded = crypto::Base58CheckDecode(address);
-        
-        // Extract the script hash (skip version byte)
         if (decoded.size() < 21) {
             throw std::invalid_argument("Invalid address length");
         }
-        
-        std::vector<uint8_t> scriptHash(decoded.begin() + 1, decoded.begin() + 21);
-        return scriptHash;
+
+        neo::io::ByteSpan span(decoded.data() + 1, 20);
+        return core::UInt160::FromBytes(span);
     }
 
     // Script hash to address conversion
-    std::string ScriptHashToAddress(const std::vector<uint8_t>& scriptHash) {
-        if (scriptHash.size() != 20) {
-            throw std::invalid_argument("Script hash must be 20 bytes");
-        }
-        
-        // Add version byte (0x35 for mainnet N-addresses)
+    std::string ScriptHashToAddress(const core::UInt160& scriptHash) {
+        auto bytes = scriptHash.ToArray();
         std::vector<uint8_t> data;
         data.push_back(0x35);
-        data.insert(data.end(), scriptHash.begin(), scriptHash.end());
-        
-        // Base58 encode with checksum
+        data.insert(data.end(), bytes.begin(), bytes.end());
         return crypto::Base58CheckEncode(data);
     }
 }
@@ -188,14 +186,14 @@ std::string Transaction::GetHash() const {
     // Signers
     WriteVarInt(data, signers.size());
     for (const auto& signer : signers) {
-        auto scriptHash = HexToBytes(signer.account);
+        auto scriptHash = UInt160ToBytes(signer.account);
         data.insert(data.end(), scriptHash.begin(), scriptHash.end());
         data.push_back(static_cast<uint8_t>(signer.scopes));
         
         if ((static_cast<uint8_t>(signer.scopes) & static_cast<uint8_t>(WitnessScope::CustomContracts)) != 0) {
             WriteVarInt(data, signer.allowedContracts.size());
             for (const auto& contract : signer.allowedContracts) {
-                auto contractHash = HexToBytes(contract);
+                auto contractHash = UInt160ToBytes(contract);
                 data.insert(data.end(), contractHash.begin(), contractHash.end());
             }
         }
@@ -228,6 +226,34 @@ std::string Transaction::GetHash() const {
     return BytesToHex(std::vector<uint8_t>(hash, hash + SHA256_DIGEST_LENGTH));
 }
 
+std::vector<uint8_t> Transaction::GetSignData() const {
+    std::vector<uint8_t> data;
+
+    data.push_back(version);
+    WriteFixed(data, nonce);
+    WriteFixed(data, systemFee);
+    WriteFixed(data, networkFee);
+    WriteFixed(data, validUntilBlock);
+
+    WriteVarInt(data, signers.size());
+    for (const auto& signer : signers) {
+        auto scriptHash = UInt160ToBytes(signer.account);
+        data.insert(data.end(), scriptHash.begin(), scriptHash.end());
+        data.push_back(static_cast<uint8_t>(signer.scopes));
+    }
+
+    WriteVarInt(data, attributes.size());
+    for (const auto& attr : attributes) {
+        data.push_back(static_cast<uint8_t>(attr.type));
+        WriteVarInt(data, attr.data.size());
+        data.insert(data.end(), attr.data.begin(), attr.data.end());
+    }
+
+    WriteVarInt(data, script.size());
+    data.insert(data.end(), script.begin(), script.end());
+    return data;
+}
+
 std::vector<uint8_t> Transaction::Serialize() const {
     std::vector<uint8_t> data;
     
@@ -241,7 +267,7 @@ std::vector<uint8_t> Transaction::Serialize() const {
     // Signers
     WriteVarInt(data, signers.size());
     for (const auto& signer : signers) {
-        auto scriptHash = HexToBytes(signer.account);
+        auto scriptHash = UInt160ToBytes(signer.account);
         data.insert(data.end(), scriptHash.begin(), scriptHash.end());
         data.push_back(static_cast<uint8_t>(signer.scopes));
     }
@@ -297,8 +323,8 @@ std::shared_ptr<Transaction> Transaction::Deserialize(const std::vector<uint8_t>
     uint64_t signerCount = ReadVarInt(data, offset);
     for (uint64_t i = 0; i < signerCount; i++) {
         Signer signer;
-        std::vector<uint8_t> scriptHash(data.begin() + offset, data.begin() + offset + 20);
-        signer.account = BytesToHex(scriptHash);
+        neo::io::ByteSpan span(data.data() + offset, 20);
+        signer.account = core::UInt160::FromBytes(span);
         offset += 20;
         signer.scopes = static_cast<WitnessScope>(data[offset++]);
         tx->signers.push_back(signer);
@@ -493,7 +519,7 @@ std::shared_ptr<Transaction> TransactionManager::CreateTransferTransaction(
     auto tx = std::make_shared<Transaction>();
     
     // Set sender
-    tx->sender = from;
+    tx->sender = AddressToScriptHash(from);
     
     // Build transfer script
     tx->script = BuildTransferScript(tokenHash, from, to, amount);
@@ -522,7 +548,7 @@ std::shared_ptr<Transaction> TransactionManager::CreateContractTransaction(
     auto tx = std::make_shared<Transaction>();
     
     // Set sender
-    tx->sender = sender;
+    tx->sender = AddressToScriptHash(sender);
     
     // Build invocation script
     tx->script = BuildInvocationScript(contractHash, method, params);
@@ -557,7 +583,7 @@ std::shared_ptr<Transaction> TransactionManager::CreateDeployTransaction(
     tx->script = sb.Build();
     
     // Set sender
-    tx->sender = sender;
+    tx->sender = AddressToScriptHash(sender);
     
     // Add signer
     Signer signer;
@@ -603,7 +629,7 @@ std::shared_ptr<Transaction> TransactionManager::CreateMultiTransferTransaction(
     
     // Set sender to first signer
     if (!uniqueSenders.empty()) {
-        tx->sender = *uniqueSenders.begin();
+        tx->sender = AddressToScriptHash(*uniqueSenders.begin());
     }
     
     // Set valid until block
@@ -742,7 +768,7 @@ std::shared_ptr<Transaction> TransactionManager::CreateClaimGasTransaction(const
     tx->script = sb.Build();
     
     // Set sender
-    tx->sender = address;
+    tx->sender = AddressToScriptHash(address);
     
     // Add signer
     Signer signer;
@@ -772,7 +798,7 @@ std::shared_ptr<Transaction> TransactionManager::CreateVoteTransaction(const std
     tx->script = sb.Build();
     
     // Set sender and signer
-    tx->sender = address;
+    tx->sender = AddressToScriptHash(address);
     Signer signer;
     signer.account = AddressToScriptHash(address);
     signer.scopes = WitnessScope::CalledByEntry;
@@ -796,7 +822,7 @@ std::shared_ptr<Transaction> TransactionManager::CreateRegisterCandidateTransact
     tx->script = sb.Build();
     
     // Set sender and signer
-    tx->sender = address;
+    tx->sender = AddressToScriptHash(address);
     Signer signer;
     signer.account = AddressToScriptHash(address);
     signer.scopes = WitnessScope::CalledByEntry;
@@ -815,14 +841,153 @@ uint32_t TransactionManager::GetCurrentBlockHeight() {
     return rpcClient_->GetBlockCount();
 }
 
-std::string TransactionManager::AddressToScriptHash(const std::string& address) {
-    auto scriptHash = ::AddressToScriptHash(address);
-    return BytesToHex(scriptHash);
+std::shared_ptr<Transaction> TransactionManager::CreateTransaction() {
+    auto tx = std::make_shared<Transaction>();
+    tx->validUntilBlock = GetCurrentBlockHeight() + 100;
+    tx->sender = core::UInt160::Zero();
+    return tx;
 }
 
-std::string TransactionManager::ScriptHashToAddress(const std::string& scriptHash) {
-    auto scriptHashBytes = HexToBytes(scriptHash);
-    return ::ScriptHashToAddress(scriptHashBytes);
+void TransactionManager::AddSigner(const std::shared_ptr<Transaction>& tx, const core::UInt160& account,
+                                   WitnessScope scope, const std::vector<core::UInt160>& allowedContracts) {
+    if (!tx) {
+        throw std::invalid_argument("Transaction cannot be null");
+    }
+
+    auto existing = std::find_if(tx->signers.begin(), tx->signers.end(),
+                                 [&](const Signer& signer) { return signer.account == account; });
+    if (existing != tx->signers.end()) {
+        existing->scopes = scope;
+        existing->allowedContracts = allowedContracts;
+        return;
+    }
+
+    Signer signer;
+    signer.account = account;
+    signer.scopes = scope;
+    signer.allowedContracts = allowedContracts;
+    tx->signers.push_back(signer);
+}
+
+void TransactionManager::AddWitness(const std::shared_ptr<Transaction>& tx, const std::vector<uint8_t>& invocation,
+                                    const std::vector<uint8_t>& verification) {
+    if (!tx) {
+        throw std::invalid_argument("Transaction cannot be null");
+    }
+
+    Witness witness;
+    witness.invocationScript = invocation;
+    witness.verificationScript = verification;
+    tx->witnesses.push_back(witness);
+}
+
+void TransactionManager::AddWitness(const std::shared_ptr<Transaction>& tx, const core::UInt160& contractHash) {
+    if (!tx) {
+        throw std::invalid_argument("Transaction cannot be null");
+    }
+
+    neo::vm::ScriptBuilder builder;
+    builder.Push(contractHash.ToArray());
+    builder.Emit(static_cast<uint8_t>(neo::vm::OpCode::RET));
+    std::vector<uint8_t> verification = builder.Build();
+    std::vector<uint8_t> invocation = {static_cast<uint8_t>(neo::vm::OpCode::PUSH0)};
+    AddWitness(tx, invocation, verification);
+}
+
+void TransactionManager::AddSignature(const std::shared_ptr<Transaction>& tx, const crypto::KeyPair& keyPair) {
+    if (!tx) {
+        throw std::invalid_argument("Transaction cannot be null");
+    }
+
+    auto data = tx->GetSignData();
+    auto signature = keyPair.Sign(data);
+
+    neo::vm::ScriptBuilder invocationBuilder;
+    invocationBuilder.Push(signature);
+    auto invocation = invocationBuilder.Build();
+
+    auto pubkey = keyPair.GetPublicKey().GetCompressedBytes();
+    std::vector<uint8_t> verification;
+    verification.push_back(0x21);  // PUSH33
+    verification.insert(verification.end(), pubkey.begin(), pubkey.end());
+    verification.push_back(static_cast<uint8_t>(neo::vm::OpCode::CHECKSIG));
+
+    AddWitness(tx, invocation, verification);
+}
+
+bool TransactionManager::SignTransaction(const std::shared_ptr<Transaction>& tx, wallet::Wallet* wallet) {
+    if (!tx || !wallet) {
+        return false;
+    }
+
+    bool signedAny = false;
+    auto data = tx->GetSignData();
+
+    for (const auto& signer : tx->signers) {
+        auto account = wallet->GetAccount(signer.account);
+        if (!account || !account->HasPrivateKey()) {
+            continue;
+        }
+
+        auto signature = wallet->Sign(data, *account);
+        if (signature.empty()) {
+            continue;
+        }
+
+        neo::vm::ScriptBuilder invocationBuilder;
+        invocationBuilder.Push(signature);
+        auto invocation = invocationBuilder.Build();
+
+        auto pubkeyBytes = account->GetPublicKey().ToArray();
+        std::vector<uint8_t> verification;
+        verification.push_back(0x21);
+        verification.insert(verification.end(), pubkeyBytes.begin(), pubkeyBytes.end());
+        verification.push_back(static_cast<uint8_t>(neo::vm::OpCode::CHECKSIG));
+
+        AddWitness(tx, invocation, verification);
+        signedAny = true;
+    }
+
+    return signedAny;
+}
+
+std::vector<uint8_t> TransactionManager::SerializeTransaction(const std::shared_ptr<Transaction>& tx) const {
+    if (!tx) {
+        return {};
+    }
+    return tx->Serialize();
+}
+
+std::shared_ptr<Transaction> TransactionManager::DeserializeTransaction(const std::vector<uint8_t>& data) const {
+    if (data.empty()) {
+        return nullptr;
+    }
+    return Transaction::Deserialize(data);
+}
+
+bool TransactionManager::ValidateTransaction(const std::shared_ptr<Transaction>& tx) const {
+    if (!tx) {
+        return false;
+    }
+
+    if (tx->script.empty()) {
+        return false;
+    }
+
+    constexpr size_t kMaxScriptSize = 1024 * 1024;  // 1 MB
+    if (tx->script.size() > kMaxScriptSize) {
+        return false;
+    }
+
+    return !tx->signers.empty();
+}
+
+core::UInt160 TransactionManager::AddressToScriptHash(const std::string& address) {
+    return ::AddressToScriptHash(address);
+}
+
+std::string TransactionManager::ScriptHashToAddress(const core::UInt160& scriptHash) {
+    return ::ScriptHashToAddress(scriptHash);
 }
 
 // ScriptBuilder implementation
@@ -946,16 +1111,16 @@ std::shared_ptr<Transaction> CreateTransfer(const std::string& from, const std::
     
     ScriptBuilder sb;
     sb.Push(static_cast<int64_t>(amount));
-    sb.Push(AddressToScriptHash(to));
-    sb.Push(AddressToScriptHash(from));
+    sb.Push(AddressToScriptHash(to).ToArray());
+    sb.Push(AddressToScriptHash(from).ToArray());
     sb.Push(3);
     sb.EmitAppCall(tokenHash == "NEO" ? TokenHash::NEO : TokenHash::GAS, "transfer");
     
     tx->script = sb.Build();
-    tx->sender = from;
+    tx->sender = AddressToScriptHash(from);
     
     Signer signer;
-    signer.account = BytesToHex(AddressToScriptHash(from));
+    signer.account = AddressToScriptHash(from);
     signer.scopes = WitnessScope::CalledByEntry;
     tx->signers.push_back(signer);
     

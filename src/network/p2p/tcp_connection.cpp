@@ -26,7 +26,7 @@ std::shared_ptr<TcpConnection> TcpConnection::Create(boost::asio::ip::tcp::socke
 }
 
 TcpConnection::TcpConnection(boost::asio::ip::tcp::socket socket)
-    : socket_(std::move(socket)), connected_(true), receiveBuffer_(8192)
+    : socket_(std::move(socket)), connected_(true), receiveBuffer_(16384)
 {
 }
 
@@ -135,8 +135,16 @@ void TcpConnection::StartReceiving()
 
 void TcpConnection::DoReceive()
 {
+    if (!connected_) return;
+
+    constexpr size_t kMinSlack = 4096;
+    if (receiveBuffer_.Size() - bufferedBytes_ < kMinSlack)
+    {
+        receiveBuffer_.Resize(bufferedBytes_ + kMinSlack);
+    }
+
     socket_.async_read_some(
-        boost::asio::buffer(receiveBuffer_.Data(), receiveBuffer_.Size()),
+        boost::asio::buffer(receiveBuffer_.Data() + bufferedBytes_, receiveBuffer_.Size() - bufferedBytes_),
         std::bind(&TcpConnection::HandleReceive, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 }
 
@@ -151,60 +159,49 @@ void TcpConnection::HandleReceive(const std::error_code& error, std::size_t byte
 
     LOG_DEBUG("Received " + std::to_string(bytesTransferred) + " bytes");
 
-    if (bytesTransferred > 0)
+    if (bytesTransferred == 0)
     {
-        // Update the bytes received
-        UpdateBytesReceived(bytesTransferred);
+        DoReceive();
+        return;
+    }
 
-        // Log raw received bytes for debugging
-        std::string hexBytes;
-        for (size_t i = 0; i < std::min(bytesTransferred, size_t(32)); ++i)
-        {
-            char hex[4];
-            snprintf(hex, sizeof(hex), "%02x ", receiveBuffer_.Data()[i]);
-            hexBytes += hex;
-        }
-        LOG_INFO("Received bytes (first 32): " + hexBytes);
+    UpdateBytesReceived(bytesTransferred);
+    bufferedBytes_ += bytesTransferred;
 
-        // Try to deserialize a message
+    // Log raw received bytes for debugging
+    std::string hexBytes;
+    for (size_t i = 0; i < std::min(bufferedBytes_, size_t(32)); ++i)
+    {
+        char hex[4];
+        snprintf(hex, sizeof(hex), "%02x ", receiveBuffer_.Data()[i]);
+        hexBytes += hex;
+    }
+    LOG_DEBUG("Buffer (first 32 bytes): " + hexBytes);
+
+    while (bufferedBytes_ > 0)
+    {
         Message message;
-        uint32_t bytesRead = Message::TryDeserialize(io::ByteSpan(receiveBuffer_.Data(), bytesTransferred), message);
+        uint32_t bytesRead = Message::TryDeserialize(io::ByteSpan(receiveBuffer_.Data(), bufferedBytes_), message);
 
-        if (bytesRead > 0)
+        if (bytesRead == 0)
         {
-            LOG_INFO("Successfully deserialized message, command: " +
-                     std::to_string(static_cast<int>(message.GetCommand())));
-            // Process the message
-            OnMessageReceived(message);
-
-            // If there are more bytes, process them
-            if (bytesRead < bytesTransferred)
-            {
-                // Move the remaining bytes to the beginning of the buffer
-                std::memmove(receiveBuffer_.Data(), receiveBuffer_.Data() + bytesRead, bytesTransferred - bytesRead);
-
-                // Try to deserialize another message
-                Message anotherMessage;
-                uint32_t anotherBytesRead = Message::TryDeserialize(
-                    io::ByteSpan(receiveBuffer_.Data(), bytesTransferred - bytesRead), anotherMessage);
-
-                if (anotherBytesRead > 0)
-                {
-                    // Process the message
-                    OnMessageReceived(anotherMessage);
-                }
-            }
-        }
-        else
-        {
-            LOG_INFO("Failed to deserialize message from " + std::to_string(bytesTransferred) + " bytes");
+            // Need more data
+            break;
         }
 
-        // Continue receiving
-        if (connected_)
+        LOG_INFO("Deserialized message, command: {}", static_cast<int>(message.GetCommand()));
+        OnMessageReceived(message);
+
+        if (bytesRead < bufferedBytes_)
         {
-            DoReceive();
+            std::memmove(receiveBuffer_.Data(), receiveBuffer_.Data() + bytesRead, bufferedBytes_ - bytesRead);
         }
+        bufferedBytes_ -= bytesRead;
+    }
+
+    if (connected_)
+    {
+        DoReceive();
     }
 }
 

@@ -108,25 +108,7 @@ void Peer::Serialize(io::BinaryWriter& writer) const
 
     for (const auto& capability : capabilities_)
     {
-        switch (capability.GetType())
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                const auto& serverCapability = static_cast<const ServerCapability&>(capability);
-                serverCapability.Serialize(writer);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                const auto& fullNodeCapability = static_cast<const FullNodeCapability&>(capability);
-                fullNodeCapability.Serialize(writer);
-                break;
-            }
-            default:
-                capability.Serialize(writer);
-                break;
-        }
+        capability.Serialize(writer);
     }
 
     // Write the last connection time
@@ -159,34 +141,9 @@ void Peer::Deserialize(io::BinaryReader& reader)
 
     for (uint64_t i = 0; i < count; i++)
     {
-        // Peek at the type
-        uint8_t type = reader.PeekUInt8();
-
-        switch (static_cast<NodeCapabilityType>(type))
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                ServerCapability capability;
-                capability.Deserialize(reader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                FullNodeCapability capability;
-                capability.Deserialize(reader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            default:
-            {
-                NodeCapability capability;
-                capability.Deserialize(reader);
-                capabilities_.push_back(capability);
-                break;
-            }
-        }
+        NodeCapability capability;
+        capability.Deserialize(reader);
+        capabilities_.push_back(capability);
     }
 
     // Read the last connection time
@@ -217,27 +174,7 @@ void Peer::SerializeJson(io::JsonWriter& writer) const
     {
         nlohmann::json capabilityJson = nlohmann::json::object();
         io::JsonWriter capabilityWriter(capabilityJson);
-
-        switch (capability.GetType())
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                const auto& serverCapability = static_cast<const ServerCapability&>(capability);
-                serverCapability.SerializeJson(capabilityWriter);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                const auto& fullNodeCapability = static_cast<const FullNodeCapability&>(capability);
-                fullNodeCapability.SerializeJson(capabilityWriter);
-                break;
-            }
-            default:
-                capability.SerializeJson(capabilityWriter);
-                break;
-        }
-
+        capability.SerializeJson(capabilityWriter);
         capabilitiesArray.push_back(capabilityJson);
     }
 
@@ -263,33 +200,9 @@ void Peer::DeserializeJson(const io::JsonReader& reader)
     for (const auto& capabilityJson : capabilitiesArray)
     {
         io::JsonReader capabilityReader(capabilityJson);
-        uint8_t type = capabilityReader.ReadUInt8("type");
-
-        switch (static_cast<NodeCapabilityType>(type))
-        {
-            case NodeCapabilityType::TcpServer:
-            case NodeCapabilityType::WsServer:
-            {
-                ServerCapability capability;
-                capability.DeserializeJson(capabilityReader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            case NodeCapabilityType::FullNode:
-            {
-                FullNodeCapability capability;
-                capability.DeserializeJson(capabilityReader);
-                capabilities_.push_back(capability);
-                break;
-            }
-            default:
-            {
-                NodeCapability capability;
-                capability.DeserializeJson(capabilityReader);
-                capabilities_.push_back(capability);
-                break;
-            }
-        }
+        NodeCapability capability;
+        capability.DeserializeJson(capabilityReader);
+        capabilities_.push_back(capability);
     }
 
     lastConnectionTime_ = reader.ReadUInt64("last_connection_time");

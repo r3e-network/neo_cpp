@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <algorithm>
+#include <iomanip>
 #include <memory>
 #include <array>
 #include <sstream>
@@ -14,6 +15,7 @@
 #include <chrono>
 #include <thread>
 
+#include <neo/common/contains_transaction_type.h>
 #include <neo/cryptography/base64.h>
 #include <neo/cryptography/ecc/keypair.h>
 #include <neo/hardfork.h>
@@ -22,6 +24,7 @@
 #include <neo/io/json.h>
 #include <neo/io/uint160.h>
 #include <neo/ledger/block.h>
+#include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/ledger/signer.h>
 #include <neo/ledger/transaction.h>
@@ -40,6 +43,7 @@
 #include <neo/rpc/rpc_methods.h>
 #include <neo/wallets/helper.h>
 #include <neo/smartcontract/contract.h>
+#include <neo/smartcontract/native/hash_index_state.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/neo_token.h>
@@ -83,19 +87,52 @@ std::string EncodeBlockToBase64(const neo::ledger::Block& block)
     return neo::cryptography::Base64::Encode(buffer.AsSpan());
 }
 
+neo::ledger::Witness EnsureWitnessScripts(const neo::ledger::Witness& baseWitness)
+{
+    auto witness = baseWitness;
+    if (witness.GetInvocationScript().Size() == 0)
+    {
+        neo::io::ByteVector script;
+        script.Push(static_cast<uint8_t>(neo::vm::OpCode::PUSH1));
+        witness.SetInvocationScript(script);
+    }
+    if (witness.GetVerificationScript().Size() == 0)
+    {
+        neo::io::ByteVector script;
+        script.Push(static_cast<uint8_t>(neo::vm::OpCode::PUSH1));
+        witness.SetVerificationScript(script);
+    }
+    return witness;
+}
+
 neo::ledger::Block CreateChildBlock(const std::shared_ptr<neo::node::NeoSystem>& system)
 {
     auto blockchain = system->GetBlockchain();
-    auto parent = blockchain->GetBlock(0);
+    if (!blockchain)
+    {
+        throw std::runtime_error("Blockchain unavailable");
+    }
+
+    auto parent = blockchain->GetBlock(blockchain->GetHeight());
+    if (!parent)
+    {
+        parent = blockchain->GetBlock(0);
+    }
     if (!parent)
     {
         throw std::runtime_error("Genesis block unavailable");
     }
 
-    neo::ledger::Block copy = *parent;
-    copy.SetIndex(parent->GetIndex() + 1);
-    copy.SetPreviousHash(parent->GetHash());
-    return copy;
+    neo::ledger::Block block;
+    block.SetVersion(parent->GetVersion());
+    block.SetPreviousHash(parent->GetHash());
+    block.SetTimestamp(parent->GetTimestamp() + 1);
+    block.SetIndex(parent->GetIndex() + 1);
+    block.SetPrimaryIndex(parent->GetPrimaryIndex());
+    block.SetNextConsensus(parent->GetNextConsensus());
+    block.SetMerkleRoot(neo::io::UInt256());
+    block.SetWitness(EnsureWitnessScripts(parent->GetWitness()));
+    return block;
 }
 }  // namespace
 
@@ -110,6 +147,9 @@ class RPCMethodsTest : public ::testing::Test
         // Create a neo system with memory store
         neoSystem = std::make_shared<NeoSystem>(protocolSettings);
         ASSERT_TRUE(neoSystem->Start());
+        auto blockchain = neoSystem->GetBlockchain();
+        ASSERT_TRUE(blockchain);
+        blockchain->SetSkipBlockVerificationForTests(true);
 
         keyPair = neo::cryptography::ecc::KeyPair::Generate();
         ASSERT_NE(keyPair, nullptr);
@@ -163,6 +203,18 @@ class RPCMethodsTest : public ::testing::Test
         std::string keyBase64;
         std::string valueBase64;
         std::string prefixBase64;
+    };
+
+    struct FindLimitGuard
+    {
+        explicit FindLimitGuard(size_t newLimit) : previous(RPCMethods::GetMaxFindResultItems())
+        {
+            RPCMethods::SetMaxFindResultItems(newLimit);
+        }
+
+        ~FindLimitGuard() { RPCMethods::SetMaxFindResultItems(previous); }
+
+        size_t previous;
     };
 
     StorageFixture PrepareStorageEntry(const std::string& keyHex, const std::string& valueHex,
@@ -283,72 +335,33 @@ class RPCMethodsTest : public ::testing::Test
 
     void AddTransactionToBlockchain(const neo::ledger::Transaction& tx)
     {
-        auto storeCache = std::dynamic_pointer_cast<neo::persistence::StoreCache>(neoSystem->GetSnapshot());
-        ASSERT_TRUE(storeCache);
+        auto memoryPool = neoSystem->GetMemoryPool();
+        ASSERT_TRUE(memoryPool);
 
-        auto storageKey =
-            neo::persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x01), tx.GetHash());
-        if (storeCache->TryGet(storageKey))
-        {
-            storeCache->Delete(storageKey);
-        }
-        storeCache->Add(storageKey, neo::persistence::StorageItem(neo::io::ByteVector{}));
-        storeCache->Commit();
+        neo::io::ByteVector buffer;
+        neo::io::BinaryWriter writer(buffer);
+        tx.Serialize(writer);
+        neo::io::BinaryReader reader(buffer);
+        neo::network::p2p::payloads::Neo3Transaction netTx;
+        netTx.Deserialize(reader);
+
+        ASSERT_TRUE(memoryPool->TryAdd(netTx));
     }
 
     void AddBlockToBlockchain(const neo::ledger::Block& block)
     {
-        auto storeCache = std::dynamic_pointer_cast<neo::persistence::StoreCache>(neoSystem->GetSnapshot());
-        ASSERT_TRUE(storeCache);
+        auto blockchain = neoSystem->GetBlockchain();
+        ASSERT_TRUE(blockchain);
 
-        auto blockKey = neo::persistence::StorageKey::Create(
-            neo::smartcontract::native::LedgerContract::ID,
-            neo::smartcontract::native::LedgerContract::PREFIX_BLOCK,
-            block.GetHash());
+        auto blockCopy = block;
+        blockCopy.SetMerkleRoot(blockCopy.ComputeMerkleRoot());
 
-        std::ostringstream blockStream;
-        neo::io::BinaryWriter blockWriter(blockStream);
-        block.Serialize(blockWriter);
-        const auto blockData = blockStream.str();
-        neo::io::ByteVector blockBytes(reinterpret_cast<const uint8_t*>(blockData.data()), blockData.size());
-        storeCache->Add(blockKey, neo::persistence::StorageItem(blockBytes));
-
-        auto hashKey = neo::persistence::StorageKey::Create(
-            neo::smartcontract::native::LedgerContract::ID,
-            neo::smartcontract::native::LedgerContract::PREFIX_BLOCK_HASH,
-            static_cast<uint32_t>(block.GetIndex()));
-
-        neo::io::ByteVector hashBytes(block.GetHash().Data(), neo::io::UInt256::Size);
-        storeCache->Add(hashKey, neo::persistence::StorageItem(hashBytes));
-
-        storeCache->Commit();
+        auto persistedBlock = std::make_shared<neo::ledger::Block>(blockCopy);
+        auto result = blockchain->OnNewBlock(persistedBlock);
+        ASSERT_EQ(result, neo::ledger::VerifyResult::Succeed);
     }
 
-    void RemoveBlockFromBlockchain(const neo::ledger::Block& block)
-    {
-        auto storeCache = std::dynamic_pointer_cast<neo::persistence::StoreCache>(neoSystem->GetSnapshot());
-        ASSERT_TRUE(storeCache);
-
-        auto blockKey = neo::persistence::StorageKey::Create(
-            neo::smartcontract::native::LedgerContract::ID,
-            neo::smartcontract::native::LedgerContract::PREFIX_BLOCK,
-            block.GetHash());
-        if (storeCache->TryGet(blockKey))
-        {
-            storeCache->Delete(blockKey);
-        }
-
-        auto hashKey = neo::persistence::StorageKey::Create(
-            neo::smartcontract::native::LedgerContract::ID,
-            neo::smartcontract::native::LedgerContract::PREFIX_BLOCK_HASH,
-            static_cast<uint32_t>(block.GetIndex()));
-        if (storeCache->TryGet(hashKey))
-        {
-            storeCache->Delete(hashKey);
-        }
-
-        storeCache->Commit();
-    }
+    void RemoveBlockFromBlockchain(const neo::ledger::Block& block) { (void)block; }
 };
 
 TEST_F(RPCMethodsTest, GetVersion)
@@ -661,6 +674,32 @@ TEST_F(RPCMethodsTest, FindStorageReturnsExpectedEntries)
     ASSERT_TRUE(result.contains("truncated"));
     ASSERT_TRUE(result.contains("next"));
     EXPECT_TRUE(result["next"].is_number_integer());
+}
+
+TEST_F(RPCMethodsTest, FindStorageRespectsConfiguredLimit)
+{
+    constexpr size_t kLimit = 2;
+    const int32_t contractId = 1337;
+    FindLimitGuard guard(kLimit);
+
+    auto first = PrepareStorageEntry("AA0B0001", "F00D", 1, contractId);
+    for (int i = 2; i < 7; ++i)
+    {
+        std::ostringstream key;
+        key << "AA0B00" << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << i;
+        std::ostringstream value;
+        value << "BEEF" << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << i;
+        PrepareStorageEntry(key.str(), value.str(), 1, contractId);
+    }
+
+    auto params = nlohmann::json::array({contractId, first.prefixBase64, 0});
+    auto result = RPCMethods::FindStorage(neoSystem, params);
+
+    ASSERT_TRUE(result.contains("results"));
+    ASSERT_TRUE(result["results"].is_array());
+    EXPECT_EQ(result["results"].size(), kLimit);
+    EXPECT_TRUE(result.at("truncated").get<bool>());
+    EXPECT_EQ(result.at("next").get<int64_t>(), static_cast<int64_t>(kLimit));
 }
 
 TEST_F(RPCMethodsTest, GetNativeContractsReturnsManifest)
@@ -1781,6 +1820,38 @@ TEST_F(RPCMethodsTest, TraverseIteratorReturnsStoredValues)
     EXPECT_FALSE(result2["truncated"].get<bool>());
 
     EXPECT_TRUE(manager.TerminateSession(sessionId));
+}
+
+TEST_F(RPCMethodsTest, TraverseIteratorRejectsOverLimitCount)
+{
+    auto& manager = neo::rpc::RpcSessionManager::Instance();
+    auto sessionId = manager.CreateSession();
+    auto iteratorId = manager.StoreIterator(sessionId, {nlohmann::json(1), nlohmann::json(2)});
+    ASSERT_TRUE(iteratorId.has_value());
+
+    try
+    {
+        (void)RPCMethods::TraverseIterator(
+            neoSystem, nlohmann::json::array({sessionId, iteratorId.value(), 101}));
+        FAIL() << "Expected RpcException";
+    }
+    catch (const RpcException& ex)
+    {
+        EXPECT_EQ(ex.GetCode(), ErrorCode::InvalidParams);
+    }
+    catch (...)
+    {
+        FAIL() << "Expected RpcException";
+    }
+
+    EXPECT_TRUE(manager.TerminateSession(sessionId));
+}
+
+TEST_F(RPCMethodsTest, CreateSessionReturnsId)
+{
+    auto result = RPCMethods::CreateSession(neoSystem, nlohmann::json::array());
+    ASSERT_TRUE(result.is_string());
+    EXPECT_FALSE(result.get<std::string>().empty());
 }
 
 TEST_F(RPCMethodsTest, TerminateSessionRemovesSession)

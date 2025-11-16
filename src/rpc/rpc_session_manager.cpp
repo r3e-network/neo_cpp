@@ -60,7 +60,8 @@ IteratorResult RpcSessionManager::Traverse(const std::string& sessionId, const s
 
     sessionIt->second.lastAccess = std::chrono::steady_clock::now();
 
-    if (maxItems == 0) maxItems = kDefaultIteratorBatch;
+    const size_t limit = max_iterator_items_ == 0 ? kDefaultIteratorBatch : max_iterator_items_;
+    if (maxItems == 0 || maxItems > limit) maxItems = limit;
 
     auto& state = iteratorIt->second;
     const auto remaining = state.values.size() - std::min(state.index, state.values.size());
@@ -125,10 +126,16 @@ void RpcSessionManager::ExpireSessionsLocked()
     }
 }
 
-void RpcSessionManager::SetSessionTimeoutForTests(std::chrono::steady_clock::duration duration)
+void RpcSessionManager::SetSessionTimeout(std::chrono::steady_clock::duration duration)
 {
     std::lock_guard<std::mutex> lock(mutex_);
     sessionTimeout_ = duration > std::chrono::steady_clock::duration::zero() ? duration : std::chrono::steady_clock::duration::zero();
     ExpireSessionsLocked();
+}
+
+void RpcSessionManager::SetMaxIteratorItems(size_t max_items)
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    max_iterator_items_ = max_items == 0 ? kDefaultIteratorBatch : max_items;
 }
 }  // namespace neo::rpc

@@ -1,36 +1,74 @@
+#include <deque>
 #include <gtest/gtest.h>
 #include <memory>
 #include <neo/rpc/rpc_client.h>
 
 namespace neo::rpc::tests
 {
+namespace
+{
+std::string BuildResultResponse(const nlohmann::json& result)
+{
+    nlohmann::json response;
+    response["jsonrpc"] = "2.0";
+    response["id"] = 1;
+    response["result"] = result;
+    return response.dump();
+}
+
+std::string BuildErrorResponse(int code, const std::string& message)
+{
+    nlohmann::json response;
+    response["jsonrpc"] = "2.0";
+    response["id"] = 1;
+    nlohmann::json error;
+    error["code"] = code;
+    error["message"] = message;
+    response["error"] = error;
+    return response.dump();
+}
+}  // namespace
+
 class MockHttpClient : public IHttpClient
 {
   public:
-    std::string mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": "mock_result"
-        })";
+    std::string mock_response = BuildResultResponse("mock_result");
 
     std::string Post(const std::string& url, const std::string& content,
                      const std::map<std::string, std::string>& headers = {}) override
     {
+        post_called = true;
         last_url = url;
         last_content = content;
         last_headers = headers;
+
+        if (!queued_responses.empty())
+        {
+            auto front = queued_responses.front();
+            queued_responses.pop_front();
+            return front;
+        }
+
         return mock_response;
     }
 
     std::future<std::string> PostAsync(const std::string& url, const std::string& content,
                                        const std::map<std::string, std::string>& headers = {}) override
     {
+        post_async_called = true;
         return std::async(std::launch::async, [this, url, content, headers]() { return Post(url, content, headers); });
     }
 
+    void QueueResponse(const std::string& response) { queued_responses.emplace_back(response); }
+
+    bool post_called = false;
+    bool post_async_called = false;
     std::string last_url;
     std::string last_content;
     std::map<std::string, std::string> last_headers;
+
+  private:
+    std::deque<std::string> queued_responses;
 };
 
 class RpcClientTest : public ::testing::Test
@@ -48,266 +86,183 @@ class RpcClientTest : public ::testing::Test
     std::unique_ptr<RpcClient> rpc_client;
 };
 
-TEST_F(RpcClientTest, TestConstructor)
+TEST_F(RpcClientTest, DefaultConstructorDoesNotThrow)
 {
-    // Test basic constructor
-    RpcClient client("http://localhost:10332");
-    EXPECT_NO_THROW(client.GetVersion());
+    EXPECT_NO_THROW({ RpcClient client("http://localhost:10332"); });
 }
 
-TEST_F(RpcClientTest, TestConstructorWithAuth)
+TEST_F(RpcClientTest, ConstructorWithAuthDoesNotThrow)
 {
-    // Test constructor with authentication
-    RpcClient client("http://localhost:10332", "user", "pass");
-    EXPECT_NO_THROW(client.GetVersion());
+    EXPECT_NO_THROW({ RpcClient client("http://localhost:10332", "user", "pass"); });
 }
 
-TEST_F(RpcClientTest, TestGetBestBlockHash)
+TEST_F(RpcClientTest, GetBestBlockHashReturnsMockedResult)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": "0x1234567890abcdef"
-        })";
+    const std::string expected_hash = "0x1234567890abcdef";
+    mock_client_ptr->mock_response = BuildResultResponse(expected_hash);
 
-    std::string hash = rpc_client->GetBestBlockHash();
-    EXPECT_EQ("mock_result", hash);  // Mock HTTP client returns predefined test response
+    const auto hash = rpc_client->GetBestBlockHash();
 
-    // Verify the request was made correctly
+    EXPECT_EQ(expected_hash, hash);
+    EXPECT_TRUE(mock_client_ptr->post_called);
     EXPECT_EQ("http://localhost:10332", mock_client_ptr->last_url);
-    EXPECT_TRUE(mock_client_ptr->last_content.find("getbestblockhash") != std::string::npos);
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find("getbestblockhash"));
 }
 
-TEST_F(RpcClientTest, TestGetBestBlockHashAsync)
+TEST_F(RpcClientTest, GetBestBlockHashAsyncUsesAsyncTransport)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": "0x1234567890abcdef"
-        })";
+    const std::string expected_hash = "0xabcdef";
+    mock_client_ptr->mock_response = BuildResultResponse(expected_hash);
 
     auto future = rpc_client->GetBestBlockHashAsync();
-    std::string hash = future.get();
-    EXPECT_EQ("mock_result", hash);
+
+    EXPECT_EQ(expected_hash, future.get());
+    EXPECT_TRUE(mock_client_ptr->post_async_called);
 }
 
-TEST_F(RpcClientTest, TestGetBlockCount)
+TEST_F(RpcClientTest, GetBlockCountParsesNumericResult)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": 12345
-        })";
+    const uint32_t expected_count = 42;
+    mock_client_ptr->mock_response = BuildResultResponse(expected_count);
 
-    // Test that GetBlockCount executes without throwing
-    EXPECT_NO_THROW(rpc_client->GetBlockCount());
+    EXPECT_EQ(expected_count, rpc_client->GetBlockCount());
 }
 
-TEST_F(RpcClientTest, TestGetBlockCountAsync)
+TEST_F(RpcClientTest, GetBlockByHashSerializesParameters)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": 12345
-        })";
+    nlohmann::json block;
+    block["hash"] = "0x123";
+    block["size"] = 10;
+    mock_client_ptr->mock_response = BuildResultResponse(block);
 
-    auto future = rpc_client->GetBlockCountAsync();
-    EXPECT_NO_THROW(future.get());
+    auto result = rpc_client->GetBlock("0x123", true);
+    EXPECT_EQ(block.dump(), result.dump());
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find("0x123"));
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find("getblock"));
 }
 
-TEST_F(RpcClientTest, TestGetBlockByHash)
+TEST_F(RpcClientTest, GetBlockByIndexSerializesIndexParameter)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": {
-                "hash": "0x1234567890abcdef",
-                "size": 1024,
-                "version": 0
-            }
-        })";
+    nlohmann::json block;
+    block["hash"] = "0x123";
+    block["size"] = 10;
+    mock_client_ptr->mock_response = BuildResultResponse(block);
 
-    auto result = rpc_client->GetBlock("0x1234567890abcdef", true);
-    EXPECT_NO_THROW(result.dump());
-
-    // Verify the request contains the hash parameter
-    EXPECT_TRUE(mock_client_ptr->last_content.find("0x1234567890abcdef") != std::string::npos);
-    EXPECT_TRUE(mock_client_ptr->last_content.find("getblock") != std::string::npos);
+    auto result = rpc_client->GetBlock(123u, true);
+    EXPECT_EQ(block.dump(), result.dump());
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find("123"));
 }
 
-TEST_F(RpcClientTest, TestGetBlockByIndex)
+TEST_F(RpcClientTest, GetTransactionUsesCorrectMethod)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": {
-                "hash": "0x1234567890abcdef",
-                "size": 1024,
-                "version": 0
-            }
-        })";
+    nlohmann::json tx;
+    tx["hash"] = "0xabc";
+    mock_client_ptr->mock_response = BuildResultResponse(tx);
 
-    auto result = rpc_client->GetBlock(12345, true);
-    EXPECT_NO_THROW(result.dump());
-
-    // Verify the request contains the index parameter
-    EXPECT_TRUE(mock_client_ptr->last_content.find("12345") != std::string::npos);
-    EXPECT_TRUE(mock_client_ptr->last_content.find("getblock") != std::string::npos);
+    auto result = rpc_client->GetTransaction("0xabc", true);
+    EXPECT_EQ(tx.dump(), result.dump());
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find("getrawtransaction"));
 }
 
-TEST_F(RpcClientTest, TestGetTransaction)
+TEST_F(RpcClientTest, SendRawTransactionReturnsResponseString)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": {
-                "hash": "0xabcdef1234567890",
-                "size": 256,
-                "version": 0
-            }
-        })";
+    const std::string expected = "0xabc";
+    mock_client_ptr->mock_response = BuildResultResponse(expected);
 
-    auto result = rpc_client->GetTransaction("0xabcdef1234567890", true);
-    EXPECT_NO_THROW(result.dump());
+    const auto result = rpc_client->SendRawTransaction("012345");
 
-    // Verify the request contains the transaction hash
-    EXPECT_TRUE(mock_client_ptr->last_content.find("0xabcdef1234567890") != std::string::npos);
-    EXPECT_TRUE(mock_client_ptr->last_content.find("getrawtransaction") != std::string::npos);
+    EXPECT_EQ(expected, result);
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find("sendrawtransaction"));
 }
 
-TEST_F(RpcClientTest, TestSendRawTransaction)
+TEST_F(RpcClientTest, InvokeFunctionIncludesScriptHashAndOperation)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": "0xabcdef1234567890"
-        })";
+    nlohmann::json invoke_result;
+    invoke_result["state"] = "HALT";
+    mock_client_ptr->mock_response = BuildResultResponse(invoke_result);
 
-    std::string tx_hex = "0123456789abcdef";
-    std::string result = rpc_client->SendRawTransaction(tx_hex);
-    EXPECT_EQ("mock_result", result);
-
-    // Verify the request contains the transaction hex
-    EXPECT_TRUE(mock_client_ptr->last_content.find(tx_hex) != std::string::npos);
-    EXPECT_TRUE(mock_client_ptr->last_content.find("sendrawtransaction") != std::string::npos);
-}
-
-TEST_F(RpcClientTest, TestInvokeFunction)
-{
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": {
-                "script": "0x1234",
-                "state": "HALT",
-                "gasconsumed": "1000000"
-            }
-        })";
-
-    std::string script_hash = "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5";
-    std::string operation = "balanceOf";
-    nlohmann::json params = nlohmann::json::array();
-    params.push_back("NZNos2WqwVfNUXNj5VEqvvPzAqze3RXyP3");
+    const std::string script_hash = "0xef40";
+    const std::string operation = "balanceOf";
+    std::vector<nlohmann::json> params;
+    params.emplace_back("address");
 
     auto result = rpc_client->InvokeFunction(script_hash, operation, params);
-    EXPECT_NO_THROW(result.dump());
-
-    // Verify the request contains the script hash and operation
-    EXPECT_TRUE(mock_client_ptr->last_content.find(script_hash) != std::string::npos);
-    EXPECT_TRUE(mock_client_ptr->last_content.find(operation) != std::string::npos);
-    EXPECT_TRUE(mock_client_ptr->last_content.find("invokefunction") != std::string::npos);
+    EXPECT_EQ(invoke_result.dump(), result.dump());
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find(script_hash));
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find(operation));
 }
 
-TEST_F(RpcClientTest, TestGetVersion)
+TEST_F(RpcClientTest, RpcSendReturnsStructuredResult)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": {
-                "tcpport": 10333,
-                "wsport": 10334,
-                "nonce": 1234567890,
-                "useragent": "/Neo:3.0.0/"
-            }
-        })";
+    nlohmann::json rpc_result;
+    rpc_result["value"] = 5;
+    mock_client_ptr->mock_response = BuildResultResponse(rpc_result);
 
-    auto result = rpc_client->GetVersion();
-    EXPECT_NO_THROW(result.dump());
-
-    // Verify the request was made correctly
-    EXPECT_TRUE(mock_client_ptr->last_content.find("getversion") != std::string::npos);
-}
-
-TEST_F(RpcClientTest, TestRpcSend)
-{
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": "test_result"
-        })";
-
-    nlohmann::json params = nlohmann::json::array();
-    params.push_back("param1");
-    params.push_back(42);
-
+    std::vector<nlohmann::json> params;
+    params.emplace_back("param1");
     auto result = rpc_client->RpcSend("testmethod", params);
-    EXPECT_NO_THROW(result.dump());
 
-    // Verify the request contains the method and parameters
-    EXPECT_TRUE(mock_client_ptr->last_content.find("testmethod") != std::string::npos);
+    EXPECT_EQ(rpc_result.dump(), result.dump());
+    EXPECT_NE(std::string::npos, mock_client_ptr->last_content.find("testmethod"));
 }
 
-TEST_F(RpcClientTest, TestAsyncMethods)
+TEST_F(RpcClientTest, RpcSendAsyncReturnsResult)
 {
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": "async_result"
-        })";
+    const std::string expected = "async";
+    mock_client_ptr->mock_response = BuildResultResponse(expected);
+    std::vector<nlohmann::json> params;
+    params.emplace_back(1);
 
-    // Test multiple async methods
-    auto future1 = rpc_client->GetVersionAsync();
-    auto future2 = rpc_client->GetBestBlockHashAsync();
-    auto future3 = rpc_client->GetBlockCountAsync();
-
-    // Wait for all futures to complete
-    EXPECT_NO_THROW(future1.get());
-    EXPECT_NO_THROW(future2.get());
-    EXPECT_NO_THROW(future3.get());
+    auto future = rpc_client->RpcSendAsync("method", params);
+    EXPECT_EQ(expected, future.get().get<std::string>());
 }
 
-TEST_F(RpcClientTest, TestErrorHandling)
+TEST_F(RpcClientTest, AsyncMethodsConsumeQueuedResponses)
 {
-    // Test error response
-    mock_client_ptr->mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "error": {
-                "code": -32601,
-                "message": "Method not found"
-            }
-        })";
+    mock_client_ptr->QueueResponse(BuildResultResponse(nlohmann::json{{"tcpport", 10333}}));
+    mock_client_ptr->QueueResponse(BuildResultResponse("0xhash"));
+    mock_client_ptr->QueueResponse(BuildResultResponse(123u));
 
-    // This should throw an exception due to the error in response
+    auto version_future = rpc_client->GetVersionAsync();
+    auto hash_future = rpc_client->GetBestBlockHashAsync();
+    auto count_future = rpc_client->GetBlockCountAsync();
+
+    auto version = version_future.get();
+    EXPECT_EQ(10333, version.at("tcpport").get<int>());
+    EXPECT_EQ("0xhash", hash_future.get());
+    EXPECT_EQ(123u, count_future.get());
+}
+
+TEST_F(RpcClientTest, ThrowsOnRpcErrorWhenThrowingEnabled)
+{
+    mock_client_ptr->mock_response = BuildErrorResponse(-32601, "Method not found");
     EXPECT_THROW(rpc_client->GetBestBlockHash(), std::runtime_error);
 }
 
-TEST_F(RpcClientTest, TestInvalidJsonResponse)
+TEST_F(RpcClientTest, ReturnsErrorPayloadWhenThrowDisabled)
 {
-    // Test invalid JSON response
-    mock_client_ptr->mock_response = "invalid json";
+    mock_client_ptr->mock_response = BuildErrorResponse(-500, "InsufficientFunds");
+    auto request = RpcRequest("2.0", "sendrawtransaction", nlohmann::json::array(), 1);
+    auto response = rpc_client->Send(request, false);
 
-    // This should throw an exception due to invalid JSON
+    ASSERT_FALSE(response.GetError().is_null());
+    EXPECT_EQ(-500, response.GetError().at("code").get<int>());
+    EXPECT_EQ("InsufficientFunds", response.GetError().at("message").get<std::string>());
+}
+
+TEST_F(RpcClientTest, InvalidJsonResponseThrows)
+{
+    mock_client_ptr->mock_response = "not json";
     EXPECT_THROW(rpc_client->GetBestBlockHash(), std::runtime_error);
 }
 
-TEST_F(RpcClientTest, TestHttpHeaders)
+TEST_F(RpcClientTest, HttpHeadersIncludeContentType)
 {
+    mock_client_ptr->mock_response = BuildResultResponse(nlohmann::json{{"tcpport", 10333}});
     rpc_client->GetVersion();
 
-    // Verify that Content-Type header was set
     auto it = mock_client_ptr->last_headers.find("Content-Type");
-    EXPECT_NE(it, mock_client_ptr->last_headers.end());
+    ASSERT_NE(mock_client_ptr->last_headers.end(), it);
     EXPECT_EQ("application/json", it->second);
 }
 }  // namespace neo::rpc::tests

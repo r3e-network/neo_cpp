@@ -138,6 +138,10 @@ make neo_cli_tool       # CLI management tool
 ./examples/neo_example_vm
 ```
 
+### Connect to Neo N3 Networks
+
+To run the C++ node against the public Neo N3 TestNet or MainNet (including automatic config selection, peer persistence, and sync monitoring), follow [docs/running_on_n3_networks.md](docs/running_on_n3_networks.md). The guide walks through building the CLI, launching with `--network testnet|mainnet`, overriding configs, and watching synchronization progress.
+
 ### Windows (Visual Studio)
 
 ```cmd
@@ -213,6 +217,8 @@ python3 scripts/final_verification.py
 python3 scripts/test_blockchain_operations.py
 ```
 
+For detailed instructions on running the CLI or production node on TestNet/MainNet, see [docs/running_on_n3_networks.md](docs/running_on_n3_networks.md).
+
 ### Quick Start
 
 ```bash
@@ -227,8 +233,12 @@ make -j8
 ./tools/neo_cli_tool version
 ./apps/test_simple_node
 
-# 3. Start the node
-./tools/neo_cli_tool start
+# 3. Start the node (examples)
+./build/apps/cli/neo_cli_app --network testnet   # Neo N3 TestNet
+# ./build/apps/cli/neo_cli_app --network mainnet # Neo N3 MainNet
+
+# You can also load a custom config:
+# ./build/apps/cli/neo_cli_app --config config/testnet.config.json
 ```
 
 ## 📚 Neo C++ SDK

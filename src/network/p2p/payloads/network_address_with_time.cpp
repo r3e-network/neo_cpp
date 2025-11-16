@@ -1,299 +1,293 @@
 /**
  * @file network_address_with_time.cpp
- * @brief Network Address With Time
- * @author Neo C++ Team
- * @date 2025
- * @copyright MIT License
+ * @brief Network Address With Time payload
  */
+
+#include <neo/network/p2p/payloads/network_address_with_time.h>
+#include <neo/network/p2p/payloads/version_payload.h>
 
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
-#include <neo/network/p2p/payloads/network_address_with_time.h>
 
-#include <regex>
-#include <sstream>
-#include <stdexcept>
+#include <algorithm>
+#include <array>
+#include <vector>
 
 namespace neo::network::p2p::payloads
 {
-NetworkAddressWithTime::NetworkAddressWithTime() : timestamp_(0), services_(0), port_(0) { address_.fill(0); }
-
-NetworkAddressWithTime::NetworkAddressWithTime(uint32_t timestamp, uint64_t services, const std::string& address,
-                                               uint16_t port)
-    : timestamp_(timestamp), services_(services), port_(port)
+namespace
 {
-    address_.fill(0);
-    ParseIPAddress(address);
+std::array<uint8_t, NetworkAddressWithTime::AddressSize> MapToIPv6(const network::IPAddress& address)
+{
+    std::array<uint8_t, NetworkAddressWithTime::AddressSize> bytes{};
+    bytes.fill(0);
+    auto length = address.GetAddressLength();
+    const auto* addrBytes = address.GetAddressBytes();
+
+    if (length == 16)
+    {
+        std::copy(addrBytes, addrBytes + 16, bytes.begin());
+    }
+    else if (length == 4)
+    {
+        bytes[10] = 0xff;
+        bytes[11] = 0xff;
+        std::copy(addrBytes, addrBytes + 4, bytes.begin() + 12);
+    }
+    else
+    {
+        throw std::invalid_argument("Unsupported IP address length");
+    }
+
+    return bytes;
+}
+
+network::IPAddress UnmapIPv6(const std::array<uint8_t, NetworkAddressWithTime::AddressSize>& bytes)
+{
+    bool isMappedIPv4 = true;
+    for (int i = 0; i < 10; ++i)
+    {
+        if (bytes[i] != 0)
+        {
+            isMappedIPv4 = false;
+            break;
+        }
+    }
+    if (isMappedIPv4 && bytes[10] == 0xff && bytes[11] == 0xff)
+    {
+        return network::IPAddress(bytes.data() + 12, 4);
+    }
+    return network::IPAddress(bytes.data(), 16);
+}
+size_t GetVarIntSize(uint64_t value)
+{
+    if (value < 0xFD) return 1;
+    if (value <= 0xFFFF) return 3;
+    if (value <= 0xFFFFFFFF) return 5;
+    return 9;
+}
+
+size_t GetCapabilitySerializedSize(const NodeCapability& capability)
+{
+    size_t size = 1;  // type byte
+    switch (capability.GetType())
+    {
+        case NodeCapabilityType::TcpServer:
+        case NodeCapabilityType::WsServer:
+            size += sizeof(uint16_t);
+            break;
+        case NodeCapabilityType::FullNode:
+            size += sizeof(uint32_t);
+            break;
+        case NodeCapabilityType::DisableCompression:
+        case NodeCapabilityType::ArchivalNode:
+            size += 1;  // single zero byte
+            break;
+        default:
+            size += capability.GetData().GetVarSize();
+            break;
+    }
+    return size;
+}
+
+size_t GetCapabilitiesSerializedLength(const std::vector<NodeCapability>& capabilities)
+{
+    size_t size = GetVarIntSize(capabilities.size());
+    for (const auto& capability : capabilities)
+    {
+        size += GetCapabilitySerializedSize(capability);
+    }
+    return size;
+}
+
+}  // namespace
+
+NetworkAddressWithTime::NetworkAddressWithTime() : timestamp_(0), address_(network::IPAddress::Any()) {}
+
+NetworkAddressWithTime::NetworkAddressWithTime(uint32_t timestamp, const network::IPAddress& address,
+                                               const std::vector<NodeCapability>& capabilities)
+    : timestamp_(timestamp), address_(address), capabilities_(capabilities)
+{
 }
 
 uint32_t NetworkAddressWithTime::GetTimestamp() const { return timestamp_; }
 
 void NetworkAddressWithTime::SetTimestamp(uint32_t timestamp) { timestamp_ = timestamp; }
 
-uint64_t NetworkAddressWithTime::GetServices() const { return services_; }
+const network::IPAddress& NetworkAddressWithTime::GetIPAddress() const { return address_; }
 
-void NetworkAddressWithTime::SetServices(uint64_t services) { services_ = services; }
+std::string NetworkAddressWithTime::GetAddress() const { return address_.ToString(); }
 
-std::string NetworkAddressWithTime::GetAddress() const { return FormatIPAddress(); }
+void NetworkAddressWithTime::SetAddress(const network::IPAddress& address) { address_ = address; }
 
-void NetworkAddressWithTime::SetAddress(const std::string& address) { ParseIPAddress(address); }
+void NetworkAddressWithTime::SetAddress(const std::string& address) { address_ = network::IPAddress(address); }
 
-const std::array<uint8_t, 16>& NetworkAddressWithTime::GetAddressBytes() const { return address_; }
+const std::vector<NodeCapability>& NetworkAddressWithTime::GetCapabilities() const { return capabilities_; }
 
-void NetworkAddressWithTime::SetAddressBytes(const std::array<uint8_t, 16>& address) { address_ = address; }
-
-uint16_t NetworkAddressWithTime::GetPort() const { return port_; }
-
-void NetworkAddressWithTime::SetPort(uint16_t port) { port_ = port; }
-
-std::string NetworkAddressWithTime::GetEndpoint() const
+void NetworkAddressWithTime::SetCapabilities(const std::vector<NodeCapability>& capabilities)
 {
-    std::string addr = GetAddress();
-    if (IsIPv6())
-    {
-        return "[" + addr + "]:" + std::to_string(port_);
-    }
-    else
-    {
-        return addr + ":" + std::to_string(port_);
-    }
+    capabilities_ = capabilities;
 }
 
-bool NetworkAddressWithTime::IsIPv4() const
+NodeCapability* NetworkAddressWithTime::FindTcpCapability()
 {
-    // Check if this is an IPv4-mapped IPv6 address
-    // IPv4-mapped IPv6 addresses have the form ::ffff:x.x.x.x
-    for (int i = 0; i < 10; i++)
-    {
-        if (address_[i] != 0) return false;
-    }
-    return address_[10] == 0xff && address_[11] == 0xff;
+    auto it = std::find_if(capabilities_.begin(), capabilities_.end(), [](const NodeCapability& capability)
+                           { return capability.GetType() == NodeCapabilityType::TcpServer; });
+    if (it == capabilities_.end()) return nullptr;
+    return &(*it);
 }
 
-bool NetworkAddressWithTime::IsIPv6() const { return !IsIPv4(); }
+const NodeCapability* NetworkAddressWithTime::FindTcpCapability() const
+{
+    auto it = std::find_if(capabilities_.begin(), capabilities_.end(), [](const NodeCapability& capability)
+                           { return capability.GetType() == NodeCapabilityType::TcpServer; });
+    if (it == capabilities_.end()) return nullptr;
+    return &(*it);
+}
 
-int NetworkAddressWithTime::GetSize() const { return Size; }
+uint16_t NetworkAddressWithTime::GetPort() const
+{
+    if (const auto* capability = FindTcpCapability())
+    {
+        return capability->GetPort();
+    }
+    return 0;
+}
+
+void NetworkAddressWithTime::SetPort(uint16_t port)
+{
+    if (auto* capability = FindTcpCapability())
+    {
+        capability->SetPort(port);
+        return;
+    }
+
+    NodeCapability tcpCapability(NodeCapabilityType::TcpServer);
+    tcpCapability.SetPort(port);
+    capabilities_.push_back(tcpCapability);
+}
+
+size_t NetworkAddressWithTime::GetSize() const
+{
+    return sizeof(uint32_t) + AddressSize + GetCapabilitiesSerializedLength(capabilities_);
+}
 
 void NetworkAddressWithTime::Serialize(io::BinaryWriter& writer) const
 {
     writer.Write(timestamp_);
-    writer.Write(services_);
-    writer.WriteBytes(address_.data(), 16);
-    writer.Write(port_);
+    auto bytes = MapToIPv6(address_);
+    writer.WriteBytes(bytes.data(), AddressSize);
+    writer.WriteVarArray(capabilities_);
 }
 
 void NetworkAddressWithTime::Deserialize(io::BinaryReader& reader)
 {
     timestamp_ = reader.ReadUInt32();
-    services_ = reader.ReadUInt64();
-    auto addressBytes = reader.ReadBytes(16);
-    std::copy(addressBytes.begin(), addressBytes.end(), address_.begin());
-    port_ = reader.ReadUInt16();
+    auto raw = reader.ReadBytes(AddressSize);
+    std::array<uint8_t, AddressSize> bytes{};
+    std::copy(raw.begin(), raw.end(), bytes.begin());
+    address_ = UnmapIPv6(bytes);
+
+    auto count = reader.ReadVarInt(VersionPayload::MaxCapabilities);
+    capabilities_.clear();
+    capabilities_.reserve(count);
+    for (uint64_t i = 0; i < count; ++i)
+    {
+        NodeCapability capability;
+        capability.Deserialize(reader);
+        capabilities_.push_back(capability);
+    }
 }
 
 void NetworkAddressWithTime::SerializeJson(io::JsonWriter& writer) const
 {
     writer.WriteStartObject();
     writer.WriteProperty("timestamp", timestamp_);
-    writer.WriteProperty("services", std::to_string(services_));
     writer.WriteProperty("address", GetAddress());
-    writer.WriteProperty("port", port_);
+    writer.WriteProperty("port", GetPort());
+    writer.WritePropertyName("capabilities");
+    writer.WriteStartArray();
+    for (const auto& capability : capabilities_)
+    {
+        capability.SerializeJson(writer);
+    }
+    writer.WriteEndArray();
     writer.WriteEndObject();
 }
 
 void NetworkAddressWithTime::DeserializeJson(const io::JsonReader& reader)
 {
     const auto& json = reader.GetJson();
-
-    if (json.contains("timestamp") && json["timestamp"].is_number())
+    if (json.contains("timestamp"))
     {
         timestamp_ = json["timestamp"].get<uint32_t>();
     }
-
-    if (json.contains("services") && json["services"].is_string())
-    {
-        services_ = std::stoull(json["services"].get<std::string>());
-    }
-
-    if (json.contains("address") && json["address"].is_string())
+    if (json.contains("address"))
     {
         SetAddress(json["address"].get<std::string>());
     }
-
-    if (json.contains("port") && json["port"].is_number())
+    capabilities_.clear();
+    bool readCapabilities = false;
+    if (json.contains("capabilities") && json["capabilities"].is_array())
     {
-        port_ = json["port"].get<uint16_t>();
+        for (const auto& entry : json["capabilities"])
+        {
+            NodeCapability capability;
+            io::JsonReader capReader(entry);
+            capability.DeserializeJson(capReader);
+            capabilities_.push_back(capability);
+        }
+        readCapabilities = true;
+    }
+    if (!readCapabilities && json.contains("port"))
+    {
+        SetPort(json["port"].get<uint16_t>());
+    }
+    else if (readCapabilities && json.contains("port"))
+    {
+        // Ensure TCP capability reflects explicit port override
+        SetPort(json["port"].get<uint16_t>());
     }
 }
 
 bool NetworkAddressWithTime::operator==(const NetworkAddressWithTime& other) const
 {
-    return timestamp_ == other.timestamp_ && services_ == other.services_ && address_ == other.address_ &&
-           port_ == other.port_;
+    return timestamp_ == other.timestamp_ && address_ == other.address_ && capabilities_ == other.capabilities_;
 }
 
 bool NetworkAddressWithTime::operator!=(const NetworkAddressWithTime& other) const { return !(*this == other); }
 
-NetworkAddressWithTime NetworkAddressWithTime::FromIPv4(uint32_t timestamp, uint64_t services, const std::string& ipv4,
-                                                        uint16_t port)
+std::array<uint8_t, NetworkAddressWithTime::AddressSize> NetworkAddressWithTime::ToIPv6Bytes() const
 {
-    NetworkAddressWithTime addr;
-    addr.timestamp_ = timestamp;
-    addr.services_ = services;
-    addr.port_ = port;
-    addr.ParseIPAddress(ipv4);
-    return addr;
+    return MapToIPv6(address_);
 }
 
-NetworkAddressWithTime NetworkAddressWithTime::FromIPv6(uint32_t timestamp, uint64_t services, const std::string& ipv6,
-                                                        uint16_t port)
+void NetworkAddressWithTime::FromIPv6Bytes(const std::array<uint8_t, AddressSize>& bytes)
 {
-    NetworkAddressWithTime addr;
-    addr.timestamp_ = timestamp;
-    addr.services_ = services;
-    addr.port_ = port;
-    addr.ParseIPAddress(ipv6);
-    return addr;
+    address_ = UnmapIPv6(bytes);
 }
 
-void NetworkAddressWithTime::ParseIPAddress(const std::string& address)
+NetworkAddressWithTime NetworkAddressWithTime::FromIPv4(uint32_t timestamp, const std::string& address, uint16_t port,
+                                                        const std::vector<NodeCapability>& capabilities)
 {
-    address_.fill(0);
-
-    // Check if it's an IPv4 address
-    std::regex ipv4_regex(R"(^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$)");
-    std::smatch match;
-
-    if (std::regex_match(address, match, ipv4_regex))
+    NetworkAddressWithTime result(timestamp, network::IPAddress(address), capabilities);
+    if (port != 0)
     {
-        // IPv4 address - map to IPv6 format (::ffff:x.x.x.x)
-        address_[10] = 0xff;
-        address_[11] = 0xff;
-
-        for (int i = 0; i < 4; i++)
-        {
-            int octet = std::stoi(match[i + 1].str());
-            if (octet < 0 || octet > 255)
-            {
-                throw std::invalid_argument("Invalid IPv4 address: " + address);
-            }
-            address_[12 + i] = static_cast<uint8_t>(octet);
-        }
+        result.SetPort(port);
     }
-    else
-    {
-        // Complete IPv6 address parsing implementation
-        // Parse IPv6 address in standard format (e.g., "2001:db8::1" or "::1")
-
-        try
-        {
-            std::vector<uint16_t> groups(8, 0);  // IPv6 has 8 groups of 16-bit values
-            std::string address_str = address;   // Fixed undefined ipString variable
-
-            // Handle compressed notation (::)
-            size_t double_colon_pos = address_str.find("::");
-            if (double_colon_pos != std::string::npos)
-            {
-                // Split into parts before and after ::
-                std::string before = address_str.substr(0, double_colon_pos);
-                std::string after = address_str.substr(double_colon_pos + 2);
-
-                // Parse groups before ::
-                std::vector<uint16_t> before_groups;
-                if (!before.empty())
-                {
-                    std::stringstream ss(before);
-                    std::string group;
-                    while (std::getline(ss, group, ':'))
-                    {
-                        if (!group.empty())
-                        {
-                            before_groups.push_back(static_cast<uint16_t>(std::stoul(group, nullptr, 16)));
-                        }
-                    }
-                }
-
-                // Parse groups after ::
-                std::vector<uint16_t> after_groups;
-                if (!after.empty())
-                {
-                    std::stringstream ss(after);
-                    std::string group;
-                    while (std::getline(ss, group, ':'))
-                    {
-                        if (!group.empty())
-                        {
-                            after_groups.push_back(static_cast<uint16_t>(std::stoul(group, nullptr, 16)));
-                        }
-                    }
-                }
-
-                // Fill the groups array
-                for (size_t i = 0; i < before_groups.size(); ++i)
-                {
-                    groups[i] = before_groups[i];
-                }
-                for (size_t i = 0; i < after_groups.size(); ++i)
-                {
-                    groups[8 - after_groups.size() + i] = after_groups[i];
-                }
-            }
-            else
-            {
-                // No compression - parse all 8 groups
-                std::stringstream ss(address_str);
-                std::string group;
-                size_t index = 0;
-                while (std::getline(ss, group, ':') && index < 8)
-                {
-                    if (!group.empty())
-                    {
-                        groups[index] = static_cast<uint16_t>(std::stoul(group, nullptr, 16));
-                    }
-                    ++index;
-                }
-
-                if (index != 8)
-                {
-                    throw std::invalid_argument("Invalid IPv6 address format");
-                }
-            }
-
-            // Convert to byte array (network byte order - big endian)
-            for (size_t i = 0; i < 8; ++i)
-            {
-                address_[i * 2] = static_cast<uint8_t>(groups[i] >> 8);
-                address_[i * 2 + 1] = static_cast<uint8_t>(groups[i] & 0xFF);
-            }
-        }
-        catch (const std::exception& e)
-        {
-            throw std::runtime_error("Failed to parse IPv6 address: " + std::string(e.what()));
-        }
-    }
+    return result;
 }
 
-std::string NetworkAddressWithTime::FormatIPAddress() const
+NetworkAddressWithTime NetworkAddressWithTime::FromIPv6(uint32_t timestamp, const std::string& address, uint16_t port,
+                                                        const std::vector<NodeCapability>& capabilities)
 {
-    if (IsIPv4())
+    NetworkAddressWithTime result(timestamp, network::IPAddress(address), capabilities);
+    if (port != 0)
     {
-        // Extract IPv4 from IPv4-mapped IPv6
-        return std::to_string(address_[12]) + "." + std::to_string(address_[13]) + "." + std::to_string(address_[14]) +
-               "." + std::to_string(address_[15]);
+        result.SetPort(port);
     }
-    else
-    {
-        // Format as IPv6
-        std::stringstream ss;
-        for (int i = 0; i < 16; i += 2)
-        {
-            if (i > 0) ss << ":";
-            uint16_t segment = (static_cast<uint16_t>(address_[i]) << 8) | address_[i + 1];
-            ss << std::hex << segment;
-        }
-        return ss.str();
-    }
+    return result;
 }
 }  // namespace neo::network::p2p::payloads

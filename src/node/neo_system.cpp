@@ -157,6 +157,11 @@ std::shared_ptr<network::P2PServer> NeoSystem::GetP2PServer() const { return p2p
 
 std::shared_ptr<network::p2p::LocalNode> NeoSystem::GetLocalNode() const { return localNode_; }
 
+std::shared_ptr<network::p2p::NetworkSynchronizer> NeoSystem::GetNetworkSynchronizer() const
+{
+    return ledgerSystem_ ? ledgerSystem_->GetNetworkSynchronizer() : nullptr;
+}
+
 std::shared_ptr<persistence::DataCache> NeoSystem::GetDataCache() const
 {
     return ledgerSystem_ ? ledgerSystem_->GetStoreView() : nullptr;

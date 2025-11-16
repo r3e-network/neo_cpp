@@ -17,7 +17,9 @@
 #include <neo/rpc/rpc_server.h>
 
 #include <exception>
+#include <filesystem>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace neo::node
 {
@@ -26,6 +28,60 @@ namespace
 bool LooksLikeWIF(const std::string& key)
 {
     return key.size() == 51 || key.size() == 52;
+}
+
+network::IPEndPoint BuildBindEndpoint(const P2PSettings& settings)
+{
+    network::IPAddress address = network::IPAddress::Any();
+    if (!settings.BindAddress.empty())
+    {
+        network::IPAddress parsed;
+        if (network::IPAddress::TryParse(settings.BindAddress, parsed))
+        {
+            address = parsed;
+        }
+    }
+    return network::IPEndPoint(address, static_cast<uint16_t>(settings.Port));
+}
+
+std::vector<network::IPEndPoint> BuildSeedEndpoints(const std::vector<std::string>& seeds, uint16_t fallbackPort)
+{
+    std::vector<network::IPEndPoint> endpoints;
+    endpoints.reserve(seeds.size());
+    for (const auto& seed : seeds)
+    {
+        network::IPEndPoint endpoint;
+        if (network::IPEndPoint::TryParse(seed, endpoint))
+        {
+            endpoints.push_back(endpoint);
+        }
+        else if (!seed.empty())
+        {
+            endpoints.emplace_back(seed, fallbackPort);
+        }
+    }
+    return endpoints;
+}
+
+std::string ResolvePeerListPath(const std::string& dataPath)
+{
+    namespace fs = std::filesystem;
+    fs::path base = dataPath.empty() ? fs::path("./data") : fs::path(dataPath);
+    std::error_code ec;
+    if (fs::is_regular_file(base, ec))
+    {
+        base = base.parent_path();
+    }
+    if (base.empty())
+    {
+        base = fs::current_path();
+    }
+    fs::path peersFile = base / "peers.dat";
+    if (auto parent = peersFile.parent_path(); !parent.empty())
+    {
+        fs::create_directories(parent, ec);
+    }
+    return peersFile.string();
 }
 }
 
@@ -131,42 +187,34 @@ bool NeoNode::InitializeNetwork()
 {
     try
     {
-        network::IPEndPoint tcpEndpoint;
-        std::string tcpAddress = settings_.P2P.BindAddress.empty() ? "0.0.0.0" : settings_.P2P.BindAddress;
-        std::string tcpEndpointString = tcpAddress + ":" + std::to_string(settings_.P2P.Port);
-
-        if (!network::IPEndPoint::TryParse(tcpEndpointString, tcpEndpoint))
-        {
-            tcpEndpoint = network::IPEndPoint(network::IPAddress::Any(), static_cast<uint16_t>(settings_.P2P.Port));
-        }
-
+        const auto tcpEndpoint = BuildBindEndpoint(settings_.P2P);
         networkConfig_.SetTcp(tcpEndpoint);
         networkConfig_.SetMinDesiredConnections(static_cast<uint32_t>(settings_.P2P.MinDesiredConnections));
         networkConfig_.SetMaxConnections(static_cast<uint32_t>(settings_.P2P.MaxConnections));
         networkConfig_.SetMaxConnectionsPerAddress(static_cast<uint32_t>(settings_.P2P.MaxConnectionsPerAddress));
+        networkConfig_.SetEnableCompression(settings_.P2P.EnableCompression);
 
-        std::vector<network::IPEndPoint> seeds;
-        seeds.reserve(settings_.P2P.Seeds.size());
-        for (const auto& seed : settings_.P2P.Seeds)
+        auto seedEndpoints = BuildSeedEndpoints(settings_.P2P.Seeds, static_cast<uint16_t>(settings_.P2P.Port));
+        if (seedEndpoints.empty() && protocolSettings_)
         {
-            network::IPEndPoint endpoint;
-            if (network::IPEndPoint::TryParse(seed, endpoint))
-            {
-                seeds.push_back(endpoint);
-            }
+            seedEndpoints = BuildSeedEndpoints(protocolSettings_->GetSeedList(),
+                                               static_cast<uint16_t>(settings_.P2P.Port));
         }
-        if (!seeds.empty())
+        if (!seedEndpoints.empty())
         {
-            networkConfig_.SetSeedList(seeds);
+            networkConfig_.SetSeedList(seedEndpoints);
         }
+
+        const auto peerListPath = ResolvePeerListPath(settings_.Application.DataPath);
+        network::p2p::LocalNode::GetInstance().SetPeerListPath(peerListPath);
+        logger_->Info("Peer list path: " + peerListPath);
 
         if (neoSystem_)
         {
             neoSystem_->SetNetworkConfig(networkConfig_);
         }
 
-        logger_->Info("Network configuration prepared (P2P port " +
-                      std::to_string(tcpEndpoint.GetPort()) + ")");
+        logger_->Info("Network configuration prepared (P2P endpoint " + tcpEndpoint.ToString() + ")");
         return true;
     }
     catch (const std::exception& e)

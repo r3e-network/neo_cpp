@@ -82,6 +82,10 @@ void NeoSystem::Start()
 
     if (local_node_)
     {
+        if (settings_)
+        {
+            local_node_->SetNetworkMagic(settings_->GetNetwork());
+        }
         if (memory_pool_) local_node_->SetMemoryPool(memory_pool_);
         if (blockchain_)
         {
@@ -93,6 +97,13 @@ void NeoSystem::Start()
         {
             local_node_->Start(*channels_config_);
         }
+
+        if (blockchain_)
+        {
+            networkSynchronizer_ =
+                std::make_shared<network::p2p::NetworkSynchronizer>(*local_node_, blockchain_);
+            networkSynchronizer_->Start();
+        }
     }
 
     is_running_ = true;
@@ -102,6 +113,12 @@ void NeoSystem::Start()
 void NeoSystem::Stop()
 {
     if (!is_running_) return;
+
+    if (networkSynchronizer_)
+    {
+        networkSynchronizer_->Stop();
+        networkSynchronizer_.reset();
+    }
 
     if (local_node_ && local_node_->IsRunning())
     {

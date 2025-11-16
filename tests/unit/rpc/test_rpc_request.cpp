@@ -78,7 +78,7 @@ TEST_F(RpcRequestTest, TestFromJson)
     EXPECT_EQ("2.0", request.GetJsonRpc());
     EXPECT_EQ("getblock", request.GetMethod());
     EXPECT_EQ(json["params"], request.GetParams());
-    EXPECT_EQ(42, request.GetId());
+    EXPECT_EQ(42, request.GetId().get<int>());
 }
 
 TEST_F(RpcRequestTest, TestFromJsonPartial)
@@ -158,13 +158,13 @@ TEST_F(RpcRequestTest, TestDifferentIdTypes)
     RpcRequest request1("2.0", "method", nlohmann::json::array(), "string_id");
     auto json1 = request1.ToJson();
     auto deserialized1 = RpcRequest::FromJson(json1);
-    EXPECT_EQ("string_id", deserialized1.GetId());
+    EXPECT_EQ("string_id", deserialized1.GetId().get<std::string>());
 
     // Test with number ID
     RpcRequest request2("2.0", "method", nlohmann::json::array(), 42);
     auto json2 = request2.ToJson();
     auto deserialized2 = RpcRequest::FromJson(json2);
-    EXPECT_EQ(42, deserialized2.GetId());
+    EXPECT_EQ(42, deserialized2.GetId().get<int>());
 
     // Test with null ID
     RpcRequest request3("2.0", "method", nlohmann::json::array(), nlohmann::json());
@@ -188,7 +188,7 @@ TEST_F(RpcRequestTest, TestCommonRpcMethods)
         auto deserialized = RpcRequest::FromJson(json);
 
         EXPECT_EQ(common_methods[i], deserialized.GetMethod());
-        EXPECT_EQ(static_cast<int>(i), deserialized.GetId());
+        EXPECT_EQ(static_cast<int>(i), deserialized.GetId().get<int>());
     }
 }
 
@@ -222,6 +222,6 @@ TEST_F(RpcRequestTest, TestLargeRequest)
 
     EXPECT_EQ("large_method", deserialized.GetMethod());
     EXPECT_EQ(1000, deserialized.GetParams().size());
-    EXPECT_EQ(999, deserialized.GetId());
+    EXPECT_EQ(999, deserialized.GetId().get<int>());
 }
 }  // namespace neo::rpc::tests

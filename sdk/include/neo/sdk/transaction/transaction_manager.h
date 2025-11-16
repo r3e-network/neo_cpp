@@ -6,6 +6,8 @@
 #include <chrono>
 #include "../types/common.h"
 #include "../rpc/rpc_client.h"
+#include "../crypto/keypair.h"
+#include "../wallet/wallet.h"
 
 namespace neo {
 namespace sdk {
@@ -31,9 +33,9 @@ enum class WitnessScope : uint8_t {
 
 // Signer structure
 struct Signer {
-    std::string account;  // Script hash of the signer
+    core::UInt160 account;  // Script hash of the signer
     WitnessScope scopes = WitnessScope::CalledByEntry;
-    std::vector<std::string> allowedContracts;
+    std::vector<core::UInt160> allowedContracts;
     std::vector<std::string> allowedGroups;
     std::vector<std::string> rules;
 };
@@ -59,7 +61,7 @@ public:
     // Transaction properties
     uint8_t version = 0;
     uint32_t nonce;
-    std::string sender;  // Fee payer
+    core::UInt160 sender;  // Fee payer
     uint64_t systemFee = 0;
     uint64_t networkFee = 0;
     uint32_t validUntilBlock;
@@ -71,6 +73,8 @@ public:
     // Calculate fees
     uint64_t CalculateNetworkFee(rpc::RpcClient& client);
     uint64_t CalculateSystemFee(rpc::RpcClient& client);
+    std::vector<uint8_t> GetSignData() const;
+    std::vector<uint8_t> GetSignData() const;
     
     // Get transaction hash
     std::string GetHash() const;
@@ -99,7 +103,21 @@ public:
 class TransactionManager {
 public:
     TransactionManager(std::shared_ptr<rpc::RpcClient> rpcClient);
-    
+
+    // Base transaction helpers
+    std::shared_ptr<Transaction> CreateTransaction();
+    void AddSigner(const std::shared_ptr<Transaction>& tx, const core::UInt160& account,
+                   WitnessScope scope = WitnessScope::CalledByEntry,
+                   const std::vector<core::UInt160>& allowedContracts = {});
+    void AddWitness(const std::shared_ptr<Transaction>& tx, const std::vector<uint8_t>& invocation,
+                    const std::vector<uint8_t>& verification);
+    void AddWitness(const std::shared_ptr<Transaction>& tx, const core::UInt160& contractHash);
+    void AddSignature(const std::shared_ptr<Transaction>& tx, const crypto::KeyPair& keyPair);
+    bool SignTransaction(const std::shared_ptr<Transaction>& tx, wallet::Wallet* wallet);
+    std::vector<uint8_t> SerializeTransaction(const std::shared_ptr<Transaction>& tx) const;
+    std::shared_ptr<Transaction> DeserializeTransaction(const std::vector<uint8_t>& data) const;
+    bool ValidateTransaction(const std::shared_ptr<Transaction>& tx) const;
+
     // Create transactions
     std::shared_ptr<Transaction> CreateTransferTransaction(
         const std::string& from,
@@ -166,8 +184,8 @@ private:
     
     // Helper methods
     uint32_t GetCurrentBlockHeight();
-    std::string AddressToScriptHash(const std::string& address);
-    std::string ScriptHashToAddress(const std::string& scriptHash);
+    core::UInt160 AddressToScriptHash(const std::string& address);
+    std::string ScriptHashToAddress(const core::UInt160& scriptHash);
 };
 
 // Script builder for creating transaction scripts

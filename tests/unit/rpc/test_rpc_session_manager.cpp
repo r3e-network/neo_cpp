@@ -1,8 +1,10 @@
-#include <gtest/gtest.h>
 #include <chrono>
+#include <gtest/gtest.h>
 #include <neo/rpc/rpc_session_manager.h>
 
 #include <nlohmann/json.hpp>
+
+#include <vector>
 
 using neo::rpc::RpcSessionManager;
 
@@ -45,4 +47,30 @@ TEST(RpcSessionManagerTest, SessionTimeoutExpiresEntries)
     EXPECT_FALSE(manager.SessionExists(sessionId));
 
     manager.SetSessionTimeoutForTests(defaultTimeout);
+}
+
+TEST(RpcSessionManagerTest, RespectsMaxIteratorLimit)
+{
+    auto& manager = RpcSessionManager::Instance();
+    manager.SetMaxIteratorItems(1);
+
+    const auto sessionId = manager.CreateSession();
+    ASSERT_TRUE(manager.SessionExists(sessionId));
+
+    std::vector<nlohmann::json> payload = {nlohmann::json{{"value", 1}}, nlohmann::json{{"value", 2}}};
+    auto iteratorId = manager.StoreIterator(sessionId, payload);
+    ASSERT_TRUE(iteratorId.has_value());
+
+    auto limited = manager.Traverse(sessionId, *iteratorId, /*maxItems*/ 5);
+    EXPECT_TRUE(limited.found);
+    ASSERT_EQ(limited.items.size(), 1u);
+    EXPECT_TRUE(limited.hasMore);
+
+    auto rest = manager.Traverse(sessionId, *iteratorId, 5);
+    EXPECT_TRUE(rest.found);
+    EXPECT_EQ(rest.items.size(), 1u);
+    EXPECT_FALSE(rest.hasMore);
+
+    manager.SetMaxIteratorItems(100);
+    manager.TerminateSession(sessionId);
 }

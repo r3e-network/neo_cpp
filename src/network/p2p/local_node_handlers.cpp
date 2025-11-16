@@ -224,22 +224,29 @@ void LocalNode::OnGetAddrMessageReceived(RemoteNode* remoteNode)
     std::vector<payloads::NetworkAddressWithTime> addresses;
 
     auto peers = GetConnectedNodes();
+    uint32_t timestamp = static_cast<uint32_t>(
+        std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count());
     for (const auto& peer : peers)
     {
-        if (peer != remoteNode)  // Don't send the requesting node back to itself
-        {
-            payloads::NetworkAddressWithTime addr;
-            // NetworkAddressWithTime constructor takes (timestamp, services, address, port)
-            uint32_t timestamp = static_cast<uint32_t>(
-                std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch())
-                    .count());
-            auto endpoint = peer->GetRemoteEndPoint();
-            addr = payloads::NetworkAddressWithTime(timestamp, 0, endpoint.GetAddress().ToString(), endpoint.GetPort());
-            addresses.push_back(addr);
+        if (peer == remoteNode) continue;
 
-            if (addresses.size() >= 200)  // Limit to 200 addresses
-                break;
+        auto endpoint = peer->GetRemoteEndPoint();
+        auto caps = peer->GetCapabilities();
+        if (caps.empty())
+        {
+            NodeCapability tcpCap(NodeCapabilityType::TcpServer);
+            tcpCap.SetPort(endpoint.GetPort());
+            caps.push_back(tcpCap);
         }
+
+        payloads::NetworkAddressWithTime addr(timestamp, endpoint.GetAddress(), caps);
+        if (addr.GetPort() == 0 && endpoint.GetPort() != 0)
+        {
+            addr.SetPort(endpoint.GetPort());
+        }
+        addresses.push_back(addr);
+
+        if (addresses.size() >= payloads::AddrPayload::MaxCountToSend) break;
     }
 
     if (!addresses.empty())

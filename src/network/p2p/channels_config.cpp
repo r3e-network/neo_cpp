@@ -13,13 +13,15 @@
 namespace neo::network::p2p
 {
 ChannelsConfig::ChannelsConfig()
-    : tcp_(IPAddress::Any(), 10333),
-      webSocket_(IPAddress::Any(), 10334),
+    : tcp_(IPAddress::Any(), 0),
+      webSocket_(IPAddress::Any(), 0),
       minDesiredConnections_(10),
       maxConnections_(20),
       maxConnectionsPerAddress_(3),
       maxKnownAddresses_(1000),
-      maxKnownHashes_(1000)
+      maxKnownHashes_(1000),
+      enableCompression_(true),
+      dialTimeoutMs_(5000)
 {
 }
 
@@ -60,4 +62,12 @@ void ChannelsConfig::SetMaxKnownHashes(uint32_t maxKnownHashes) { maxKnownHashes
 const std::vector<IPEndPoint>& ChannelsConfig::GetSeedList() const { return seedList_; }
 
 void ChannelsConfig::SetSeedList(const std::vector<IPEndPoint>& seedList) { seedList_ = seedList; }
+
+bool ChannelsConfig::GetEnableCompression() const { return enableCompression_; }
+
+void ChannelsConfig::SetEnableCompression(bool enableCompression) { enableCompression_ = enableCompression; }
+
+uint32_t ChannelsConfig::GetDialTimeoutMs() const { return dialTimeoutMs_; }
+
+void ChannelsConfig::SetDialTimeoutMs(uint32_t dialTimeoutMs) { dialTimeoutMs_ = dialTimeoutMs; }
 }  // namespace neo::network::p2p

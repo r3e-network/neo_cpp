@@ -46,6 +46,7 @@ TEST_F(ChannelsConfigTest, DefaultConstructor)
     EXPECT_GT(config.GetMaxKnownAddresses(), 0u);
     EXPECT_GT(config.GetMaxKnownHashes(), 0u);
     EXPECT_TRUE(config.GetSeedList().empty());
+    EXPECT_TRUE(config.GetEnableCompression());
 }
 
 TEST_F(ChannelsConfigTest, GettersAndSetters_Endpoints)
@@ -81,6 +82,18 @@ TEST_F(ChannelsConfigTest, GettersAndSetters_Connections)
     uint32_t maxPerAddress = 3;
     config.SetMaxConnectionsPerAddress(maxPerAddress);
     EXPECT_EQ(maxPerAddress, config.GetMaxConnectionsPerAddress());
+}
+
+TEST_F(ChannelsConfigTest, CompressionToggle)
+{
+    ChannelsConfig config;
+    EXPECT_TRUE(config.GetEnableCompression());
+
+    config.SetEnableCompression(false);
+    EXPECT_FALSE(config.GetEnableCompression());
+
+    config.SetEnableCompression(true);
+    EXPECT_TRUE(config.GetEnableCompression());
 }
 
 TEST_F(ChannelsConfigTest, GettersAndSetters_Limits)

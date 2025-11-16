@@ -122,6 +122,28 @@ class ChannelsConfig
      */
     void SetSeedList(const std::vector<IPEndPoint>& seedList);
 
+    /**
+     * @brief Gets whether compression is enabled for this channel configuration.
+     * @return True if compression is enabled.
+     */
+    bool GetEnableCompression() const;
+
+    /**
+     * @brief Sets whether compression is enabled for this channel configuration.
+     * @param enableCompression True to enable compression.
+     */
+    void SetEnableCompression(bool enableCompression);
+
+    /**
+     * @brief Gets the dial/connect timeout in milliseconds.
+     */
+    uint32_t GetDialTimeoutMs() const;
+
+    /**
+     * @brief Sets the dial/connect timeout in milliseconds.
+     */
+    void SetDialTimeoutMs(uint32_t dialTimeoutMs);
+
    private:
     IPEndPoint tcp_;
     IPEndPoint webSocket_;
@@ -131,5 +153,7 @@ class ChannelsConfig
     uint32_t maxKnownAddresses_;
     uint32_t maxKnownHashes_;
     std::vector<IPEndPoint> seedList_;
+    bool enableCompression_;
+    uint32_t dialTimeoutMs_;
 };
 }  // namespace neo::network::p2p

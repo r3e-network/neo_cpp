@@ -40,6 +40,11 @@ class ByteVector
     explicit ByteVector(size_t size) : data_(size) {}
 
     /**
+     * @brief Constructs a ByteVector with the specified size and fill value.
+     */
+    ByteVector(size_t size, uint8_t value) : data_(size, value) {}
+
+    /**
      * @brief Constructs a ByteVector from a ByteSpan.
      * @param data The ByteSpan.
      */
