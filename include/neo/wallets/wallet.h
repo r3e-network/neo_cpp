@@ -13,6 +13,7 @@
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/wallets/wallet_account.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 
 #include <memory>
 #include <mutex>
@@ -86,6 +87,13 @@ class Wallet : public io::JsonSerializable
      * @return The default account.
      */
     std::shared_ptr<WalletAccount> GetDefaultAccount() const;
+
+    /**
+     * @brief Sign a transaction with the default account (if available).
+     * @param tx The transaction to sign.
+     * @return True if signed, false otherwise. (stub for future transfer support)
+     */
+    inline bool SignTransaction(std::shared_ptr<network::p2p::payloads::Neo3Transaction> /*tx*/) { return false; }
 
     /**
      * @brief Sets the default account.
@@ -186,6 +194,8 @@ class Wallet : public io::JsonSerializable
      * @return True if the wallet was loaded, false otherwise.
      */
     bool LoadFrom(const std::string& path);
+
+
 
     /**
      * @brief Serializes the Wallet to a JSON object.

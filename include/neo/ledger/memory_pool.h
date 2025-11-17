@@ -12,6 +12,7 @@
 
 #include <neo/io/uint256.h>
 #include <neo/ledger/event_system.h>
+#include <neo/ledger/verify_result.h>
 #include <neo/ledger/pool_item.h>
 #include <neo/ledger/transaction.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
@@ -95,6 +96,13 @@ class MemoryPool
      * @complexity O(log n) for sorted pool insertion
      */
     bool TryAdd(const network::p2p::payloads::Neo3Transaction& transaction);
+
+    /**
+     * @brief Attempts to add a signed transaction to the pool (pointer overload).
+     * @param transaction The transaction to add.
+     * @return Verification result.
+     */
+    VerifyResult AddTransaction(const std::shared_ptr<network::p2p::payloads::Neo3Transaction>& transaction);
 
     /**
      * @brief Removes a transaction from the pool

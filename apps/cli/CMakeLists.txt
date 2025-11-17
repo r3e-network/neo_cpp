@@ -2,6 +2,7 @@
 add_executable(neo_cli_app
     main.cpp
     main_service.cpp
+    ${CMAKE_SOURCE_DIR}/src/cli/console_helper.cpp
 )
 
 # Set target properties
@@ -16,6 +17,7 @@ target_include_directories(neo_cli_app
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/src/cli
 )
 
 # Link with all required libraries

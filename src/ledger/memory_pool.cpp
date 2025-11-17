@@ -69,8 +69,19 @@ bool MemoryPool::TryAdd(const network::p2p::payloads::Neo3Transaction& transacti
             
             // Fire event
             FireTransactionAddedEvent(item.GetTransactionPtr());
-            return true;
-        }
+    return true;
+}
+
+VerifyResult MemoryPool::AddTransaction(const std::shared_ptr<Neo3Transaction>& transaction)
+{
+    if (!transaction) return VerifyResult::Invalid;
+
+    if (TryAdd(*transaction))
+    {
+        return VerifyResult::Succeed;
+    }
+    return VerifyResult::Invalid;
+}
         else
         {
             // Transaction failed verification, add to unverified pool

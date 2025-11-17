@@ -228,7 +228,8 @@ tidy: configure
 run: build
 	@echo "$(BOLD)$(CYAN)Starting Neo node (MainNet)...$(NC)"
 	@echo "$(YELLOW)Log level: info (use LOG_LEVEL env var to change)$(NC)"
-	@$(BUILD_DIR)/apps/neo_node --network mainnet --config config/mainnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
+	@$(BUILD_DIR)/apps/neo_node --network mainnet --config config/mainnet.config.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
+	$(BUILD_DIR)/apps/neo_node --network mainnet --config config/mainnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
 	$(BUILD_DIR)/apps/neo_node_production_ready --network mainnet --config config/mainnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
 	$(BUILD_DIR)/apps/neo_node_app --network mainnet --config config/mainnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
 	echo "$(RED)Neo node executable not found$(NC)"
@@ -237,7 +238,8 @@ run: build
 run-testnet: build
 	@echo "$(BOLD)$(CYAN)Starting Neo node (TestNet)...$(NC)"
 	@echo "$(YELLOW)Log level: info (use LOG_LEVEL env var to change)$(NC)"
-	@$(BUILD_DIR)/apps/neo_node --network testnet --config config/testnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
+	@$(BUILD_DIR)/apps/neo_node --network testnet --config config/testnet.config.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
+	$(BUILD_DIR)/apps/neo_node --network testnet --config config/testnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
 	$(BUILD_DIR)/apps/neo_node_production_ready --network testnet --config config/testnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
 	$(BUILD_DIR)/apps/neo_node_app --network testnet --config config/testnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
 	echo "$(RED)Neo node executable not found$(NC)"
@@ -250,7 +252,7 @@ run-private: build
 .PHONY: run-cli
 run-cli: build
 	@echo "$(CYAN)Starting Neo CLI...$(NC)"
-	@$(BUILD_DIR)/apps/neo-cli || $(BUILD_DIR)/apps/neo_cli
+	@$(BUILD_DIR)/apps/cli/neo-cli --network testnet || $(BUILD_DIR)/apps/cli/neo-cli --config config/testnet.config.json || $(BUILD_DIR)/apps/cli/neo-cli --config config/testnet.json || true
 
 .PHONY: run-rpc
 run-rpc: build
@@ -520,6 +522,20 @@ c: clean
 
 .PHONY: h
 h: help
+
+# =============================================================================
+# Smoke Tests (offline initialization)
+# =============================================================================
+
+.PHONY: smoke-node
+smoke-node:
+	@echo "$(CYAN)Running offline smoke test with $(SMOKE_CONFIG)$(NC)"
+	cd $(BUILD_DIR) && ./apps/neo_node --config ../$${SMOKE_CONFIG:-config/testnet.config.json} --no-rpc --status-interval 2 || true
+
+.PHONY: smoke-cli
+smoke-cli:
+	@echo "$(CYAN)Running offline CLI smoke test with $(SMOKE_CONFIG)$(NC)"
+	cd $(BUILD_DIR) && ./apps/cli/neo-cli --config ../$${SMOKE_CONFIG:-config/testnet.config.json} --noverify --no-rpc --status-interval 2 || true
 
 # Force rebuild
 .PHONY: rebuild

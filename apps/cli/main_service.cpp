@@ -15,6 +15,7 @@
 #include <neo/rpc/rpc_methods.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/rpc/rpc_session_manager.h>
+#include <neo/io/fixed8.h>
 #include <neo/settings.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>
@@ -82,16 +83,44 @@ std::string ResolvePeerListPath(const std::string& dataPath)
 
 std::string ResolveNetworkConfigPath(const std::string& network)
 {
+    namespace fs = std::filesystem;
     std::string normalized = network;
     std::transform(normalized.begin(), normalized.end(), normalized.begin(),
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
 
-    if (normalized == "mainnet") return "config/mainnet.config.json";
-    if (normalized == "testnet") return "config/testnet.config.json";
-    if (normalized == "privnet" || normalized == "private" || normalized == "private-net")
-        return "config/privnet.json";
+    std::vector<std::string> candidates;
+    if (normalized == "mainnet")
+    {
+        candidates = {"config/mainnet.config.json", "config/mainnet.json"};
+    }
+    else if (normalized == "testnet")
+    {
+        candidates = {"config/testnet.config.json", "config/testnet.json"};
+    }
+    else if (normalized == "privnet" || normalized == "private" || normalized == "private-net")
+    {
+        candidates = {"config/privnet.json"};
+    }
+    else
+    {
+        throw std::invalid_argument("Unknown network preset: " + network);
+    }
 
-    throw std::invalid_argument("Unknown network preset: " + network);
+    for (const auto& candidate : candidates)
+    {
+        if (fs::exists(candidate))
+        {
+            return candidate;
+        }
+
+        fs::path parentCandidate = fs::path("..") / candidate;
+        if (fs::exists(parentCandidate))
+        {
+            return parentCandidate.string();
+        }
+    }
+
+    throw std::invalid_argument("No configuration found for preset: " + network);
 }
 }  // namespace
 
@@ -1017,7 +1046,8 @@ void MainService::OnShowPeers()
             // GetRemoteEndPoint not available in P2PPeer
             if (peer)
             {
-                ConsoleHelper::Info("  " + peer->GetUserAgent() + " (Height: " + std::to_string(peer->GetStartHeight()) + ")");
+                ConsoleHelper::Info("  " + peer->GetUserAgent() + " (Height: " +
+                                    std::to_string(peer->GetLastBlockIndex()) + ")");
             }
         }
     }
@@ -1082,22 +1112,28 @@ void MainService::OnShowBalance()
 
     try
     {
+        auto snapshot = neoSystem_->GetDataCache();
+        if (!snapshot)
+        {
+            ConsoleHelper::Error("Failed to get ledger snapshot");
+            return;
+        }
+
+        auto neoToken = smartcontract::native::NeoToken::GetInstance();
+        auto gasToken = smartcontract::native::GasToken::GetInstance();
         auto accounts = currentWallet_->GetAccounts();
 
         for (const auto& account : accounts)
         {
             ConsoleHelper::Info("Account: " + account->GetAddress());
 
-            // Get NEO balance - GetBalance method is unavailable
-            // auto neoBalance =
-            //     currentWallet_->GetBalance(smartcontract::native::NeoToken::SCRIPT_HASH, account->GetScriptHash());
+            const auto neoBalance = neoToken->GetBalance(snapshot, account->GetScriptHash());
+            const auto gasRaw = gasToken->GetBalance(snapshot, account->GetScriptHash());
+            const double gasBalance =
+                static_cast<double>(gasRaw) / static_cast<double>(smartcontract::native::GasToken::FACTOR);
 
-            // Get GAS balance - GetBalance method is unavailable
-            // auto gasBalance =
-            //     currentWallet_->GetBalance(smartcontract::native::GasToken::SCRIPT_HASH, account->GetScriptHash());
-
-            ConsoleHelper::Info("  NEO: Balance not available");
-            ConsoleHelper::Info("  GAS: Balance not available");
+            ConsoleHelper::Info("  NEO: " + neoBalance.ToString());
+            ConsoleHelper::Info("  GAS: " + std::to_string(gasBalance));
         }
     }
     catch (const std::exception& ex)
@@ -1116,13 +1152,35 @@ void MainService::OnShowBalance(const io::UInt160& assetId)
 
     try
     {
+        auto snapshot = neoSystem_ ? neoSystem_->GetDataCache() : nullptr;
+        if (!snapshot)
+        {
+            ConsoleHelper::Error("Failed to get ledger snapshot");
+            return;
+        }
+
+        const auto neoToken = smartcontract::native::NeoToken::GetInstance();
+        const auto gasToken = smartcontract::native::GasToken::GetInstance();
         auto accounts = currentWallet_->GetAccounts();
 
         for (const auto& account : accounts)
         {
-            // auto balance = currentWallet_->GetBalance(assetId, account->GetScriptHash()); // Method unavailable
-            uint64_t balance = 0;
-            ConsoleHelper::Info(account->GetAddress() + ": " + std::to_string(balance));
+            if (assetId == neoToken->GetScriptHash())
+            {
+                const auto neoBalance = neoToken->GetBalance(snapshot, account->GetScriptHash());
+                ConsoleHelper::Info(account->GetAddress() + ": " + neoBalance.ToString());
+            }
+            else if (assetId == gasToken->GetScriptHash())
+            {
+                const auto gasRaw = gasToken->GetBalance(snapshot, account->GetScriptHash());
+                const double gasBalance =
+                    static_cast<double>(gasRaw) / static_cast<double>(smartcontract::native::GasToken::FACTOR);
+                ConsoleHelper::Info(account->GetAddress() + ": " + std::to_string(gasBalance));
+            }
+            else
+            {
+                ConsoleHelper::Info(account->GetAddress() + ": asset not supported");
+            }
         }
     }
     catch (const std::exception& ex)
@@ -1171,17 +1229,7 @@ void MainService::OnTransfer(const io::UInt160& assetId, const std::string& addr
 
     try
     {
-        // Create transfer transaction - Methods unavailable in this build
-        // auto tx = currentWallet_->CreateTransferTransaction(assetId, address, amount);
-
-        // Sign transaction - Method unavailable
-        // currentWallet_->SignTransaction(tx);
-
-        // Send transaction - AddTransaction method is unavailable
-        // auto memPool = neoSystem_->GetMemPool();
-        // auto result = memPool->AddTransaction(tx);
-
-        ConsoleHelper::Info("Transfer functionality is not available in this build");
+        ConsoleHelper::Error("Transfers not yet implemented in this build");
     }
     catch (const std::exception& ex)
     {

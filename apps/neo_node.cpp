@@ -1,167 +1,388 @@
-// Simple app using NeoSystem and RPCServer
-#include <neo/core/neo_system.h>
-#include <neo/protocol_settings.h>
+#include <neo/logging/logger.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/local_node.h>
+#include <neo/network/p2p/network_synchronizer.h>
+#include <neo/node/neo_system.h>
+#include <neo/rpc/rpc_methods.h>
 #include <neo/rpc/rpc_server.h>
-#include <iostream>
+#include <neo/settings.h>
+
+#include <algorithm>
 #include <atomic>
+#include <chrono>
+#include <csignal>
+#include <filesystem>
+#include <iostream>
+#include <string>
 #include <thread>
+#include <vector>
 
-using namespace neo;
-using namespace neo::core;
-using namespace neo::rpc;
-
-static std::atomic<bool> running{true};
-
-static void signal_handler(int signal)
+namespace
 {
-    std::cout << "\nReceived signal " << signal << ". Shutting down gracefully...\n";
-    running = false;
+std::atomic<bool> g_shutdownRequested{false};
+std::chrono::seconds g_statusInterval{std::chrono::seconds(30)};
+
+void SignalHandler(int signal)
+{
+    g_shutdownRequested.store(true);
+    std::cout << "\nReceived signal " << signal << ", shutting down..." << std::endl;
 }
 
-static void DisplayNodeInfo()
+void PrintUsage()
+{
+    std::cout << "Neo C++ Node" << std::endl;
+    std::cout << "Usage: neo_node [options]" << std::endl;
+    std::cout << "Options:" << std::endl;
+    std::cout << "  --config <path>          Configuration file path" << std::endl;
+    std::cout << "  --network <preset>       Network preset (mainnet|testnet|privnet)" << std::endl;
+    std::cout << "  --db-engine <name>       Storage provider override" << std::endl;
+    std::cout << "  --db-path <path>         Storage path override" << std::endl;
+    std::cout << "  --no-rpc                 Disable RPC even if enabled in config" << std::endl;
+    std::cout << "  --status-interval <sec>  Seconds between status reports (default 30)" << std::endl;
+    std::cout << "  -h, --help               Show this help message" << std::endl;
+    std::cout << "  -v, --version            Show version information" << std::endl;
+}
+
+void PrintVersion()
+{
+    std::cout << "Neo C++ Node" << std::endl;
+    std::cout << "Build Date: " << __DATE__ << " " << __TIME__ << std::endl;
+}
+
+std::string ResolveNetworkConfigPath(const std::string& preset)
+{
+    namespace fs = std::filesystem;
+    std::string normalized = preset;
+    std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+
+    std::vector<std::string> candidates;
+    if (normalized == "mainnet")
     {
-        std::cout << "\n";
-        std::cout << "╔══════════════════════════════════════════════════════════╗\n";
-        std::cout << "║                     NEO C++ NODE                        ║\n";
-        std::cout << "║                    Version 3.6.0                        ║\n";
-        std::cout << "╠══════════════════════════════════════════════════════════╣\n";
-        std::cout << "║ Status: RUNNING                                          ║\n";
-        std::cout << "║ Network: Private Network                                 ║\n";
-        std::cout << "║ RPC Server: http://127.0.0.1:10332                      ║\n";
-        std::cout << "║ Block Height: 0                                          ║\n";
-        std::cout << "║ Connected Peers: 0                                       ║\n";
-        std::cout << "║ Memory Pool: 0 transactions                             ║\n";
-        std::cout << "╠══════════════════════════════════════════════════════════╣\n";
-        std::cout << "║ Native Contracts:                                        ║\n";
-        std::cout << "║  • NEO Token (Governance)                               ║\n";
-        std::cout << "║  • GAS Token (Utility) [DISABLED]                       ║\n";
-        std::cout << "║  • Contract Management                                  ║\n";
-        std::cout << "╠══════════════════════════════════════════════════════════╣\n";
-        std::cout << "║ Available RPC Methods:                                   ║\n";
-        std::cout << "║  • getblockcount    • getversion      • validateaddress ║\n";
-        std::cout << "║  • getpeers         • getconnectioncount               ║\n";
-        std::cout << "║  • getnep17balances • getnep17transfers                 ║\n";
-        std::cout << "║  • getstate         • getstateroot                     ║\n";
-        std::cout << "║  • getblockheader   • gettransactionheight             ║\n";
-        std::cout << "╚══════════════════════════════════════════════════════════╝\n";
-        std::cout << "\n";
-        std::cout << "Example RPC call:\n";
-        std::cout << "curl -X POST http://127.0.0.1:10332 \\\n";
-        std::cout << "  -H \"Content-Type: application/json\" \\\n";
-        std::cout << "  -d '{\"jsonrpc\":\"2.0\",\"method\":\"getversion\",\"params\":[],\"id\":1}'\n\n";
-        std::cout << "Press Ctrl+C to stop the node...\n\n";
+        candidates = {"config/mainnet.config.json", "config/mainnet.json"};
+    }
+    else if (normalized == "testnet")
+    {
+        candidates = {"config/testnet.config.json", "config/testnet.json"};
+    }
+    else if (normalized == "privnet" || normalized == "private" || normalized == "private-net")
+    {
+        candidates = {"config/privnet.json"};
+    }
+    else
+    {
+        throw std::invalid_argument("Unknown network preset: " + preset);
     }
 
-static void DisplayStatistics(RpcServer& rpc)
-{
-    auto rpc_stats = rpc.GetStatistics();
+    for (const auto& candidate : candidates)
+    {
+        if (fs::exists(candidate))
+        {
+            return candidate;
+        }
 
-    std::cout << "=== NODE STATISTICS ===" << std::endl;
-    std::cout << "RPC Requests: " << rpc_stats["totalRequests"].GetInt64() << " total, "
-              << rpc_stats["failedRequests"].GetInt64() << " failed" << std::endl;
-    std::cout << "========================" << std::endl;
+        fs::path parentCandidate = fs::path("..") / candidate;
+        if (fs::exists(parentCandidate))
+        {
+            return parentCandidate.string();
+        }
+    }
+
+    throw std::invalid_argument("No configuration found for preset: " + preset);
 }
 
-static void PrintUsage()
+neo::network::IPEndPoint CreateBindEndpoint(const neo::P2PSettings& p2p)
 {
-    std::cout << "Neo C++ Node v1.2.0\n"
-              << "Usage: neo_node [--help] [--version] [--config <path>]\n"
-              << "\nOptions:\n"
-              << "  --help, -h       Show this help message\n"
-              << "  --version, -v    Show version information\n"
-              << "  --config <path>  Specify configuration file path\n" << std::endl;
+    neo::network::IPAddress address = neo::network::IPAddress::Any();
+    if (!p2p.BindAddress.empty())
+    {
+        neo::network::IPAddress parsed;
+        if (neo::network::IPAddress::TryParse(p2p.BindAddress, parsed))
+        {
+            address = parsed;
+        }
+    }
+    return neo::network::IPEndPoint(address, static_cast<uint16_t>(p2p.Port));
 }
 
-static void PrintVersion()
+std::vector<neo::network::IPEndPoint> BuildSeedEndpoints(const std::vector<std::string>& seeds, uint16_t defaultPort)
 {
-    std::cout << "Neo C++ Node\n"
-              << "Version: 1.2.0\n"
-              << "Build Date: " << __DATE__ << " " << __TIME__ << "\n"
-              << "Protocol Version: 3.6.0\n"
-              << "Network ID: 860833102\n" << std::endl;
+    std::vector<neo::network::IPEndPoint> endpoints;
+    endpoints.reserve(seeds.size());
+    for (const auto& seed : seeds)
+    {
+        neo::network::IPEndPoint endpoint;
+        if (neo::network::IPEndPoint::TryParse(seed, endpoint))
+        {
+            endpoints.push_back(endpoint);
+        }
+        else if (!seed.empty())
+        {
+            endpoints.emplace_back(seed, defaultPort);
+        }
+    }
+    return endpoints;
 }
+
+std::string ResolvePeerListPath(const std::string& dataPath)
+{
+    namespace fs = std::filesystem;
+    fs::path base = dataPath.empty() ? fs::path("./data") : fs::path(dataPath);
+    std::error_code ec;
+    if (fs::is_regular_file(base, ec))
+    {
+        base = base.parent_path();
+    }
+    if (base.empty())
+    {
+        base = fs::current_path();
+    }
+    fs::path peersFile = base / "peers.dat";
+    if (auto parent = peersFile.parent_path(); !parent.empty())
+    {
+        fs::create_directories(parent, ec);
+    }
+    return peersFile.string();
+}
+
+void PrintStatus(const std::shared_ptr<neo::node::NeoSystem>& system,
+                 const std::chrono::steady_clock::time_point& startTime)
+{
+    const auto now = std::chrono::steady_clock::now();
+    const auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - startTime);
+
+    uint32_t height = 0;
+    size_t peers = 0;
+    size_t mempool = 0;
+
+    if (auto blockchain = system->GetBlockchain())
+    {
+        height = blockchain->GetHeight();
+    }
+
+    if (auto pool = system->GetMemoryPool())
+    {
+        mempool = pool->GetVerifiedTransactions().size() + pool->GetUnverifiedTransactions().size();
+    }
+
+    if (auto local = system->GetLocalNode())
+    {
+        peers = local->GetConnectedPeersCount();
+    }
+
+    std::cout << "[Status] Uptime=" << uptime.count() << "s"
+              << " | Height=" << height << " | Peers=" << peers << " | Mempool=" << mempool << std::endl;
+}
+}  // namespace
 
 int main(int argc, char* argv[])
 {
-    // Setup signal handlers for graceful shutdown
-    signal(SIGINT, signal_handler);
-    signal(SIGTERM, signal_handler);
+    std::signal(SIGINT, SignalHandler);
+    std::signal(SIGTERM, SignalHandler);
+
+    bool noRpc = false;
+    bool showHelp = false;
+    bool showVersion = false;
+    std::string configPath;
+    std::string networkPreset;
+    std::string dbEngine;
+    std::string dbPath;
+
+    for (int i = 1; i < argc; ++i)
+    {
+        std::string arg(argv[i]);
+        if (arg == "--help" || arg == "-h")
+        {
+            showHelp = true;
+        }
+        else if (arg == "--version" || arg == "-v")
+        {
+            showVersion = true;
+        }
+        else if (arg == "--config" && i + 1 < argc)
+        {
+            configPath = std::string(argv[++i]);
+        }
+        else if (arg == "--network" && i + 1 < argc)
+        {
+            networkPreset = std::string(argv[++i]);
+        }
+        else if (arg == "--db-engine" && i + 1 < argc)
+        {
+            dbEngine = std::string(argv[++i]);
+        }
+        else if (arg == "--db-path" && i + 1 < argc)
+        {
+            dbPath = std::string(argv[++i]);
+        }
+        else if (arg == "--no-rpc")
+        {
+            noRpc = true;
+        }
+        else if (arg == "--status-interval" && i + 1 < argc)
+        {
+            try
+            {
+                const auto value = std::stoul(argv[++i]);
+                if (value == 0) throw std::invalid_argument("status interval must be > 0");
+                g_statusInterval = std::chrono::seconds(value);
+            }
+            catch (const std::exception& ex)
+            {
+                std::cerr << "Invalid --status-interval value: " << ex.what() << std::endl;
+                return 1;
+            }
+        }
+    }
+
+    if (showHelp)
+    {
+        PrintUsage();
+        return 0;
+    }
+
+    if (showVersion)
+    {
+        PrintVersion();
+        return 0;
+    }
 
     try
     {
-        // Basic CLI handling
-        std::string configPath;
-        bool noRpc = false;
-        std::string dataPath = "./data";
-        for (int i = 1; i < argc; ++i)
+        if (configPath.empty() && !networkPreset.empty())
         {
-            std::string arg(argv[i]);
-            if (arg == "--help" || arg == "-h")
-            {
-                PrintUsage();
-                return 0;
-            }
-            else if (arg == "--version" || arg == "-v")
-            {
-                PrintVersion();
-                return 0;
-            }
-            if (arg == "--config" && i + 1 < argc)
-            {
-                configPath = std::string(argv[++i]);
-                continue;
-            }
-            if (arg == "--no-rpc")
-            {
-                noRpc = true;
-                continue;
-            }
-            if (arg == "--data" && i + 1 < argc)
-            {
-                dataPath = std::string(argv[++i]);
-                continue;
-            }
+            configPath = ResolveNetworkConfigPath(networkPreset);
+            std::cout << "Selected network preset '" << networkPreset << "' -> " << configPath << std::endl;
         }
 
-        std::cout << "Starting Neo C++ Blockchain Node...\n";
+        neo::Settings settings = configPath.empty() ? neo::Settings::GetDefault() : neo::Settings::Load(configPath);
 
-        // Initialize logging
-        Logger::Initialize("neo-node");
-
-        // Initialize NeoSystem with RocksDB (fallback to memory if unavailable)
-        auto settings = std::make_unique<ProtocolSettings>(ProtocolSettings::GetDefault());
-        auto neoSystem = std::make_shared<neo::NeoSystem>(std::move(settings), "rocksdb", dataPath);
-        neoSystem->EnsureBlockchainInitialized();
-
-        // Initialize RPC server
-        RpcConfig rpc_config;
-        rpc_config.bind_address = "127.0.0.1";
-        rpc_config.port = 10332;
-        rpc_config.enable_cors = true;
-        rpc_config.max_concurrent_requests = 100;
-
-        std::unique_ptr<RpcServer> rpc;
-        if (!noRpc)
+        if (!dbEngine.empty())
         {
-            rpc = std::make_unique<RpcServer>(rpc_config, neoSystem);
+            settings.Storage.Engine = dbEngine;
+        }
+        if (!dbPath.empty())
+        {
+            settings.Storage.Path = dbPath;
+        }
+
+        neo::rpc::RPCMethods::SetMaxFindResultItems(
+            static_cast<size_t>(std::max(1, settings.RPC.MaxFindResultItems)));
+
+        const auto peerListPath = ResolvePeerListPath(settings.Application.DataPath);
+        neo::network::p2p::LocalNode::GetInstance().SetPeerListPath(peerListPath);
+        std::cout << "Peer list path: " << peerListPath << std::endl;
+
+        neo::network::p2p::ChannelsConfig channelsConfig;
+        channelsConfig.SetTcp(CreateBindEndpoint(settings.P2P));
+        channelsConfig.SetMinDesiredConnections(static_cast<uint32_t>(settings.P2P.MinDesiredConnections));
+        channelsConfig.SetMaxConnections(static_cast<uint32_t>(settings.P2P.MaxConnections));
+        channelsConfig.SetMaxConnectionsPerAddress(static_cast<uint32_t>(settings.P2P.MaxConnectionsPerAddress));
+        channelsConfig.SetEnableCompression(settings.P2P.EnableCompression);
+        channelsConfig.SetDialTimeoutMs(static_cast<uint32_t>(settings.P2P.DialTimeoutMs));
+
+        auto seedEndpoints = BuildSeedEndpoints(settings.P2P.Seeds, static_cast<uint16_t>(settings.P2P.Port));
+        if (seedEndpoints.empty() && settings.Protocol)
+        {
+            seedEndpoints = BuildSeedEndpoints(settings.Protocol->GetSeedList(),
+                                               static_cast<uint16_t>(settings.P2P.Port));
+        }
+        if (!seedEndpoints.empty())
+        {
+            channelsConfig.SetSeedList(seedEndpoints);
+        }
+
+        auto system = std::make_shared<neo::node::NeoSystem>(settings.Protocol, settings.Storage.Engine,
+                                                             settings.Storage.Path);
+        system->SetNetworkConfig(channelsConfig);
+        if (!system->Start())
+        {
+            std::cerr << "Failed to start Neo system" << std::endl;
+            return 1;
+        }
+
+        std::shared_ptr<neo::rpc::RpcServer> rpc;
+        if (settings.RPC.Enabled && !noRpc)
+        {
+            neo::rpc::RpcConfig rpcConfig;
+            rpcConfig.port = static_cast<uint16_t>(settings.RPC.Port);
+            rpcConfig.bind_address =
+                settings.RPC.BindAddress.empty() ? std::string("0.0.0.0") : settings.RPC.BindAddress;
+            rpcConfig.enable_cors = settings.RPC.EnableCors;
+            rpcConfig.enable_authentication = !settings.RPC.Username.empty();
+            rpcConfig.username = settings.RPC.Username;
+            rpcConfig.password = settings.RPC.Password;
+            rpcConfig.max_concurrent_requests = static_cast<uint32_t>(std::max(1, settings.RPC.MaxConnections));
+            rpcConfig.max_iterator_items = static_cast<uint32_t>(std::max(1, settings.RPC.MaxIteratorResultItems));
+            rpcConfig.max_request_size = static_cast<uint32_t>(settings.RPC.MaxRequestBodyBytes);
+            rpcConfig.enable_rate_limiting = settings.RPC.EnableRateLimit;
+            rpcConfig.max_requests_per_second =
+                static_cast<uint32_t>(std::max(0, settings.RPC.MaxRequestsPerSecond));
+            rpcConfig.rate_limit_window_seconds =
+                static_cast<uint32_t>(std::max(1, settings.RPC.RateLimitWindowSeconds));
+            rpcConfig.enable_ssl = settings.RPC.EnableSsl;
+            rpcConfig.ssl_cert_path = settings.RPC.SslCert;
+            rpcConfig.ssl_key_path = settings.RPC.SslKey;
+            rpcConfig.trusted_authorities = settings.RPC.TrustedAuthorities;
+            rpcConfig.ssl_ciphers = settings.RPC.SslCiphers;
+            rpcConfig.min_tls_version = settings.RPC.MinTlsVersion;
+
+            rpc = std::make_shared<neo::rpc::RpcServer>(rpcConfig, system);
             rpc->Start();
+            std::cout << "RPC server listening on " << rpcConfig.bind_address << ":" << settings.RPC.Port << std::endl;
+        }
+        else
+        {
+            std::cout << "RPC server disabled" << std::endl;
         }
 
-        DisplayNodeInfo();
-
-        int stats_counter = 0;
-        while (running.load())
+        if (auto synchronizer = system->GetNetworkSynchronizer())
         {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            if (!noRpc && ++stats_counter % 30 == 0)
+            synchronizer->SetStateChangedCallback(
+                [](neo::network::p2p::SynchronizationState state)
+                {
+                    switch (state)
+                    {
+                        case neo::network::p2p::SynchronizationState::NotSynchronizing:
+                            std::cout << "Synchronization: Not synchronizing" << std::endl;
+                            break;
+                        case neo::network::p2p::SynchronizationState::SynchronizingHeaders:
+                            std::cout << "Synchronization: Synchronizing headers" << std::endl;
+                            break;
+                        case neo::network::p2p::SynchronizationState::SynchronizingBlocks:
+                            std::cout << "Synchronization: Synchronizing blocks" << std::endl;
+                            break;
+                        case neo::network::p2p::SynchronizationState::Synchronized:
+                            std::cout << "Synchronization: Synchronized" << std::endl;
+                            break;
+                    }
+                });
+        }
+
+        const auto startTime = std::chrono::steady_clock::now();
+        std::cout << "Neo node started on network " << (settings.Protocol ? settings.Protocol->GetNetwork() : 0)
+                  << std::endl;
+        std::cout << "P2P listening on " << settings.P2P.BindAddress << ":" << settings.P2P.Port << std::endl;
+
+        while (!g_shutdownRequested.load())
+        {
+            PrintStatus(system, startTime);
+
+            auto slept = std::chrono::seconds(0);
+            while (slept < g_statusInterval && !g_shutdownRequested.load())
             {
-                DisplayStatistics(*rpc);
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                slept += std::chrono::seconds(1);
             }
         }
 
-        if (rpc) rpc->Stop();
-        neoSystem->stop();
-        std::cout << "Neo C++ Node stopped.\n";
+        if (rpc)
+        {
+            rpc->Stop();
+        }
+        system->Stop();
+        std::cout << "Neo node stopped cleanly." << std::endl;
         return 0;
     }
     catch (const std::exception& e)

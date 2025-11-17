@@ -191,6 +191,11 @@ class GasToken : public FungibleToken
     static std::shared_ptr<GasToken> GetInstance();
 
     /**
+     * @brief Gets the contract script hash (compatibility with C# GetContractId()).
+     */
+    static io::UInt160 GetContractId();
+
+    /**
      * @brief Handles the OnPersist event.
      * @param engine The engine.
      * @return True if the event was handled, false otherwise.

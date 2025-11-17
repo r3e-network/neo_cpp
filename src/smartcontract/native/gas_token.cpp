@@ -36,6 +36,8 @@ std::shared_ptr<GasToken> GasToken::GetInstance()
     return instance;
 }
 
+io::UInt160 GasToken::GetContractId() { return GetInstance()->GetScriptHash(); }
+
 void GasToken::Initialize()
 {
     RegisterMethod("symbol", CallFlags::ReadStates,

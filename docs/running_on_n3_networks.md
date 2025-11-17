@@ -9,23 +9,23 @@ cmake -S . -B build
 cmake --build build --target neo_cli_app
 ```
 
-The binary will be available at `build/apps/cli/neo_cli_app`.
+The binary will be available at `build/apps/cli/neo-cli`.
 
 ## 2. Launch on TestNet
 
 ```bash
-./build/apps/cli/neo_cli_app --network testnet
+./build/apps/cli/neo-cli --network testnet
 ```
 
 - Loads `config/testnet.config.json` automatically.
-- Binds to `0.0.0.0:20333` and connects to the official seed nodes (`seed*.neo.org`).
+- Binds to `0.0.0.0:20333` and connects to the official Neo N3 testnet seeds (`seed*t5.neo.org`).
 - Stores blockchain data in `./testnet-data` (from the config file).
 - Persists peers in `./testnet-data/peers.dat` (path is printed during startup).
 
 ## 3. Launch on MainNet
 
 ```bash
-./build/apps/cli/neo_cli_app --network mainnet
+./build/apps/cli/neo-cli --network mainnet
 ```
 
 - Loads `config/mainnet.config.json` (network magic `0x334F454E`).
@@ -37,7 +37,7 @@ The binary will be available at `build/apps/cli/neo_cli_app`.
 If you need to run against a custom network or modified config file, pass the file directly and optionally override the storage path:
 
 ```bash
-./build/apps/cli/neo_cli_app \
+./build/apps/cli/neo-cli \
     --config my_config.json \
     --db-path /data/neo-node
 ```
@@ -84,6 +84,24 @@ Example:
 
 No additional CLI flags are needed—the RPC server automatically enables auth/TLS based on these fields.
 
+## 7. Quick Offline Smoke Test
+
+If network egress is restricted, you can still verify startup/shutdown locally:
+
+```bash
+# From repo root after building:
+make smoke-node SMOKE_CONFIG=config/testnet.config.json
+# Or via CLI wrapper:
+make smoke-cli  SMOKE_CONFIG=config/testnet.config.json
+
+# Direct commands if you prefer:
+cd build
+./apps/neo_node --config ../config/testnet.config.json --no-rpc --status-interval 2
+./apps/cli/neo-cli --config ../config/testnet.config.json --noverify --no-rpc --status-interval 2
+```
+
+This will initialize the genesis block, bind P2P, print status every two seconds, and exit cleanly with Ctrl+C (no peers will appear without outbound connectivity).
+
 ## 7. Using the Production Wrapper
 
 If you prefer the production `neo_node_complete` harness:
@@ -94,6 +112,7 @@ cmake --build build --target neo_node
 
 # Or explicitly:
 # ./build/apps/neo_node/neo_node --config config/testnet.config.json
+# ./build/apps/neo_node/neo_node --network mainnet
 ```
 
 The new peer list path logging is also available there, pointing at the resolved `peers.dat` location under the configured data directory.

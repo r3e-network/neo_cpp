@@ -8,6 +8,7 @@
 
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/io/json.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/wallets/wallet.h>
 
 #include <filesystem>

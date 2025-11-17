@@ -234,11 +234,16 @@ make -j8
 ./apps/test_simple_node
 
 # 3. Start the node (examples)
-./build/apps/cli/neo_cli_app --network testnet   # Neo N3 TestNet
-# ./build/apps/cli/neo_cli_app --network mainnet # Neo N3 MainNet
+cmake --build . --target neo_cli_app
+./apps/cli/neo-cli --network testnet    # Neo N3 TestNet
+# ./apps/cli/neo-cli --network mainnet  # Neo N3 MainNet
 
 # You can also load a custom config:
-# ./build/apps/cli/neo_cli_app --config config/testnet.config.json
+# ./apps/cli/neo-cli --config config/testnet.config.json
+
+# Optional: quick offline smoke tests (no network/RPC)
+make smoke-node SMOKE_CONFIG=config/testnet.config.json
+make smoke-cli  SMOKE_CONFIG=config/testnet.config.json
 ```
 
 ## 📚 Neo C++ SDK
