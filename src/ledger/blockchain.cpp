@@ -124,6 +124,12 @@ uint32_t Blockchain::GetHeight() const
     return system_->GetLedgerContract()->GetCurrentIndex(data_cache_);
 }
 
+uint32_t Blockchain::GetHeaderHeight() const
+{
+    // Header cache is disabled in this implementation, so header height matches block height.
+    return GetHeight();
+}
+
 io::UInt256 Blockchain::GetCurrentBlockHash() const
 {
     std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);

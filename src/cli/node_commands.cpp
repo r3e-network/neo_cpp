@@ -9,7 +9,25 @@
 #include <neo/cli/console_helper.h>
 #include <neo/cli/node_commands.h>
 
-#include <iostream>
+#include <algorithm>
+#include <cctype>
+
+namespace
+{
+bool IsVerboseArgument(const std::vector<std::string>& args)
+{
+    if (args.empty())
+        return false;
+
+    std::string normalized = args[0];
+    normalized.erase(normalized.begin(),
+                     std::find_if(normalized.begin(), normalized.end(), [](unsigned char c) { return c != '-'; }));
+    std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+
+    return normalized == "verbose" || normalized == "v" || normalized == "true" || normalized == "1";
+}
+}  // namespace
 
 namespace neo::cli
 {
@@ -35,7 +53,7 @@ bool NodeCommands::HandleShowState(const std::vector<std::string>& args)
 
 bool NodeCommands::HandleShowPool(const std::vector<std::string>& args)
 {
-    service_.OnShowPool();
+    service_.OnShowPool(IsVerboseArgument(args));
     return true;
 }
 

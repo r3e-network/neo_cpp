@@ -214,6 +214,12 @@ class Blockchain
     uint32_t GetHeight() const;
 
     /**
+     * @brief Gets the current header height (alias for block height when header cache is disabled).
+     * @return The current header height.
+     */
+    uint32_t GetHeaderHeight() const;
+
+    /**
      * @brief Gets the current block index (alias for GetHeight).
      * @return The current block index.
      */

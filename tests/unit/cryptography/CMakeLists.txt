@@ -137,3 +137,22 @@ target_sources(test_crypto_merkle
 
 add_test(NAME crypto_merkle COMMAND test_crypto_merkle)
 set_tests_properties(crypto_merkle PROPERTIES TIMEOUT 15)
+
+# Extended cryptography coverage (converted from C#)
+add_executable(test_crypto_extended test_crypto_extended.cpp)
+target_link_libraries(test_crypto_extended
+    PRIVATE
+        neo_cpp
+        gtest
+        gtest_main
+)
+
+target_include_directories(test_crypto_extended
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/tests/include
+        ${CMAKE_SOURCE_DIR}/third_party/googletest/googletest/include
+)
+
+add_test(NAME crypto_extended COMMAND test_crypto_extended)
+set_tests_properties(crypto_extended PROPERTIES TIMEOUT 30)

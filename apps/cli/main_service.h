@@ -70,7 +70,7 @@ class MainService
 
     // Node Commands
     void OnShowState();
-    void OnShowPool();
+    void OnShowPool(bool verbose = false);
     void OnShowPeers();
 
     // Wallet Commands

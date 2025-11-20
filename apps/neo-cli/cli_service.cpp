@@ -19,6 +19,7 @@
 #include <neo/network/ip_address.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p_server.h>
 #include <neo/rpc/rate_limiter.h>
 #include <neo/rpc/rpc_server.h>
@@ -192,12 +193,31 @@ void CLIService::DisplayStatus()
     auto blockchain = GetBlockchain();
     auto mempool = GetMemoryPool();
     auto p2p = GetP2PServer();
+    auto localNode = neo_system_->GetLocalNode();
+
+    uint32_t maxPeerHeight = 0;
+    if (localNode)
+    {
+        for (auto* peer : localNode->GetConnectedNodes())
+        {
+            if (peer)
+            {
+                maxPeerHeight = std::max(maxPeerHeight, peer->GetLastBlockIndex());
+            }
+        }
+    }
 
     std::cout << "\nNode Status:" << std::endl;
-    std::cout << "  Height: " << blockchain->GetHeight() << std::endl;
-    std::cout << "  Block Height: " << blockchain->GetHeight() << std::endl;
+    std::cout << "  Block Height   : " << blockchain->GetHeight() << std::endl;
+    std::cout << "  Header Height  : " << blockchain->GetHeaderHeight() << std::endl;
+    if (maxPeerHeight > 0)
+        std::cout << "  Max Peer Height: " << maxPeerHeight << std::endl;
     std::cout << "  Connected Peers: " << (p2p ? p2p->GetConnectedPeersCount() : 0) << std::endl;
-    std::cout << "  Memory Pool: " << (mempool ? mempool->GetSize() : 0) << " transactions" << std::endl;
+    if (mempool)
+    {
+        std::cout << "  Memory Pool (verified):   " << mempool->GetSize() << std::endl;
+        std::cout << "  Memory Pool (unverified): " << mempool->GetUnverifiedSize() << std::endl;
+    }
 
     if (consensus_ && consensus_enabled_)
     {

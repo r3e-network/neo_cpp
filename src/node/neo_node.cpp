@@ -222,6 +222,7 @@ void NeoNode::Stop()
 bool NeoNode::IsRunning() const { return running_; }
 
 uint32_t NeoNode::GetBlockHeight() const { return blockchain_ ? blockchain_->GetHeight() : 0; }
+uint32_t NeoNode::GetHeaderHeight() const { return blockchain_ ? blockchain_->GetHeaderHeight() : 0; }
 
 size_t NeoNode::GetConnectedPeersCount() const
 {

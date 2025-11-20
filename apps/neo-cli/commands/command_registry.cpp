@@ -5,6 +5,8 @@
 #include <neo/ledger/block.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
+#include <neo/network/p2p/local_node.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/network/p2p_server.h>
 #include <neo/smartcontract/application_engine.h>
 // #include <neo/smartcontract/manifest.h> // File doesn't exist
@@ -12,6 +14,8 @@
 #include <neo/wallets/nep6/nep6_wallet.h>
 #include <neo/ledger/memory_pool.h>
 
+#include <algorithm>
+#include <cctype>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -152,20 +156,59 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
     }
 
     const std::string& subcommand = args[0];
+    const auto isVerbose = [&args]() -> bool {
+        if (args.size() < 2) return false;
+        std::string normalized = args[1];
+        normalized.erase(normalized.begin(),
+                         std::find_if(normalized.begin(), normalized.end(), [](unsigned char c) { return c != '-'; }));
+        std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                       [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+        return normalized == "verbose" || normalized == "v" || normalized == "true" || normalized == "1";
+    };
+    const auto formatGas = [](int64_t datoshi) {
+        std::ostringstream oss;
+        oss << std::fixed << std::setprecision(8) << static_cast<double>(datoshi) / 100000000.0;
+        return oss.str();
+    };
 
     if (subcommand == "state")
     {
         auto blockchain = service->GetBlockchain();
+        auto mempool = service->GetMemoryPool();
+        auto neoSystem = service->GetNeoSystem();
         if (!blockchain)
         {
             std::cerr << "Blockchain not initialized" << std::endl;
             return false;
         }
 
+        uint32_t maxPeerHeight = 0;
+        if (neoSystem)
+        {
+            auto localNode = neoSystem->GetLocalNode();
+            if (localNode)
+            {
+                for (auto* peer : localNode->GetConnectedNodes())
+                {
+                    if (peer)
+                    {
+                        maxPeerHeight = std::max(maxPeerHeight, peer->GetLastBlockIndex());
+                    }
+                }
+            }
+        }
+
         std::cout << "\nBlockchain State:" << std::endl;
-        std::cout << "  Height: " << blockchain->GetHeight() << std::endl;
-        std::cout << "  Block Height: " << blockchain->GetHeight() << std::endl;
+        std::cout << "  Block Height   : " << blockchain->GetHeight() << std::endl;
+        std::cout << "  Header Height  : " << blockchain->GetHeaderHeight() << std::endl;
+        if (maxPeerHeight > 0)
+            std::cout << "  Max Peer Height: " << maxPeerHeight << std::endl;
         std::cout << "  Current Block Hash: " << blockchain->GetCurrentBlockHash().ToString() << std::endl;
+        if (mempool)
+        {
+            std::cout << "  Mempool Verified   : " << mempool->GetSize() << std::endl;
+            std::cout << "  Mempool Unverified : " << mempool->GetUnverifiedSize() << std::endl;
+        }
     }
     else if (subcommand == "pool")
     {
@@ -177,8 +220,48 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
         }
 
         std::cout << "\nMemory Pool:" << std::endl;
-        std::cout << "  Count: " << mempool->GetSize() << std::endl;
-        std::cout << "  Total Transactions: " << mempool->GetSize() << std::endl;
+        std::cout << "  Verified   : " << mempool->GetSize() << std::endl;
+        std::cout << "  Unverified : " << mempool->GetUnverifiedSize() << std::endl;
+        std::cout << "  Total      : " << mempool->GetSize() + mempool->GetUnverifiedSize() << std::endl;
+
+        if (isVerbose())
+        {
+            std::vector<network::p2p::payloads::Neo3Transaction> verified;
+            std::vector<network::p2p::payloads::Neo3Transaction> unverified;
+            mempool->GetVerifiedAndUnverifiedTransactions(verified, unverified);
+
+            std::cout << "\nVerified Transactions:" << std::endl;
+            if (verified.empty())
+            {
+                std::cout << "  (none)" << std::endl;
+            }
+            else
+            {
+                for (const auto& tx : verified)
+                {
+                    std::cout << "  " << tx.GetHash().ToString() << " fee=" << formatGas(tx.GetNetworkFee())
+                              << " GAS" << std::endl;
+                }
+            }
+
+            std::cout << "\nUnverified Transactions:" << std::endl;
+            if (unverified.empty())
+            {
+                std::cout << "  (none)" << std::endl;
+            }
+            else
+            {
+                for (const auto& tx : unverified)
+                {
+                    std::cout << "  " << tx.GetHash().ToString() << " fee=" << formatGas(tx.GetNetworkFee())
+                              << " GAS" << std::endl;
+                }
+            }
+        }
+        else
+        {
+            std::cout << "  Use 'show pool verbose' for transaction details." << std::endl;
+        }
     }
     else if (subcommand == "account")
     {

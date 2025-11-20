@@ -107,6 +107,11 @@ class NeoNode
      * @return Current block height
      */
     uint32_t GetBlockHeight() const;
+    /**
+     * @brief Get the current header height
+     * @return Current header height
+     */
+    uint32_t GetHeaderHeight() const;
 
     /**
      * @brief Get the number of connected peers
